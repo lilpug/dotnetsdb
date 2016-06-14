@@ -16,7 +16,7 @@ namespace DotNetSDB
 
             //This is done to ensure if we have an alias we use it otherwise we use the generic
             string[] mainTables = table_name.Split(' ');
-            string alias = (mainTables.Count() > 1) ? alias = mainTables[1] : alias = mainTables[0];
+            string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
             string temp_build = string.Format("{0} {1} ON {2}.{3} = {4}.{5}", join_type, table_name, alias, join_field, other_table_name, other_field);
 
@@ -31,7 +31,7 @@ namespace DotNetSDB
 
             //This is done to ensure if we have an alias we use it otherwise we use the generic
             string[] mainTables = table_name.Split(' ');
-            string alias = (mainTables.Count() > 1) ? alias = mainTables[1] : alias = mainTables[0];
+            string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
             string temp_build = "";
             for (int i = 0; i < join_fields.Length; i++)
@@ -57,9 +57,9 @@ namespace DotNetSDB
 
             //This is done to ensure if we have an alias we use it otherwise we use the generic
             string[] mainTables = table_name.Split(' ');
-            string alias = (mainTables.Count() > 0) ? alias = mainTables[1] : alias = mainTables[0];
+            string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
-            string temp_build = string.Format("{0}{1}.{2} = {3}.{4}", "AND ", alias, join_field, other_table_name, other_field);
+            string temp_build = string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, join_field, other_table_name, other_field);
 
             //Adds it to the current join object
             theQuery.join_fields[theQuery.join_fields.Count - 1] = theQuery.join_fields[theQuery.join_fields.Count - 1] + temp_build;
@@ -72,12 +72,12 @@ namespace DotNetSDB
 
             //This is done to ensure if we have an alias we use it otherwise we use the generic
             string[] mainTables = table_name.Split(' ');
-            string alias = (mainTables.Count() > 0) ? alias = mainTables[1] : alias = mainTables[0];
+            string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
             string temp_build = "";
             for (int i = 0; i < join_fields.Length; i++)
             {
-                temp_build += string.Format("{0}{1}.{2} = {3}.{4}", "AND ", alias, join_fields[i], other_table_name, other_fields[i]);
+                temp_build += string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, join_fields[i], other_table_name, other_fields[i]);
             }
 
             //Adds it to the current join object
