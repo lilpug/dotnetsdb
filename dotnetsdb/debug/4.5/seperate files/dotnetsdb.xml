@@ -1,0 +1,831 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>dotnetsdb-4.5</name>
+    </assembly>
+    <members>
+        <member name="M:DotNetSDB.MysqlCore.run">
+            <summary>
+            <para>This executes the sql which has been added.</para>
+            <para>Note: This does not return any data, it only executes the sql.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_return_string">
+            <summary>
+            <para>This executes the sql which has been added and returns the first value as string.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_return_array">
+            <summary>
+            <para>This executes the sql which has been added and returns an array from the first value of the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_return_json">
+            <summary>
+            <para>This executes the sql which has been added and returns the a json formatted string with the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_return_datatable">
+            <summary>
+            <para>This executes the sql which has been added and returns the results in a datatable.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_return_dataset(System.Boolean)">
+            <summary>
+            <para>This executes the sql which has been added and returns the results in a dataset.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_return_dynamic">
+            <summary>
+            <para>This executes the sql which has been added and returns a list of dynamic objects that are structured with the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_to_csv(System.String,System.String)">
+            <summary>
+            <para>This executes the sql which has been added and creates a csv file using the file path and delimiter parameters specified.</para>
+            </summary>
+            <param name="fullFilePath">the full file location including the filename</param>
+            <param name="delimiter">the delimiter used for the csv</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_append_to_csv(System.String,System.String)">
+            <summary>
+            <para>This executes the sql which has been added and appends the results to a csv file using the file path and delimiter parameters specified.</para>
+            </summary>
+            <param name="fullFilePath">the full file location including the filename</param>
+            <param name="delimiter">the delimiter used for the csv</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_raw_output(System.String)">
+            <summary>
+            <para>This executes the sql which has been added and returns the raw string format using the delimiter parameter specified.</para>
+            </summary>        
+            <param name="delimiter">the delimiter</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_procedure_return_datatable(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            This executes the procedure passed and returns the results in a datatable.
+            </summary>
+            <param name="procedureName"></param>
+            <param name="theParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.run_procedure(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            <para>This executes the procedure passed.</para>
+            <para>Note: This does not return any data, it only executes the procedure.</para>
+            </summary>
+            <param name="procedureName"></param>
+            <param name="theParameters"></param>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.sql_real_output">
+            <summary>
+            This function returns the sql query which will be built on run
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.table_exist(System.String)">
+            <summary>
+            This function checks if a table exists
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.add_limit(System.Int32,System.Int32)">
+            <summary>
+            This function adds the limit statement
+            </summary>
+            <param name="startLocation"></param>
+            <param name="endLocation"></param>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.table_get_fields(System.String)">
+            <summary>
+            This functions returns all the column names of a table
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MysqlCore.truncate_table(System.String)">
+            <summary>
+            This function truncates the table
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DotNetSDB.MySqlConvertor">
+            <summary>
+            Convert a base data type to another base data type
+            </summary>
+            <summary>
+            Convert a base data type to another base data type
+            </summary>
+            <summary>
+            Convert a base data type to another base data type
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySqlConvertor.ToNetType(System.Data.DbType)">
+            <summary>
+            Convert db type to .Net data type
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySqlConvertor.ToNetType(MySql.Data.MySqlClient.MySqlDbType)">
+            <summary>
+            Convert TSQL type to .Net data type
+            </summary>
+            <param name="sqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySqlConvertor.ToDbType(System.Type)">
+            <summary>
+            Convert .Net type to Db type
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySqlConvertor.ToDbType(MySql.Data.MySqlClient.MySqlDbType)">
+            <summary>
+            Convert TSQL data type to DbType
+            </summary>
+            <param name="sqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySqlConvertor.ToSqlDbType(System.Type)">
+            <summary>
+            Convert .Net type to TSQL data type
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySqlConvertor.ToSqlDbType(System.Data.DbType)">
+            <summary>
+            Convert DbType type to TSQL data type
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.compiling(System.Boolean)">
+            <summary>
+            This function is the main compiling function which deals with putting all the queries together into one massive statement to be executed.
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.get_bind_count">
+            <summary>
+            This function returns the current amount of parameter binding occurrences
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_create_table(System.String,System.String,System.String)">
+            <summary>
+            This function creates the main create table statement
+            </summary>
+            <param name="newTableName"></param>
+            <param name="newFieldsNames"></param>
+            <param name="newFieldTypes"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_create_table(System.String,System.String[],System.String[])">
+            <summary>
+            This function creates the main create table statement
+            </summary>
+            <param name="newTableName"></param>
+            <param name="newFieldsNames"></param>
+            <param name="newFieldTypes"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_create_fields(System.String,System.String)">
+            <summary>
+            This function adds additional fields and types to the create table statement
+            </summary>
+            <param name="newFieldsName"></param>
+            <param name="newFieldType"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_create_fields(System.String[],System.String[])">
+            <summary>
+            This function adds additional fields and types to the create table statement
+            </summary>
+            <param name="newFieldsNames"></param>
+            <param name="newFieldTypes"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_delete(System.String)">
+            <summary>
+            This function adds the delete statement
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_groupby(System.String,System.String)">
+            <summary>
+            This function adds the main group by statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_groupby(System.String,System.String[])">
+            <summary>
+            This function adds the main group by statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_groupby_fields(System.String,System.String)">
+            <summary>
+            This function adds additional fields to the group by statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_groupby_fields(System.String,System.String[])">
+            <summary>
+            This function adds additional fields to the group by statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String)">
+            <summary>
+            This function adds the insert statement without fields or values
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.String)">
+            <summary>
+            This functions adds the insert statement with a field only
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertField"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.String[])">
+            <summary>
+            This functions adds the insert statement with fields only
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertFields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.Object)">
+            <summary>
+            This function adds the insert statement with only values
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertValues">single value or object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.String,System.Object)">
+            <summary>
+            This function adds the insert statement with a field and value
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertField"></param>
+            <param name="insertValue">single value only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.String[],System.Object)">
+            <summary>
+            This function adds the insert statement with the fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertFields"></param>
+            <param name="insertValues">object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert_fields(System.String)">
+            <summary>
+            This function adds additional fields to an insert statement
+            </summary>
+            <param name="insertField"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert_fields(System.String[])">
+            <summary>
+            This function adds additional fields to an insert statement
+            </summary>
+            <param name="insertFields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert_values(System.Object)">
+            <summary>
+            <para>This function adds additional values to an insert statement</para>
+            </summary>
+            <param name="insertValues">single values or object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_join(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            <para>This function adds a join into the query.</para>
+            <para>Note: Please remember to use 'JOIN' within the joinType i.e. 'INNER JOIN'</para>
+            </summary>
+            <param name="joinType">Please enter the join type here i.e. 'INNER JOIN'</param>
+            <param name="joinTableName">Please enter the new table you wish to start your join on</param>
+            <param name="currentTableName">Please enter your current table you are linking with</param>
+            <param name="joinTableField">Please enter the field you are linking on the new table</param>
+            <param name="currentTableField">Please enter the field you are linking on in the current table</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_join(System.String,System.String,System.String,System.String[],System.String[])">
+            <summary>
+            <para>This function adds a join into the query.</para>
+            <para>Note: Please remember to use 'JOIN' within the joinType i.e. 'INNER JOIN'</para>
+            </summary>
+            <param name="joinType">Please enter the join type here i.e. 'INNER JOIN'</param>
+            <param name="joinTableName">Please enter the new table you wish to start your join on</param>
+            <param name="currentTableName">Please enter your current table you are linking with</param>
+            <param name="joinTableFields">Please enter the fields you are linking on the new table</param>
+            <param name="currentTableFields">Please enter the fields you are linking on in the current table</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_join_parameters(System.String,System.String,System.String[],System.String[])">
+            <summary>
+            <para>This function adds additional parameters to the previous join.</para>
+            </summary>
+            <param name="joinTableName">Please enter the new table you wish to start your join on</param>
+            <param name="currentTableName">Please enter your current table you are linking with</param>
+            <param name="joinTableFields">Please enter the fields you are linking on the new table</param>
+            <param name="currentTableFields">Please enter the fields you are linking on in the current table</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_join_parameters(System.String,System.String,System.String,System.String)">
+            <summary>
+            <para>This function adds additional parameters to the previous join.</para>
+            </summary>
+            <param name="joinTableName">Please enter the new table you wish to start your join on</param>
+            <param name="currentTableName">Please enter your current table you are linking with</param>
+            <param name="joinTableField">Please enter the field you are linking on the new table</param>
+            <param name="currentTableField">Please enter the field you are linking on in the current table</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_orderby(System.String,System.String,System.String)">
+            <summary>
+            This function creates the main orderby statement.
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_orderby(System.String,System.String[],System.String[])">
+            <summary>
+            This function creates the main orderby statement.
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="types"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_orderby_fields(System.String,System.String,System.String)">
+            <summary>
+            This function adds an additional field to the orderby statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_orderby_fields(System.String,System.String[],System.String[])">
+            <summary>
+            This function adds additional fields to the orderby statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="types"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.is_distinct(System.Boolean)">
+            <summary>
+            This function determines whether the select statement should be be distinct
+            </summary>
+            <param name="distinct"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_select_fields(System.String,System.String,System.String,System.String)">
+            <summary>
+            This functions adds an additional select field to a select statement
+            </summary>
+            <param name="table_name"></param>
+            <param name="select_fields"></param>
+            <param name="select_start_fields"></param>
+            <param name="select_end_fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_select_fields(System.String,System.String[],System.String[],System.String[])">
+            <summary>
+            This functions adds additional select fields to a select statement
+            </summary>
+            <param name="table_name"></param>
+            <param name="select_fields"></param>
+            <param name="select_start_fields"></param>
+            <param name="select_end_fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_select(System.String,System.String,System.String,System.String)">
+            <summary>
+            This functions adds a select statement
+            </summary>
+            <param name="table_name"></param>
+            <param name="select_fields"></param>
+            <param name="select_start_fields"></param>
+            <param name="select_end_fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_select(System.String,System.String[],System.String[],System.String[])">
+            <summary>
+            This functions adds a select statement
+            </summary>
+            <param name="table_name"></param>
+            <param name="select_fields"></param>
+            <param name="select_start_fields"></param>
+            <param name="select_end_fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_pure_sql_bind(System.Object)">
+            <summary>
+            This function allows manual parameter binding and returns a string of the definition to input into the query
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_pure_sql_bind_array(System.Object)">
+            <summary>
+            This function allows manual parameter binding and returns a string[] of the definition to input into the query
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_pure_sql(System.String)">
+            <summary>
+            This function adds an sql query to the current query object.
+            </summary>
+            <param name="sqlQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_start_sql_wrapper(System.String)">
+            <summary>
+            <para>This function adds a sql statement to the start of the current query object being processed.</para>
+            <para>Note: This function can only be used once per new query, using it multiple times will wipe the previous data until a new query object 'start_new_query()'.</para>
+            </summary>
+            <param name="sqlQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_end_sql_wrapper(System.String)">
+            <summary>
+            <para>This function adds a sql statement to the end of the current query object being processed.</para>
+            <para>Note: This function can only be used once per new query, using it multiple times will wipe the previous data until a new query object 'start_new_query()'.</para>
+            </summary>
+            <param name="sqlQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_update(System.String,System.String,System.Object)">
+            <summary>
+            This function adds the update statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="updateField"></param>
+            <param name="updateValue">Single value</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_update(System.String,System.String[],System.Object)">
+            <summary>
+            This function adds the update statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="updateFields"></param>
+            <param name="updateValues">object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_update_fields(System.String,System.String,System.Object)">
+            <summary>
+            This function adds additional update fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="updateField"></param>
+            <param name="updateValue">Single value</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_update_fields(System.String,System.String[],System.Object)">
+            <summary>
+            This function adds additional update fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="updateFields"></param>
+            <param name="updateValues">object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_between(System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a where between statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="whereField"></param>
+            <param name="whereValues">object[] only, should only have 2 elements!</param>
+            <param name="whereOperator">Optional, default is blank, could use NOT</param>
+            <param name="whereType">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_in(System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a where in statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="whereField"></param>
+            <param name="whereValues">object[] only</param>
+            <param name="whereOperator">Optional, default is blank, could use NOT</param>
+            <param name="whereType">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_is(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a where is statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="whereField"></param>
+            <param name="whereOperator">Optional, default is blank, could use NOT</param>
+            <param name="whereType">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_like(System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a where like statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="whereField"></param>
+            <param name="whereValue">Single value</param>
+            <param name="whereOperator">Optional, default is blank, could use NOT</param>
+            <param name="whereType">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_normal(System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a normal where statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="whereField"></param>
+            <param name="whereValue">Single value</param>
+            <param name="whereOperator">Optional, default is '='</param>
+            <param name="whereType">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer2012.add_offset(System.Int32,System.Int32)">
+            <summary>
+            Note: This function requires an orderby before using it
+            </summary>
+            <param name="startLocation"></param>
+            <param name="endLocation"></param>
+        </member>
+        <member name="T:DotNetSDB.SqlServerCore">
+            <summary>
+            The main core class for the sql server
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run">
+            <summary>
+            <para>This executes the sql which has been added.</para>
+            <para>Note: This does not return any data, it only executes the sql.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_string">
+            <summary>
+            <para>This executes the sql which has been added and returns the first value as string.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_array">
+            <summary>
+            <para>This executes the sql which has been added and returns an array from the first value of the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_json">
+            <summary>
+            <para>This executes the sql which has been added and returns the a json formatted string with the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_datatable">
+            <summary>
+            <para>This executes the sql which has been added and returns the results in a datatable.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_dataset(System.Boolean)">
+            <summary>
+            <para>This executes the sql which has been added and returns the results in a dataset.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_dynamic">
+            <summary>
+            <para>This executes the sql which has been added and returns a list of dynamic objects that are structured with the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_bulk_copy(System.Data.DataTable,System.Int32,System.Int32)">
+            <summary>
+            This executes a bulk insert using the data in the datatable
+            </summary>
+            <param name="sourceData">Datatable that holds all the data to be inserted.</param>
+            <param name="sourceData">NOTE: The datatable table name and column names have to match the table that is being inserted to.</param>
+            <param name="batchSize">The max records to insert at a time.</param>
+            <param name="timeoutSeconds">The maximum timeout per batch insert.</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_to_csv(System.String,System.String)">
+            <summary>
+            <para>This executes the sql which has been added and creates a csv file using the file path and delimiter parameters specified.</para>
+            </summary>
+            <param name="fullFilePath">the full file location including the filename</param>
+            <param name="delimiter">the delimiter used for the csv</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_append_to_csv(System.String,System.String)">
+            <summary>
+            <para>This executes the sql which has been added and appends the results to a csv file using the file path and delimiter parameters specified.</para>
+            </summary>
+            <param name="fullFilePath">the full file location including the filename</param>
+            <param name="delimiter">the delimiter used for the csv</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_raw_output(System.String)">
+            <summary>
+            <para>This executes the sql which has been added and returns the raw string format using the delimiter parameter specified.</para>
+            </summary>        
+            <param name="delimiter">the delimiter</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_procedure_return_datatable(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            This executes the procedure passed and returns the results in a datatable.
+            </summary>
+            <param name="procedureName"></param>
+            <param name="theParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_procedure(System.String,System.Data.SqlClient.SqlParameter[])">
+            <summary>
+            <para>This executes the procedure passed.</para>
+            <para>Note: This does not return any data, it only executes the procedure.</para>
+            </summary>
+            <param name="procedureName"></param>
+            <param name="theParameters"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.sql_real_output">
+            <summary>
+            This function returns the sql query which will be built on run
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_delete(System.String,System.Boolean)">
+            <summary>
+            This function starts the delete query
+            </summary>
+            <param name="tableName">The Table that you want to delete from</param>
+            <param name="returnDeleted">Returns all the deleted rows and fields</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.table_exist(System.String)">
+            <summary>
+            This function returns whether a table exists
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.Boolean)">
+            <summary>
+            This function adds the insert statement without fields or values
+            </summary>
+            <param name="tableName"></param>
+            <param name="returnInsert">returns all the inserted rows and fields</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.String,System.Boolean)">
+            <summary>
+            This functions adds the insert statement with a field only
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertField"></param>
+            <param name="returnInsert">returns all the inserted rows and fields</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.String[],System.Boolean)">
+            <summary>
+            This functions adds the insert statement with fields only
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertFields"></param>
+            <param name="returnInsert">returns all the inserted rows and fields</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.Object,System.Boolean)">
+            <summary>
+            This function adds the insert statement with only values
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertValues">single value or object[] only</param>
+            <param name="returnInsert">returns all the inserted rows and fields</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.String,System.Object,System.Boolean)">
+            <summary>
+            This function adds the insert statement with a field and value
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertField"></param>
+            <param name="insertValue">single value only</param>
+            <param name="returnInsert">returns all the inserted rows and fields</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.String[],System.Object,System.Boolean)">
+            <summary>
+            This function adds the insert statement with the fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="insertFields"></param>
+            <param name="insertValues">object[] only</param>
+            <param name="returnInsert">returns all the inserted rows and fields</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_select_top(System.Int32)">
+            <summary>
+            This function adds a top to the select statement
+            </summary>
+            <param name="topValue"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.table_get_fields(System.String)">
+            <summary>
+            This function returns all the column of a table
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.truncate_table(System.String)">
+            <summary>
+            This function truncates the table
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_update(System.String,System.String,System.Object,System.Boolean)">
+            <summary>
+            This function adds additional update fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="updateField"></param>
+            <param name="updateValue"></param>
+            <param name="returnUpdated">returns all the updated rows and fields</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_update(System.String,System.String[],System.Object,System.Boolean)">
+            <summary>
+            This function adds additional update fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="updateFields"></param>
+            <param name="updateValues"></param>
+            <param name="returnUpdated">returns all the updated rows and fields</param>
+        </member>
+        <member name="T:DotNetSDB.SQLServerUserConnection">
+            <summary>
+            The sql server user connection class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServerUserConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the sql server user connection class
+            </summary>
+            <param name="serverName"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="databaseName"></param>
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
+        <member name="T:DotNetSDB.SQLServerWindowsConnection">
+            <summary>
+            The sql server windows connection class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServerWindowsConnection.#ctor(System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the sql server windows connection class
+            </summary>
+            <param name="serverName"></param>
+            <param name="database"></param>
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
+        <member name="T:DotNetSDB.SqlServerConvertor">
+            <summary>
+            Convert a base data type to another base data type
+            </summary>
+            <summary>
+            Convert a base data type to another base data type
+            </summary>
+            <summary>
+            Convert a base data type to another base data type
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerConvertor.ToNetType(System.Data.DbType)">
+            <summary>
+            Convert db type to .Net data type
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerConvertor.ToNetType(System.Data.SqlDbType)">
+            <summary>
+            Convert TSQL type to .Net data type
+            </summary>
+            <param name="sqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerConvertor.ToDbType(System.Type)">
+            <summary>
+            Convert .Net type to Db type
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerConvertor.ToDbType(System.Data.SqlDbType)">
+            <summary>
+            Convert TSQL data type to DbType
+            </summary>
+            <param name="sqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerConvertor.ToSqlDbType(System.Type)">
+            <summary>
+            Convert .Net type to TSQL data type
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerConvertor.ToSqlDbType(System.Data.DbType)">
+            <summary>
+            Convert DbType type to TSQL data type
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
