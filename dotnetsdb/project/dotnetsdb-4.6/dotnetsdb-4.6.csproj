@@ -324,6 +324,60 @@
     <Compile Include="..\..\files\lib\SQLServer\2012\TypeConvertor\types.cs">
       <Link>SQLServer\2012\TypeConvertor\types.cs</Link>
     </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Compile List.cs">
+      <Link>SQLServer\2014\Core\Compiling\Compile List.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Core.cs">
+      <Link>SQLServer\2014\Core\Compiling\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Functions\Offset.cs">
+      <Link>SQLServer\2014\Core\Compiling\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Connections.cs">
+      <Link>SQLServer\2014\Core\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Dispose.cs">
+      <Link>SQLServer\2014\Core\Dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Query3.cs">
+      <Link>SQLServer\2014\Core\Query3.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Sanatisation.cs">
+      <Link>SQLServer\2014\Core\Sanatisation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Functions\Offset.cs">
+      <Link>SQLServer\2014\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\TypeConvertor\types.cs">
+      <Link>SQLServer\2014\TypeConvertor\types.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Compile List.cs">
+      <Link>SQLServer\2016\Core\Compiling\Compile List.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Core.cs">
+      <Link>SQLServer\2016\Core\Compiling\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Functions\Offset.cs">
+      <Link>SQLServer\2016\Core\Compiling\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Connections.cs">
+      <Link>SQLServer\2016\Core\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Dispose.cs">
+      <Link>SQLServer\2016\Core\Dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Query3.cs">
+      <Link>SQLServer\2016\Core\Query3.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Sanatisation.cs">
+      <Link>SQLServer\2016\Core\Sanatisation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Functions\Offset.cs">
+      <Link>SQLServer\2016\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\TypeConvertor\types.cs">
+      <Link>SQLServer\2016\TypeConvertor\types.cs</Link>
+    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Compile List.cs">
       <Link>SQLServer\General\Core\Compiling\Compile List.cs</Link>
     </Compile>
