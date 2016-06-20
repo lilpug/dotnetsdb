@@ -2,7 +2,7 @@
 
 namespace DotNetSDB
 {
-    public partial class SqlServer2012 : SqlServerCore
+    public partial class SqlServer2016 : SqlServerCore
     {
         /*##########################################*/
         /*       Offset Compiling functions         */

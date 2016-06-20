@@ -38,7 +38,7 @@ namespace DotNetSDB
             user = username;
             pwd = password;
             dbName = databaseName;
-            port = -1;
+            port = -1;//This tells the connection builder not to add a port field
             connectionTime = connectionTimeout;
             logger = errorLogger;
         }
@@ -89,7 +89,7 @@ namespace DotNetSDB
         {
             server = serverName;
             dbName = database;
-            port = -1;
+            port = -1;//This tells the connection builder not to add a port field
             connectionTime = connectionTimeout;
             logger = errorLogger;
         }

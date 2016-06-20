@@ -113,6 +113,29 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
+        <member name="M:DotNetSDB.MySQLUserConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the mysql user connection class
+            </summary>
+            <param name="serverName"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="databaseName"></param>
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLUserConnection.#ctor(System.String,System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the mysql user connection class
+            </summary>
+            <param name="serverName"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="databaseName"></param>
+            <param name="thePort"></param>
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
         <member name="T:DotNetSDB.MySqlTypeConvertor">
             <summary>
             Convert a base data type to another base data type
@@ -548,6 +571,13 @@
             <param name="startLocation"></param>
             <param name="endLocation"></param>
         </member>
+        <member name="M:DotNetSDB.SqlServer2016.add_offset(System.Int32,System.Int32)">
+            <summary>
+            Note: This function requires an orderby before using it
+            </summary>
+            <param name="startLocation"></param>
+            <param name="endLocation"></param>
+        </member>
         <member name="T:DotNetSDB.SqlServerCore">
             <summary>
             The main core class for the sql server
@@ -749,7 +779,18 @@
             The sql server user connection class
             </summary>
         </member>
-        <member name="M:DotNetSDB.SQLServerUserConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+        <member name="M:DotNetSDB.SQLServerUserConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the sql server user connection class
+            </summary>
+            <param name="serverName"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="databaseName"></param>        
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerUserConnection.#ctor(System.String,System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
             <summary>
             This function is the initialisation for the sql server user connection class
             </summary>
@@ -766,7 +807,16 @@
             The sql server windows connection class
             </summary>
         </member>
-        <member name="M:DotNetSDB.SQLServerWindowsConnection.#ctor(System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+        <member name="M:DotNetSDB.SQLServerWindowsConnection.#ctor(System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the sql server windows connection class
+            </summary>
+            <param name="serverName"></param>
+            <param name="database"></param>        
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerWindowsConnection.#ctor(System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
             <summary>
             This function is the initialisation for the sql server windows connection class
             </summary>

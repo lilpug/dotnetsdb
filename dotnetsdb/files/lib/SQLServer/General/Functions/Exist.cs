@@ -14,7 +14,7 @@ namespace DotNetSDB
         /// </summary>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        public bool table_exist(string tableName)
+        public virtual bool table_exist(string tableName)
         {
             query2 theQuery = get_query2();
             theQuery.exist_real_table_value = tableName;
