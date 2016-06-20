@@ -17,7 +17,9 @@ namespace DotNetSDB
         public string user { get; set; }
         public string pwd { get; set; }
         public string dbName { get; set; }
+        public int port { get; set; }
         public int connectionTime { get; set; }
+        
 
         public OutputManagementVariable logger { get; set; }
 
@@ -27,7 +29,7 @@ namespace DotNetSDB
         /// <param name="serverName"></param>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="databaseName"></param>
+        /// <param name="databaseName"></param>        
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
         public SQLServerUserConnection(string serverName, string username, string password, string databaseName, int connectionTimeout = 30, OutputManagementVariable errorLogger = null)
@@ -36,8 +38,30 @@ namespace DotNetSDB
             user = username;
             pwd = password;
             dbName = databaseName;
+            port = -1;
             connectionTime = connectionTimeout;
             logger = errorLogger;
+        }
+
+        /// <summary>
+        /// This function is the initialisation for the sql server user connection class
+        /// </summary>
+        /// <param name="serverName"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="databaseName"></param>
+        /// <param name="thePort"></param>
+        /// <param name="connectionTimeout"></param>
+        /// <param name="errorLogger"></param>
+        public SQLServerUserConnection(string serverName, string username, string password, string databaseName, string thePort, int connectionTimeout = 30, OutputManagementVariable errorLogger = null)
+        {
+            server = serverName;
+            user = username;
+            pwd = password;
+            dbName = databaseName;
+            port = Convert.ToInt32(thePort);
+            connectionTime = connectionTimeout;
+            logger = errorLogger;            
         }
     }
 
@@ -48,23 +72,43 @@ namespace DotNetSDB
     {
         public string server { get; set; }
         public string dbName { get; set; }
+        public int port { get; set; }
         public int connectionTime { get; set; }
+        
 
         public OutputManagementVariable logger { get; set; }
-
+        
         /// <summary>
         /// This function is the initialisation for the sql server windows connection class
         /// </summary>
         /// <param name="serverName"></param>
-        /// <param name="database"></param>
+        /// <param name="database"></param>        
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
         public SQLServerWindowsConnection(string serverName, string database, int connectionTimeout = 30, OutputManagementVariable errorLogger = null)
         {
             server = serverName;
             dbName = database;
+            port = -1;
             connectionTime = connectionTimeout;
             logger = errorLogger;
+        }
+
+        /// <summary>
+        /// This function is the initialisation for the sql server windows connection class
+        /// </summary>
+        /// <param name="serverName"></param>
+        /// <param name="database"></param>
+        /// <param name="thePort"></param>
+        /// <param name="connectionTimeout"></param>
+        /// <param name="errorLogger"></param>
+        public SQLServerWindowsConnection(string serverName, string database, string thePort, int connectionTimeout = 30, OutputManagementVariable errorLogger = null)
+        {
+            server = serverName;
+            dbName = database;
+            port = Convert.ToInt32(thePort);
+            connectionTime = connectionTimeout;
+            logger = errorLogger;            
         }
     }
 
@@ -73,84 +117,141 @@ namespace DotNetSDB
     /// </summary>
     public partial class SqlServerCore
     {
+        /*######################################################*/
+        /*    Database Connection String Compiling functions    */
+        /*######################################################*/
+
+        //Builds the windows authentication string
+        protected void WindowsAuthConnectionString()
+        {
+            if (port == -1)
+            {
+                connection = string.Format("Server={0};Database={1};Integrated Security=SSPI;connection timeout={2}", server, db, connectionTime);
+            }
+            else
+            {
+                connection = string.Format("Server={0},{1};Database={2};Integrated Security=SSPI;connection timeout={3}", server, port, db, connectionTime);
+            }
+        }
+
+        //Builds the sql authentication string
+        protected void SqlAuthConnectionString()
+        {
+            if (port == -1)
+            {
+                connection = string.Format("Server={0};Database={2};User Id={3};Password={4};connection timeout={5}", server, db, user, pwd, connectionTime);
+            }
+            else
+            {
+                connection = string.Format("Server={0},{1};Database={2};User Id={3};Password={4};connection timeout={5}", server, port, db, user, pwd, connectionTime);
+            }
+        }
+
         /*##########################################*/
         /*       Database Compiling functions       */
         /*##########################################*/
 
-        //This function processes the connection string from a sqlconnection object and breaks it into its seperate entities
-        protected bool connection_decompile(SqlConnection theConnection)
+        //This function processes the connection string from a sqlconnection object
+        protected bool ConnectionDecompile(SqlConnection theConnection)
+        {   
+            return ConnectionDecompile(theConnection.ConnectionString);            
+        }
+
+        //This function processes the connection string and breaks it into its seperate entities
+        protected bool ConnectionDecompile(string connectionString)
         {
             //This will be used to find the correct positions which is why its all lower case
             //Note: we do not extract the final data from this as its all been made lower case
-            string temp = theConnection.ConnectionString.ToLower();
-
-            //We pull this as its essential in determining what kind of connection is being asked for
-            string windowsAuth = GetBetweenStringValue(temp, "integrated security=", ";");
-
-            //Sets all the variables up
-            DecompileVariables(temp, windowsAuth);
-
-            //Checks the validity of the variables
-            if (DecompileMinimumValidity(windowsAuth))
+            string con = connectionString.ToLower();
+            
+            //Pulls the variables needed out and ensures they are all valid
+            if (DecompileVariables(con))
             {
-                //Check which connection type we are compiling
-                if (string.IsNullOrWhiteSpace(user) && string.IsNullOrWhiteSpace(pwd))
-                {
-                    //Builds the windows authentication string
-                    connection = "Server=" + server + "; Database=" + db + ";Integrated Security=SSPI;connection timeout=" + connectionTime.ToString();
-                    return true;
+                //Check which connection type we are compiling and creates the connection string                
+                if (isWindowsAuth)
+                {   
+                    WindowsAuthConnectionString();                    
                 }
                 else
                 {
-                    //Builds the sql authentication string
-                    connection = "Server=" + server + "; Database=" + db + "; User Id=" + user + "; Password=" + pwd + ";connection timeout=" + connectionTime.ToString();
-                    return true;
+                    SqlAuthConnectionString();                    
                 }
+
+                return true;
             }
 
             return false;
         }
-
+        
         //This function pulls out all the variable from a connection string
-        private void DecompileVariables(string connectionString, string windowsAuth)
+        private bool DecompileVariables(string connectionString)
         {
-            //Checks if the connection is using windows authentication
-            //Note: if so we do not require username and passwords
-            if (string.IsNullOrWhiteSpace(windowsAuth) || (windowsAuth != "true" && windowsAuth != "sspi"))
+            try
             {
-                //Checks which version of the user id someone has entered for the connection string
-                if (connectionString.IndexOf("user id=") != -1)
+                //We pull this as its essential in determining what kind of connection is being asked for *sql user or windows auth*
+                string windowsAuth = GetBetweenStringValue(connectionString.ToLower(), "integrated security=", ";");
+                if (!string.IsNullOrWhiteSpace(windowsAuth) && (windowsAuth == "true" || windowsAuth == "false" || windowsAuth == "sspi"))
                 {
-                    user = GetBetweenStringValue(connectionString, "user id=", ";");
+                    isWindowsAuth = true;
                 }
-                else if (connectionString.IndexOf("userid=") != -1)
+                else
                 {
-                    user = GetBetweenStringValue(connectionString, "userid=", ";");
-                }
-                else if (connectionString.IndexOf("uid=") != -1)
-                {
-                    user = GetBetweenStringValue(connectionString, "uid=", ";");
+                    isWindowsAuth = false;
                 }
 
-                pwd = GetBetweenStringValue(connectionString, "password=", ";");
+                //Checks if the connection is using windows authentication
+                //Note: if so we do not require username and passwords
+                if (!isWindowsAuth)
+                {
+                    //Checks which version of the user id someone has entered for the connection string
+                    if (connectionString.IndexOf("user id=") != -1)
+                    {
+                        user = GetBetweenStringValue(connectionString, "user id=", ";");
+                    }
+                    else if (connectionString.IndexOf("userid=") != -1)
+                    {
+                        user = GetBetweenStringValue(connectionString, "userid=", ";");
+                    }
+                    else if (connectionString.IndexOf("uid=") != -1)
+                    {
+                        user = GetBetweenStringValue(connectionString, "uid=", ";");
+                    }
+
+                    pwd = GetBetweenStringValue(connectionString, "password=", ";");
+                }
+
+                server = GetBetweenStringValue(connectionString, "server=", ";");
+
+                db = GetBetweenStringValue(connectionString, "database=", ";");
+
+                //Checks if there is a port number supplied
+                string[] tempPort = server.Split(',');
+                port = (tempPort != null && tempPort.Length > 1) ? Convert.ToInt32(tempPort[1]) : -1;
+
+                //Checks if there is a connection timeout supplied
+                string tempConnectionTimeout = GetBetweenStringValue(connectionString, "connection timeout=", ";");
+                connectionTime = (!string.IsNullOrWhiteSpace(tempConnectionTimeout)) ? Convert.ToInt32(tempConnectionTimeout) : 30;
+                
+                //Checks all values required have been populated and are valid
+                return MinimumConnectionValidity();
             }
-
-            server = GetBetweenStringValue(connectionString, "server=", ";");
-
-            db = GetBetweenStringValue(connectionString, "database=", ";");
-
-            string tempConnectionTimeout = GetBetweenStringValue(connectionString, "connection timeout=", ";");
-            connectionTime = (!string.IsNullOrWhiteSpace(tempConnectionTimeout)) ? Convert.ToInt32(tempConnectionTimeout) : 30;
+            catch { }
+            return false;
         }
 
         //This function ensures the minimum required variables for a connection are valid
-        private bool DecompileMinimumValidity(string windowsAuth)
+        private bool MinimumConnectionValidity()
         {
-            //Windows authentication validity check
-            if (string.IsNullOrWhiteSpace(windowsAuth) || windowsAuth == "true" || windowsAuth == "false" || windowsAuth == "sspi")
-            {
-                //Default variable checks
+            if(isWindowsAuth)
+            {   
                 if (!string.IsNullOrWhiteSpace(server) && !string.IsNullOrWhiteSpace(db) && connectionTime >= 0)
+                {
+                    return true;
+                }
+            }
+            else
+            {   
+                if (!string.IsNullOrWhiteSpace(server) && !string.IsNullOrWhiteSpace(db) && !string.IsNullOrWhiteSpace(user) && !string.IsNullOrWhiteSpace(pwd) && connectionTime >= 0)
                 {
                     return true;
                 }
@@ -209,11 +310,13 @@ namespace DotNetSDB
             user = connectionInformation.user;
             pwd = connectionInformation.pwd;
             server = connectionInformation.server;
+            port = connectionInformation.port;
             connectionTime = connectionInformation.connectionTime;
             loggerDetails = connectionInformation.logger;
+            isWindowsAuth = false;
 
-            //Recreates the connection string
-            connection = string.Format("Server={0};Database={1};User Id={2};Password={3};Connection Timeout={4};", server, db, user, pwd, connectionTime);
+            //Creates the connection string
+            SqlAuthConnectionString();
 
             //Initialises the connection
             connectionInit();
@@ -226,11 +329,13 @@ namespace DotNetSDB
             //Sets the connection string
             db = connectionInformation.dbName;
             server = connectionInformation.server;
+            port = connectionInformation.port;
             connectionTime = connectionInformation.connectionTime;
             loggerDetails = connectionInformation.logger;
+            isWindowsAuth = true;
 
-            //Recreates the connection string
-            connection = string.Format("Server={0};Database={1};Integrated Security=SSPI;Connection Timeout={2};", server, db, connectionTime);
+            //Creates the connection string
+            WindowsAuthConnectionString();
 
             //Initialises the connection
             connectionInit();
@@ -241,7 +346,7 @@ namespace DotNetSDB
         public bool switch_connection(SqlConnection theConnection)
         {
             //Checks if anything went wrong with decompiling the connection string from the sqlconnection
-            if (connection_decompile(theConnection))
+            if (ConnectionDecompile(theConnection))
             {
                 //Initialises the connection
                 connectionInit();
@@ -256,14 +361,8 @@ namespace DotNetSDB
 
         public bool switch_connection(string sqlConnectionString)
         {
-            //We pull this as its essential in determining what kind of connection is being asked for
-            string windowsAuth = GetBetweenStringValue(sqlConnectionString.ToLower(), "integrated security=", ";");
-
-            //Pulls the variable out
-            DecompileVariables(sqlConnectionString.ToLower(), windowsAuth);
-
             //Checks the validity of the variables
-            if (DecompileMinimumValidity(windowsAuth))
+            if (ConnectionDecompile(sqlConnectionString))
             {
                 //Initialises the connection
                 connectionInit();

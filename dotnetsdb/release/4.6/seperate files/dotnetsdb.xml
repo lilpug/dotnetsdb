@@ -113,6 +113,29 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
+        <member name="M:DotNetSDB.MySQLUserConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the mysql user connection class
+            </summary>
+            <param name="serverName"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="databaseName"></param>
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLUserConnection.#ctor(System.String,System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the mysql user connection class
+            </summary>
+            <param name="serverName"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <param name="databaseName"></param>
+            <param name="thePort"></param>
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
         <member name="T:DotNetSDB.MySqlTypeConvertor">
             <summary>
             Convert a base data type to another base data type
@@ -756,7 +779,19 @@
             <param name="serverName"></param>
             <param name="username"></param>
             <param name="password"></param>
+            <param name="databaseName"></param>        
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerUserConnection.#ctor(System.String,System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the sql server user connection class
+            </summary>
+            <param name="serverName"></param>
+            <param name="username"></param>
+            <param name="password"></param>
             <param name="databaseName"></param>
+            <param name="thePort"></param>
             <param name="connectionTimeout"></param>
             <param name="errorLogger"></param>
         </member>
@@ -770,7 +805,17 @@
             This function is the initialisation for the sql server windows connection class
             </summary>
             <param name="serverName"></param>
+            <param name="database"></param>        
+            <param name="connectionTimeout"></param>
+            <param name="errorLogger"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerWindowsConnection.#ctor(System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementVariable)">
+            <summary>
+            This function is the initialisation for the sql server windows connection class
+            </summary>
+            <param name="serverName"></param>
             <param name="database"></param>
+            <param name="thePort"></param>
             <param name="connectionTimeout"></param>
             <param name="errorLogger"></param>
         </member>

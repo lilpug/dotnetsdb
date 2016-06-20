@@ -25,6 +25,8 @@ namespace DotNetSDB
         //Class variables for the database connections
         protected string user, pwd, server, db, connection;
 
+        protected bool isWindowsAuth;
+        protected int port;
         protected int connectionTime;
         protected SqlConnection myConnection;
 
