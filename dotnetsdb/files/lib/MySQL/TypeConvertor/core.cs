@@ -7,7 +7,7 @@ namespace DotNetSDB
     /// <summary>
     /// Convert a base data type to another base data type
     /// </summary>
-    public partial class MySqlConvertor
+    public partial class MySqlTypeConvertor
     {
         /// <summary>
         /// Convert db type to .Net data type
@@ -88,9 +88,8 @@ namespace DotNetSDB
                 }
             }
             if (retObj == null)
-            {
-                throw
-                new ApplicationException("Referenced an unsupported Type");
+            {   
+                throw new ApplicationException("MySql Type Converter: data was used which is an unsupported Type");
             }
 
             return (DbTypeMapEntry)retObj;
@@ -110,8 +109,7 @@ namespace DotNetSDB
             }
             if (retObj == null)
             {
-                throw
-                new ApplicationException("Referenced an unsupported DbType");
+                throw new ApplicationException("MySql Type Converter: data was used which is an unsupported DbType");                
             }
 
             return (DbTypeMapEntry)retObj;
@@ -131,8 +129,7 @@ namespace DotNetSDB
             }
             if (retObj == null)
             {
-                throw
-                new ApplicationException("Referenced an unsupported SqlDbType");
+                throw new ApplicationException("MySql Type Converter: data was used which is an unsupported SqlDbType");                
             }
 
             return (DbTypeMapEntry)retObj;

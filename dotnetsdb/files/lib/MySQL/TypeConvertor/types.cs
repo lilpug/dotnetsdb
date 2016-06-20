@@ -8,7 +8,7 @@ namespace DotNetSDB
     /// <summary>
     /// Convert a base data type to another base data type
     /// </summary>
-    public partial class MySqlConvertor
+    public partial class MySqlTypeConvertor
     {
         public virtual void typeBool()
         {

@@ -3,7 +3,7 @@ using System.Data;
 
 namespace DotNetSDB
 {
-    public partial class SqlServer2012Convertor : SqlServerConvertor
+    public partial class SqlServer2012TypeConvertor : SqlServerTypeConvertor
     {
         public override void typeDateTime()
         {

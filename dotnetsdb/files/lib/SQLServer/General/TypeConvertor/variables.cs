@@ -11,7 +11,7 @@ namespace DotNetSDB
     /// <summary>
     /// Convert a base data type to another base data type
     /// </summary>
-    public partial class SqlServerConvertor
+    public partial class SqlServerTypeConvertor
     {
         public class DbTypeMapEntry
         {
@@ -21,15 +21,15 @@ namespace DotNetSDB
 
             public DbTypeMapEntry(Type type, DbType dbType, SqlDbType sqlDbType)
             {
-                this.Type = type;
-                this.DbType = dbType;
-                this.SqlDbType = sqlDbType;
+                Type = type;
+                DbType = dbType;
+                SqlDbType = sqlDbType;
             }
         };
 
         public static ArrayList _DbTypeList = new ArrayList();
 
-        public SqlServerConvertor()
+        public SqlServerTypeConvertor()
         {
             init();
         }

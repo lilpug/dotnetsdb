@@ -113,7 +113,7 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <member name="T:DotNetSDB.MySqlConvertor">
+        <member name="T:DotNetSDB.MySqlTypeConvertor">
             <summary>
             Convert a base data type to another base data type
             </summary>
@@ -124,42 +124,42 @@
             Convert a base data type to another base data type
             </summary>
         </member>
-        <member name="M:DotNetSDB.MySqlConvertor.ToNetType(System.Data.DbType)">
+        <member name="M:DotNetSDB.MySqlTypeConvertor.ToNetType(System.Data.DbType)">
             <summary>
             Convert db type to .Net data type
             </summary>
             <param name="dbType"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySqlConvertor.ToNetType(MySql.Data.MySqlClient.MySqlDbType)">
+        <member name="M:DotNetSDB.MySqlTypeConvertor.ToNetType(MySql.Data.MySqlClient.MySqlDbType)">
             <summary>
             Convert TSQL type to .Net data type
             </summary>
             <param name="sqlDbType"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySqlConvertor.ToDbType(System.Type)">
+        <member name="M:DotNetSDB.MySqlTypeConvertor.ToDbType(System.Type)">
             <summary>
             Convert .Net type to Db type
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySqlConvertor.ToDbType(MySql.Data.MySqlClient.MySqlDbType)">
+        <member name="M:DotNetSDB.MySqlTypeConvertor.ToDbType(MySql.Data.MySqlClient.MySqlDbType)">
             <summary>
             Convert TSQL data type to DbType
             </summary>
             <param name="sqlDbType"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySqlConvertor.ToSqlDbType(System.Type)">
+        <member name="M:DotNetSDB.MySqlTypeConvertor.ToSqlDbType(System.Type)">
             <summary>
             Convert .Net type to TSQL data type
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySqlConvertor.ToSqlDbType(System.Data.DbType)">
+        <member name="M:DotNetSDB.MySqlTypeConvertor.ToSqlDbType(System.Data.DbType)">
             <summary>
             Convert DbType type to TSQL data type
             </summary>
@@ -774,7 +774,7 @@
             <param name="connectionTimeout"></param>
             <param name="errorLogger"></param>
         </member>
-        <member name="T:DotNetSDB.SqlServerConvertor">
+        <member name="T:DotNetSDB.SqlServerTypeConvertor">
             <summary>
             Convert a base data type to another base data type
             </summary>
@@ -785,42 +785,42 @@
             Convert a base data type to another base data type
             </summary>
         </member>
-        <member name="M:DotNetSDB.SqlServerConvertor.ToNetType(System.Data.DbType)">
+        <member name="M:DotNetSDB.SqlServerTypeConvertor.ToNetType(System.Data.DbType)">
             <summary>
             Convert db type to .Net data type
             </summary>
             <param name="dbType"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerConvertor.ToNetType(System.Data.SqlDbType)">
+        <member name="M:DotNetSDB.SqlServerTypeConvertor.ToNetType(System.Data.SqlDbType)">
             <summary>
             Convert TSQL type to .Net data type
             </summary>
             <param name="sqlDbType"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerConvertor.ToDbType(System.Type)">
+        <member name="M:DotNetSDB.SqlServerTypeConvertor.ToDbType(System.Type)">
             <summary>
             Convert .Net type to Db type
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerConvertor.ToDbType(System.Data.SqlDbType)">
+        <member name="M:DotNetSDB.SqlServerTypeConvertor.ToDbType(System.Data.SqlDbType)">
             <summary>
             Convert TSQL data type to DbType
             </summary>
             <param name="sqlDbType"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerConvertor.ToSqlDbType(System.Type)">
+        <member name="M:DotNetSDB.SqlServerTypeConvertor.ToSqlDbType(System.Type)">
             <summary>
             Convert .Net type to TSQL data type
             </summary>
             <param name="type"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerConvertor.ToSqlDbType(System.Data.DbType)">
+        <member name="M:DotNetSDB.SqlServerTypeConvertor.ToSqlDbType(System.Data.DbType)">
             <summary>
             Convert DbType type to TSQL data type
             </summary>

@@ -13,7 +13,7 @@ namespace DotNetSDB
     /// <summary>
     /// Convert a base data type to another base data type
     /// </summary>
-    public partial class MySqlConvertor
+    public partial class MySqlTypeConvertor
     {
         public class DbTypeMapEntry
         {
@@ -23,15 +23,15 @@ namespace DotNetSDB
 
             public DbTypeMapEntry(Type type, DbType dbType, MySqlDbType sqlDbType)
             {
-                this.Type = type;
-                this.DbType = dbType;
-                this.SqlDbType = sqlDbType;
+                Type = type;
+                DbType = dbType;
+                SqlDbType = sqlDbType;
             }
         };
 
         public static ArrayList _DbTypeList = new ArrayList();
 
-        public MySqlConvertor()
+        public MySqlTypeConvertor()
         {
             init();
         }

@@ -11,16 +11,16 @@ namespace DotNetSDB
 
         protected virtual void Sanitisation(string definition, ref SqlCommand command, params object[] items)
         {
+            int counter = 0;
+
             try
             {
-                int counter = 0;
-
                 foreach (object data in items)
                 {
                     command.Parameters.AddWithValue(definition + counter.ToString(), ((data == null) ? DBNull.Value : data));
                     if (data != null)
                     {
-                        SqlServerConvertor convertor = new SqlServerConvertor();
+                        SqlServerTypeConvertor convertor = new SqlServerTypeConvertor();
                         command.Parameters[definition + counter.ToString()].SqlDbType = convertor.ToSqlDbType(data.GetType());                        
                     }
                     counter++;
@@ -28,7 +28,7 @@ namespace DotNetSDB
             }
             catch(Exception e)
             {
-                throw new Exception(string.Format("There seems to be an issue while sanitising definition: {0}{1}Error: {2}", definition, Environment.NewLine, e.Message));
+                throw new Exception(string.Format("There seems to be an issue while sanitising definition: {0}{1}Basic Error Information: {2}{1}Error Details: {3}", definition + counter.ToString(), Environment.NewLine, e.Message, e.ToString()));
             }
         }
 

@@ -7,7 +7,7 @@ namespace DotNetSDB
     /// <summary>
     /// Convert a base data type to another base data type
     /// </summary>
-    public partial class SqlServerConvertor
+    public partial class SqlServerTypeConvertor
     {
         public virtual void typeBool()
         {
