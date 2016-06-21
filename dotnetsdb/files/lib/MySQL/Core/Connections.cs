@@ -73,7 +73,7 @@ namespace DotNetSDB
         {
             if (port == -1)
             {
-                connection = string.Format("Server={0};Database={2};UId={3};Pwd={4};Connection Timeout={5};AllowZeroDateTime=true;ConvertZeroDatetime=True", server, db, user, pwd, connectionTime.ToString());
+                connection = string.Format("Server={0};Database={1};UId={2};Pwd={3};Connection Timeout={4};AllowZeroDateTime=true;ConvertZeroDatetime=True", server, db, user, pwd, connectionTime.ToString());
             }
             else
             {

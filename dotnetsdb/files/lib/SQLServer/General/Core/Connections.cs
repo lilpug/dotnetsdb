@@ -139,7 +139,7 @@ namespace DotNetSDB
         {
             if (port == -1)
             {
-                connection = string.Format("Server={0};Database={2};User Id={3};Password={4};connection timeout={5}", server, db, user, pwd, connectionTime);
+                connection = string.Format("Server={0};Database={1};User Id={2};Password={3};connection timeout={4}", server, db, user, pwd, connectionTime);
             }
             else
             {
