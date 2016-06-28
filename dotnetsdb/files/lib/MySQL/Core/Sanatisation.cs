@@ -11,19 +11,20 @@ namespace DotNetSDB
 
         protected virtual void sanitisation(string definition, ref MySqlCommand command, params object[] items)
         {
-            int counter = 0;
+            int counter = -1;
 
             try
             {
                 foreach (object data in items)
                 {
+                    counter++;
+
                     command.Parameters.AddWithValue(definition + counter.ToString(), ((data == null) ? DBNull.Value : data));
                     if (data != null)
                     {
                         MySqlTypeConvertor convertor = new MySqlTypeConvertor();
                         command.Parameters[definition + counter.ToString()].MySqlDbType = convertor.ToSqlDbType(data.GetType());
-                    }
-                    counter++;
+                    }                    
                 }
             }
             catch(Exception e)
@@ -94,12 +95,12 @@ namespace DotNetSDB
 
                 //Gets the index of the current query we are on
                 int index = theQueries.IndexOf(current);
-                if (theQueries2[index].exist_real_table_value != "")
+                if (theQueries2[index].exist_real_table_value != null && theQueries2[index].exist_real_table_value.Length > 0)
                 {
                     sanitisation(exist_definition + "_" + queryCounter.ToString() + "_" + "0" + "_", ref command, theQueries2[index].exist_real_table_value);
                 }
 
-                if (theQueries2[index].get_fields_real_table_value != "")
+                if (theQueries2[index].get_fields_real_table_value != null && theQueries2[index].get_fields_real_table_value.Length > 0)
                 {
                     sanitisation(fields_definition + "_" + queryCounter.ToString() + "_" + "0" + "_", ref command, theQueries2[index].get_fields_real_table_value);
                 }

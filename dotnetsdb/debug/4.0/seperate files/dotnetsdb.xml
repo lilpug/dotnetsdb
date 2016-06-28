@@ -92,6 +92,12 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
+        <member name="M:DotNetSDB.MysqlCore.add_limit(System.Int32)">
+            <summary>
+            This function adds the limit statement
+            </summary>
+            <param name="startLocation"></param>        
+        </member>
         <member name="M:DotNetSDB.MysqlCore.add_limit(System.Int32,System.Int32)">
             <summary>
             This function adds the limit statement
@@ -101,7 +107,7 @@
         </member>
         <member name="M:DotNetSDB.MysqlCore.table_get_fields(System.String)">
             <summary>
-            This functions returns all the column names of a table
+            This function returns all the column names of a table
             </summary>
             <param name="tableName"></param>
             <returns></returns>
@@ -751,7 +757,7 @@
         </member>
         <member name="M:DotNetSDB.SqlServerCore.table_get_fields(System.String)">
             <summary>
-            This function returns all the column of a table
+            This function returns all the column names of a table
             </summary>
             <param name="tableName"></param>
             <returns></returns>

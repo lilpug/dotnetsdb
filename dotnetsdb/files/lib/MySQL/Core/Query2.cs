@@ -15,8 +15,8 @@ namespace DotNetSDB
             //Variables for the offset
             public string limit = "";
 
-            public string exist_real_table_value = "";
-            public string get_fields_real_table_value = "";
+            public object[] exist_real_table_value = new object[0];
+            public object[] get_fields_real_table_value = new object[0];            
 
             public void Dispose(bool disposing)
             {
@@ -24,8 +24,8 @@ namespace DotNetSDB
                 {
                     limit = "";
 
-                    exist_real_table_value = "";
-                    get_fields_real_table_value = "";
+                    exist_real_table_value = null;
+                    get_fields_real_table_value = null;
                 }
             }
 

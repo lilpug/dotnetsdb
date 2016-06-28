@@ -16,19 +16,18 @@ namespace DotNetSDB
         /// <returns></returns>
         public bool truncate_table(string tableName)
         {
-            //Gives the sql string to the compiled_build
-            compiled_build = "Truncate Table " + tableName;
-
-            try
+            //Checks if the value passed is null
+            if (!string.IsNullOrWhiteSpace(tableName))
             {
-                //Runs the query
+                //Gives the sql string to the compiled_build
+                compiled_build = "Truncate Table " + tableName;
+
                 run();
+
                 return true;
             }
-            catch (Exception)
-            {
-                return false;
-            }
+
+            return false;
         }
     }
 }

@@ -30,6 +30,10 @@ namespace DotNetSDB
             {
                 throw new Exception(string.Format("The offset start value starts at 1 and above, yours is currently '{0}'.", startLocation.ToString()));
             }
+            if (endLocation < startLocation)
+            {
+                throw new Exception(string.Format("The offset end value starts before the start value, start value: '{0}', end value: '{1}'.", startLocation.ToString(), endLocation.ToString()));
+            }
             query theMain = get_query();
             query3 theQuery = get_query3();
             offset_build_compiling(theQuery, startLocation, endLocation);

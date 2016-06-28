@@ -11,20 +11,21 @@ namespace DotNetSDB
 
         protected override void Sanitisation(string definition, ref SqlCommand command, params object[] items)
         {
-            int counter = 0;
+            int counter = -1;
 
             try
-            {
+            {   
                 foreach (object data in items)
                 {
+                    counter++;
+
                     command.Parameters.AddWithValue(definition + counter.ToString(), ((data == null) ? DBNull.Value : data));
                     if (data != null)
                     {
-                        SqlServer2012TypeConvertor convertor = new SqlServer2012TypeConvertor();                        
+                        SqlServer2012TypeConvertor convertor = new SqlServer2012TypeConvertor();
                         command.Parameters[definition + counter.ToString()].SqlDbType = convertor.ToSqlDbType(data.GetType());
-                    }
-                    counter++;
-                }
+                    }                        
+                }                
             }
             catch(Exception e)
             {   

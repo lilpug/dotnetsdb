@@ -13,9 +13,9 @@ namespace DotNetSDB
         protected class query2
         {
             public int select_top = -1;
-
-            public string exist_real_table_value = "";
-            public string get_fields_real_table_value = "";
+            
+            public object[] exist_real_table_value = new object[0];            
+            public object[] get_fields_real_table_value = new object[0];
 
             public bool insert_return = false;
 
@@ -28,8 +28,8 @@ namespace DotNetSDB
                 if (disposing)
                 {
                     select_top = -1;
-                    exist_real_table_value = "";
-                    get_fields_real_table_value = "";
+                    exist_real_table_value = null;
+                    get_fields_real_table_value = null;
 
                     insert_return = false;
 

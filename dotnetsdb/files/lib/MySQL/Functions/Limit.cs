@@ -9,14 +9,36 @@ namespace DotNetSDB
         /*##########################################*/
 
         //This function is the mysql limit sql builder
+        protected void limit_create(query2 theQuery, int start)
+        {
+            theQuery.limit = "LIMIT " + (start - 1).ToString();
+        }
+
+        //This function is the mysql limit sql builder
         protected void limit_create(query2 theQuery, int start, int end)
         {
             theQuery.limit = "LIMIT " + (start - 1).ToString() + ", " + (end - start + 1).ToString();
-        }
+        }        
 
         /*##########################################*/
         /*           Main Front functions           */
         /*##########################################*/
+
+        /// <summary>
+        /// This function adds the limit statement
+        /// </summary>
+        /// <param name="startLocation"></param>        
+        public void add_limit(int startLocation)
+        {
+            if (startLocation <= 0)
+            {
+                throw new Exception(string.Format("The limit start value starts at 1 and above, yours is currently '{0}'.", startLocation.ToString()));
+            }            
+            query theMain = get_query();
+            query2 theQuery = get_query2();
+            limit_create(theQuery, startLocation);
+            theMain.orderList.Add("limit");
+        }
 
         /// <summary>
         /// This function adds the limit statement
@@ -28,6 +50,10 @@ namespace DotNetSDB
             if (startLocation <= 0)
             {
                 throw new Exception(string.Format("The limit start value starts at 1 and above, yours is currently '{0}'.", startLocation.ToString()));
+            }
+            if (endLocation < startLocation)
+            {
+                throw new Exception(string.Format("The limit end value starts before the start value, start value: '{0}', end value: '{1}'.", startLocation.ToString(), endLocation.ToString()));
             }
             query theMain = get_query();
             query2 theQuery = get_query2();
