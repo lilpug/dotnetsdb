@@ -27,7 +27,7 @@ namespace DotNetSDB
             }
         };
 
-        public static ArrayList _DbTypeList = new ArrayList();
+        public ArrayList typeList = new ArrayList();
 
         public SqlServerTypeConvertor()
         {

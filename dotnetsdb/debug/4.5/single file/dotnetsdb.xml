@@ -152,6 +152,9 @@
             <summary>
             Convert a base data type to another base data type
             </summary>
+            <summary>
+            Convert a base data type to another base data type
+            </summary>
         </member>
         <member name="M:DotNetSDB.MySqlTypeConvertor.ToNetType(System.Data.DbType)">
             <summary>
@@ -840,6 +843,9 @@
             <param name="errorLogger"></param>
         </member>
         <member name="T:DotNetSDB.SqlServerTypeConvertor">
+            <summary>
+            Convert a base data type to another base data type
+            </summary>
             <summary>
             Convert a base data type to another base data type
             </summary>

@@ -12,62 +12,62 @@ namespace DotNetSDB
     {
         public virtual void typeBool()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(bool), DbType.Boolean, MySqlDbType.Bit));
+            typeList.Add(new DbTypeMapEntry(typeof(bool), DbType.Boolean, MySqlDbType.Bit));
         }
 
         public virtual void typeByte()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(byte), DbType.Binary, MySqlDbType.Byte));
+            typeList.Add(new DbTypeMapEntry(typeof(byte), DbType.Binary, MySqlDbType.Byte));
         }
 
         public virtual void typeByteArray()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(byte[]), DbType.Binary, MySqlDbType.VarBinary));
+            typeList.Add(new DbTypeMapEntry(typeof(byte[]), DbType.Binary, MySqlDbType.VarBinary));
         }
 
         public virtual void typeDateTime()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(DateTime), DbType.DateTime, MySqlDbType.DateTime));
+            typeList.Add(new DbTypeMapEntry(typeof(DateTime), DbType.DateTime, MySqlDbType.DateTime));
         }
 
         public virtual void typeDecimal()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(Decimal), DbType.Decimal, MySqlDbType.Decimal));
+            typeList.Add(new DbTypeMapEntry(typeof(Decimal), DbType.Decimal, MySqlDbType.Decimal));
         }
 
         public virtual void typeDouble()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(double), DbType.Double, MySqlDbType.Float));
+            typeList.Add(new DbTypeMapEntry(typeof(double), DbType.Double, MySqlDbType.Float));
         }
 
         public virtual void typeGUID()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(Guid), DbType.Guid, MySqlDbType.Guid));
+            typeList.Add(new DbTypeMapEntry(typeof(Guid), DbType.Guid, MySqlDbType.Guid));
         }
 
         public virtual void typeInt16()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(Int16), DbType.Int16, MySqlDbType.Int16));
+            typeList.Add(new DbTypeMapEntry(typeof(Int16), DbType.Int16, MySqlDbType.Int16));
         }
 
         public virtual void typeInt32()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(Int32), DbType.Int32, MySqlDbType.Int32));
+            typeList.Add(new DbTypeMapEntry(typeof(Int32), DbType.Int32, MySqlDbType.Int32));
         }
 
         public virtual void typeInt64()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(Int64), DbType.Int64, MySqlDbType.Int64));
+            typeList.Add(new DbTypeMapEntry(typeof(Int64), DbType.Int64, MySqlDbType.Int64));
         }
 
         public virtual void typeObject()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(object), DbType.Object, MySqlDbType.Blob));
+            typeList.Add(new DbTypeMapEntry(typeof(object), DbType.Object, MySqlDbType.Blob));
         }
 
         public virtual void typeString()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(string), DbType.String, MySqlDbType.VarChar));
+            typeList.Add(new DbTypeMapEntry(typeof(string), DbType.String, MySqlDbType.VarChar));
         }
 
         public virtual void extraType()

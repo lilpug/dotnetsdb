@@ -78,9 +78,9 @@ namespace DotNetSDB
         private DbTypeMapEntry Find(Type type)
         {
             object retObj = null;
-            for (int i = 0; i < _DbTypeList.Count; i++)
+            for (int i = 0; i < typeList.Count; i++)
             {
-                DbTypeMapEntry entry = (DbTypeMapEntry)_DbTypeList[i];
+                DbTypeMapEntry entry = (DbTypeMapEntry)typeList[i];
                 if (entry.Type == type)
                 {
                     retObj = entry;
@@ -98,9 +98,9 @@ namespace DotNetSDB
         private DbTypeMapEntry Find(DbType dbType)
         {
             object retObj = null;
-            for (int i = 0; i < _DbTypeList.Count; i++)
+            for (int i = 0; i < typeList.Count; i++)
             {
-                DbTypeMapEntry entry = (DbTypeMapEntry)_DbTypeList[i];
+                DbTypeMapEntry entry = (DbTypeMapEntry)typeList[i];
                 if (entry.DbType == dbType)
                 {
                     retObj = entry;
@@ -118,9 +118,9 @@ namespace DotNetSDB
         private DbTypeMapEntry Find(MySqlDbType sqlDbType)
         {
             object retObj = null;
-            for (int i = 0; i < _DbTypeList.Count; i++)
+            for (int i = 0; i < typeList.Count; i++)
             {
-                DbTypeMapEntry entry = (DbTypeMapEntry)_DbTypeList[i];
+                DbTypeMapEntry entry = (DbTypeMapEntry)typeList[i];
                 if (entry.SqlDbType == sqlDbType)
                 {
                     retObj = entry;

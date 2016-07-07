@@ -22,8 +22,10 @@ namespace DotNetSDB
                     command.Parameters.AddWithValue(definition + counter.ToString(), ((data == null) ? DBNull.Value : data));
                     if (data != null)
                     {
-                        MySqlTypeConvertor convertor = new MySqlTypeConvertor();
-                        command.Parameters[definition + counter.ToString()].MySqlDbType = convertor.ToSqlDbType(data.GetType());
+                        using (MySqlTypeConvertor convertor = new MySqlTypeConvertor())
+                        {
+                            command.Parameters[definition + counter.ToString()].MySqlDbType = convertor.ToSqlDbType(data.GetType());
+                        }
                     }                    
                 }
             }

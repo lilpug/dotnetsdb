@@ -22,8 +22,10 @@ namespace DotNetSDB
                     command.Parameters.AddWithValue(definition + counter.ToString(), ((data == null) ? DBNull.Value : data));
                     if (data != null)
                     {
-                        SqlServerTypeConvertor convertor = new SqlServerTypeConvertor();
-                        command.Parameters[definition + counter.ToString()].SqlDbType = convertor.ToSqlDbType(data.GetType());                        
+                        using (SqlServerTypeConvertor convertor = new SqlServerTypeConvertor())
+                        {
+                            command.Parameters[definition + counter.ToString()].SqlDbType = convertor.ToSqlDbType(data.GetType());
+                        }
                     }                    
                 }
             }

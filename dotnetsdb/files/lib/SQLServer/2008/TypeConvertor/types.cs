@@ -7,7 +7,7 @@ namespace DotNetSDB
     {
         public override void typeDateTime()
         {
-            _DbTypeList.Add(new DbTypeMapEntry(typeof(DateTime), DbType.DateTime2, SqlDbType.DateTime2));
+            typeList.Add(new DbTypeMapEntry(typeof(DateTime), DbType.DateTime2, SqlDbType.DateTime2));
         }
     }
 }

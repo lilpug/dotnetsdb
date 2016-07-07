@@ -104,6 +104,9 @@
     <Compile Include="..\..\files\lib\MySQL\TypeConvertor\core.cs">
       <Link>MySQL\TypeConvertor\core.cs</Link>
     </Compile>
+    <Compile Include="..\..\files\lib\MySQL\TypeConvertor\dispose.cs">
+      <Link>MySQL\TypeConvertor\dispose.cs</Link>
+    </Compile>
     <Compile Include="..\..\files\lib\MySQL\TypeConvertor\types.cs">
       <Link>MySQL\TypeConvertor\types.cs</Link>
     </Compile>
@@ -439,6 +442,9 @@
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\core.cs">
       <Link>SQLServer\General\TypeConvertor\core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\dispose.cs">
+      <Link>SQLServer\General\TypeConvertor\dispose.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\types.cs">
       <Link>SQLServer\General\TypeConvertor\types.cs</Link>
