@@ -8,8 +8,7 @@ namespace DotNetSDB
         /*       Offset Compiling functions         */
         /*##########################################*/
 
-        //This functions adds the variables ready for compiling the offset query
-        //Note: first = f -1, last = last - f + 1
+        //This functions adds the variables ready for compiling the offset query        
         protected void offset_build_compiling(query3 theQuery, int offset, int fetch)
         {
             theQuery.offset = string.Format("OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", offset, fetch);

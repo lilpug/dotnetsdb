@@ -584,15 +584,15 @@
             <summary>
             Note: This function requires an orderby before using it
             </summary>
-            <param name="startLocation"></param>
-            <param name="endLocation"></param>
+            <param name="offsetRows"></param>
+            <param name="numberOfRows"></param>
         </member>
         <member name="M:DotNetSDB.SqlServer2016.add_offset(System.Int32,System.Int32)">
             <summary>
             Note: This function requires an orderby before using it
             </summary>
-            <param name="startLocation"></param>
-            <param name="endLocation"></param>
+            <param name="offsetRows"></param>
+            <param name="numberOfRows"></param>
         </member>
         <member name="T:DotNetSDB.SqlServerCore">
             <summary>
