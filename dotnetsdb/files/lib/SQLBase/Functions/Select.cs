@@ -37,7 +37,7 @@ namespace DotNetSDB
                 //Builds the string
                 if (select_start_field != null && select_end_field != null)
                 {
-                    temp_build += string.Format("{1} {2}.{3} {4}", select_start_field, table_name, select_field, select_end_field);
+                    temp_build += string.Format("{0} {1}.{2} {3}", select_start_field, table_name, select_field, select_end_field);
                 }
                 else
                 {
