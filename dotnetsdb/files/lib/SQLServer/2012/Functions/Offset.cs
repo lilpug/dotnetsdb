@@ -10,9 +10,9 @@ namespace DotNetSDB
 
         //This functions adds the variables ready for compiling the offset query
         //Note: first = f -1, last = last - f + 1
-        protected void offset_build_compiling(query3 theQuery, int first, int last)
+        protected void offset_build_compiling(query3 theQuery, int offset, int fetch)
         {
-            theQuery.offset = string.Format("OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", (first - 1), (last - first));
+            theQuery.offset = string.Format("OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", offset, fetch);
         }
 
         /*##########################################*/
@@ -22,21 +22,21 @@ namespace DotNetSDB
         /// <summary>
         /// Note: This function requires an orderby before using it
         /// </summary>
-        /// <param name="startLocation"></param>
-        /// <param name="endLocation"></param>
-        public void add_offset(int startLocation, int endLocation)
+        /// <param name="offsetRows"></param>
+        /// <param name="numberOfRows"></param>
+        public void add_offset(int offsetRows, int numberOfRows)
         {
-            if (startLocation <= 0)
+            if (offsetRows < 0)
             {
-                throw new Exception(string.Format("The offset start value starts at 1 and above, yours is currently '{0}'.", startLocation.ToString()));
+                throw new Exception(string.Format("The offset start value starts at 0 and above, yours is currently '{0}'.", offsetRows.ToString()));
             }
-            if (endLocation < startLocation)
+            if (numberOfRows < 0)
             {
-                throw new Exception(string.Format("The offset end value starts before the start value, start value: '{0}', end value: '{1}'.", startLocation.ToString(), endLocation.ToString()));
+                throw new Exception(string.Format("The fetch rows cannot be below zero, yours is currently '{0}'.", numberOfRows.ToString()));
             }
             query theMain = get_query();
             query3 theQuery = get_query3();
-            offset_build_compiling(theQuery, startLocation, endLocation);
+            offset_build_compiling(theQuery, offsetRows, numberOfRows);
             theMain.orderList.Add("offset");
         }
     }
