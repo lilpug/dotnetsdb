@@ -35,15 +35,16 @@ namespace DotNetSDB
 
             string temp_build = "";
             for (int i = 0; i < join_fields.Length; i++)
-            {
-                //Determines if there should be a an and for double join statements
-                string seperator = "";
-                if (i != 0)
-                {
-                    seperator = "AND ";
+            {   
+                //Determines when to start using the and on the join parameters
+                if (i == 0)//First params so init the join
+                {                    
+                    temp_build += string.Format("{0} {1} ON {2}.{3} = {4}.{5}", join_type, table_name, alias, join_fields[i], other_table_name, other_fields[i]);                    
                 }
-
-                temp_build += string.Format("{0}{1} {2} ON {3}.{4} = {5}.{6}", seperator, join_type, table_name, alias, join_fields[i], other_table_name, other_fields[i]);
+                else//Add the additional params
+                {
+                    temp_build += string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, join_fields[i], other_table_name, other_fields[i]);
+                }                
             }
 
             //adds it to the join statement lists
@@ -173,6 +174,7 @@ namespace DotNetSDB
             theQuery.orderList.Add("join");
         }
 
+        
         /// <summary>
         /// <para>This function adds a join into the query.</para>
         /// <para>Note: Please remember to use 'JOIN' within the joinType i.e. 'INNER JOIN'</para>
