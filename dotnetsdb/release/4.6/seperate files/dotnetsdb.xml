@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>dotnetsdb-4.6</name>
+        <name>dotnetsdb</name>
     </assembly>
     <members>
         <member name="M:DotNetSDB.MysqlCore.run">

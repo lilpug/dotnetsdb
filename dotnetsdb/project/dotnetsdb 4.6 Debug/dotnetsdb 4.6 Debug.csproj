@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>dotnetsdb_4._6_Debug</RootNamespace>
-    <AssemblyName>dotnetsdb 4.6 Debug</AssemblyName>
+    <AssemblyName>dotnetsdb Debug</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

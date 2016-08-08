@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>dotnetsdb_4._5</RootNamespace>
-    <AssemblyName>dotnetsdb-4.5</AssemblyName>
+    <AssemblyName>dotnetsdb</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -22,7 +22,7 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\debug\4.5\dotnetsdb-4.5.XML</DocumentationFile>
+    <DocumentationFile>..\..\debug\4.5\dotnetsdb.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -32,7 +32,7 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\release\4.5\dotnetsdb-4.5.XML</DocumentationFile>
+    <DocumentationFile>..\..\release\4.5\dotnetsdb.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SqlServer.Types, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -473,21 +473,21 @@
     <PostBuildEvent>RMDIR /S /Q "seperate files"
 RMDIR /S /Q "single file"
 
-merge 4 dotnetsdb.dll dotnetsdb-4.5.dll mysql.data.dll Microsoft.SqlServer.Types.dll
+merge 4 dotnetsdb.dll dotnetsdb.dll mysql.data.dll Microsoft.SqlServer.Types.dll
 
 mkdir "seperate files"
 mkdir "single file"
 
-move /Y dotnetsdb-4.5.dll  .\"seperate files"\dotnetsdb.dll
+move /Y dotnetsdb.dll  .\"seperate files"\dotnetsdb.dll
 move /Y mysql.data.dll  .\"seperate files"\mysql.data.dll
 move /Y Microsoft.SqlServer.Types.dll  .\"seperate files"\Microsoft.SqlServer.Types.dll
 
 move /Y .\merged\dotnetsdb.dll .\"single file"\dotnetsdb.dll
 
-copy /Y dotnetsdb-4.5.XML .\"single file"\dotnetsdb.xml
-copy /Y dotnetsdb-4.5.XML .\"seperate files"\dotnetsdb.xml
+copy /Y dotnetsdb.xml .\"single file"\dotnetsdb.xml
+copy /Y dotnetsdb.xml .\"seperate files"\dotnetsdb.xml
 
-DEL /F /Q dotnetsdb-4.5.XML
+DEL /F /Q dotnetsdb.xml
 DEL /F /Q merge.exe
 DEL /F /Q ILMerge.exe
 RMDIR /S /Q merged</PostBuildEvent>
