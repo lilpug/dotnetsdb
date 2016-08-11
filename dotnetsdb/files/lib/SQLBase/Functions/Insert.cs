@@ -67,7 +67,7 @@ namespace DotNetSDB
             {
                 throw new Exception("Insert Error: The table name supplied is empty.");
             }
-            else if (!string.IsNullOrWhiteSpace(field))
+            else if (string.IsNullOrWhiteSpace(field))
             {
                 throw new Exception("Insert Error: The Insert Field supplied is empty.");
             }
