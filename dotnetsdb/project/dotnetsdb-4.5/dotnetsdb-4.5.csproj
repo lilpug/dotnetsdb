@@ -375,6 +375,36 @@
     <Compile Include="..\..\files\lib\SQLServer\2016\Core\Sanatisation.cs">
       <Link>SQLServer\2016\Core\Sanatisation.cs</Link>
     </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\Core.cs">
+      <Link>SQLServer\2016\FileTable Extension\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\db\Create.cs">
+      <Link>SQLServer\2016\FileTable Extension\db\Create.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\db\Delete.cs">
+      <Link>SQLServer\2016\FileTable Extension\db\Delete.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\db\Exists.cs">
+      <Link>SQLServer\2016\FileTable Extension\db\Exists.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\db\Get.cs">
+      <Link>SQLServer\2016\FileTable Extension\db\Get.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\db\Insert.cs">
+      <Link>SQLServer\2016\FileTable Extension\db\Insert.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\db\Search.cs">
+      <Link>SQLServer\2016\FileTable Extension\db\Search.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\Errors.cs">
+      <Link>SQLServer\2016\FileTable Extension\Errors.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\Permissions.cs">
+      <Link>SQLServer\2016\FileTable Extension\Permissions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\FileTable Extension\Variables.cs">
+      <Link>SQLServer\2016\FileTable Extension\Variables.cs</Link>
+    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2016\Functions\Offset.cs">
       <Link>SQLServer\2016\Functions\Offset.cs</Link>
     </Compile>
