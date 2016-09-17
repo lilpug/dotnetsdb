@@ -1,12 +1,35 @@
-﻿using DotNetSDB;
-using System;
+﻿using System;
 namespace DotNetSDB.Connector
 {
-    public partial class DatabaseConnector : IDisposable
+    public sealed partial class DatabaseConnector : IDisposable
     {
         //Database object initiator and checker functions 
 
-        private void SqlServer2012(SqlServer2012 sqlserver)
+        internal void SqlServer2016(SqlServer2016 sqlserver)
+        {
+            if (sqlserver.is_alive())
+            {
+                sqlserver2016 = sqlserver;
+            }
+            else
+            {
+                throw new Exception("Error: the sql server connection is not active");
+            }
+        }
+
+        internal void SqlServer2014(SqlServer2014 sqlserver)
+        {
+            if (sqlserver.is_alive())
+            {
+                sqlserver2014 = sqlserver;
+            }
+            else
+            {
+                throw new Exception("Error: the sql server connection is not active");
+            }
+        }
+
+        internal void SqlServer2012(SqlServer2012 sqlserver)
         {
             if (sqlserver.is_alive())
             {
@@ -18,7 +41,7 @@ namespace DotNetSDB.Connector
             }
         }
 
-        private void SqlServer2008(SqlServer2008 sqlserver)
+        internal void SqlServer2008(SqlServer2008 sqlserver)
         {
             if (sqlserver.is_alive())
             {
@@ -30,7 +53,7 @@ namespace DotNetSDB.Connector
             }
         }
 
-        private void mysqlCore(MysqlCore mysqlDb)
+        internal void mysqlCore(MysqlCore mysqlDb)
         {
             if (mysql.is_alive())
             {

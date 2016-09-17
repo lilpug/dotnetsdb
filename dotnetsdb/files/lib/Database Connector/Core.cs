@@ -1,14 +1,22 @@
 ﻿using System;
 namespace DotNetSDB.Connector
 {
-    public partial class DatabaseConnector : IDisposable
+    public sealed partial class DatabaseConnector : IDisposable
     {
         //Returns the database object
         public dynamic db
         {
             get
             {
-                if (sqlserver2012 != null)
+                if (sqlserver2016 != null)
+                {
+                    return sqlserver2016;
+                }
+                else if (sqlserver2014 != null)
+                {
+                    return sqlserver2014;
+                }    
+                else if (sqlserver2012 != null)
                 {
                     return sqlserver2012;
                 }
@@ -32,7 +40,15 @@ namespace DotNetSDB.Connector
         {
             get
             {
-                if (sqlserver2012 != null)
+                if (sqlserver2016 != null)
+                {
+                    return "sqlserver2016";
+                }
+                else if (sqlserver2014 != null)
+                {
+                    return "sqlserver2014";
+                }
+                else if (sqlserver2012 != null)
                 {
                     return "sqlserver2012";
                 }
@@ -56,7 +72,7 @@ namespace DotNetSDB.Connector
         {
             get
             {
-                if (sqlserver2012 != null || sqlserver2008 != null)
+                if (sqlserver2016 != null || sqlserver2014 != null || sqlserver2012 != null || sqlserver2008 != null)
                 {
                     return false;
                 }
