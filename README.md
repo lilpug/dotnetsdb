@@ -1,5 +1,5 @@
 ## dotnetsdb
-Dotnetsdb is a C#.NET database library which sits on top of the default functionality of both the .NET SQL Server and MySql adapters. Its intension is to bring a more modular and dynamic approach to making database calls in .NET. 
+Dotnetsdb is a C#.NET database library which sits on top of the default functionality of both the .NET SQL Server and MySql adapters. Its intention is to bring a more modular and dynamic approach to making database calls in .NET. 
 
 
 ## Documentation
