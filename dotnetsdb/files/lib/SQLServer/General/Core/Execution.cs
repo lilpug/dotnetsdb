@@ -369,7 +369,7 @@ namespace DotNetSDB
                 {
                     //Puts the first output into a string
                     string value = null;
-                    if (myReader.Read())
+                    if (myReader != null && myReader.Read())
                     {
                         value = myReader.GetValue(0).ToString();
                     }

@@ -8,6 +8,8 @@ namespace DotNetSDB.SqlServer.FileTable
     {
 		public partial class FileTableTasks
 		{
+            //Steam Ids
+
 			public string get_root_folder_id(string tableName, string folderName)
 			{
 				try
@@ -98,6 +100,9 @@ namespace DotNetSDB.SqlServer.FileTable
 					throw errorHandler.CustomErrorOutput(e);
 				}
 			}
+            
+            
+            //File Data
 
 			public Dictionary<string, byte[]> get_all_files_from_root(string tableName)
 			{
@@ -193,7 +198,23 @@ namespace DotNetSDB.SqlServer.FileTable
 
 
 
-            //Names
+            //Gets the main path locator for a stream id
+            public string get_path_locator(string tableName, string streamID)
+            {
+                try
+                {
+                    connector.db.add_select(tableName, "path_locator", "CAST( ", " AS varchar(max)) as path_locator");
+                    connector.db.add_where_normal(tableName, "stream_id", streamID);
+                    return connector.db.run_return_string();
+                }
+                catch (Exception e)
+                {
+                    throw errorHandler.CustomErrorOutput(e);
+                }
+            }
+
+
+            //Get methods to retreive the names
 
             public string[] get_all_file_names_from_root(string tableName)
             {
@@ -262,19 +283,7 @@ namespace DotNetSDB.SqlServer.FileTable
 
 
 
-            public string get_path_locator(string tableName, string streamID)
-			{
-				try
-				{
-					connector.db.add_select(tableName, "path_locator", "CAST( ", " AS varchar(max)) as path_locator");
-					connector.db.add_where_normal(tableName, "stream_id", streamID);
-					return connector.db.run_return_string();
-				}
-				catch (Exception e)
-				{
-					throw errorHandler.CustomErrorOutput(e);
-				}
-			}
+            //Main get methods to retreive all data
 
 			public DataTable get_all_from_root(string tableName)
 			{

@@ -10,14 +10,12 @@ namespace DotNetSDB.SqlServer.FileTable
 			{
 				try
 				{
-					connector.db.add_select(tableName, "path_locator");
-					connector.db.add_where_normal(tableName, "stream_id", streamID);
-					string locator = connector.db.run_return_string();
-					if (!string.IsNullOrWhiteSpace(locator))
+                    string locator = get_path_locator(tableName, streamID);
+                    if (!string.IsNullOrWhiteSpace(locator))
 					{
 						//Starts the delete recursion off
 						//Note: this is recursive because a folder cannot be delete if it has folders and files within it
-						DeleteDirectoryRecursively(tableName, locator);
+						DeleteFolderRecursively(tableName, locator);
 					}
 					else
 					{
