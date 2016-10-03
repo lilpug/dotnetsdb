@@ -83,7 +83,7 @@ namespace DotNetSDB.SqlServer.FileTable
 			}
 
             //This function recursively deletes a folder structure and all its content within it
-			private void DeleteFolderRecursively(string tableName, string locator)
+			private void DeleteFolderContentRecursively(string tableName, string locator, bool deleteBaseFolder = true)
 			{
 				try
 				{
@@ -95,7 +95,8 @@ namespace DotNetSDB.SqlServer.FileTable
 					{
 						if (dr["path_locator"] != null && !string.IsNullOrWhiteSpace(dr["path_locator"].ToString()))
 						{
-							DeleteFolderRecursively(tableName, dr["path_locator"].ToString());
+                            //The deleteBaseFolder should be true for all recursions other than the start thread
+							DeleteFolderContentRecursively(tableName, dr["path_locator"].ToString(), true);
 						}
 						else//Error output
 						{
@@ -110,11 +111,15 @@ namespace DotNetSDB.SqlServer.FileTable
 					connector.db.add_where_normal(tableName, "is_archive", 1);
 					connector.db.run();
 
-					//Removes the directory now its empty
-					connector.db.add_delete(tableName);
-					connector.db.add_where_normal(tableName, "path_locator", locator);
-					connector.db.add_where_normal(tableName, "is_directory", 1);
-					connector.db.run();
+                    //Checks if we should remove the base folder
+                    if (deleteBaseFolder)
+                    {
+                        //Removes the directory now its empty
+                        connector.db.add_delete(tableName);
+                        connector.db.add_where_normal(tableName, "path_locator", locator);
+                        connector.db.add_where_normal(tableName, "is_directory", 1);
+                        connector.db.run();
+                    }
 				}
 				catch (Exception e)
 				{

@@ -435,6 +435,9 @@
     <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\db\Search.cs">
       <Link>SQLServer\General\FileTable Extension\tasks\db\Search.cs</Link>
     </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\db\Update.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\db\Update.cs</Link>
+    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\Variables.cs">
       <Link>SQLServer\General\FileTable Extension\tasks\Variables.cs</Link>
     </Compile>

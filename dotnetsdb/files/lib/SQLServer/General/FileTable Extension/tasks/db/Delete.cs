@@ -15,7 +15,7 @@ namespace DotNetSDB.SqlServer.FileTable
 					{
 						//Starts the delete recursion off
 						//Note: this is recursive because a folder cannot be delete if it has folders and files within it
-						DeleteFolderRecursively(tableName, locator);
+						DeleteFolderContentRecursively(tableName, locator);
 					}
 					else
 					{
@@ -28,7 +28,29 @@ namespace DotNetSDB.SqlServer.FileTable
 				}
 			}
 
-			public void delete_file(string tableName, string streamID)
+            public void delete_folder_contents(string tableName, string streamID)
+            {
+                try
+                {
+                    string locator = get_path_locator(tableName, streamID);
+                    if (!string.IsNullOrWhiteSpace(locator))
+                    {
+                        //Starts the delete recursion off
+                        //Note: this is recursive because a folder cannot be delete if it has folders and files within it
+                        DeleteFolderContentRecursively(tableName, locator, false);
+                    }
+                    else
+                    {
+                        throw new Exception("Database FileTable Directory Content Delete: A path locator could not be retrieved from the stream ID.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw errorHandler.CustomErrorOutput(e);
+                }
+            }
+
+            public void delete_file(string tableName, string streamID)
 			{
 				try
 				{

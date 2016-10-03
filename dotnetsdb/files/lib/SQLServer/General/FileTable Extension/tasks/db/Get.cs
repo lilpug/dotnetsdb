@@ -108,7 +108,7 @@ namespace DotNetSDB.SqlServer.FileTable
 			{
 				try
 				{
-					connector.db.add_select(tableName, "*");
+					connector.db.add_select(tableName, new string[] { "name", "file_stream" });
 					connector.db.add_where_normal(tableName, "is_archive", 1);
                     connector.db.add_where_is(tableName, "parent_path_locator");
                     DataTable results = connector.db.run_return_datatable();
@@ -140,9 +140,9 @@ namespace DotNetSDB.SqlServer.FileTable
 					{
 						string pathLocator = get_path_locator(tableName, folderID);
 
-						connector.db.add_select(tableName, "*");
-						connector.db.add_where_normal(tableName, "is_archive", 1);
-						connector.db.add_where_normal(tableName, "parent_path_locator", pathLocator);
+						connector.db.add_select(tableName, new string[] { "name", "file_stream" });
+                        connector.db.add_where_normal(tableName, "is_archive", 1);
+                        connector.db.add_where_normal(tableName, "parent_path_locator", pathLocator);
 						DataTable results = connector.db.run_return_datatable();
 
 						if (results != null && results.Rows.Count > 0)
