@@ -11,7 +11,7 @@
             int index = theQueries.IndexOf(current);
             query2 current2 = theQueries2[index];
 
-            compiled_build += string.Format(" DELETE FROM {0} {1}", current.delete_table, ((current2.delete_returned) ? "OUTPUT DELETED.*" : ""));
+            compiled_build += string.Format(" DELETE FROM {0} {1} FROM {0}", current.delete_table, ((current2.delete_returned) ? "OUTPUT DELETED.*" : ""));
             current.delete_table = "";
             current2.delete_returned = false;
         }
