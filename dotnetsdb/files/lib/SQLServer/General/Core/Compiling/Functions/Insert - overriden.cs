@@ -24,12 +24,12 @@ namespace DotNetSDB
 
             if (current.insert_fields.Count > 0)
             {
-                fields = string.Format(" ( {0} ) ", String.Join(",", current.insert_fields));
+                fields = string.Format(" ( {0} ) ", string.Join(",", current.insert_fields));
             }
 
             if (current.insert_values.Count > 0)
             {
-                values = string.Format(" VALUES ({0}) ", String.Join("),(", current.insert_values));
+                values = string.Format(" VALUES ({0}) ", string.Join("),(", current.insert_values));
             }
 
             compiled_build += string.Format(" INSERT INTO  {0}{1}{2}{3}", current.insert_table_name, fields, returnInsert, values);
