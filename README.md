@@ -16,6 +16,13 @@ This library also uses the Microsoft.SqlServer.Types.dll to help make queries mu
 Please Note: The project uses a small application i built on top of Microsoft's ILMerge in ordered to merge all the required DLL files into a single file on compiling.
 
 
-## License
-This project is licensed under the MIT License. see license file for more information.
+## Copyright and License
+Copyright © David Whitehead
+
+This project is licensed under the MIT License.
+
+You do not have to do anything special by using the MIT license and you don't have to notify anyone that your using this license. You are free to use, modify and distribute this software in any normal and commercial usage. If being used for any commercial purposes the latest copyright license file supplied above which is known as "LICENSE" must also be distributed with any compiled code that is utilising dotnetsdb.
+
+
+
 
