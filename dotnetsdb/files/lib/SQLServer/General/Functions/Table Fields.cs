@@ -22,7 +22,7 @@ namespace DotNetSDB
             //Gives the sql string to the compiled_build
             compiled_build = "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = " + fields_definition + "_1_0_0 ORDER BY ordinal_position;";
             
-            return run_return_array();
+            return run_return_string_array();
         }
     }
 }

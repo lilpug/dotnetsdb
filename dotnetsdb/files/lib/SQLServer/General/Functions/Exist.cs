@@ -21,7 +21,7 @@ namespace DotNetSDB
             compiled_build = "SELECT 1 FROM " + db + ".sys.tables WHERE name = " + exist_definition + "_1_0_0";
             
             //Runs the query
-            string[] results = run_return_array();
+            string[] results = run_return_string_array();
 
             //Checks if the return is correct or not
             if (results != null && results.Count() >= 1)

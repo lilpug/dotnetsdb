@@ -367,12 +367,8 @@ namespace DotNetSDB
 
                 try
                 {
-                    //Puts the first output into a string
-                    string value = null;
-                    if (myReader.Read())
-                    {
-                        value = myReader.GetValue(0).ToString();
-                    }
+                    //gets the first value as a string output
+                    string value = result_conversion_string(ref myReader);
 
                     //Closes the connections that are open
                     myReader.Close();
@@ -402,9 +398,9 @@ namespace DotNetSDB
         }
 
         /// <summary>
-        /// <para>This executes the sql which has been added and returns an array from the first value of the results.</para>
+        /// <para>This executes the sql which has been added and returns a string array from the first value of the results.</para>
         /// </summary>
-        public virtual string[] run_return_array()
+        public virtual string[] run_return_string_array()
         {
             using (myConnection = new MySqlConnection(connection))
             {
@@ -416,7 +412,7 @@ namespace DotNetSDB
 
                 try
                 {
-                    string[] temp = result_conversion_array(ref myReader);
+                    string[] temp = result_conversion_string_array(ref myReader);
 
                     //Closes the connections that are open
                     myReader.Close();

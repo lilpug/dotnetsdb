@@ -53,7 +53,7 @@ namespace DotNetSDB
             return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
         }
 
-        private string already_compiled_sql_output(ref SqlCommand myCommand)
+        protected string already_compiled_sql_output(ref SqlCommand myCommand)
         {
             try
             {

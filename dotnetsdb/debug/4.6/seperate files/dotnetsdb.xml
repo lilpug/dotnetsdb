@@ -15,9 +15,9 @@
             <para>This executes the sql which has been added and returns the first value as string.</para>
             </summary>
         </member>
-        <member name="M:DotNetSDB.MysqlCore.run_return_array">
+        <member name="M:DotNetSDB.MysqlCore.run_return_string_array">
             <summary>
-            <para>This executes the sql which has been added and returns an array from the first value of the results.</para>
+            <para>This executes the sql which has been added and returns a string array from the first value of the results.</para>
             </summary>
         </member>
         <member name="M:DotNetSDB.MysqlCore.run_return_json">
@@ -610,9 +610,9 @@
             <para>This executes the sql which has been added and returns the first value as string.</para>
             </summary>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.run_return_array">
+        <member name="M:DotNetSDB.SqlServerCore.run_return_string_array">
             <summary>
-            <para>This executes the sql which has been added and returns an array from the first value of the results.</para>
+            <para>This executes the sql which has been added and returns a string array from the first value of the results.</para>
             </summary>
         </member>
         <member name="M:DotNetSDB.SqlServerCore.run_return_json">
