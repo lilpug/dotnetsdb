@@ -11,7 +11,7 @@
             //Gets the index of the current query we are on
             int index = theQueries.IndexOf(current);
 
-            if (key == "offset")
+            if (key == "limit")
             {
                 CompileLimit(theQueries2[index]);
             }
