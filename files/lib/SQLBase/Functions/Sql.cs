@@ -8,9 +8,7 @@ namespace DotNetSDB
         /*##########################################*/
         /*           Main Front function            */
         /*##########################################*/
-
-        //This function allows manual binding to occur on pure sql
-
+        
         /// <summary>
         /// This function allows manual parameter binding and returns a string of the definition to input into the query
         /// </summary>
@@ -18,26 +16,24 @@ namespace DotNetSDB
         /// <returns></returns>
         public string add_pure_sql_bind(object values)
         {
-            query current = this.get_query();
+            query current = get_query();
             object[] holding = add_data(values);
             if (holding.Length > 1)
             {
-                throw new Exception("CustomParameterBind Error: The data your trying to bind is an array not singular, please use the 'CustomParameterBindArrayType' function for this.");
+                throw new Exception("add_pure_sql_bind Error: The data your trying to bind is an array not singular, please use the 'add_pure_sql_bind_array' function for this.");
             }
             current.custom_real_values.Add(holding);
-            return custom_definition + "_" + theQueries.Count.ToString() + "_" + (current.custom_real_values.Count - 1).ToString() + "_" + "0";
+            return string.Format("{0}_{1}_{2}_0", custom_definition, theQueries.Count.ToString(), (current.custom_real_values.Count - 1).ToString());
         }
 
-        //This function allows manual binding to occur with array types on pure sql
-
         /// <summary>
-        /// This function allows manual parameter binding and returns a string[] of the definition to input into the query
+        /// This function allows an array of manual parameter binding and returns a string array of the definition to input into the query
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
         public string[] add_pure_sql_bind_array(object values)
         {
-            query current = this.get_query();
+            query current = get_query();
             object[] holding = add_data(values);
             current.custom_real_values.Add(holding);
 
@@ -46,14 +42,25 @@ namespace DotNetSDB
                 List<string> defs = new List<string>();
                 for (int i = 0; i < holding.Length; i++)
                 {
-                    defs.Add(custom_definition + "_" + theQueries.Count.ToString() + "_" + (current.custom_real_values.Count - 1).ToString() + "_" + i.ToString());
+                    defs.Add(string.Format("{0}_{1}_{2}_{3}", custom_definition, theQueries.Count.ToString(), (current.custom_real_values.Count - 1).ToString(), i.ToString()));
                 }
                 return defs.ToArray();
             }
             else
             {
-                return new string[] { custom_definition + "_" + theQueries.Count.ToString() + "_" + (current.custom_real_values.Count - 1).ToString() + "_" + "0" };
+                return new string[] { string.Format("{0}_{1}_{2}_0", custom_definition, theQueries.Count.ToString(), (current.custom_real_values.Count - 1).ToString()) };
             }
+        }
+
+        /// <summary>
+        /// This function allows an array of manual parameter binding and returns a concatenated string of the definitions to input into the query
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public string add_pure_sql_bind_array_to_string(object values)
+        {
+            var bindings = add_pure_sql_bind_array(values);
+            return string.Join(",", bindings);
         }
 
         /// <summary>

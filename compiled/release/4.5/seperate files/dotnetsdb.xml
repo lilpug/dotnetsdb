@@ -457,7 +457,14 @@
         </member>
         <member name="M:DotNetSDB.SQLBase.add_pure_sql_bind_array(System.Object)">
             <summary>
-            This function allows manual parameter binding and returns a string[] of the definition to input into the query
+            This function allows an array of manual parameter binding and returns a string array of the definition to input into the query
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_pure_sql_bind_array_to_string(System.Object)">
+            <summary>
+            This function allows an array of manual parameter binding and returns a concatenated string of the definitions to input into the query
             </summary>
             <param name="values"></param>
             <returns></returns>
