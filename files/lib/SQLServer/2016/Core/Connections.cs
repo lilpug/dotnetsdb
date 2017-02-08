@@ -23,19 +23,5 @@ namespace DotNetSDB
         {
             filetable = new SqlServerFileTableExtension(new DatabaseConnector(this), db);
         }
-
-        //This is the constructor which allows the user to pass in a sqlconnection object for connecting
-        public SqlServer2016(SqlConnection theConnection)
-            : base(theConnection)
-        {
-            filetable = new SqlServerFileTableExtension(new DatabaseConnector(this), db);
-        }
-
-        //This is the constructor which allows the user to pass in a connection string for connecting
-        public SqlServer2016(string sqlConnectionString)
-            : base(sqlConnectionString)
-        {
-            filetable = new SqlServerFileTableExtension(new DatabaseConnector(this), db);
-        }
     }
 }

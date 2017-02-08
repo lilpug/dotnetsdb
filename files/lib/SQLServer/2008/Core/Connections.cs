@@ -19,17 +19,5 @@ namespace DotNetSDB
             : base(connectionInformation)
         {
         }
-
-        //This is the constructor which allows the user to pass in a sqlconnection object for connecting
-        public SqlServer2008(SqlConnection theConnection)
-            : base(theConnection)
-        {
-        }
-
-        //This is the constructor which allows the user to pass in a connection string for connecting
-        public SqlServer2008(string sqlConnectionString)
-            : base(sqlConnectionString)
-        {
-        }
     }
 }
