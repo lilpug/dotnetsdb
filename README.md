@@ -1,11 +1,7 @@
-## dotnetsdb
-Dotnetsdb is a C#.NET database library which sits on top of the default functionality of both the .NET SQL Server and MySql adapters. Its intention is to bring a more modular and dynamic approach to making database calls in .NET. 
+## DotNetSDB
+For information, documentation or any inquiries please refer to the main website for this library.
 
-
-## Documentation
-
-There is currently no documentation for this library, but a website will be setup shortly to explain how to intereact with the library.
-
+http://dotnetsdb.com/
 
 ## Extra Credits
 This library uses the MySql.data.dll connector in order to create the flexibility with MySql database calls. The MySql connector is available from http://dev.mysql.com/downloads/connector/net/6.8.6.html, it is used under the FOSS exception Licenses, please see the MySql notice for further information.
@@ -22,7 +18,3 @@ Copyright &copy; David Whitehead
 This project is licensed under the MIT License.
 
 You do not have to do anything special by using the MIT license and you don't have to notify anyone that your using this license. You are free to use, modify and distribute this software in any normal and commercial usage. If being used for any commercial purposes the latest copyright license file supplied above which is known as "LICENSE" must also be distributed with any compiled code that is being sold that utilises dotnetsdb.
-
-
-
-
