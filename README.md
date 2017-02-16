@@ -13,7 +13,7 @@ Please Note: The project uses a small application i built on top of Microsoft's 
 
 
 ## Copyright and License
-Copyright &copy; David Whitehead
+Copyright &copy; 2016 David Whitehead
 
 This project is licensed under the MIT License.
 
