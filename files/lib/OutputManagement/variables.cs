@@ -3,7 +3,7 @@ using System.IO;
 
 namespace DotNetSDB.output
 {
-    public class OutputManagementVariable
+    public class OutputManagementSettings
     {
         //Variables
         public string directory { get; set; }
@@ -11,16 +11,16 @@ namespace DotNetSDB.output
         public string logName { get; set; }
         public int cleanUpDays { get; set; }
         public bool singleLineLog { get; set; }
-        public string cultureInfo { get; set; }
+        public DateTime currentDateTime { get; set; }
 
         //Constructor
-        public OutputManagementVariable(string directoryPath, string theLogName, bool multiLineLogging = false, int cleanUpDaysAmount = 0, string cultureTimeInfo = "en-gb")
+        public OutputManagementSettings(string directoryPath, string theLogName, DateTime datetime, bool multiLineLogging = false, int cleanUpDaysAmount = 0)
         {
             if (!string.IsNullOrWhiteSpace(directoryPath) && !string.IsNullOrWhiteSpace(theLogName))
             {
                 if (!Directory.Exists(directoryPath))
                 {
-                    throw new Exception("OutputManagementVariable Error: The directory provided does not exist and is required.");
+                    throw new Exception("OutputManagementSettings Error: The directory provided does not exist and is required.");
                 }
 
                 //Fills the variables in if everything is ok
@@ -28,11 +28,11 @@ namespace DotNetSDB.output
                 logName = theLogName;
                 singleLineLog = !multiLineLogging;//Inverts the output
                 cleanUpDays = cleanUpDaysAmount;
-                cultureInfo = cultureTimeInfo;
+                currentDateTime = datetime;
             }
             else
             {
-                throw new Exception("OutputManagementVariable Error: Some of the information provided was empty and is required.");
+                throw new Exception("OutputManagementSettings Error: Some of the information provided was empty and is required.");
             }
         }
     }
@@ -40,24 +40,21 @@ namespace DotNetSDB.output
     public partial class OutputManagement : IDisposable
     {
         //Holds all the variables required for this library
-        private OutputManagementVariable info;
+        private OutputManagementSettings info;
 
-        public OutputManagement(OutputManagementVariable variables)
+        //Used to lock the thread while we add data to the log to ensure threadsafe compatibility
+        private static object locker = new object();
+
+        public OutputManagement(OutputManagementSettings variables)
         {
             if (variables != null)
             {
                 info = variables;
 
-                //Attempts to give the directory correct permissions, if it cannot it errors
+                //Attempts to give the directory correct permissions
                 if (!GrantAccess(info.directory))
                 {
                     throw new Exception(string.Format("OutputManagement Error: Could not give the correct permissions required to the directory '{0}'.", info.directory));
-                }
-
-                //Checks if cleanup is scheduled and if it failed
-                if (info.cleanUpDays > 0 && !cleanupLogs())
-                {
-                    throw new Exception(string.Format("OutputManagement Error: The cleanup has failed."));
                 }
             }
             else

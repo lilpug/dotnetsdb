@@ -9,7 +9,7 @@ namespace DotNetSDB
         /*   OutputManagement Variable Definition   */
         /*##########################################*/
 
-        protected OutputManagementVariable loggerDetails;
+        protected OutputManagementSettings loggerDetails;
 
         /*##########################################*/
         /*     Sanitisation Variable Definitions    */

@@ -9,18 +9,6 @@ namespace DotNetSDB.output
 {
     public partial class OutputManagement
     {
-        //This functions returns the datetime using the uk style
-        private DateTime GetDateNow()
-        {
-            try
-            {
-                CultureInfo cultureinfo = new CultureInfo(info.cultureInfo);
-                return DateTime.Parse(DateTime.Now.ToString(), cultureinfo);
-            }
-            catch { }
-            return DateTime.MinValue;
-        }
-
         //This function checks if the file exists
         private bool FileExists(string filename)
         {

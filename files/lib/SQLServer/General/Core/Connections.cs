@@ -21,7 +21,7 @@ namespace DotNetSDB
         public int connectionTime { get; set; }
         
 
-        public OutputManagementVariable logger { get; set; }
+        public OutputManagementSettings logger { get; set; }
 
         /// <summary>
         /// This function is the initialisation for the sql server user connection class
@@ -32,7 +32,7 @@ namespace DotNetSDB
         /// <param name="databaseName"></param>        
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public SQLServerUserConnection(string serverName, string username, string password, string databaseName, int connectionTimeout = 30, OutputManagementVariable errorLogger = null)
+        public SQLServerUserConnection(string serverName, string username, string password, string databaseName, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
         {
             server = serverName;
             user = username;
@@ -53,7 +53,7 @@ namespace DotNetSDB
         /// <param name="thePort"></param>
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public SQLServerUserConnection(string serverName, string username, string password, string databaseName, string thePort, int connectionTimeout = 30, OutputManagementVariable errorLogger = null)
+        public SQLServerUserConnection(string serverName, string username, string password, string databaseName, string thePort, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
         {
             server = serverName;
             user = username;
@@ -76,7 +76,7 @@ namespace DotNetSDB
         public int connectionTime { get; set; }
         
 
-        public OutputManagementVariable logger { get; set; }
+        public OutputManagementSettings logger { get; set; }
         
         /// <summary>
         /// This function is the initialisation for the sql server windows connection class
@@ -85,7 +85,7 @@ namespace DotNetSDB
         /// <param name="database"></param>        
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public SQLServerWindowsConnection(string serverName, string database, int connectionTimeout = 30, OutputManagementVariable errorLogger = null)
+        public SQLServerWindowsConnection(string serverName, string database, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
         {
             server = serverName;
             dbName = database;
@@ -102,7 +102,7 @@ namespace DotNetSDB
         /// <param name="thePort"></param>
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public SQLServerWindowsConnection(string serverName, string database, string thePort, int connectionTimeout = 30, OutputManagementVariable errorLogger = null)
+        public SQLServerWindowsConnection(string serverName, string database, string thePort, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
         {
             server = serverName;
             dbName = database;
