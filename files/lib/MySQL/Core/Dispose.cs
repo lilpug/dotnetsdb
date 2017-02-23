@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DotNetSDB
 {
-    public partial class MysqlCore
+    public partial class MySLQCore
     {
         //This is the dispose method for disposing of the connection
         //Note: called at the end of a using statement
@@ -30,7 +30,7 @@ namespace DotNetSDB
             //Runs the base first then executes the extras
             base.ExtraDispose();
 
-            foreach (query2 q in theQueries2)
+            foreach (Query2 q in theQueries2)
             {
                 q.Dispose();
             }

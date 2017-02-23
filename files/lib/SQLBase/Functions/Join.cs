@@ -9,87 +9,87 @@ namespace DotNetSDB
         /*         Join Compiling functions         */
         /*##########################################*/
 
-        protected void join_build_compiling(query theQuery, string table_name, string join_type, string other_table_name, string join_field, string other_field)
+        protected void JoinCompile(Query theQuery, string tableName, string joinType, string joinTable, string field, string joinField)
         {
             //Does validation
-            join_single_validation(join_type, table_name, other_table_name, join_field, other_field);
+            JoinSingleValidation(joinType, tableName, joinTable, field, joinField);
 
             //This is done to ensure if we have an alias we use it otherwise we use the generic
-            string[] mainTables = table_name.Split(' ');
+            string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
-            string temp_build = string.Format("{0} {1} ON {2}.{3} = {4}.{5}", join_type, table_name, alias, join_field, other_table_name, other_field);
+            string temp_build = string.Format("{0} {1} ON {2}.{3} = {4}.{5}", joinType, tableName, alias, field, joinTable, joinField);
 
             //adds it to the join statement lists
-            theQuery.join_fields.Add(temp_build);
+            theQuery.joinFields.Add(temp_build);
         }
 
-        protected void join_build_compiling(query theQuery, string table_name, string join_type, string other_table_name, string[] join_fields, string[] other_fields)
+        protected void JoinCompile(Query theQuery, string tableName, string joinType, string joinTable, string[] fields, string[] joinFields)
         {
             //Does validation
-            join_multiple_validation(join_type, table_name, other_table_name, join_fields, other_fields);
+            JoinMultipleValidation(joinType, tableName, joinTable, fields, joinFields);
 
             //This is done to ensure if we have an alias we use it otherwise we use the generic
-            string[] mainTables = table_name.Split(' ');
+            string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
             string temp_build = "";
-            for (int i = 0; i < join_fields.Length; i++)
+            for (int i = 0; i < fields.Length; i++)
             {   
                 //Determines when to start using the and on the join parameters
                 if (i == 0)//First params so init the join
                 {                    
-                    temp_build += string.Format("{0} {1} ON {2}.{3} = {4}.{5}", join_type, table_name, alias, join_fields[i], other_table_name, other_fields[i]);                    
+                    temp_build += string.Format("{0} {1} ON {2}.{3} = {4}.{5}", joinType, tableName, alias, fields[i], joinTable, joinFields[i]);                    
                 }
                 else//Add the additional params
                 {
-                    temp_build += string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, join_fields[i], other_table_name, other_fields[i]);
+                    temp_build += string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, fields[i], joinTable, joinFields[i]);
                 }                
             }
 
             //adds it to the join statement lists
-            theQuery.join_fields.Add(temp_build);
+            theQuery.joinFields.Add(temp_build);
         }
 
-        protected void join_additional_parameters_compiling(query theQuery, string table_name, string other_table_name, string join_field, string other_field)
+        protected void JoinAdditionalCompile(Query theQuery, string tableName, string joinTable, string field, string joinField)
         {
             //Does validation
-            join_single_validation("exclude", table_name, other_table_name, join_field, other_field);
+            JoinSingleValidation("exclude", tableName, joinTable, field, joinField);
 
             //This is done to ensure if we have an alias we use it otherwise we use the generic
-            string[] mainTables = table_name.Split(' ');
+            string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
-            string temp_build = string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, join_field, other_table_name, other_field);
+            string temp_build = string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, field, joinTable, joinField);
 
             //Adds it to the current join object
-            theQuery.join_fields[theQuery.join_fields.Count - 1] = theQuery.join_fields[theQuery.join_fields.Count - 1] + temp_build;
+            theQuery.joinFields[theQuery.joinFields.Count - 1] = theQuery.joinFields[theQuery.joinFields.Count - 1] + temp_build;
         }
 
-        protected void join_additional_parameters_compiling(query theQuery, string table_name, string other_table_name, string[] join_fields, string[] other_fields)
+        protected void JoinAdditionalCompile(Query theQuery, string tableName, string joinTable, string[] fields, string[] joinFields)
         {
             //Does validation
-            join_multiple_validation("exclude", table_name, other_table_name, join_fields, other_fields);
+            JoinMultipleValidation("exclude", tableName, joinTable, fields, joinFields);
 
             //This is done to ensure if we have an alias we use it otherwise we use the generic
-            string[] mainTables = table_name.Split(' ');
+            string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
             string temp_build = "";
-            for (int i = 0; i < join_fields.Length; i++)
+            for (int i = 0; i < fields.Length; i++)
             {
-                temp_build += string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, join_fields[i], other_table_name, other_fields[i]);
+                temp_build += string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, fields[i], joinTable, joinFields[i]);
             }
 
             //Adds it to the current join object
-            theQuery.join_fields[theQuery.join_fields.Count - 1] = theQuery.join_fields[theQuery.join_fields.Count - 1] + temp_build;
+            theQuery.joinFields[theQuery.joinFields.Count - 1] = theQuery.joinFields[theQuery.joinFields.Count - 1] + temp_build;
         }
 
         /*##########################################*/
         /*        Join Validation functions         */
         /*##########################################*/
 
-        protected void join_single_validation(string joinType, string joinTableName, string currentTableName, string joinTableFields, string currentTableFields)
+        protected void JoinSingleValidation(string joinType, string joinTableName, string currentTableName, string joinTableFields, string currentTableFields)
         {
             if (string.IsNullOrWhiteSpace(joinType))
             {
@@ -113,7 +113,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void join_multiple_validation(string joinType, string joinTableName, string currentTableName, string[] joinTableFields, string[] currentTableFields)
+        protected void JoinMultipleValidation(string joinType, string joinTableName, string currentTableName, string[] joinTableFields, string[] currentTableFields)
         {
             if (string.IsNullOrWhiteSpace(joinType))
             {
@@ -141,9 +141,9 @@ namespace DotNetSDB
             }
         }
 
-        protected void join_exist_validation(query theQuery)
+        protected void JoinExistValidation(Query theQuery)
         {
-            if (theQuery.join_fields == null || theQuery.join_fields.Count <= 0)
+            if (theQuery.joinFields == null || theQuery.joinFields.Count <= 0)
             {
                 throw new Exception("Join Error: There is no join statement to add additional parameters.");
             }
@@ -165,10 +165,10 @@ namespace DotNetSDB
         public void add_join(string joinType, string joinTableName, string currentTableName, string joinTableField, string currentTableField)
         {
             //Gets the current query object
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Builds the sql from the parameters
-            join_build_compiling(theQuery, joinTableName, joinType, currentTableName, joinTableField, currentTableField);
+            JoinCompile(theQuery, joinTableName, joinType, currentTableName, joinTableField, currentTableField);
 
             //Adds the join command
             theQuery.orderList.Add("join");
@@ -187,10 +187,10 @@ namespace DotNetSDB
         public void add_join(string joinType, string joinTableName, string currentTableName, string[] joinTableFields, string[] currentTableFields)
         {
             //Gets the current query object
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Builds the sql from the parameters
-            join_build_compiling(theQuery, joinTableName, joinType, currentTableName, joinTableFields, currentTableFields);
+            JoinCompile(theQuery, joinTableName, joinType, currentTableName, joinTableFields, currentTableFields);
 
             //Adds the join command
             theQuery.orderList.Add("join");
@@ -206,12 +206,12 @@ namespace DotNetSDB
         public void add_join_parameters(string joinTableName, string currentTableName, string[] joinTableFields, string[] currentTableFields)
         {
             //Gets the current query object
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            join_exist_validation(theQuery);
+            JoinExistValidation(theQuery);
 
             //Builds the additional sql from the parameters
-            join_additional_parameters_compiling(theQuery, joinTableName, currentTableName, joinTableFields, currentTableFields);
+            JoinAdditionalCompile(theQuery, joinTableName, currentTableName, joinTableFields, currentTableFields);
         }
 
         /// <summary>
@@ -224,12 +224,12 @@ namespace DotNetSDB
         public void add_join_parameters(string joinTableName, string currentTableName, string joinTableField, string currentTableField)
         {
             //Gets the current query object
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            join_exist_validation(theQuery);
+            JoinExistValidation(theQuery);
 
             //Builds the additional sql from the parameters
-            join_additional_parameters_compiling(theQuery, joinTableName, currentTableName, joinTableField, currentTableField);
+            JoinAdditionalCompile(theQuery, joinTableName, currentTableName, joinTableField, currentTableField);
         }
     }
 }

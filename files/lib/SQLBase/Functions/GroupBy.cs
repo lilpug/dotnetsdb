@@ -8,20 +8,20 @@ namespace DotNetSDB
         /*       GroupBy Compiling functions        */
         /*##########################################*/
 
-        protected void groupBy_build_compiling(query theQuery, string tableName, string field)
+        protected void GroupByCompile(Query theQuery, string tableName, string field)
         {
             //validation check
-            groupby_single_validate(tableName, field);
+            GroupBySingleValidation(tableName, field);
 
             string temp_build = string.Format("{0}.{1}", tableName, field);
 
-            theQuery.groupby_fields.Add(temp_build);
+            theQuery.groupbyFields.Add(temp_build);
         }
 
-        protected void groupBy_build_compiling(query theQuery, string tableName, string[] fields)
+        protected void GroupByCompile(Query theQuery, string tableName, string[] fields)
         {
             //validation check
-            groupby_multiple_validate(tableName, fields);
+            GroupByMultipleValidation(tableName, fields);
 
             string temp_build = "";
             for (int i = 0; i < fields.Length; i++)
@@ -36,14 +36,14 @@ namespace DotNetSDB
                 temp_build += string.Format("{0}{1}.{2}", seperator, tableName, fields[i]);
             }
 
-            theQuery.groupby_fields.Add(temp_build);
+            theQuery.groupbyFields.Add(temp_build);
         }
 
         /*##########################################*/
         /*      GroupBy Validation functions        */
         /*##########################################*/
 
-        protected void groupby_single_validate(string tableName, string field)
+        protected void GroupBySingleValidation(string tableName, string field)
         {
             if (!string.IsNullOrWhiteSpace(tableName))
             {
@@ -55,7 +55,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void groupby_multiple_validate(string tableName, string[] fields)
+        protected void GroupByMultipleValidation(string tableName, string[] fields)
         {
             if (!string.IsNullOrWhiteSpace(tableName))
             {
@@ -67,7 +67,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void groupby_not_exist_validate(query theQuery)
+        protected void GroupByNotExistValidation(Query theQuery)
         {
             if (!theQuery.orderList.Contains("groupby"))
             {
@@ -75,7 +75,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void groupby_exist_validate(query theQuery)
+        protected void GroupByExistValidation(Query theQuery)
         {
             if (theQuery.orderList.Contains("groupby"))
             {
@@ -94,12 +94,12 @@ namespace DotNetSDB
         /// <param name="field"></param>
         public void add_groupby(string tableName, string field)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Validation
-            groupby_exist_validate(theQuery);
+            GroupByExistValidation(theQuery);
 
-            groupBy_build_compiling(theQuery, tableName, field);
+            GroupByCompile(theQuery, tableName, field);
 
             theQuery.orderList.Add("groupby");
         }
@@ -111,12 +111,12 @@ namespace DotNetSDB
         /// <param name="fields"></param>
         public void add_groupby(string tableName, string[] fields)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Validation
-            groupby_exist_validate(theQuery);
+            GroupByExistValidation(theQuery);
 
-            groupBy_build_compiling(theQuery, tableName, fields);
+            GroupByCompile(theQuery, tableName, fields);
 
             theQuery.orderList.Add("groupby");
         }
@@ -128,12 +128,12 @@ namespace DotNetSDB
         /// <param name="field"></param>
         public void add_groupby_fields(string tableName, string field)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Validation
-            groupby_not_exist_validate(theQuery);
+            GroupByNotExistValidation(theQuery);
 
-            groupBy_build_compiling(theQuery, tableName, field);
+            GroupByCompile(theQuery, tableName, field);
         }
 
         /// <summary>
@@ -143,12 +143,12 @@ namespace DotNetSDB
         /// <param name="fields"></param>
         public void add_groupby_fields(string tableName, string[] fields)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Validation
-            groupby_not_exist_validate(theQuery);
+            GroupByNotExistValidation(theQuery);
 
-            groupBy_build_compiling(theQuery, tableName, fields);
+            GroupByCompile(theQuery, tableName, fields);
         }
     }
 }

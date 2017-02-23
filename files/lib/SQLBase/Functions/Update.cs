@@ -10,26 +10,26 @@ namespace DotNetSDB
         /*##########################################*/
 
         //This function compiles the update fields
-        protected void update_build_compiling(query theQuery, string definition, string table_name, string update_field, params object[] update_values)
+        protected void UpdateCompile(Query theQuery, string definition, string tableName, string updateField, params object[] updateValues)
         {
-            if (string.IsNullOrWhiteSpace(table_name))
+            if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new Exception("Update Error: The table name supplied is empty.");
             }
 
-            if (!string.IsNullOrWhiteSpace(update_field))
+            if (!string.IsNullOrWhiteSpace(updateField))
             {
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.update_table) && !string.IsNullOrWhiteSpace(table_name))
+                if (string.IsNullOrWhiteSpace(theQuery.updateTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    theQuery.update_table = table_name;
+                    theQuery.updateTable = tableName;
                 }
 
-                string temp_build = string.Format("{0}.{1} = {2}0", table_name, update_field, definition);
+                string temp_build = string.Format("{0}.{1} = {2}0", tableName, updateField, definition);
 
                 //Builds the final statement
-                theQuery.update_fields.Add(temp_build);
+                theQuery.updateFields.Add(temp_build);
             }
             else
             {
@@ -37,26 +37,26 @@ namespace DotNetSDB
             }
         }
 
-        protected void update_build_compiling(query theQuery, string definition, string table_name, string[] update_fields, params object[] update_values)
+        protected void UpdateCompile(Query theQuery, string definition, string tableName, string[] updateFields, params object[] updateValues)
         {
-            if (string.IsNullOrWhiteSpace(table_name))
+            if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new Exception("Update Error: The table name supplied is empty.");
             }
 
             //Checks  to ensure the data is accurate as there should be one field for every data insert
-            if (update_fields != null && update_fields.Count() > 0)
+            if (updateFields != null && updateFields.Count() > 0)
             {
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.update_table) && !string.IsNullOrWhiteSpace(table_name))
+                if (string.IsNullOrWhiteSpace(theQuery.updateTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    theQuery.update_table = table_name;
+                    theQuery.updateTable = tableName;
                 }
 
                 string temp_build = "";
 
-                for (int i = 0; i < update_fields.Length; i++)//Compiles the query string
+                for (int i = 0; i < updateFields.Length; i++)//Compiles the query string
                 {
                     //Determines if there should be a comma
                     string seperator = "";
@@ -65,11 +65,11 @@ namespace DotNetSDB
                         seperator = ", ";
                     }
 
-                    temp_build += string.Format("{0}{1}.{2} = {3}", seperator, table_name, update_fields[i], definition + i.ToString());
+                    temp_build += string.Format("{0}{1}.{2} = {3}", seperator, tableName, updateFields[i], definition + i.ToString());
                 }
 
                 //Builds the final statement
-                theQuery.update_fields.Add(temp_build);
+                theQuery.updateFields.Add(temp_build);
             }
             else
             {
@@ -81,7 +81,7 @@ namespace DotNetSDB
         /*       Update Validation functions        */
         /*##########################################*/
 
-        protected void update_not_exist_validate(query theQuery)
+        protected void UpdateNotExistValidation(Query theQuery)
         {
             if (!theQuery.orderList.Contains("update"))
             {
@@ -89,7 +89,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void update_exist_validate(query theQuery)
+        protected void UpdateExistValidation(Query theQuery)
         {
             if (theQuery.orderList.Contains("update"))
             {
@@ -105,25 +105,25 @@ namespace DotNetSDB
         /// This function adds the update statement
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="updateField"></param>
-        /// <param name="updateValue">Single value</param>
-        public void add_update(string tableName, string updateField, object updateValue)
+        /// <param name="field"></param>
+        /// <param name="value">Single value</param>
+        public void add_update(string tableName, string field, object value)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            update_exist_validate(theQuery);
+            UpdateExistValidation(theQuery);
 
-            string definition = update_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.update_fields.Count).ToString() + "_";
+            string definition = string.Format("{0}_{1}_{2}_", updateDefinition, (theQueries.Count).ToString(), (theQuery.updateFields.Count).ToString());
 
-            object[] holding = add_data(updateValue);
+            object[] holding = AddData(value);
             if (holding.Count() != 1)
             {
                 throw new Exception("Update Error: There is a different number of fields to the amount of values passed.");
             }
 
-            update_build_compiling(theQuery, definition, tableName, updateField, holding);
+            UpdateCompile(theQuery, definition, tableName, field, holding);
 
-            theQuery.update_real_values.Add(holding);
+            theQuery.updateRealValues.Add(holding);
 
             theQuery.orderList.Add("update");
         }
@@ -132,25 +132,25 @@ namespace DotNetSDB
         /// This function adds the update statement
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="updateFields"></param>
-        /// <param name="updateValues">object[] only</param>
-        public void add_update(string tableName, string[] updateFields, object updateValues)
+        /// <param name="fields"></param>
+        /// <param name="values">object[] only</param>
+        public void add_update(string tableName, string[] fields, object values)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            update_exist_validate(theQuery);
+            UpdateExistValidation(theQuery);
 
-            string definition = update_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.update_fields.Count).ToString() + "_";
+            string definition = string.Format("{0}_{1}_{2}_", updateDefinition, (theQueries.Count).ToString(), (theQuery.updateFields.Count).ToString());
 
-            object[] holding = add_data(updateValues);
-            if (holding.Count() != updateFields.Length)
+            object[] holding = AddData(values);
+            if (holding.Count() != fields.Length)
             {
                 throw new Exception("Update Error: There is a different number of fields to the amount of values passed.");
             }
 
-            update_build_compiling(theQuery, definition, tableName, updateFields, holding);
+            UpdateCompile(theQuery, definition, tableName, fields, holding);
 
-            theQuery.update_real_values.Add(holding);
+            theQuery.updateRealValues.Add(holding);
 
             theQuery.orderList.Add("update");
         }
@@ -159,50 +159,50 @@ namespace DotNetSDB
         /// This function adds additional update fields and values
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="updateField"></param>
-        /// <param name="updateValue">Single value</param>
-        public void add_update_fields(string tableName, string updateField, object updateValue)
+        /// <param name="field"></param>
+        /// <param name="value">Single value</param>
+        public void add_update_fields(string tableName, string field, object value)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            update_not_exist_validate(theQuery);
+            UpdateNotExistValidation(theQuery);
 
-            string definition = update_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.update_fields.Count).ToString() + "_";
+            string definition = string.Format("{0}_{1}_{2}_", updateDefinition, (theQueries.Count).ToString(), (theQuery.updateFields.Count).ToString());
 
-            object[] holding = add_data(updateValue);
+            object[] holding = AddData(value);
             if (holding.Count() != 1)
             {
                 throw new Exception("Update Error: There is a different number of fields to the amount of values passed.");
             }
 
-            update_build_compiling(theQuery, definition, tableName, updateField, holding);
+            UpdateCompile(theQuery, definition, tableName, field, holding);
 
-            theQuery.update_real_values.Add(holding);
+            theQuery.updateRealValues.Add(holding);
         }
 
         /// <summary>
         /// This function adds additional update fields and values
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="updateFields"></param>
-        /// <param name="updateValues">object[] only</param>
-        public void add_update_fields(string tableName, string[] updateFields, object updateValues)
+        /// <param name="fields"></param>
+        /// <param name="values">object[] only</param>
+        public void add_update_fields(string tableName, string[] fields, object values)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            update_not_exist_validate(theQuery);
+            UpdateNotExistValidation(theQuery);
 
-            string definition = update_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.update_fields.Count).ToString() + "_";
+            string definition = string.Format("{0}_{1}_{2}_", updateDefinition, (theQueries.Count).ToString(), (theQuery.updateFields.Count).ToString());
 
-            object[] holding = add_data(updateValues);
-            if (holding.Count() != updateFields.Length)
+            object[] holding = AddData(values);
+            if (holding.Count() != fields.Length)
             {
                 throw new Exception("Update Error: There is a different number of fields to the amount of values passed.");
             }
 
-            update_build_compiling(theQuery, definition, tableName, updateFields, holding);
+            UpdateCompile(theQuery, definition, tableName, fields, holding);
 
-            theQuery.update_real_values.Add(holding);
+            theQuery.updateRealValues.Add(holding);
         }
     }
 }

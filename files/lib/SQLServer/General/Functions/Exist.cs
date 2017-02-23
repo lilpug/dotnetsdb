@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace DotNetSDB
 {
@@ -16,9 +15,9 @@ namespace DotNetSDB
         /// <returns></returns>
         public virtual bool table_exist(string tableName)
         {
-            query2 theQuery = get_query2();
-            theQuery.exist_real_table_value = add_data(tableName);
-            compiled_build = "SELECT 1 FROM " + db + ".sys.tables WHERE name = " + exist_definition + "_1_0_0";
+            Query2 theQuery = GetQuery2();
+            theQuery.existRealTableValue = AddData(tableName);
+            compiledSql = string.Format("SELECT 1 FROM {0}.sys.tables WHERE name = {1}_1_0_0", db, existDefinition);
             
             //Runs the query
             string[] results = run_return_string_array();

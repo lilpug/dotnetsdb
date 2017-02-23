@@ -15,15 +15,15 @@ namespace DotNetSDB
         /*     Sanitisation Variable Definitions    */
         /*##########################################*/
 
-        protected const string exist_definition = "@exist_name";
-        protected const string fields_definition = "@get_fields_name";
+        protected const string existDefinition = "@exist_name";
+        protected const string fieldsDefinition = "@get_fields_name";
 
         /*##########################################*/
         /*      Database Connection Variables       */
         /*##########################################*/
 
         //Class variables for the database connections
-        protected string user, pwd, server, db, connection;
+        protected string user, pwd, server, db, connection, connectionStringExtra;
 
         protected bool isWindowsAuth;
         protected int port;

@@ -10,13 +10,13 @@ namespace DotNetSDB
         /*##########################################*/
 
         //This function builds the insert sql with multiple field parameters for inserting values
-        protected virtual void insert_build_compiling(query theQuery, string definition, params object[] insert_values)
+        protected virtual void InsertCompile(Query theQuery, string definition, params object[] values)
         {
             //Checks if fields have been specified, if so there should be the same amount of parameters. otherwise does not matter
-            if (theQuery.insert_fields.Count() == 0 || theQuery.insert_fields.Count() == insert_values.Count())
+            if (theQuery.insertFields.Count() == 0 || theQuery.insertFields.Count() == values.Count())
             {
                 string temp_build = "";
-                for (int i = 0; i < insert_values.Length; i++)//Compiles the query string
+                for (int i = 0; i < values.Length; i++)//Compiles the query string
                 {
                     //Determines if there should be a comma
                     string seperator = "";
@@ -29,7 +29,7 @@ namespace DotNetSDB
                     temp_build += string.Format("{0}{1}", seperator, definition + i.ToString());
                 }
 
-                theQuery.insert_values.Add(temp_build);
+                theQuery.insertValues.Add(temp_build);
             }
             else
             {
@@ -38,17 +38,15 @@ namespace DotNetSDB
         }
 
         //This function builds the insert sql with multiple field parameters for inserting values
-        protected virtual void insert_build_fields_compiling(query theQuery, params string[] insert_fields)
+        protected virtual void InsertFieldCompile(Query theQuery, params string[] fields)
         {
             //Checks  to ensure the data is accurate as there should be one field for every data insert
-            if (insert_fields.Count() > 0)
+            if (fields.Count() > 0)
             {
-                if (insert_fields.Count() > 0)
+                if (fields.Count() > 0)
                 {
                     //Merges the results
-                    theQuery.insert_fields = theQuery.insert_fields.Concat(insert_fields.ToList()).ToList();
-
-                    //theQuery.insert_fields = insert_fields.ToList();
+                    theQuery.insertFields = theQuery.insertFields.Concat(fields.ToList()).ToList();                    
                 }
             }
             else
@@ -61,7 +59,7 @@ namespace DotNetSDB
         /*        Insert Validation functions       */
         /*##########################################*/
 
-        protected void insert_single_validation(string tableName, string field)
+        protected void InsertsingleValidation(string tableName, string field)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
@@ -73,19 +71,19 @@ namespace DotNetSDB
             }
         }
 
-        protected void insert_multiple_validation(string tableName, string[] insertFields)
+        protected void InsertMultipleValidation(string tableName, string[] fields)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new Exception("Insert Error: The table name supplied is empty.");
             }
-            else if (insertFields != null && insertFields.Length <= 0)
+            else if (fields != null && fields.Length <= 0)
             {
                 throw new Exception("Insert Error: The Insert Fields that have been supplied are empty.");
             }
         }
 
-        protected void insert_exist_validation(query theQuery)
+        protected void InsertExistValidation(Query theQuery)
         {
             if (theQuery.orderList.Contains("insert"))
             {
@@ -93,7 +91,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void insert_not_exist_validation(query theQuery)
+        protected void InsertNotExistValidation(Query theQuery)
         {
             if (!theQuery.orderList.Contains("insert"))
             {
@@ -111,17 +109,17 @@ namespace DotNetSDB
         /// <param name="tableName"></param>
         public virtual void add_insert(string tableName)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Validation
-            insert_exist_validation(theQuery);
+            InsertExistValidation(theQuery);
             if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new Exception("Insert Error: The table name supplied is empty.");
             }
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -131,20 +129,20 @@ namespace DotNetSDB
         /// This functions adds the insert statement with a field only
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertField"></param>
-        public virtual void add_insert(string tableName, string insertField)
+        /// <param name="field"></param>
+        public virtual void add_insert(string tableName, string field)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Validation
-            insert_exist_validation(theQuery);
-            insert_single_validation(tableName, insertField);
+            InsertExistValidation(theQuery);
+            InsertsingleValidation(tableName, field);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the feidls query
-            insert_build_fields_compiling(theQuery, insertField);
+            InsertFieldCompile(theQuery, field);
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -154,20 +152,20 @@ namespace DotNetSDB
         /// This functions adds the insert statement with fields only
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertFields"></param>
-        public virtual void add_insert(string tableName, string[] insertFields)
+        /// <param name="fields"></param>
+        public virtual void add_insert(string tableName, string[] fields)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Validation
-            insert_exist_validation(theQuery);
-            insert_multiple_validation(tableName, insertFields);
+            InsertExistValidation(theQuery);
+            InsertMultipleValidation(tableName, fields);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the feidls query
-            insert_build_fields_compiling(theQuery, insertFields);
+            InsertFieldCompile(theQuery, fields);
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -177,30 +175,31 @@ namespace DotNetSDB
         /// This function adds the insert statement with only values
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertValues">single value or object[] only</param>
-        public virtual void add_insert(string tableName, object insertValues)
+        /// <param name="values">single value or object[] only</param>
+        public virtual void add_insert(string tableName, object values)
         {
-            query theQuery = get_query();
-            string definition = insert_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.insert_values.Count).ToString() + "_";
+            Query theQuery = GetQuery();
+            
+            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
 
             //Validation
-            insert_exist_validation(theQuery);
+            InsertExistValidation(theQuery);
             if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new Exception("Insert Error: The table name supplied is empty.");
             }
 
             //Gets the data object *even if the value is just null it should be length 1 i.e. new object[] {null}
-            object[] holding = add_data(insertValues);
+            object[] holding = AddData(values);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the query
-            insert_build_compiling(theQuery, definition, holding);
+            InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insert_real_values.Add(holding);
+            theQuery.insertRealValues.Add(holding);
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -210,29 +209,29 @@ namespace DotNetSDB
         /// This function adds the insert statement with a field and value
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertField"></param>
-        /// <param name="insertValue">single value only</param>
-        public virtual void add_insert(string tableName, string insertField, object insertValue)
+        /// <param name="field"></param>
+        /// <param name="value">single value only</param>
+        public virtual void add_insert(string tableName, string field, object value)
         {
-            query theQuery = get_query();
-            string definition = insert_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.insert_values.Count).ToString() + "_";
+            Query theQuery = GetQuery();
+            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
 
             //Validation
-            insert_exist_validation(theQuery);
-            insert_single_validation(tableName, insertField);
+            InsertExistValidation(theQuery);
+            InsertsingleValidation(tableName, field);
 
             //Gets the data object *even if the value is just null it should be length 1 i.e. new object[] {null}
-            object[] holding = add_data(insertValue);
+            object[] holding = AddData(value);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the query
-            insert_build_fields_compiling(theQuery, insertField);
-            insert_build_compiling(theQuery, definition, holding);
+            InsertFieldCompile(theQuery, field);
+            InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insert_real_values.Add(holding);
+            theQuery.insertRealValues.Add(holding);
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -242,29 +241,29 @@ namespace DotNetSDB
         /// This function adds the insert statement with the fields and values
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertFields"></param>
-        /// <param name="insertValues">object[] only</param>
-        public virtual void add_insert(string tableName, string[] insertFields, object insertValues)
+        /// <param name="fields"></param>
+        /// <param name="values">object[] only</param>
+        public virtual void add_insert(string tableName, string[] fields, object values)
         {
-            query theQuery = get_query();
-            string definition = insert_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.insert_values.Count).ToString() + "_";
+            Query theQuery = GetQuery();
+            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
 
             //Validation
-            insert_exist_validation(theQuery);
-            insert_multiple_validation(tableName, insertFields);
+            InsertExistValidation(theQuery);
+            InsertMultipleValidation(tableName, fields);
 
             //Gets the data object *even if the value is just null it should be length 1 i.e. new object[] {null}
-            object[] holding = add_data(insertValues);
+            object[] holding = AddData(values);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the query
-            insert_build_fields_compiling(theQuery, insertFields);
-            insert_build_compiling(theQuery, definition, holding);
+            InsertFieldCompile(theQuery, fields);
+            InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insert_real_values.Add(holding);
+            theQuery.insertRealValues.Add(holding);
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -273,55 +272,55 @@ namespace DotNetSDB
         /// <summary>
         /// This function adds additional fields to an insert statement
         /// </summary>
-        /// <param name="insertField"></param>
-        public virtual void add_insert_fields(string insertField)
+        /// <param name="field"></param>
+        public virtual void add_insert_fields(string field)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Validation
-            insert_not_exist_validation(theQuery);
-            insert_single_validation("exclude", insertField);
+            InsertNotExistValidation(theQuery);
+            InsertsingleValidation("exclude", field);
 
             //Builds the query
-            insert_build_fields_compiling(theQuery, insertField);
+            InsertFieldCompile(theQuery, field);
         }
 
         /// <summary>
         /// This function adds additional fields to an insert statement
         /// </summary>
-        /// <param name="insertFields"></param>
-        public virtual void add_insert_fields(string[] insertFields)
+        /// <param name="fields"></param>
+        public virtual void add_insert_fields(string[] fields)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             //Validation
-            insert_not_exist_validation(theQuery);
-            insert_multiple_validation("exclude", insertFields);
+            InsertNotExistValidation(theQuery);
+            InsertMultipleValidation("exclude", fields);
 
             //Builds the query
-            insert_build_fields_compiling(theQuery, insertFields);
+            InsertFieldCompile(theQuery, fields);
         }
 
         /// <summary>
         /// <para>This function adds additional values to an insert statement</para>
         /// </summary>
-        /// <param name="insertValues">single values or object[] only</param>
-        public virtual void add_insert_values(object insertValues)
+        /// <param name="values">single values or object[] only</param>
+        public virtual void add_insert_values(object values)
         {
-            query theQuery = get_query();
-            string definition = insert_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.insert_values.Count).ToString() + "_";
+            Query theQuery = GetQuery();
+            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
 
             //Validation
-            insert_not_exist_validation(theQuery);
+            InsertNotExistValidation(theQuery);
 
             //Gets the data object *even if the value is just null it should be length 1 i.e. new object[] {null}
-            object[] holding = add_data(insertValues);
+            object[] holding = AddData(values);
 
             //Builds the query
-            insert_build_compiling(theQuery, definition, holding);
+            InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insert_real_values.Add(holding);
+            theQuery.insertRealValues.Add(holding);
         }
     }
 }

@@ -8,11 +8,11 @@ namespace DotNetSDB
         /*          Compiling Create functions      */
         /*##########################################*/
 
-        protected virtual void CompileCreate(query current)
+        protected virtual void CompileCreate(Query current)
         {
-            compiled_build += string.Format(" CREATE TABLE {0} ({1})", current.create_table, String.Join(",", current.create_fields).TrimEnd(','));
-            current.create_fields.Clear();
-            current.create_table = "";
+            compiledSql += string.Format(" CREATE TABLE {0} ({1})", current.createTable, string.Join(",", current.createFields).TrimEnd(','));
+            current.createFields.Clear();
+            current.createTable = "";
         }
     }
 }

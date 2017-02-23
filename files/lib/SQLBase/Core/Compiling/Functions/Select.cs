@@ -8,12 +8,12 @@ namespace DotNetSDB
         /*          Compiling Select functions      */
         /*##########################################*/
 
-        protected virtual void CompileSelect(query current)
+        protected virtual void CompileSelect(Query current)
         {
             //This does not use the number as there can only be one main select for a query
-            compiled_build += string.Format("Select {0} {1} FROM {2}", (current.is_dinstinct) ? "DISTINCT " : "", String.Join(",", current.select_fields).TrimEnd(','), current.select_table);
-            current.select_table = "";
-            current.select_fields.Clear();
+            compiledSql += string.Format("Select {0} {1} FROM {2}", (current.isDistinct) ? "DISTINCT " : "", string.Join(",", current.selectFields).TrimEnd(','), current.selectTable);
+            current.selectTable = "";
+            current.selectFields.Clear();
         }
     }
 }

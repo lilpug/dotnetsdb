@@ -9,34 +9,34 @@ namespace DotNetSDB
         /*##########################################*/
 
         //This function deals with processing through the where like clause
-        protected void where_like_compiling(query theQuery, string definition, string table_name, string where_field, object where_value, string where_operator, string where_type = null, string start_wrapper = null, string end_wrapper = null)
+        protected void WhereLikeCompile(Query theQuery, string definition, string tableName, string field, object value, string theOperator, string type = null, string start = null, string end = null)
         {
             //validation
-            where_like_validation(theQuery, table_name, where_field, where_type);
+            WhereLikeValidation(theQuery, tableName, field, type);
 
             //Extra optional variables
-            string whereOperator = (string.IsNullOrWhiteSpace(where_operator) ? "" : where_operator);
-            string startWrapper = (!string.IsNullOrWhiteSpace(start_wrapper) ? start_wrapper : "");
-            string endWrapper = (!string.IsNullOrWhiteSpace(end_wrapper) ? end_wrapper : "");
+            string whereOperator = (string.IsNullOrWhiteSpace(theOperator) ? "" : theOperator);
+            string startWrapper = (!string.IsNullOrWhiteSpace(start) ? start : "");
+            string endWrapper = (!string.IsNullOrWhiteSpace(end) ? end : "");
 
             //Adds the operator *default and*
-            if (theQuery.where_statements.Count != 0)
+            if (theQuery.whereStatements.Count != 0)
             {
-                theQuery.where_statement_types.Add((!string.IsNullOrWhiteSpace(where_type)) ? where_type : "AND");
+                theQuery.whereStatementsTypes.Add((!string.IsNullOrWhiteSpace(type)) ? type : "AND");
             }
 
             string temp_build = "";
 
             //Builds the sql string
-            temp_build = string.Format("{0} {1}.{2} {3} LIKE {4} {5}", startWrapper, table_name, where_field, whereOperator, definition + "0 ", endWrapper);
-            theQuery.where_statements.Add(temp_build);
+            temp_build = string.Format("{0} {1}.{2} {3} LIKE {4}0 {5}", startWrapper, tableName, field, whereOperator, definition, endWrapper);
+            theQuery.whereStatements.Add(temp_build);
         }
 
         /*##########################################*/
         /*      Where Like Validation functions     */
         /*##########################################*/
 
-        protected void where_like_validation(query theQuery, string tableName, string field, string type)
+        protected void WhereLikeValidation(Query theQuery, string tableName, string field, string type)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
@@ -46,7 +46,7 @@ namespace DotNetSDB
             {
                 throw new Exception("Where Like Error: The Field supplied is empty.");
             }
-            else if (!string.IsNullOrWhiteSpace(type) && theQuery.where_statements.Count == 0)
+            else if (!string.IsNullOrWhiteSpace(type) && theQuery.whereStatements.Count == 0)
             {
                 throw new Exception("Where Like Error: The where type is supplied but this is the first where clause so there will be no type used.");
             }
@@ -60,22 +60,22 @@ namespace DotNetSDB
         /// This function defines a where like statement
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="whereField"></param>
-        /// <param name="whereValue">Single value</param>
-        /// <param name="whereOperator">Optional, default is blank, could use NOT</param>
-        /// <param name="whereType">Optional, default is 'AND'</param>
+        /// <param name="field"></param>
+        /// <param name="value">Single value</param>
+        /// <param name="theOperator">Optional, default is blank, could use NOT</param>
+        /// <param name="type">Optional, default is 'AND'</param>
         /// <param name="startWrapper">Optional start wrapper</param>
         /// <param name="endWrapper">Optional end wrapper</param>
-        public void add_where_like(string tableName, string whereField, object whereValue, string whereOperator = null, string whereType = null, string startWrapper = null, string endWrapper = null)
+        public void add_where_like(string tableName, string field, object value, string theOperator = null, string type = null, string startWrapper = null, string endWrapper = null)
         {
-            query theQuery = get_query();
-            string definition = where_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.where_statements.Count).ToString() + "_";
+            Query theQuery = GetQuery();
+            string definition = string.Format("{0}_{1}_{2}_", whereDefinition, (theQueries.Count).ToString(), (theQuery.whereStatements.Count).ToString());
 
             //Builds the query
-            where_like_compiling(theQuery, definition, tableName, whereField, whereValue, whereOperator, whereType, startWrapper, endWrapper);
+            WhereLikeCompile(theQuery, definition, tableName, field, value, theOperator, type, startWrapper, endWrapper);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.where_real_values.Add(add_data(whereValue));
+            theQuery.whereRealValues.Add(AddData(value));
 
             //Adds the command
             theQuery.orderList.Add("where");

@@ -9,24 +9,24 @@ namespace DotNetSDB
         /*##########################################*/
 
         //This function builds the create table sql
-        protected void create_table_compiling(query theQuery, string table_name, string create_field, string create_type)
+        protected void CreateCompile(Query theQuery, string tableName, string field, string type)
         {
-            if (!string.IsNullOrWhiteSpace(create_field) && !string.IsNullOrWhiteSpace(create_type))
+            if (!string.IsNullOrWhiteSpace(field) && !string.IsNullOrWhiteSpace(type))
             {
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.create_table) && !string.IsNullOrWhiteSpace(table_name))
+                if (string.IsNullOrWhiteSpace(theQuery.createTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    theQuery.create_table = table_name;
+                    theQuery.createTable = tableName;
                 }
 
                 string temp_build = "";
 
                 //Builds the string
-                temp_build += string.Format("{0} {1}", create_field, create_type);
+                temp_build += string.Format("{0} {1}", field, type);
 
                 //Builds the final statement
-                theQuery.create_fields.Add(temp_build);
+                theQuery.createFields.Add(temp_build);
             }
             else
             {
@@ -34,25 +34,25 @@ namespace DotNetSDB
             }
         }
 
-        protected void create_table_compiling(query theQuery, string table_name, string[] create_fields, string[] create_types)
+        protected void CreateCompile(Query theQuery, string tablelName, string[] fields, string[] types)
         {
-            if (create_fields != null && create_types != null)
+            if (fields != null && types != null)
             {
                 //Checks if the sizes are not the same and if not returns a false
-                if (create_fields.Length != create_types.Length)
+                if (fields.Length != types.Length)
                 {
                     throw new Exception("Create Table Error: When using multiple fields there must be the same amount of field types passed.");
                 }
 
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.create_table) && !string.IsNullOrWhiteSpace(table_name))
+                if (string.IsNullOrWhiteSpace(theQuery.createTable) && !string.IsNullOrWhiteSpace(tablelName))
                 {
                     //Sets the table name
-                    theQuery.create_table = table_name;
+                    theQuery.createTable = tablelName;
                 }
 
                 string temp_build = "";
-                for (int i = 0; i < create_fields.Length; i++)
+                for (int i = 0; i < fields.Length; i++)
                 {
                     //Determines if there should be a comma
                     string seperator = "";
@@ -62,11 +62,11 @@ namespace DotNetSDB
                     }
 
                     //Builds the string
-                    temp_build += string.Format("{0}{1} {2}", seperator, create_fields[i], create_types[i]);
+                    temp_build += string.Format("{0}{1} {2}", seperator, fields[i], types[i]);
                 }
 
                 //Builds the final statement
-                theQuery.create_fields.Add(temp_build);
+                theQuery.createFields.Add(temp_build);
             }
             else
             {
@@ -78,7 +78,7 @@ namespace DotNetSDB
         /*        Create Validation functions       */
         /*##########################################*/
 
-        protected void create_single_validation(string tableName)
+        protected void CreateSingleValidation(string tableName)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
@@ -86,7 +86,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void create_not_exist_validation(query theQuery)
+        protected void CreateNotExistValidation(Query theQuery)
         {
             if (!theQuery.orderList.Contains("create"))
             {
@@ -94,7 +94,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void create_exist_validation(query theQuery)
+        protected void CreateExistValidation(Query theQuery)
         {
             if (theQuery.orderList.Contains("create"))
             {
@@ -110,15 +110,15 @@ namespace DotNetSDB
         /// This function creates the main create table statement
         /// </summary>
         /// <param name="newTableName"></param>
-        /// <param name="newFieldsNames"></param>
-        /// <param name="newFieldTypes"></param>
+        /// <param name="newFieldsName"></param>
+        /// <param name="newFieldType"></param>
         public void add_create_table(string newTableName, string newFieldsName, string newFieldType)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            create_exist_validation(theQuery);
+            CreateExistValidation(theQuery);
 
-            create_table_compiling(theQuery, newTableName, newFieldsName, newFieldType);
+            CreateCompile(theQuery, newTableName, newFieldsName, newFieldType);
 
             //Adds the command
             theQuery.orderList.Add("create");
@@ -132,11 +132,11 @@ namespace DotNetSDB
         /// <param name="newFieldTypes"></param>
         public void add_create_table(string newTableName, string[] newFieldsNames, string[] newFieldTypes)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            create_exist_validation(theQuery);
+            CreateExistValidation(theQuery);
 
-            create_table_compiling(theQuery, newTableName, newFieldsNames, newFieldTypes);
+            CreateCompile(theQuery, newTableName, newFieldsNames, newFieldTypes);
 
             //Adds the command
             theQuery.orderList.Add("create");
@@ -149,11 +149,11 @@ namespace DotNetSDB
         /// <param name="newFieldType"></param>
         public void add_create_fields(string newFieldsName, string newFieldType)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            create_not_exist_validation(theQuery);
+            CreateNotExistValidation(theQuery);
 
-            create_table_compiling(theQuery, null, newFieldsName, newFieldType);
+            CreateCompile(theQuery, null, newFieldsName, newFieldType);
         }
 
         /// <summary>
@@ -163,11 +163,11 @@ namespace DotNetSDB
         /// <param name="newFieldTypes"></param>
         public void add_create_fields(string[] newFieldsNames, string[] newFieldTypes)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            create_not_exist_validation(theQuery);
+            CreateNotExistValidation(theQuery);
 
-            create_table_compiling(theQuery, null, newFieldsNames, newFieldTypes);
+            CreateCompile(theQuery, null, newFieldsNames, newFieldTypes);
         }
     }
 }

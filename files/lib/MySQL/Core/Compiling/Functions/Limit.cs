@@ -1,14 +1,14 @@
 ﻿namespace DotNetSDB
 {
-    public partial class MysqlCore
+    public partial class MySLQCore
     {
         /*##########################################*/
         /*          Compiling Insert functions      */
         /*##########################################*/
 
-        protected virtual void CompileLimit(query2 current)
+        protected virtual void CompileLimit(Query2 current)
         {
-            compiled_build += " " + current.limit;
+            compiledSql += string.Format(" {0}", current.limit);
             current.limit = "";
         }
     }

@@ -12,7 +12,7 @@ namespace DotNetSDB
 
         //This section is used to make a full deep backup of the query object if we are running compile only for debugging and not execution
         //Note: This means it backs up the query and then returns it to its original state before the compiling started
-        private List<query> theBackup = new List<query>();
+        private List<Query> theBackup = new List<Query>();
 
         protected virtual void CompileBackup()
         {
@@ -54,9 +54,9 @@ namespace DotNetSDB
                 CompileBackup();
             }
 
-            compiled_build = " ";
+            compiledSql = " ";
 
-            foreach (query current in theQueries)
+            foreach (Query current in theQueries)
             {
                 //Deals with adding the start wrapper around the query
                 CompileStartWrapper(current);
@@ -68,11 +68,11 @@ namespace DotNetSDB
                 CompileEndWrapper(current);
 
                 //Ends the query
-                compiled_build += "; ";
+                compiledSql += "; ";
             }
 
-            compiled_build = compiled_build.Replace("  ", " "); //Removes any duplicate spaces with a space in the compile building
-            compiled_build = compiled_build.Trim(); //Removes the whitespace at the start and end of the compile building
+            compiledSql = compiledSql.Replace("  ", " "); //Removes any duplicate spaces with a space in the compile building
+            compiledSql = compiledSql.Trim(); //Removes the whitespace at the start and end of the compile building
 
             if (backup)
             {

@@ -8,10 +8,10 @@ namespace DotNetSDB
         /*           Compiling Group functions      */
         /*##########################################*/
 
-        protected virtual void CompileGroup(query current)
+        protected virtual void CompileGroup(Query current)
         {
-            compiled_build += string.Format(" GROUP BY {0}", String.Join(",", current.groupby_fields).TrimEnd(','));
-            current.groupby_fields.Clear();
+            compiledSql += string.Format(" GROUP BY {0}", string.Join(",", current.groupbyFields).TrimEnd(','));
+            current.groupbyFields.Clear();
         }
     }
 }

@@ -9,33 +9,33 @@ namespace DotNetSDB
         //      we STILL use the normal query objects order list for the new commands!!
 
         //This holds the extra query variables for this specific database version
-        [SerializableAttribute]
-        protected class query2
+        [Serializable]
+        protected class Query2
         {
-            public int select_top = -1;
+            public int selectTop = -1;
             
-            public object[] exist_real_table_value = new object[0];            
-            public object[] get_fields_real_table_value = new object[0];
+            public object[] existRealTableValue = new object[0];            
+            public object[] getFieldsRealTableValue = new object[0];
 
-            public bool insert_return = false;
+            public bool insertReturn = false;
 
-            public bool update_returned = false;
+            public bool updateReturned = false;
 
-            public bool delete_returned = false;
+            public bool deleteReturned = false;
 
             public void Dispose(bool disposing)
             {
                 if (disposing)
                 {
-                    select_top = -1;
-                    exist_real_table_value = null;
-                    get_fields_real_table_value = null;
+                    selectTop = -1;
+                    existRealTableValue = null;
+                    getFieldsRealTableValue = null;
 
-                    insert_return = false;
+                    insertReturn = false;
 
-                    update_returned = false;
+                    updateReturned = false;
 
-                    delete_returned = false;
+                    deleteReturned = false;
                 }
             }
 
@@ -47,10 +47,10 @@ namespace DotNetSDB
         }
 
         //This variable holds all the query objects for this specific database version
-        private List<query2> theQueries2 = new List<query2>();
+        private List<Query2> theQueries2 = new List<Query2>();
 
         //This function is run every time a Top layer function is run to get the query object
-        protected query2 get_query2()
+        protected Query2 GetQuery2()
         {
             //This runs in case its the first initiation, if so it creates the new query object before getting it
             if (theQueries2.Count == 0)
@@ -68,7 +68,7 @@ namespace DotNetSDB
             //Runs the base first then executes the extras
             base.start_new_query();
 
-            theQueries2.Add(new query2());
+            theQueries2.Add(new Query2());
         }
     }
 }

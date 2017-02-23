@@ -21,19 +21,19 @@ namespace DotNetSDB
         protected virtual void CoreProcessing(SqlConnection myConnection, int counter = 0)
         {
             //Checks if its already been compiled i.e. debug sql output
-            if (string.IsNullOrWhiteSpace(compiled_build))
+            if (string.IsNullOrWhiteSpace(compiledSql))
             {
                 //Compiles the querys into one massive query string
                 compiling();
             }
 
             //gets the query ready and wraps the query in the deadlock solution
-            SqlCommand myCommand = new SqlCommand(compiled_build, myConnection);
+            SqlCommand myCommand = new SqlCommand(compiledSql, myConnection);
 
             myCommand.CommandTimeout = connectionTime;
 
             //Checks for sanitisation
-            sanitisation_create(ref myCommand);
+            SanitisationProcess(ref myCommand);
 
             try
             {
@@ -58,11 +58,11 @@ namespace DotNetSDB
                         {
                             if (e.Number == 1205)
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nQuery: '{1}'", e.Message, already_compiled_sql_output(ref myCommand)));
+                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
                             }
                             else
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nQuery: '{1}'", e.Message, already_compiled_sql_output(ref myCommand)));
+                                debugger.AddToLog(string.Format("{0}\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
                             }
                         }
                     }
@@ -134,7 +134,7 @@ namespace DotNetSDB
         protected virtual SqlDataReader CoreProcessingReaderReturn(SqlConnection myConnection, int counter = 0)
         {
             //Checks if its already been compiled i.e. debug sql output
-            if (string.IsNullOrWhiteSpace(compiled_build))
+            if (string.IsNullOrWhiteSpace(compiledSql))
             {
                 //Compiles the querys into one massive query string
                 compiling();
@@ -143,12 +143,12 @@ namespace DotNetSDB
             SqlDataReader myReader = null;
 
             //gets the query ready and wraps the query in the deadlock solution
-            SqlCommand myCommand = new SqlCommand(compiled_build, myConnection);
+            SqlCommand myCommand = new SqlCommand(compiledSql, myConnection);
 
             myCommand.CommandTimeout = connectionTime;
 
             //Checks for sanitisation
-            sanitisation_create(ref myCommand);
+            SanitisationProcess(ref myCommand);
 
             try
             {
@@ -176,11 +176,11 @@ namespace DotNetSDB
                         {
                             if (e.Number == 1205)
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nQuery: '{1}'", e.Message, already_compiled_sql_output(ref myCommand)));
+                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
                             }
                             else
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nQuery: '{1}'", e.Message, already_compiled_sql_output(ref myCommand)));
+                                debugger.AddToLog(string.Format("{0}\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
                             }
                         }
                     }
@@ -255,19 +255,19 @@ namespace DotNetSDB
         protected virtual SqlDataAdapter CoreProcessingAdapterReturn(SqlConnection myConnection, int counter = 0)
         {
             //Checks if its already been compiled i.e. debug sql output
-            if (string.IsNullOrWhiteSpace(compiled_build))
+            if (string.IsNullOrWhiteSpace(compiledSql))
             {
                 //Compiles the querys into one massive query string
                 compiling();
             }
 
             //gets the query ready and wraps the query in the deadlock solution
-            SqlCommand myCommand = new SqlCommand(compiled_build, myConnection);
+            SqlCommand myCommand = new SqlCommand(compiledSql, myConnection);
 
             myCommand.CommandTimeout = connectionTime;
 
             //Checks for sanitisation
-            sanitisation_create(ref myCommand);
+            SanitisationProcess(ref myCommand);
 
             try
             {
@@ -295,11 +295,11 @@ namespace DotNetSDB
                         {
                             if (e.Number == 1205)
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nQuery: '{1}'", e.Message, already_compiled_sql_output(ref myCommand)));
+                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
                             }
                             else
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nQuery: '{1}'", e.Message, already_compiled_sql_output(ref myCommand)));
+                                debugger.AddToLog(string.Format("{0}\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
                             }
                         }
                     }
@@ -345,7 +345,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiled_build = "";
+                    compiledSql = "";
                 }
             }
         }
@@ -368,7 +368,7 @@ namespace DotNetSDB
                 try
                 {
                     //gets the first value as a string output
-                    string value = result_conversion_string(ref myReader);
+                    string value = ResultToString(ref myReader);
 
                     //Closes the connections that are open
                     myReader.Close();
@@ -392,7 +392,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiled_build = "";
+                    compiledSql = "";
                 }
             }
         }
@@ -412,7 +412,7 @@ namespace DotNetSDB
 
                 try
                 {
-                    string[] temp = result_conversion_string_array(ref myReader);
+                    string[] temp = ResultToStringArray(ref myReader);
 
                     //Closes the connections that are open
                     myReader.Close();
@@ -436,7 +436,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiled_build = "";
+                    compiledSql = "";
                 }
             }
         }
@@ -458,7 +458,7 @@ namespace DotNetSDB
 
                 try
                 {
-                    string theResults = result_conversion_json(ref myReader);
+                    string theResults = ResultToJson(ref myReader);
 
                     //Closes the connections that are open
                     myReader.Close();
@@ -482,7 +482,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiled_build = "";
+                    compiledSql = "";
                 }
             }
         }
@@ -503,7 +503,7 @@ namespace DotNetSDB
                 try
                 {
                     //This section Processes the results into datatable format
-                    DataTable theResults = result_conversion_datatable(ref myReader);
+                    DataTable theResults = ResultToDataTable(ref myReader);
 
                     //Closes the connections that are open
                     myReader.Close();
@@ -527,7 +527,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiled_build = "";
+                    compiledSql = "";
                 }
             }
         }
@@ -548,7 +548,7 @@ namespace DotNetSDB
                 try
                 {
                     //This section Processes the results into datatable format
-                    DataSet theResults = result_conversion_dataset(ref myAdapter, enforceConstraints);
+                    DataSet theResults = ResultToDataSet(ref myAdapter, enforceConstraints);
 
                     //Closes the connections that are open
                     myAdapter.Dispose();
@@ -572,7 +572,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiled_build = "";
+                    compiledSql = "";
                 }
             }
         }
@@ -592,7 +592,7 @@ namespace DotNetSDB
                 try
                 {
                     //This section Processes the results into datatable format
-                    List<dynamic> theResults = result_conversion_dynamic(ref myReader);
+                    List<dynamic> theResults = ResultToDynamic(ref myReader);
 
                     //Closes the connections that are open
                     myReader.Close();
@@ -616,7 +616,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiled_build = "";
+                    compiledSql = "";
                 }
             }
         }
@@ -691,7 +691,7 @@ namespace DotNetSDB
             {
                 //Clears the queries ready for the next
                 disposeAll();
-                compiled_build = "";
+                compiledSql = "";
             }
         }
         
@@ -707,7 +707,7 @@ namespace DotNetSDB
             DataTable queryData = run_return_datatable();
             try
             {
-                return datatable_conversion_csv(queryData, fullFilePath, delimiter);
+                return DataTableToCSV(queryData, fullFilePath, delimiter);
             }
             catch (Exception e)
             {
@@ -736,7 +736,7 @@ namespace DotNetSDB
             DataTable queryData = run_return_datatable();
             try
             {
-                return datatable_conversion_append_csv(queryData, fullFilePath, delimiter);
+                return DataTableAppendCSV(queryData, fullFilePath, delimiter);
             }
             catch (Exception e)
             {
@@ -764,7 +764,7 @@ namespace DotNetSDB
             DataTable queryData = run_return_datatable();
             try
             {
-                return datatable_conversion_raw_output(queryData, delimiter);
+                return DataTableToRawString(queryData, delimiter);
             }
             catch (Exception e)
             {
@@ -804,7 +804,7 @@ namespace DotNetSDB
 
                 try
                 {
-                    DataTable theResults = result_conversion_datatable(ref myReader);
+                    DataTable theResults = ResultToDataTable(ref myReader);
 
                     //Closes the connections that are open
                     myReader.Close();
@@ -829,7 +829,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiled_build = "";
+                    compiledSql = "";
                 }
             }
         }
@@ -869,7 +869,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiled_build = "";
+                    compiledSql = "";
                 }
             }
         }

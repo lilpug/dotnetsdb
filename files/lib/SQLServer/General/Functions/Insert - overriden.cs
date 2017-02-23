@@ -13,23 +13,23 @@ namespace DotNetSDB
         {
         }
 
-        private new void add_insert(string tableName, string insertField)
+        private new void add_insert(string tableName, string field)
         {
         }
 
-        private new void add_insert(string tableName, string[] insertFields)
+        private new void add_insert(string tableName, string[] fields)
         {
         }
 
-        private new void add_insert(string tableName, object insertValues)
+        private new void add_insert(string tableName, object values)
         {
         }
 
-        private new void add_insert(string tableName, string insertField, object insertValue)
+        private new void add_insert(string tableName, string field, object value)
         {
         }
 
-        private new void add_insert(string tableName, string[] insertFields, object insertValues)
+        private new void add_insert(string tableName, string[] fields, object values)
         {
         }
 
@@ -42,21 +42,21 @@ namespace DotNetSDB
         /// <param name="returnInsert">returns all the inserted rows and fields</param>
         public virtual void add_insert(string tableName, bool returnInsert = false)
         {
-            query theQuery = get_query();
-            query2 theQuery2 = get_query2();
+            Query theQuery = GetQuery();
+            Query2 theQuery2 = GetQuery2();
 
             //Validation
-            insert_exist_validation(theQuery);
+            InsertExistValidation(theQuery);
             if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new Exception("Insert Error: The table name supplied is empty.");
             }
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Adds the new return feature
-            theQuery2.insert_return = returnInsert;
+            theQuery2.insertReturn = returnInsert;
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -66,25 +66,25 @@ namespace DotNetSDB
         /// This functions adds the insert statement with a field only
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertField"></param>
+        /// <param name="field"></param>
         /// <param name="returnInsert">returns all the inserted rows and fields</param>
-        public virtual void add_insert(string tableName, string insertField, bool returnInsert = false)
+        public virtual void add_insert(string tableName, string field, bool returnInsert = false)
         {
-            query theQuery = get_query();
-            query2 theQuery2 = get_query2();
+            Query theQuery = GetQuery();
+            Query2 theQuery2 = GetQuery2();
 
             //Validation
-            insert_exist_validation(theQuery);
-            insert_single_validation(tableName, insertField);
+            InsertExistValidation(theQuery);
+            InsertsingleValidation(tableName, field);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the feidls query
-            insert_build_fields_compiling(theQuery, insertField);
+            InsertFieldCompile(theQuery, field);
 
             //Adds the new return feature
-            theQuery2.insert_return = returnInsert;
+            theQuery2.insertReturn = returnInsert;
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -94,25 +94,25 @@ namespace DotNetSDB
         /// This functions adds the insert statement with fields only
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertFields"></param>
+        /// <param name="fields"></param>
         /// <param name="returnInsert">returns all the inserted rows and fields</param>
-        public virtual void add_insert(string tableName, string[] insertFields, bool returnInsert = false)
+        public virtual void add_insert(string tableName, string[] fields, bool returnInsert = false)
         {
-            query theQuery = get_query();
-            query2 theQuery2 = get_query2();
+            Query theQuery = GetQuery();
+            Query2 theQuery2 = GetQuery2();
 
             //Validation
-            insert_exist_validation(theQuery);
-            insert_multiple_validation(tableName, insertFields);
+            InsertExistValidation(theQuery);
+            InsertMultipleValidation(tableName, fields);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the feidls query
-            insert_build_fields_compiling(theQuery, insertFields);
+            InsertFieldCompile(theQuery, fields);
 
             //Adds the new return feature
-            theQuery2.insert_return = returnInsert;
+            theQuery2.insertReturn = returnInsert;
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -122,35 +122,35 @@ namespace DotNetSDB
         /// This function adds the insert statement with only values
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertValues">single value or object[] only</param>
+        /// <param name="values">single value or object[] only</param>
         /// <param name="returnInsert">returns all the inserted rows and fields</param>
-        public virtual void add_insert(string tableName, object insertValues, bool returnInsert = false)
+        public virtual void add_insert(string tableName, object values, bool returnInsert = false)
         {
-            query theQuery = get_query();
-            query2 theQuery2 = get_query2();
-            string definition = insert_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.insert_values.Count).ToString() + "_";
+            Query theQuery = GetQuery();
+            Query2 theQuery2 = GetQuery2();
+            string definition = string.Format("{0}_{1}_{2}_", insertDefinition , (theQueries.Count).ToString() , (theQuery.insertValues.Count).ToString());
 
             //Validation
-            insert_exist_validation(theQuery);
+            InsertExistValidation(theQuery);
             if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new Exception("Insert Error: The table name supplied is empty.");
             }
 
             //Gets the data object *even if the value is just null it should be length 1 i.e. new object[] {null}
-            object[] holding = add_data(insertValues);
+            object[] holding = AddData(values);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the query
-            insert_build_compiling(theQuery, definition, holding);
+            InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insert_real_values.Add(holding);
+            theQuery.insertRealValues.Add(holding);
 
             //Adds the new return feature
-            theQuery2.insert_return = returnInsert;
+            theQuery2.insertReturn = returnInsert;
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -160,34 +160,34 @@ namespace DotNetSDB
         /// This function adds the insert statement with a field and value
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertField"></param>
-        /// <param name="insertValue">single value only</param>
+        /// <param name="field"></param>
+        /// <param name="value">single value only</param>
         /// <param name="returnInsert">returns all the inserted rows and fields</param>
-        public virtual void add_insert(string tableName, string insertField, object insertValue, bool returnInsert = false)
+        public virtual void add_insert(string tableName, string field, object value, bool returnInsert = false)
         {
-            query theQuery = get_query();
-            query2 theQuery2 = get_query2();
-            string definition = insert_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.insert_values.Count).ToString() + "_";
+            Query theQuery = GetQuery();
+            Query2 theQuery2 = GetQuery2();
+            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
 
             //Validation
-            insert_exist_validation(theQuery);
-            insert_single_validation(tableName, insertField);
+            InsertExistValidation(theQuery);
+            InsertsingleValidation(tableName, field);
 
             //Gets the data object *even if the value is just null it should be length 1 i.e. new object[] {null}
-            object[] holding = add_data(insertValue);
+            object[] holding = AddData(value);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the query
-            insert_build_fields_compiling(theQuery, insertField);
-            insert_build_compiling(theQuery, definition, holding);
+            InsertFieldCompile(theQuery, field);
+            InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insert_real_values.Add(holding);
+            theQuery.insertRealValues.Add(holding);
 
             //Adds the new return feature
-            theQuery2.insert_return = returnInsert;
+            theQuery2.insertReturn = returnInsert;
 
             //Adds the command
             theQuery.orderList.Add("insert");
@@ -197,34 +197,34 @@ namespace DotNetSDB
         /// This function adds the insert statement with the fields and values
         /// </summary>
         /// <param name="tableName"></param>
-        /// <param name="insertFields"></param>
-        /// <param name="insertValues">object[] only</param>
+        /// <param name="fields"></param>
+        /// <param name="values">object[] only</param>
         /// <param name="returnInsert">returns all the inserted rows and fields</param>
-        public virtual void add_insert(string tableName, string[] insertFields, object insertValues, bool returnInsert = false)
+        public virtual void add_insert(string tableName, string[] fields, object values, bool returnInsert = false)
         {
-            query theQuery = get_query();
-            query2 theQuery2 = get_query2();
-            string definition = insert_definition + "_" + (theQueries.Count).ToString() + "_" + (theQuery.insert_values.Count).ToString() + "_";
+            Query theQuery = GetQuery();
+            Query2 theQuery2 = GetQuery2();
+            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
 
             //Validation
-            insert_exist_validation(theQuery);
-            insert_multiple_validation(tableName, insertFields);
+            InsertExistValidation(theQuery);
+            InsertMultipleValidation(tableName, fields);
 
             //Gets the data object *even if the value is just null it should be length 1 i.e. new object[] {null}
-            object[] holding = add_data(insertValues);
+            object[] holding = AddData(values);
 
             //Holds the insert table
-            theQuery.insert_table_name = tableName;
+            theQuery.insertTableName = tableName;
 
             //Builds the query
-            insert_build_fields_compiling(theQuery, insertFields);
-            insert_build_compiling(theQuery, definition, holding);
+            InsertFieldCompile(theQuery, fields);
+            InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insert_real_values.Add(holding);
+            theQuery.insertRealValues.Add(holding);
 
             //Adds the new return feature
-            theQuery2.insert_return = returnInsert;
+            theQuery2.insertReturn = returnInsert;
 
             //Adds the command
             theQuery.orderList.Add("insert");

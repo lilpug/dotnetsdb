@@ -9,8 +9,9 @@ namespace DotNetSDB
         /*     Sanatisation Compiling functions     */
         /*##########################################*/
 
-        protected override void Sanitisation(string definition, ref SqlCommand command, params object[] items)
+        protected override void SanitiseItems(string definition, ref SqlCommand command, params object[] items)
         {
+            //Note: We do this here and in a foreach so if we get any errors we can build the error definition section in the exception.
             int counter = -1;
 
             try
@@ -19,12 +20,14 @@ namespace DotNetSDB
                 {
                     counter++;
 
-                    command.Parameters.AddWithValue(definition + counter.ToString(), ((data == null) ? DBNull.Value : data));
+                    var newDefinition = string.Format("{0}{1}", definition, counter.ToString());
+
+                    command.Parameters.AddWithValue(newDefinition, ((data == null) ? DBNull.Value : data));
                     if (data != null)
                     {
                         using (SqlServer2008TypeConvertor convertor = new SqlServer2008TypeConvertor())
                         {
-                            command.Parameters[definition + counter.ToString()].SqlDbType = convertor.ToSqlDbType(data.GetType());
+                            command.Parameters[newDefinition].SqlDbType = convertor.ToSqlDbType(data.GetType());
                         }
                     }                    
                 }

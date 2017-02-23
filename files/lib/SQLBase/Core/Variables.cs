@@ -10,18 +10,18 @@ namespace DotNetSDB
         /*##########################################*/        
 
         //This variable holds all the query objects which will be processed
-        protected List<query> theQueries = new List<query>();
+        protected List<Query> theQueries = new List<Query>();
 
         //This variable is used to compile the main sql query that will be executed
-        protected string compiled_build = "";
+        protected string compiledSql = "";
 
         /*##########################################*/
         /*     Sanitisation Variable Definitions    */
         /*##########################################*/
 
-        protected const string update_definition = "@update";
-        protected const string insert_definition = "@insert";
-        protected const string where_definition = "@where";
-        protected const string custom_definition = "@custom";        
+        protected const string updateDefinition = "@update";
+        protected const string insertDefinition = "@insert";
+        protected const string whereDefinition = "@where";
+        protected const string customDefinition = "@custom";        
     }
 }

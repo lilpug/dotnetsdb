@@ -6,10 +6,10 @@
         /*            Compiling Join functions      */
         /*##########################################*/
 
-        protected virtual void CompileJoin(query current)
+        protected virtual void CompileJoin(Query current)
         {
-            compiled_build += " " + current.join_fields[0];
-            current.join_fields.RemoveAt(0);
+            compiledSql += string.Format(" {0}", current.joinFields[0]);
+            current.joinFields.RemoveAt(0);
         }
     }
 }

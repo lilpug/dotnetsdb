@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DotNetSDB
 {
-    public partial class MysqlCore
+    public partial class MySLQCore
     {
         /*##########################################*/
         /*            Exist SQL function             */
@@ -16,9 +16,9 @@ namespace DotNetSDB
         /// <returns></returns>
         public bool table_exist(string tableName)
         {
-            query2 theQuery = get_query2();
-            theQuery.exist_real_table_value = add_data(tableName + "%");
-            compiled_build = "select * from INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE " + exist_definition + "_1_0_0 AND TABLE_SCHEMA = '" + db + "'";
+            Query2 theQuery = GetQuery2();
+            theQuery.exist_real_table_value = AddData(tableName + "%");
+            compiledSql = string.Format("select * from INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE {0}_1_0_0 AND TABLE_SCHEMA = '{1}'", existDefinition, db);
             
             //Runs the query
             string[] results = run_return_string_array();

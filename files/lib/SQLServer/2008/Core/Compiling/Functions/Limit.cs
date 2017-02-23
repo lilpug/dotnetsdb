@@ -6,11 +6,11 @@
         /*          Compiling Limit functions       */
         /*##########################################*/
 
-        protected virtual void CompileLimit(query3 current)
+        protected virtual void CompileLimit(Query3 current)
         {
-            compiled_build = " " + limit_create(current, current.orderby, compiled_build);
-            current.limit_count_one = -1;
-            current.limit_count_two = -1;
+            compiledSql = string.Format(" {0}",LimitCompile(current, current.orderby, compiledSql));
+            current.limitCountOne = -1;
+            current.limitCountTwo = -1;
             current.orderby = "";
         }
     }

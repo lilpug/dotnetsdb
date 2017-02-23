@@ -14,7 +14,7 @@ namespace DotNetSDB
 
         //This functions takes the resulting data and converts it into a json format string
         //Note: http://jsonformatter.curiousconcept.com/
-        protected virtual string result_conversion_json(ref SqlDataReader myReader)
+        protected virtual string ResultToJson(ref SqlDataReader myReader)
         {
             StringBuilder sb = new StringBuilder();
             if (myReader == null || myReader.FieldCount == 0)
@@ -33,8 +33,8 @@ namespace DotNetSDB
 
                 for (int i = 0; i < myReader.FieldCount; i++)
                 {
-                    sb.Append("\"" + myReader.GetName(i) + "\":");
-                    sb.Append("\"" + myReader[i] + "\"");
+                    sb.Append(string.Format("\"{0}\":", myReader.GetName(i)));
+                    sb.Append(string.Format("\"{0}\"", myReader[i]));
 
                     sb.Append(i == myReader.FieldCount - 1 ? "" : ",");
                 }
@@ -51,24 +51,25 @@ namespace DotNetSDB
             }
 
             //Adds the column information section:
-            sb.Append("],\"columns\": { \"count\": " + myReader.FieldCount + ", \"names\": [");
+            sb.Append(string.Format("],\"columns\": { \"count\": {0}, \"names\": [", myReader.FieldCount));
             for (int i = 0; i < myReader.FieldCount; i++)
             {
                 if (i == myReader.FieldCount - 1)
                 {
-                    sb.Append("\"" + myReader.GetName(i) + "\"");
+                    sb.Append(string.Format("\"{0}\"", myReader.GetName(i)));
                 }
                 else
                 {
-                    sb.Append("\"" + myReader.GetName(i) + "\",");
+                    sb.Append(string.Format("\"{0}\",", myReader.GetName(i)));
                 }
             }
-            sb.Append("]}, \"result_count\": " + rowCount + "}");
+
+            sb.Append(string.Format("]}, \"result_count\": {0} }", rowCount));
 
             return sb.ToString();
         }
 
-        protected virtual string result_conversion_string(ref SqlDataReader myReader)
+        protected virtual string ResultToString(ref SqlDataReader myReader)
         {
             //Puts the first output into a string
             string value = null;
@@ -80,7 +81,7 @@ namespace DotNetSDB
         }
 
         //This functions takes the resulting data and converts it into a dataTable format
-        protected virtual DataTable result_conversion_datatable(ref SqlDataReader myReader)
+        protected virtual DataTable ResultToDataTable(ref SqlDataReader myReader)
         {
             DataTable main_store = new DataTable();
             //Loads the data into a datatable format
@@ -89,7 +90,7 @@ namespace DotNetSDB
         }
 
         //This functions takes the resulting data and converts it into a dataset format
-        protected virtual DataSet result_conversion_dataset(ref SqlDataAdapter myAdapter, bool enforceConstraints)
+        protected virtual DataSet ResultToDataSet(ref SqlDataAdapter myAdapter, bool enforceConstraints)
         {
             DataSet ds = new DataSet();
 
@@ -103,7 +104,7 @@ namespace DotNetSDB
         }
 
         //This function takes the resulting data and puts every first row value into an array
-        protected virtual string[] result_conversion_string_array(ref SqlDataReader myReader)
+        protected virtual string[] ResultToStringArray(ref SqlDataReader myReader)
         {
             List<string> ls = new List<string>();
 
@@ -116,7 +117,7 @@ namespace DotNetSDB
         }
 
         //This functions takes the resulting data and converts it into a list of dynamic class objects
-        protected virtual List<dynamic> result_conversion_dynamic(ref SqlDataReader myReader)
+        protected virtual List<dynamic> ResultToDynamic(ref SqlDataReader myReader)
         {
             //Builds the temporary storage object
             List<dynamic> temp = new List<dynamic>();

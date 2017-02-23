@@ -9,7 +9,7 @@ namespace DotNetSDB
         /*##########################################*/
 
         //This function builds the fields for the orderBy
-        protected void orderBy_build_compiling(query theQuery, string tableName, string field, string type = null)
+        protected void OrderByCompile(Query theQuery, string tableName, string field, string type = null)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
@@ -31,7 +31,7 @@ namespace DotNetSDB
                 }
 
                 //Compiles the final build of the order by sql
-                theQuery.orderby_fields.Add(temp_build);
+                theQuery.orderbyFields.Add(temp_build);
             }
             else
             {
@@ -39,7 +39,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void orderBy_build_compiling(query theQuery, string tableName, string[] fields, string[] types = null)
+        protected void OrderByCompile(Query theQuery, string tableName, string[] fields, string[] types = null)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
@@ -75,7 +75,7 @@ namespace DotNetSDB
                 }
 
                 //Compiles the final build of the order by sql
-                theQuery.orderby_fields.Add(temp_build);
+                theQuery.orderbyFields.Add(temp_build);
             }
             else
             {
@@ -95,7 +95,7 @@ namespace DotNetSDB
         /// <param name="type"></param>
         public void add_orderby(string tableName, string field, string type = null)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             if (theQuery.orderList.Contains("orderby"))
             {
@@ -103,7 +103,7 @@ namespace DotNetSDB
             }
 
             //Builds the order by sql into the query
-            orderBy_build_compiling(theQuery, tableName, field, type);
+            OrderByCompile(theQuery, tableName, field, type);
 
             //Adds the command
             theQuery.orderList.Add("orderby");
@@ -117,7 +117,7 @@ namespace DotNetSDB
         /// <param name="types"></param>
         public void add_orderby(string tableName, string[] fields, string[] types = null)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             if (theQuery.orderList.Contains("orderby"))
             {
@@ -125,7 +125,7 @@ namespace DotNetSDB
             }
 
             //Builds the order by sql into the query
-            orderBy_build_compiling(theQuery, tableName, fields, types);
+            OrderByCompile(theQuery, tableName, fields, types);
 
             //Adds the command
             theQuery.orderList.Add("orderby");
@@ -139,7 +139,7 @@ namespace DotNetSDB
         /// <param name="type"></param>
         public void add_orderby_fields(string tableName, string field, string type)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             if (!theQuery.orderList.Contains("orderby"))
             {
@@ -147,7 +147,7 @@ namespace DotNetSDB
             }
 
             //Builds the order by sql into the query
-            orderBy_build_compiling(theQuery, tableName, field, type);
+            OrderByCompile(theQuery, tableName, field, type);
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace DotNetSDB
         /// <param name="types"></param>
         public void add_orderby_fields(string tableName, string[] fields, string[] types)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
             if (!theQuery.orderList.Contains("orderby"))
             {
@@ -166,7 +166,7 @@ namespace DotNetSDB
             }
 
             //Builds the order by sql into the query
-            orderBy_build_compiling(theQuery, tableName, fields, types);
+            OrderByCompile(theQuery, tableName, fields, types);
         }
     }
 }

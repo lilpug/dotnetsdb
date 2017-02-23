@@ -27,7 +27,7 @@
             //Runs the base first then executes the extras
             base.ExtraDispose();
 
-            foreach (query2 q in theQueries2)
+            foreach (Query2 q in theQueries2)
             {
                 q.Dispose();
             }

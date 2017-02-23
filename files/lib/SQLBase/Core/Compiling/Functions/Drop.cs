@@ -6,10 +6,10 @@
         /*            Compiling Drop functions      */
         /*##########################################*/
 
-        protected virtual void CompileDrop(query current)
+        protected virtual void CompileDrop(Query current)
         {
-            compiled_build += string.Format(" DROP TABLE {0}", current.drop_table_name);
-            current.drop_table_name = "";
+            compiledSql += string.Format(" DROP TABLE {0}", current.dropTableName);
+            current.dropTableName = "";
         }
     }
 }

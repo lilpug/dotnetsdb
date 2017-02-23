@@ -17,18 +17,18 @@
         /// <param name="returnDeleted">Returns all the deleted rows and fields</param>
         public void add_delete(string tableName, bool returnDeleted = false)
         {
-            query theQuery = get_query();
-            query2 theQuery2 = get_query2();
+            Query theQuery = GetQuery();
+            Query2 theQuery2 = GetQuery2();
 
-            delete_exist_validation(theQuery);
+            DeleteExistsValidation(theQuery);
 
-            delete_single_validation(tableName);
+            DeleteSingleValidation(tableName);
 
             //Adds the delete table to the query
-            theQuery.delete_table = tableName;
+            theQuery.deleteTable = tableName;
 
             //Adds the extra feature to the query2
-            theQuery2.delete_returned = returnDeleted;
+            theQuery2.deleteReturned = returnDeleted;
 
             //Adds the command
             theQuery.orderList.Add("delete");

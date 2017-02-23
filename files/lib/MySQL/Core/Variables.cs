@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 
 namespace DotNetSDB
 {
-    public partial class MysqlCore : SQLBase
+    public partial class MySLQCore : SQLBase
     {
         /*##########################################*/
         /*   OutputManagement Variable Definition   */
@@ -15,15 +15,15 @@ namespace DotNetSDB
         /*     Sanitisation Variable Definitions    */
         /*##########################################*/
 
-        protected const string exist_definition = "@exist_name";
-        protected const string fields_definition = "@get_fields_name";
+        protected const string existDefinition = "@exist_name";
+        protected const string fieldsDefinition = "@get_fields_name";
 
         /*##########################################*/
         /*      Database Connection Variables       */
         /*##########################################*/
 
-        //Class variables for the database connections
-        protected string user, pwd, server, db, connection;
+        //Class variables for the database connection strings
+        protected string user, pwd, server, db, connection, connectionStringExtra;
 
         protected int port;
         protected int connectionTime;

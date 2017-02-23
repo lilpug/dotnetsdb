@@ -9,8 +9,8 @@ namespace DotNetSDB
         //      we STILL use the normal query objects order list for the new commands!!
 
         //This holds the extra query variables for this specific database version
-        [SerializableAttribute]
-        protected class query3
+        [Serializable]
+        protected class Query3
         {
             //Variables for the offset
             public string offset = "";
@@ -31,10 +31,10 @@ namespace DotNetSDB
         }
 
         //This variable holds all the query objects for this specific database version
-        private List<query3> theQueries3 = new List<query3>();
+        private List<Query3> theQueries3 = new List<Query3>();
 
         //This function is run every time a Top layer function is run to get the query object
-        protected query3 get_query3()
+        protected Query3 GetQuery3()
         {
             //This runs in case its the first initiation, if so it creates the new query object before getting it
             if (theQueries3.Count == 0)
@@ -52,7 +52,7 @@ namespace DotNetSDB
             //Runs the base first then executes the extras
             base.start_new_query();
 
-            theQueries3.Add(new query3());
+            theQueries3.Add(new Query3());
         }
     }
 }

@@ -8,12 +8,12 @@ namespace DotNetSDB
         /*          Compiling Update functions      */
         /*##########################################*/
 
-        protected virtual void CompileUpdate(query current)
+        protected virtual void CompileUpdate(Query current)
         {
-            compiled_build += string.Format(" UPDATE {0} SET {1}", current.update_table, String.Join(", ", current.update_fields).TrimEnd(','));
+            compiledSql += string.Format(" UPDATE {0} SET {1}", current.updateTable, String.Join(", ", current.updateFields).TrimEnd(','));
 
-            current.update_fields.Clear();
-            current.update_table = "";
+            current.updateFields.Clear();
+            current.updateTable = "";
         }
     }
 }

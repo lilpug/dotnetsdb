@@ -6,21 +6,21 @@
         /*         Compiling Wrapper functions      */
         /*##########################################*/
 
-        protected virtual void CompileStartWrapper(query current)
+        protected virtual void CompileStartWrapper(Query current)
         {
-            if (current.sql_start_wrapper != "")
+            if (current.sqlStartWrapper != "")
             {
-                compiled_build += " " + current.sql_start_wrapper;
-                current.sql_start_wrapper = "";
+                compiledSql += string.Format(" {0}", current.sqlStartWrapper);
+                current.sqlStartWrapper = "";
             }
         }
 
-        protected virtual void CompileEndWrapper(query current)
+        protected virtual void CompileEndWrapper(Query current)
         {
-            if (current.sql_end_wrapper != "")
+            if (current.sqlEndWrapper != "")
             {
-                compiled_build += " " + current.sql_end_wrapper;
-                current.sql_end_wrapper = "";
+                compiledSql += string.Format(" {0}", current.sqlEndWrapper);
+                current.sqlEndWrapper = "";
             }
         }
     }

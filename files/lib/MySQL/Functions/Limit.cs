@@ -2,20 +2,20 @@
 
 namespace DotNetSDB
 {
-    public partial class MysqlCore
+    public partial class MySLQCore
     {
         /*##########################################*/
         /*        Limit Compiling functions         */
         /*##########################################*/
 
         //This function is the mysql limit sql builder
-        protected void limit_create(query2 theQuery, int start)
+        protected void LimitCompile(Query2 theQuery, int start)
         {
             theQuery.limit = string.Format("LIMIT {0}", start);
         }
 
         //This function is the mysql limit sql builder
-        protected void limit_create(query2 theQuery, int start, int end)
+        protected void LimitCompile(Query2 theQuery, int start, int end)
         {
             theQuery.limit = string.Format("LIMIT {0}, {1}", start, end);
         }        
@@ -34,9 +34,9 @@ namespace DotNetSDB
             {
                 throw new Exception(string.Format("The limit start value starts at 1 and above, yours is currently '{0}'.", startLocation.ToString()));
             }            
-            query theMain = get_query();
-            query2 theQuery = get_query2();
-            limit_create(theQuery, startLocation);
+            Query theMain = GetQuery();
+            Query2 theQuery = GetQuery2();
+            LimitCompile(theQuery, startLocation);
             theMain.orderList.Add("limit");
         }
 
@@ -55,9 +55,9 @@ namespace DotNetSDB
             {
                 throw new Exception(string.Format("The limit end value starts before the start value, start value: '{0}', end value: '{1}'.", startLocation.ToString(), numberOfRows.ToString()));
             }
-            query theMain = get_query();
-            query2 theQuery = get_query2();
-            limit_create(theQuery, startLocation, numberOfRows);
+            Query theMain = GetQuery();
+            Query2 theQuery = GetQuery2();
+            LimitCompile(theQuery, startLocation, numberOfRows);
             theMain.orderList.Add("limit");
         }
     }

@@ -6,7 +6,7 @@
         /*      Main Compiling List functions       */
         /*##########################################*/
 
-        protected virtual void CompileKeyList(query current)
+        protected virtual void CompileKeyList(Query current)
         {
             foreach (string key in current.orderList)
             {
@@ -61,7 +61,7 @@
         }
 
         //This is an empty method which allows inheritance to hook onto something within the list for extra functions
-        protected virtual void ExtraCompileList(query current, string key)
+        protected virtual void ExtraCompileList(Query current, string key)
         {
         }
     }

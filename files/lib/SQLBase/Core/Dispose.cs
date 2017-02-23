@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace DotNetSDB
 {
@@ -35,7 +34,7 @@ namespace DotNetSDB
         //This disposes all the query objects once finished
         protected void disposeAll()
         {
-            foreach (query q in theQueries)
+            foreach (Query q in theQueries)
             {
                 q.Dispose();                
             }

@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace DotNetSDB
 {
     public partial class SqlServerCore
@@ -15,12 +14,12 @@ namespace DotNetSDB
         /// <returns></returns>
         public string[] table_get_fields(string tableName)
         {
-            query2 theQuery = get_query2();
+            Query2 theQuery = GetQuery2();
 
-            theQuery.get_fields_real_table_value = add_data(tableName);
+            theQuery.getFieldsRealTableValue = AddData(tableName);
 
             //Gives the sql string to the compiled_build
-            compiled_build = "SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = " + fields_definition + "_1_0_0 ORDER BY ordinal_position;";
+            compiledSql = string.Format("SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {0}_1_0_0 ORDER BY ordinal_position;", fieldsDefinition);
             
             return run_return_string_array();
         }

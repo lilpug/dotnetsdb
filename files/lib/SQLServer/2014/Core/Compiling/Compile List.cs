@@ -6,7 +6,7 @@
         /*      Main Compiling List functions       */
         /*##########################################*/
 
-        protected override void ExtraCompileList(query current, string key)
+        protected override void ExtraCompileList(Query current, string key)
         {
             //Runs the base first then executes the extras
             base.ExtraCompileList(current, key);

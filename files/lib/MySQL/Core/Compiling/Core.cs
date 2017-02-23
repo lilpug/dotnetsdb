@@ -2,10 +2,10 @@
 
 namespace DotNetSDB
 {
-    public partial class MysqlCore
+    public partial class MySLQCore
     {
         //Extends the backup facility on runing a debug compile to the new functionality of query2
-        private List<query2> theBackup2 = new List<query2>();
+        private List<Query2> theBackup2 = new List<Query2>();
 
         protected override void CompileBackup()
         {

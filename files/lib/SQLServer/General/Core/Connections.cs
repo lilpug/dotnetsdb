@@ -19,7 +19,8 @@ namespace DotNetSDB
         public string dbName { get; set; }
         public int port { get; set; }
         public int connectionTime { get; set; }
-        
+        public string connectionStringExtra { get; set; }
+
 
         public OutputManagementSettings logger { get; set; }
 
@@ -32,7 +33,8 @@ namespace DotNetSDB
         /// <param name="databaseName"></param>        
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public SQLServerUserConnection(string serverName, string username, string password, string databaseName, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
+        /// <param name="additionalConnectionString"></param>
+        public SQLServerUserConnection(string serverName, string username, string password, string databaseName, int connectionTimeout = 30, OutputManagementSettings errorLogger = null, string additionalConnectionString = null)
         {
             server = serverName;
             user = username;
@@ -41,6 +43,7 @@ namespace DotNetSDB
             port = -1;//This tells the connection builder not to add a port field
             connectionTime = connectionTimeout;
             logger = errorLogger;
+            connectionStringExtra = additionalConnectionString;
         }
 
         /// <summary>
@@ -53,7 +56,8 @@ namespace DotNetSDB
         /// <param name="thePort"></param>
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public SQLServerUserConnection(string serverName, string username, string password, string databaseName, string thePort, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
+        /// <param name="additionalConnectionString"></param>
+        public SQLServerUserConnection(string serverName, string username, string password, string databaseName, string thePort, int connectionTimeout = 30, OutputManagementSettings errorLogger = null, string additionalConnectionString = null)
         {
             server = serverName;
             user = username;
@@ -61,7 +65,8 @@ namespace DotNetSDB
             dbName = databaseName;
             port = Convert.ToInt32(thePort);
             connectionTime = connectionTimeout;
-            logger = errorLogger;            
+            logger = errorLogger;
+            connectionStringExtra = additionalConnectionString;
         }
     }
 
@@ -74,10 +79,9 @@ namespace DotNetSDB
         public string dbName { get; set; }
         public int port { get; set; }
         public int connectionTime { get; set; }
-        
-
         public OutputManagementSettings logger { get; set; }
-        
+        public string connectionStringExtra { get; set; }
+
         /// <summary>
         /// This function is the initialisation for the sql server windows connection class
         /// </summary>
@@ -85,13 +89,15 @@ namespace DotNetSDB
         /// <param name="database"></param>        
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public SQLServerWindowsConnection(string serverName, string database, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
+        /// <param name="additionalConnectionString"></param>
+        public SQLServerWindowsConnection(string serverName, string database, int connectionTimeout = 30, OutputManagementSettings errorLogger = null, string additionalConnectionString = null)
         {
             server = serverName;
             dbName = database;
             port = -1;//This tells the connection builder not to add a port field
             connectionTime = connectionTimeout;
             logger = errorLogger;
+            connectionStringExtra = additionalConnectionString;
         }
 
         /// <summary>
@@ -102,13 +108,15 @@ namespace DotNetSDB
         /// <param name="thePort"></param>
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public SQLServerWindowsConnection(string serverName, string database, string thePort, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
+        /// <param name="additionalConnectionString"></param>
+        public SQLServerWindowsConnection(string serverName, string database, string thePort, int connectionTimeout = 30, OutputManagementSettings errorLogger = null, string additionalConnectionString = null)
         {
             server = serverName;
             dbName = database;
             port = Convert.ToInt32(thePort);
             connectionTime = connectionTimeout;
-            logger = errorLogger;            
+            logger = errorLogger;
+            connectionStringExtra = additionalConnectionString;
         }
     }
 
@@ -126,11 +134,11 @@ namespace DotNetSDB
         {
             if (port == -1)
             {
-                connection = string.Format("Server={0};Database={1};Integrated Security=SSPI;connection timeout={2}", server, db, connectionTime);
+                connection = string.Format("Server={0};Database={1};Integrated Security=SSPI;connection timeout={2};{3}", server, db, connectionTime, (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
             }
             else
             {
-                connection = string.Format("Server={0},{1};Database={2};Integrated Security=SSPI;connection timeout={3}", server, port, db, connectionTime);
+                connection = string.Format("Server={0},{1};Database={2};Integrated Security=SSPI;connection timeout={3};{4}", server, port, db, connectionTime, (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
             }
         }
 
@@ -139,11 +147,11 @@ namespace DotNetSDB
         {
             if (port == -1)
             {
-                connection = string.Format("Server={0};Database={1};User Id={2};Password={3};connection timeout={4}", server, db, user, pwd, connectionTime);
+                connection = string.Format("Server={0};Database={1};User Id={2};Password={3};connection timeout={4};{5}", server, db, user, pwd, connectionTime, (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
             }
             else
             {
-                connection = string.Format("Server={0},{1};Database={2};User Id={3};Password={4};connection timeout={5}", server, port, db, user, pwd, connectionTime);
+                connection = string.Format("Server={0},{1};Database={2};User Id={3};Password={4};connection timeout={5};{6}", server, port, db, user, pwd, connectionTime, (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
             }
         }
         
@@ -161,6 +169,7 @@ namespace DotNetSDB
             port = connectionInformation.port;
             connectionTime = connectionInformation.connectionTime;
             loggerDetails = connectionInformation.logger;
+            connectionStringExtra = connectionInformation.connectionStringExtra;
             isWindowsAuth = false;
 
             //Creates the connection string
@@ -178,6 +187,7 @@ namespace DotNetSDB
             port = connectionInformation.port;
             connectionTime = connectionInformation.connectionTime;
             loggerDetails = connectionInformation.logger;
+            connectionStringExtra = connectionInformation.connectionStringExtra;
             isWindowsAuth = true;
 
             //Creates the connection string

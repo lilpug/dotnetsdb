@@ -9,7 +9,7 @@ namespace DotNetSDB
         /*##########################################*/
 
         //This functions adds the variables ready for compiling the offset query        
-        protected void offset_build_compiling(query3 theQuery, int offset, int fetch)
+        protected void OffsetCompile(Query3 theQuery, int offset, int fetch)
         {
             theQuery.offset = string.Format("OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", offset, fetch);
         }
@@ -33,9 +33,9 @@ namespace DotNetSDB
             {
                 throw new Exception(string.Format("The fetch rows cannot be below zero, yours is currently '{0}'.", numberOfRows.ToString()));
             }
-            query theMain = get_query();
-            query3 theQuery = get_query3();
-            offset_build_compiling(theQuery, offsetRows, numberOfRows);
+            Query theMain = GetQuery();
+            Query3 theQuery = GetQuery3();
+            OffsetCompile(theQuery, offsetRows, numberOfRows);
             theMain.orderList.Add("offset");
         }
     }

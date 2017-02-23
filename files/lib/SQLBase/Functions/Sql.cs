@@ -16,14 +16,14 @@ namespace DotNetSDB
         /// <returns></returns>
         public string add_pure_sql_bind(object values)
         {
-            query current = get_query();
-            object[] holding = add_data(values);
+            Query current = GetQuery();
+            object[] holding = AddData(values);
             if (holding.Length > 1)
             {
                 throw new Exception("add_pure_sql_bind Error: The data your trying to bind is an array not singular, please use the 'add_pure_sql_bind_array' function for this.");
             }
-            current.custom_real_values.Add(holding);
-            return string.Format("{0}_{1}_{2}_0", custom_definition, theQueries.Count.ToString(), (current.custom_real_values.Count - 1).ToString());
+            current.customRealValues.Add(holding);
+            return string.Format("{0}_{1}_{2}_0", customDefinition, theQueries.Count.ToString(), (current.customRealValues.Count - 1).ToString());
         }
 
         /// <summary>
@@ -33,22 +33,22 @@ namespace DotNetSDB
         /// <returns></returns>
         public string[] add_pure_sql_bind_array(object values)
         {
-            query current = get_query();
-            object[] holding = add_data(values);
-            current.custom_real_values.Add(holding);
+            Query current = GetQuery();
+            object[] holding = AddData(values);
+            current.customRealValues.Add(holding);
 
             if (holding.Length > 1)
             {
                 List<string> defs = new List<string>();
                 for (int i = 0; i < holding.Length; i++)
                 {
-                    defs.Add(string.Format("{0}_{1}_{2}_{3}", custom_definition, theQueries.Count.ToString(), (current.custom_real_values.Count - 1).ToString(), i.ToString()));
+                    defs.Add(string.Format("{0}_{1}_{2}_{3}", customDefinition, theQueries.Count.ToString(), (current.customRealValues.Count - 1).ToString(), i.ToString()));
                 }
                 return defs.ToArray();
             }
             else
             {
-                return new string[] { string.Format("{0}_{1}_{2}_0", custom_definition, theQueries.Count.ToString(), (current.custom_real_values.Count - 1).ToString()) };
+                return new string[] { string.Format("{0}_{1}_{2}_0", customDefinition, theQueries.Count.ToString(), (current.customRealValues.Count - 1).ToString()) };
             }
         }
 
@@ -69,9 +69,9 @@ namespace DotNetSDB
         /// <param name="sqlQuery"></param>
         public void add_pure_sql(string sqlQuery)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            theQuery.pure_sql.Add(sqlQuery);
+            theQuery.pureSql.Add(sqlQuery);
             theQuery.orderList.Add("pure_sql");
         }
 
@@ -82,8 +82,8 @@ namespace DotNetSDB
         /// <param name="sqlQuery"></param>
         public void add_start_sql_wrapper(string sqlQuery)
         {
-            query theQuery = get_query();
-            theQuery.sql_start_wrapper = sqlQuery;
+            Query theQuery = GetQuery();
+            theQuery.sqlStartWrapper = sqlQuery;
         }
 
         /// <summary>
@@ -93,8 +93,8 @@ namespace DotNetSDB
         /// <param name="sqlQuery"></param>
         public void add_end_sql_wrapper(string sqlQuery)
         {
-            query theQuery = get_query();
-            theQuery.sql_end_wrapper = sqlQuery;
+            Query theQuery = GetQuery();
+            theQuery.sqlEndWrapper = sqlQuery;
         }
     }
 }

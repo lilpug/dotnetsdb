@@ -53,7 +53,7 @@ namespace DotNetSDB.Connector
             }
         }
 
-        internal void mysqlCore(MysqlCore mysqlDb)
+        internal void mysqlCore(MySLQCore mysqlDb)
         {
             if (mysql.is_alive())
             {

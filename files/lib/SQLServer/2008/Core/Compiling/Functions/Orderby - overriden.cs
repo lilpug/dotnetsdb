@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace DotNetSDB
 {
     public partial class SqlServer2008 : SqlServerCore
@@ -9,11 +8,11 @@ namespace DotNetSDB
         /*##########################################*/
 
         //Overrides the order by base function to add the orderby statement into the query3 object for the limit capability later
-        protected override void CompileOrderBy(query current)
+        protected override void CompileOrderBy(Query current)
         {
-            string orderby = " ORDER BY " + String.Join(", ", current.orderby_fields).TrimEnd(',') + " ";
+            string orderby = string.Format(" ORDER BY {0} ", string.Join(", ", current.orderbyFields).TrimEnd(','));
             //This does not use the number as there can only be one main select for a query
-            compiled_build += orderby;
+            compiledSql += orderby;
 
             /* Extra Code Start */
             //Gets the index of the current query we are on
@@ -21,7 +20,7 @@ namespace DotNetSDB
             theQueries3[index].orderby = orderby;
             /* Extra Code End */
 
-            current.orderby_fields.Clear();
+            current.orderbyFields.Clear();
         }
     }
 }

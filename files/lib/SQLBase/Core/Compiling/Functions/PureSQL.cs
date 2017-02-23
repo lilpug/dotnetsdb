@@ -6,10 +6,10 @@
         /*        Compiling Pure Sql functions      */
         /*##########################################*/
 
-        protected virtual void CompilePureSQL(query current)
+        protected virtual void CompilePureSQL(Query current)
         {
-            compiled_build += " " + current.pure_sql[0];
-            current.pure_sql.RemoveAt(0);
+            compiledSql += string.Format(" {0}", current.pureSql[0]);
+            current.pureSql.RemoveAt(0);
         }
     }
 }

@@ -6,9 +6,9 @@
         /*          Compiling Offset functions      */
         /*##########################################*/
 
-        protected virtual void CompileOffset(query3 current)
+        protected virtual void CompileOffset(Query3 current)
         {
-            compiled_build += " " + current.offset;
+            compiledSql += string.Format(" {0}", current.offset);
             current.offset = "";
         }
     }

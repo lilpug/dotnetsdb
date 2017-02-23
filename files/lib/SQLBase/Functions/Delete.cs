@@ -8,7 +8,7 @@ namespace DotNetSDB
         /*        Delete Validation functions       */
         /*##########################################*/
 
-        protected void delete_single_validation(string tableName)
+        protected void DeleteSingleValidation(string tableName)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
@@ -16,7 +16,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void delete_exist_validation(query theQuery)
+        protected void DeleteExistsValidation(Query theQuery)
         {
             if (theQuery.orderList.Contains("delete"))
             {
@@ -34,14 +34,14 @@ namespace DotNetSDB
         /// <param name="tableName"></param>
         public virtual void add_delete(string tableName)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            delete_exist_validation(theQuery);
+            DeleteExistsValidation(theQuery);
 
-            delete_single_validation(tableName);
+            DeleteSingleValidation(tableName);
 
             //Adds the delete table to the query
-            theQuery.delete_table = tableName;
+            theQuery.deleteTable = tableName;
 
             //Adds the command
             theQuery.orderList.Add("delete");

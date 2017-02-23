@@ -12,7 +12,7 @@ namespace DotNetSDB
             //Runs the base first then executes the extras
             base.ExtraDispose();
 
-            foreach (query3 q in theQueries3)
+            foreach (Query3 q in theQueries3)
             {
                 q.Dispose();
             }

@@ -9,42 +9,43 @@ namespace DotNetSDB
         /*##########################################*/
 
         //This function builds the fields for the select statement
-        protected void add_new_fields(query the_query, string table_name, string select_field, string select_start_field = null, string select_end_field = null)
+        protected void SelectCompile(Query theQuery, string tableName, string selectField, string startField = null, string endField = null)
         {
-            select_single_validation(table_name);
+            SelectSingleValidation(tableName);
 
             //Checks if there is any select fields
-            if (select_field != null)
+            if (selectField != null)
             {
                 //Checks if the sizes are not the same and if not returns a false
                 if (
-                    (select_start_field != null && select_end_field != null) &&
-                    ((!string.IsNullOrWhiteSpace(select_start_field) && string.IsNullOrWhiteSpace(select_end_field)) || (string.IsNullOrWhiteSpace(select_start_field) && !string.IsNullOrWhiteSpace(select_end_field)))
+                    (startField != null && endField != null) &&
+                    ((!string.IsNullOrWhiteSpace(startField) && string.IsNullOrWhiteSpace(endField)) || 
+                     (string.IsNullOrWhiteSpace(startField) && !string.IsNullOrWhiteSpace(endField)))
                     )
                 {
                     throw new Exception("Select Error: When using a start or end parameter you must supply both");
                 }
 
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(the_query.select_table) && !string.IsNullOrWhiteSpace(table_name))
+                if (string.IsNullOrWhiteSpace(theQuery.selectTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    the_query.select_table = table_name;
+                    theQuery.selectTable = tableName;
                 }
 
                 string temp_build = "";
 
                 //Builds the string
-                if (select_start_field != null && select_end_field != null)
+                if (startField != null && endField != null)
                 {
-                    temp_build += string.Format("{0} {1}.{2} {3}", select_start_field, table_name, select_field, select_end_field);
+                    temp_build += string.Format("{0} {1}.{2} {3}", startField, tableName, selectField, endField);
                 }
                 else
                 {
-                    temp_build += string.Format("{0}.{1}", table_name, select_field);
+                    temp_build += string.Format("{0}.{1}", tableName, selectField);
                 }
 
-                the_query.select_fields.Add(temp_build);
+                theQuery.selectFields.Add(temp_build);
             }
             else
             {
@@ -52,31 +53,31 @@ namespace DotNetSDB
             }
         }
 
-        protected void add_new_fields(query the_query, string table_name, string[] select_fields, string[] select_start_fields = null, string[] select_end_fields = null)
+        protected void SelectCompile(Query theQuery, string tableName, string[] selectFields, string[] startFields = null, string[] endFields = null)
         {
-            select_single_validation(table_name);
+            SelectSingleValidation(tableName);
 
             //Checks if there is any select fields
-            if (select_fields != null)
+            if (selectFields != null)
             {
                 //Checks if the sizes are not the same and if not returns a false
                 if (
-                    (select_start_fields != null && select_end_fields != null) &&
-                    (select_fields.Length != select_start_fields.Length || select_fields.Length != select_end_fields.Length)
+                    (startFields != null && endFields != null) &&
+                    (selectFields.Length != startFields.Length || selectFields.Length != endFields.Length)
                     )
                 {
                     throw new Exception("Select Error: When using multiple start or end parameters you must supply an equal amount of both");
                 }
 
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(the_query.select_table) && !string.IsNullOrWhiteSpace(table_name))
+                if (string.IsNullOrWhiteSpace(theQuery.selectTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    the_query.select_table = table_name;
+                    theQuery.selectTable = tableName;
                 }
 
                 string temp_build = "";
-                for (int i = 0; i < select_fields.Length; i++)
+                for (int i = 0; i < selectFields.Length; i++)
                 {
                     //Determines if there should be a comma
                     string seperator = "";
@@ -86,16 +87,16 @@ namespace DotNetSDB
                     }
 
                     //Builds the string
-                    if (select_start_fields != null && select_end_fields != null)
+                    if (startFields != null && endFields != null)
                     {
-                        temp_build += string.Format("{0}{1} {2}.{3} {4}", seperator, select_start_fields[i], table_name, select_fields[i], select_end_fields[i]);
+                        temp_build += string.Format("{0}{1} {2}.{3} {4}", seperator, startFields[i], tableName, selectFields[i], endFields[i]);
                     }
                     else
                     {
-                        temp_build += string.Format("{0}{1}.{2}", seperator, table_name, select_fields[i]);
+                        temp_build += string.Format("{0}{1}.{2}", seperator, tableName, selectFields[i]);
                     }
                 }
-                the_query.select_fields.Add(temp_build);
+                theQuery.selectFields.Add(temp_build);
             }
             else
             {
@@ -107,7 +108,7 @@ namespace DotNetSDB
         /*       Select Validation functions        */
         /*##########################################*/
 
-        protected void select_single_validation(string tableName)
+        protected void SelectSingleValidation(string tableName)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
@@ -115,7 +116,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void select_not_exist_validation(query theQuery)
+        protected void SelectNotExistValidation(Query theQuery)
         {
             if (!theQuery.orderList.Contains("select"))
             {
@@ -123,7 +124,7 @@ namespace DotNetSDB
             }
         }
 
-        protected void select_exist_validation(query theQuery)
+        protected void SelectExistValidation(Query theQuery)
         {
             if (theQuery.orderList.Contains("select"))
             {
@@ -141,61 +142,61 @@ namespace DotNetSDB
         /// <param name="distinct"></param>
         public void is_distinct(bool distinct)
         {
-            query theQuery = get_query();
-            theQuery.is_dinstinct = distinct;
+            Query theQuery = GetQuery();
+            theQuery.isDistinct = distinct;
         }
 
         /// <summary>
         /// This functions adds an additional select field to a select statement
         /// </summary>
-        /// <param name="table_name"></param>
-        /// <param name="select_fields"></param>
-        /// <param name="select_start_fields"></param>
-        /// <param name="select_end_fields"></param>
-        public void add_select_fields(string table_name, string select_field, string select_start_field = null, string select_end_field = null)
+        /// <param name="tableName"></param>
+        /// <param name="selectField"></param>
+        /// <param name="startField"></param>
+        /// <param name="endField"></param>
+        public void add_select_fields(string tableName, string selectField, string startField = null, string endField = null)
         {
             //Obtains the current query object
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            select_not_exist_validation(theQuery);
+            SelectNotExistValidation(theQuery);
 
             //Builds the select_fields sql
-            add_new_fields(theQuery, table_name, select_field, select_start_field, select_end_field);
+            SelectCompile(theQuery, tableName, selectField, startField, endField);
         }
 
         /// <summary>
         /// This functions adds additional select fields to a select statement
         /// </summary>
-        /// <param name="table_name"></param>
-        /// <param name="select_fields"></param>
-        /// <param name="select_start_fields"></param>
-        /// <param name="select_end_fields"></param>
-        public void add_select_fields(string table_name, string[] select_fields, string[] select_start_fields = null, string[] select_end_fields = null)
+        /// <param name="tableName"></param>
+        /// <param name="selectFields"></param>
+        /// <param name="startFields"></param>
+        /// <param name="endFields"></param>
+        public void add_select_fields(string tableName, string[] selectFields, string[] startFields = null, string[] endFields = null)
         {
             //Obtains the current query object
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            select_not_exist_validation(theQuery);
+            SelectNotExistValidation(theQuery);
 
             //Builds the select_fields sql
-            add_new_fields(theQuery, table_name, select_fields, select_start_fields, select_end_fields);
+            SelectCompile(theQuery, tableName, selectFields, startFields, endFields);
         }
 
         /// <summary>
         /// This functions adds a select statement
         /// </summary>
-        /// <param name="table_name"></param>
-        /// <param name="select_fields"></param>
-        /// <param name="select_start_fields"></param>
-        /// <param name="select_end_fields"></param>
-        public void add_select(string table_name, string select_field, string select_start_field = null, string select_end_field = null)
+        /// <param name="tableName"></param>
+        /// <param name="selectField"></param>
+        /// <param name="startField"></param>
+        /// <param name="endField"></param>
+        public void add_select(string tableName, string selectField, string startField = null, string endField = null)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            select_exist_validation(theQuery);
+            SelectExistValidation(theQuery);
 
             //Builds the select_fields sql
-            add_new_fields(theQuery, table_name, select_field, select_start_field, select_end_field);
+            SelectCompile(theQuery, tableName, selectField, startField, endField);
 
             //Adds the command
             theQuery.orderList.Add("select");
@@ -204,18 +205,18 @@ namespace DotNetSDB
         /// <summary>
         /// This functions adds a select statement
         /// </summary>
-        /// <param name="table_name"></param>
-        /// <param name="select_fields"></param>
-        /// <param name="select_start_fields"></param>
-        /// <param name="select_end_fields"></param>
-        public void add_select(string table_name, string[] select_fields, string[] select_start_fields = null, string[] select_end_fields = null)
+        /// <param name="tableName"></param>
+        /// <param name="selectFields"></param>
+        /// <param name="startFields"></param>
+        /// <param name="endFields"></param>
+        public void add_select(string tableName, string[] selectFields, string[] startFields = null, string[] endFields = null)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            select_exist_validation(theQuery);
+            SelectExistValidation(theQuery);
 
             //Builds the select_fields sql
-            add_new_fields(theQuery, table_name, select_fields, select_start_fields, select_end_fields);
+            SelectCompile(theQuery, tableName, selectFields, startFields, endFields);
 
             //Adds the command
             theQuery.orderList.Add("select");

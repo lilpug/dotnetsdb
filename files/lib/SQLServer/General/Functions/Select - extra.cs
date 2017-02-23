@@ -7,7 +7,6 @@
         /*##########################################*/
 
         //This function sets the top flag with the specified parameter
-        //Note: THIS FUNCTION IS A SQL SERVER ONLY!
 
         /// <summary>
         /// This function adds a top to the select statement
@@ -16,8 +15,8 @@
         public void add_select_top(int topValue)
         {
             //Obtains the current query object
-            query2 theQuery = get_query2();
-            theQuery.select_top = topValue;
+            Query2 theQuery = GetQuery2();
+            theQuery.selectTop = topValue;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace DotNetSDB.Connector
         public SqlServer2014 sqlserver2014;
         public SqlServer2012 sqlserver2012;
         public SqlServer2008 sqlserver2008;
-        public MysqlCore mysql;
+        public MySLQCore mysql;
 
         //Constructor for determining which database connection has been passed
         public DatabaseConnector(object dbObject)
@@ -30,9 +30,9 @@ namespace DotNetSDB.Connector
             {
                 SqlServer2008((SqlServer2008)dbObject);
             }
-            else if (dbObject.GetType() == typeof(MysqlCore))
+            else if (dbObject.GetType() == typeof(MySLQCore))
             {
-                mysqlCore((MysqlCore)dbObject);
+                mysqlCore((MySLQCore)dbObject);
             }
             else
             {

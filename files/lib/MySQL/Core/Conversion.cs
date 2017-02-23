@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DotNetSDB
 {
-    public partial class MysqlCore
+    public partial class MySLQCore
     {
         /*##########################################*/
         /*        Data Conversion functions         */
@@ -16,7 +16,7 @@ namespace DotNetSDB
 
         //This functions takes the resulting data and converts it into a json format string
         //Note: http://jsonformatter.curiousconcept.com/
-        protected virtual string result_conversion_json(ref MySqlDataReader myReader)
+        protected virtual string ResultToJson(ref MySqlDataReader myReader)
         {
             StringBuilder sb = new StringBuilder();
             if (myReader == null || myReader.FieldCount == 0)
@@ -35,8 +35,8 @@ namespace DotNetSDB
 
                 for (int i = 0; i < myReader.FieldCount; i++)
                 {
-                    sb.Append("\"" + myReader.GetName(i) + "\":");
-                    sb.Append("\"" + myReader[i] + "\"");
+                    sb.Append(string.Format("\"{0}\":", myReader.GetName(i)));
+                    sb.Append(string.Format("\"{0}\"", myReader[i]));
 
                     sb.Append(i == myReader.FieldCount - 1 ? "" : ",");
                 }
@@ -53,25 +53,26 @@ namespace DotNetSDB
             }
 
             //Adds the column information section:
-            sb.Append("],\"columns\": { \"count\": " + myReader.FieldCount + ", \"names\": [");
+            sb.Append(string.Format("],\"columns\": { \"count\": {0}, \"names\": [", myReader.FieldCount));
             for (int i = 0; i < myReader.FieldCount; i++)
             {
                 if (i == myReader.FieldCount - 1)
                 {
-                    sb.Append("\"" + myReader.GetName(i) + "\"");
+                    sb.Append(string.Format("\"{0}\"", myReader.GetName(i)));
                 }
                 else
                 {
-                    sb.Append("\"" + myReader.GetName(i) + "\",");
+                    sb.Append(string.Format("\"{0}\",", myReader.GetName(i)));
                 }
             }
-            sb.Append("]}, \"result_count\": " + rowCount + "}");
+
+            sb.Append(string.Format("]}, \"result_count\": {0} }", rowCount));
 
             return sb.ToString();
         }
 
         //This function takes the first result value and returns it as a string
-        protected virtual string result_conversion_string(ref MySqlDataReader myReader)
+        protected virtual string ResultToString(ref MySqlDataReader myReader)
         {
             //Puts the first output into a string
             string value = null;
@@ -83,7 +84,7 @@ namespace DotNetSDB
         }
 
         //This functions takes the resulting data and converts it into a dataTable format
-        protected DataTable result_conversion_datatable(ref MySqlDataReader myReader)
+        protected DataTable ResultToDataTable(ref MySqlDataReader myReader)
         {
             DataTable main_store = new DataTable();
             //Loads the data into a datatable format
@@ -92,7 +93,7 @@ namespace DotNetSDB
         }
 
         //This functions takes the resulting data and converts it into a dataset format
-        protected DataSet result_conversion_dataset(ref MySqlDataAdapter myAdapter, bool enforceConstraints)
+        protected DataSet ResultToDataSet(ref MySqlDataAdapter myAdapter, bool enforceConstraints)
         {
             DataSet ds = new DataSet();
 
@@ -106,7 +107,7 @@ namespace DotNetSDB
         }
 
         //This function takes the resulting data and puts every first row value into an array
-        protected string[] result_conversion_string_array(ref MySqlDataReader myReader)
+        protected string[] ResultToStringArray(ref MySqlDataReader myReader)
         {
             List<string> ls = new List<string>();
 
@@ -119,7 +120,7 @@ namespace DotNetSDB
         }
 
         //This functions takes the resulting data and converts it into a list of dynamic class objects
-        protected List<dynamic> result_conversion_dynamic(ref MySqlDataReader myReader)
+        protected List<dynamic> ResultToDynamic(ref MySqlDataReader myReader)
         {
             //Builds the temporary storage object
             List<dynamic> temp = new List<dynamic>();

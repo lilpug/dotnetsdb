@@ -11,7 +11,7 @@ namespace DotNetSDB
 
         //This function looks at the data and if a cast exception is thrown it then uses a different approach to be able to type cast it correctly
         //Note: This is done as string[] will type cast normally but elements like byte[] will not the index's do not match
-        protected virtual object[] add_data(object data)
+        protected virtual object[] AddData(object data)
         {
             object[] results;
 

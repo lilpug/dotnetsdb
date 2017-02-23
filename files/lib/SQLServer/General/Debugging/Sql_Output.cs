@@ -1,6 +1,6 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace DotNetSDB
 {
@@ -11,10 +11,10 @@ namespace DotNetSDB
         /*##########################################*/
 
         /// <summary>
-        /// This function returns the sql query which will be built on run
+        /// This function returns the sql query which will be built on a run function
         /// </summary>
         /// <returns></returns>
-        public string sql_real_output()
+        public string return_compiled_sql_string()
         {
             try
             {
@@ -22,19 +22,18 @@ namespace DotNetSDB
                 compiling(true);
 
                 //gets the query ready and wraps the query in the deadlock solution
-                SqlCommand myCommand = new SqlCommand(compiled_build, myConnection);
+                SqlCommand myCommand = new SqlCommand(compiledSql, myConnection);
 
                 //Checks for sanitisation
-                sanitisation_create(ref myCommand);
+                SanitisationProcess(ref myCommand);
 
                 //Gets the query
                 string query = myCommand.CommandText;
 
                 //Loops over the parameters and outputs their real values
                 foreach (SqlParameter p in myCommand.Parameters)
-                {
-                    //query = query.Replace(p.ParameterName, ParameterValueForSQL(p));
-                    query = ReplaceFirst(query, p.ParameterName, ParameterValueForSQL(p));
+                {   
+                    query = ReplaceOccurrences(query, p.ParameterName, ParameterValueForSQL(p));
                 }
 
                 return query;
@@ -42,18 +41,13 @@ namespace DotNetSDB
             catch { }
             return null;
         }
-
-        private string ReplaceFirst(string text, string search, string replace)
+        
+        protected string ReplaceOccurrences(string text, string search, string replace)
         {
-            int pos = text.IndexOf(search);
-            if (pos < 0)
-            {
-                return text;
-            }
-            return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
+            return Regex.Replace(text, @"" + search + "+", replace);
         }
 
-        protected string already_compiled_sql_output(ref SqlCommand myCommand)
+        protected string GetCompiledSqlFromCommand(ref SqlCommand myCommand)
         {
             try
             {
@@ -63,7 +57,7 @@ namespace DotNetSDB
                 //Loops over the parameters and outputs their real values
                 foreach (SqlParameter p in myCommand.Parameters)
                 {
-                    query = query.Replace(p.ParameterName, ParameterValueForSQL(p));
+                    query = ReplaceOccurrences(query, p.ParameterName, ParameterValueForSQL(p));
                 }
 
                 return query;
@@ -73,9 +67,9 @@ namespace DotNetSDB
         }
 
         //This returns the parameters value in the specific format
-        private String ParameterValueForSQL(SqlParameter sp)
+        protected string ParameterValueForSQL(SqlParameter sp)
         {
-            String retval = "";
+            string retval = "";
 
             switch (sp.SqlDbType)
             {
@@ -107,9 +101,9 @@ namespace DotNetSDB
         }
 
         //This deals with boolean and bit values
-        private Boolean ToBooleanOrDefault(Object o)
+        protected bool ToBooleanOrDefault(object o)
         {
-            Boolean ReturnVal = false;
+            bool ReturnVal = false;
             try
             {
                 if (o != null)
@@ -132,7 +126,7 @@ namespace DotNetSDB
                             break;
 
                         default:
-                            ReturnVal = Boolean.Parse(o.ToString());
+                            ReturnVal = bool.Parse(o.ToString());
                             break;
                     }
                 }

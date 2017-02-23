@@ -8,7 +8,7 @@ namespace DotNetSDB
         /*          Compiling Insert functions      */
         /*##########################################*/
 
-        protected override void CompileInsert(query current)
+        protected override void CompileInsert(Query current)
         {
             string fields = "";
             string values = "";
@@ -16,27 +16,27 @@ namespace DotNetSDB
             //Adds the data to be outputted if required
             string returnInsert = "";
             int index = theQueries.IndexOf(current);
-            if (theQueries2[index].insert_return)
+            if (theQueries2[index].insertReturn)
             {
                 returnInsert = " OUTPUT INSERTED.* ";
-                theQueries2[index].insert_return = false;
+                theQueries2[index].insertReturn = false;
             }
 
-            if (current.insert_fields.Count > 0)
+            if (current.insertFields.Count > 0)
             {
-                fields = string.Format(" ( {0} ) ", string.Join(",", current.insert_fields));
+                fields = string.Format(" ( {0} ) ", string.Join(",", current.insertFields));
             }
 
-            if (current.insert_values.Count > 0)
+            if (current.insertValues.Count > 0)
             {
-                values = string.Format(" VALUES ({0}) ", string.Join("),(", current.insert_values));
+                values = string.Format(" VALUES ({0}) ", string.Join("),(", current.insertValues));
             }
 
-            compiled_build += string.Format(" INSERT INTO  {0}{1}{2}{3}", current.insert_table_name, fields, returnInsert, values);
+            compiledSql += string.Format(" INSERT INTO  {0}{1}{2}{3}", current.insertTableName, fields, returnInsert, values);
 
-            current.insert_table_name = "";
-            current.insert_fields.Clear();
-            current.insert_values.Clear();
+            current.insertTableName = "";
+            current.insertFields.Clear();
+            current.insertValues.Clear();
         }
     }
 }

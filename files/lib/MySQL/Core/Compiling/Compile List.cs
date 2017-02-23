@@ -1,9 +1,9 @@
 ﻿namespace DotNetSDB
 {
-    public partial class MysqlCore
+    public partial class MySLQCore
     {
         //Hooks into the extra compiling function so we can run the extra compiling features for query2
-        protected override void ExtraCompileList(query current, string key)
+        protected override void ExtraCompileList(Query current, string key)
         {
             //Runs the base first then executes the extras
             base.ExtraCompileList(current, key);

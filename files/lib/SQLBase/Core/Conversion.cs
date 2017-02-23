@@ -14,7 +14,7 @@ namespace DotNetSDB
         /*##########################################*/
 
         //This function returns a raw string from a datatable using the specified parameters
-        protected string datatable_conversion_raw_output(DataTable dt, string delimiter = ",")
+        protected string DataTableToRawString(DataTable dt, string delimiter = ",")
         {
             //Initialises the string builder
             StringBuilder sb = new StringBuilder();
@@ -42,7 +42,7 @@ namespace DotNetSDB
         }
 
         //This function creates a csv file from a datatable using the specified parameters
-        protected bool datatable_conversion_csv(DataTable dt, string fullFilePath, string delimiter = ",")
+        protected bool DataTableToCSV(DataTable dt, string fullFilePath, string delimiter = ",")
         {
             //Checks to ensure the parent directory exists
             if (Directory.Exists(Path.GetDirectoryName(fullFilePath)))
@@ -55,7 +55,7 @@ namespace DotNetSDB
                 }
 
                 //Gets the raw datatable output
-                string rawOutput = datatable_conversion_raw_output(dt, delimiter);
+                string rawOutput = DataTableToRawString(dt, delimiter);
 
                 //Creates the file
                 return CreateFile(string.Format(@"{0}\{1}{2}", Path.GetDirectoryName(fullFilePath), Path.GetFileNameWithoutExtension(fullFilePath), extension), rawOutput);
@@ -65,7 +65,7 @@ namespace DotNetSDB
         }
 
         //This function appends to an existing csv file from a datatable using the specified parameters
-        protected bool datatable_conversion_append_csv(DataTable dt, string fullFilePath, string delimiter = ",")
+        protected bool DataTableAppendCSV(DataTable dt, string fullFilePath, string delimiter = ",")
         {
             //Adds the csv extension if one has not been supplied in the file path
             string extension = Path.GetExtension(fullFilePath);
@@ -78,7 +78,7 @@ namespace DotNetSDB
             if (File.Exists(string.Format(@"{0}\{1}{2}", Path.GetDirectoryName(fullFilePath), Path.GetFileNameWithoutExtension(fullFilePath), extension)))
             {
                 //Gets the raw datatable output
-                string rawOutput = datatable_conversion_raw_output(dt, delimiter);
+                string rawOutput = DataTableToRawString(dt, delimiter);
 
                 //Creates the file
                 return AppendFile(string.Format(@"{0}\{1}{2}", Path.GetDirectoryName(fullFilePath), Path.GetFileNameWithoutExtension(fullFilePath), extension), rawOutput);

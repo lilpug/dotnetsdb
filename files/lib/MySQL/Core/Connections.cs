@@ -16,8 +16,10 @@ namespace DotNetSDB
         public string dbName { get; set; }
         public int port { get; set; }
         public int connectionTime { get; set; }
-
         public OutputManagementSettings logger { get; set; }
+        public string connectionStringExtra { get; set; }
+
+        
 
         /// <summary>
         /// This function is the initialisation for the mysql user connection class
@@ -28,7 +30,8 @@ namespace DotNetSDB
         /// <param name="databaseName"></param>
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public MySQLUserConnection(string serverName, string username, string password, string databaseName, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
+        /// <param name="additionalConnectionString"></param>
+        public MySQLUserConnection(string serverName, string username, string password, string databaseName, int connectionTimeout = 30, OutputManagementSettings errorLogger = null, string additionalConnectionString = null)
         {
             server = serverName;
             user = username;
@@ -37,6 +40,7 @@ namespace DotNetSDB
             port = -1;//This tells the connection builder not to add a port field
             connectionTime = connectionTimeout;
             logger = errorLogger;
+            connectionStringExtra = additionalConnectionString;
         }
 
         /// <summary>
@@ -49,7 +53,8 @@ namespace DotNetSDB
         /// <param name="thePort"></param>
         /// <param name="connectionTimeout"></param>
         /// <param name="errorLogger"></param>
-        public MySQLUserConnection(string serverName, string username, string password, string databaseName, string thePort, int connectionTimeout = 30, OutputManagementSettings errorLogger = null)
+        /// <param name="additionalConnectionString"></param>
+        public MySQLUserConnection(string serverName, string username, string password, string databaseName, string thePort, int connectionTimeout = 30, OutputManagementSettings errorLogger = null, string additionalConnectionString = null)
         {
             server = serverName;
             user = username;
@@ -58,11 +63,12 @@ namespace DotNetSDB
             port = Convert.ToInt32(thePort);
             connectionTime = connectionTimeout;
             logger = errorLogger;
+            connectionStringExtra = additionalConnectionString;
         }
     }
 
     //sql_server_database class (the IDispossible allows the class to be used with using statements)
-    public partial class MysqlCore
+    public partial class MySLQCore
     {
         /*######################################################*/
         /*    Database Connection String Compiling functions    */
@@ -73,11 +79,11 @@ namespace DotNetSDB
         {
             if (port == -1)
             {
-                connection = string.Format("Server={0};Database={1};UId={2};Pwd={3};Connection Timeout={4};AllowZeroDateTime=true;ConvertZeroDatetime=True", server, db, user, pwd, connectionTime.ToString());
+                connection = string.Format("Server={0};Database={1};UId={2};Pwd={3};Connection Timeout={4};AllowZeroDateTime=true;ConvertZeroDatetime=True;{5}", server, db, user, pwd, connectionTime.ToString(), (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
             }
             else
             {
-                connection = string.Format("Server={0},{1};Database={2};UId={3};Pwd={4};Connection Timeout={5};AllowZeroDateTime=true;ConvertZeroDatetime=True", server, port, db, user, pwd, connectionTime.ToString());
+                connection = string.Format("Server={0},{1};Database={2};UId={3};Pwd={4};Connection Timeout={5};AllowZeroDateTime=true;ConvertZeroDatetime=True;{5}", server, port, db, user, pwd, connectionTime.ToString(), (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
             }
         }
        
@@ -85,7 +91,7 @@ namespace DotNetSDB
         /*      Database connection functions       */
         /*##########################################*/
 
-        public MysqlCore(MySQLUserConnection connectionInformation)
+        public MySLQCore(MySQLUserConnection connectionInformation)
         {
             //Sets the connection string
             db = connectionInformation.dbName;
@@ -95,12 +101,13 @@ namespace DotNetSDB
             port = connectionInformation.port;
             connectionTime = connectionInformation.connectionTime;
             loggerDetails = connectionInformation.logger;
+            connectionStringExtra = connectionInformation.connectionStringExtra;
 
             //Creates the connection string
             SqlAuthConnectionString();
 
             //Initialises the connection
-            connectionInit();
+            ConnectionInit();
         }
 
         //This function checks to see if the connection information allows connections or not
@@ -125,7 +132,7 @@ namespace DotNetSDB
         /*    Database connection Initialisation    */
         /*##########################################*/
 
-        private void connectionInit()
+        private void ConnectionInit()
         {
             //Trys to connect to see if it will work
             try

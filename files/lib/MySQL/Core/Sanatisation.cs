@@ -3,14 +3,15 @@ using System;
 
 namespace DotNetSDB
 {
-    public partial class MysqlCore
+    public partial class MySLQCore
     {
         /*##########################################*/
         /*     Sanitisation Compiling functions     */
         /*##########################################*/
 
-        protected virtual void sanitisation(string definition, ref MySqlCommand command, params object[] items)
+        protected virtual void SanitiseItems(string definition, ref MySqlCommand command, params object[] items)
         {
+            //Note: We do this here and in a foreach so if we get any errors we can build the error definition section in the exception.
             int counter = -1;
 
             try
@@ -19,12 +20,14 @@ namespace DotNetSDB
                 {
                     counter++;
 
-                    command.Parameters.AddWithValue(definition + counter.ToString(), ((data == null) ? DBNull.Value : data));
+                    var newDefinition = string.Format("{0}{1}", definition, counter.ToString());
+
+                    command.Parameters.AddWithValue(newDefinition, ((data == null) ? DBNull.Value : data));
                     if (data != null)
                     {
                         using (MySqlTypeConvertor convertor = new MySqlTypeConvertor())
                         {
-                            command.Parameters[definition + counter.ToString()].MySqlDbType = convertor.ToSqlDbType(data.GetType());
+                            command.Parameters[newDefinition].MySqlDbType = convertor.ToSqlDbType(data.GetType());
                         }
                     }                    
                 }
@@ -36,60 +39,46 @@ namespace DotNetSDB
         }
 
         //This function processes all the different sanitisations that have been declared
-        protected void sanitisation_create(ref MySqlCommand command)
+        protected void SanitisationProcess(ref MySqlCommand command)
         {
             //The definition is broken into the following numbers:-
             //Operator definition, query number, operator number, value number
 
-            int queryCounter = 1;
-
             //This loops through all the querys checking the values sanitize correctly
-            foreach (query current in theQueries)
+            for(int qc=0; qc<theQueries.Count; qc++)
             {
-                //The counter is used for linking the parameters with the correct definitions
-                int operatorCounter = 0;
+                Query current = theQueries[qc];
 
-                if (current.where_real_values.Count != 0)
+                if (current.whereRealValues.Count != 0)
                 {
-                    operatorCounter = 0;
-
-                    foreach (object[] values in current.where_real_values)
+                    for(int i=0; i<current.whereRealValues.Count; i++)
                     {
-                        sanitisation(where_definition + "_" + queryCounter.ToString() + "_" + operatorCounter.ToString() + "_", ref command, values);
-                        operatorCounter++;
+                        SanitiseItems(string.Format("{0}_{1}_{2}_", whereDefinition, qc.ToString(), i.ToString()), ref command, current.whereRealValues[i]);
                     }
                 }
 
-                if (current.update_real_values.Count != 0)
+                if (current.updateRealValues.Count != 0)
                 {
-                    operatorCounter = 0;
-
-                    foreach (object[] values in current.update_real_values)
+                    for(int i=0; i<current.updateRealValues.Count; i++)
                     {
-                        sanitisation(update_definition + "_" + queryCounter.ToString() + "_" + operatorCounter.ToString() + "_", ref command, values);
-                        operatorCounter++;
+                        SanitiseItems(string.Format("{0}_{1}_{2}_", updateDefinition, qc.ToString(), i.ToString()), ref command, current.updateRealValues[i]);                        
                     }
                 }
 
-                if (current.insert_real_values.Count != 0)
-                {
-                    operatorCounter = 0;
-
-                    foreach (object[] values in current.insert_real_values)
-                    {
-                        sanitisation(insert_definition + "_" + queryCounter.ToString() + "_" + operatorCounter.ToString() + "_", ref command, values);
-                        operatorCounter++;
+                if (current.insertRealValues.Count != 0)
+                {   
+                    for(int i=0; i< current.insertRealValues.Count; i++)
+                    {   
+                        SanitiseItems(string.Format("{0}_{1}_{2}_", insertDefinition, qc.ToString(), i.ToString()), ref command, current.insertRealValues[i]);
+                        
                     }
                 }
 
-                if (current.custom_real_values.Count != 0)
+                if (current.customRealValues.Count != 0)
                 {
-                    operatorCounter = 0;
-
-                    foreach (object[] values in current.custom_real_values)
+                    for(int i=0; i< current.customRealValues.Count; i++)
                     {
-                        sanitisation(custom_definition + "_" + queryCounter.ToString() + "_" + operatorCounter.ToString() + "_", ref command, values);
-                        operatorCounter++;
+                        SanitiseItems(string.Format("{0}_{1}_{2}_", customDefinition, qc.ToString(), i.ToString()), ref command, current.customRealValues[i]);
                     }
                 }
 
@@ -99,23 +88,21 @@ namespace DotNetSDB
                 int index = theQueries.IndexOf(current);
                 if (theQueries2[index].exist_real_table_value != null && theQueries2[index].exist_real_table_value.Length > 0)
                 {
-                    sanitisation(exist_definition + "_" + queryCounter.ToString() + "_" + "0" + "_", ref command, theQueries2[index].exist_real_table_value);
+                    SanitiseItems(string.Format("{0}_{1}_0_", existDefinition, qc.ToString()), ref command, theQueries2[index].exist_real_table_value);
                 }
 
                 if (theQueries2[index].get_fields_real_table_value != null && theQueries2[index].get_fields_real_table_value.Length > 0)
                 {
-                    sanitisation(fields_definition + "_" + queryCounter.ToString() + "_" + "0" + "_", ref command, theQueries2[index].get_fields_real_table_value);
+                    SanitiseItems(string.Format("{0}_{1}_0_", fieldsDefinition, qc.ToString()), ref command, theQueries2[index].get_fields_real_table_value);
                 }
 
                 //Fires the extra hook run
-                ExtraSanatisation(current, queryCounter);
-
-                queryCounter++;
+                ExtraSanitisationProcessing(current, qc);
             }
         }
 
         //This can be used as a hook in function for new features which are inherited down the line and need to be sanatised
-        protected virtual void ExtraSanatisation(query current, int queryCounter)
+        protected virtual void ExtraSanitisationProcessing(Query current, int queryCounter)
         {
         }
     }

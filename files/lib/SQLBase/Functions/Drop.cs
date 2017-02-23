@@ -8,9 +8,9 @@
 
         public void add_drop_table(string tableName)
         {
-            query theQuery = get_query();
+            Query theQuery = GetQuery();
 
-            theQuery.drop_table_name = tableName;
+            theQuery.dropTableName = tableName;
 
             theQuery.orderList.Add("drop");
 
