@@ -48,12 +48,13 @@ namespace DotNetSDB
             for(int qc=0; qc<theQueries.Count; qc++)
             {
                 Query current = theQueries[qc];
+                int realQueryCount = qc + 1;
 
                 if (current.whereRealValues.Count != 0)
                 {
                     for(int i=0; i<current.whereRealValues.Count; i++)
                     {
-                        SanitiseItems(string.Format("{0}_{1}_{2}_", whereDefinition, qc.ToString(), i.ToString()), ref command, current.whereRealValues[i]);
+                        SanitiseItems(string.Format("{0}_{1}_{2}_", whereDefinition, realQueryCount.ToString(), i.ToString()), ref command, current.whereRealValues[i]);
                     }
                 }
 
@@ -61,7 +62,7 @@ namespace DotNetSDB
                 {
                     for(int i=0; i<current.updateRealValues.Count; i++)
                     {
-                        SanitiseItems(string.Format("{0}_{1}_{2}_", updateDefinition, qc.ToString(), i.ToString()), ref command, current.updateRealValues[i]);                        
+                        SanitiseItems(string.Format("{0}_{1}_{2}_", updateDefinition, realQueryCount.ToString(), i.ToString()), ref command, current.updateRealValues[i]);                        
                     }
                 }
 
@@ -69,7 +70,7 @@ namespace DotNetSDB
                 {   
                     for(int i=0; i< current.insertRealValues.Count; i++)
                     {   
-                        SanitiseItems(string.Format("{0}_{1}_{2}_", insertDefinition, qc.ToString(), i.ToString()), ref command, current.insertRealValues[i]);
+                        SanitiseItems(string.Format("{0}_{1}_{2}_", insertDefinition, realQueryCount.ToString(), i.ToString()), ref command, current.insertRealValues[i]);
                         
                     }
                 }
@@ -78,7 +79,7 @@ namespace DotNetSDB
                 {
                     for(int i=0; i< current.customRealValues.Count; i++)
                     {
-                        SanitiseItems(string.Format("{0}_{1}_{2}_", customDefinition, qc.ToString(), i.ToString()), ref command, current.customRealValues[i]);
+                        SanitiseItems(string.Format("{0}_{1}_{2}_", customDefinition, realQueryCount.ToString(), i.ToString()), ref command, current.customRealValues[i]);
                     }
                 }
 
@@ -88,16 +89,16 @@ namespace DotNetSDB
                 int index = theQueries.IndexOf(current);
                 if (theQueries2[index].exist_real_table_value != null && theQueries2[index].exist_real_table_value.Length > 0)
                 {
-                    SanitiseItems(string.Format("{0}_{1}_0_", existDefinition, qc.ToString()), ref command, theQueries2[index].exist_real_table_value);
+                    SanitiseItems(string.Format("{0}_{1}_0_", existDefinition, realQueryCount.ToString()), ref command, theQueries2[index].exist_real_table_value);
                 }
 
                 if (theQueries2[index].get_fields_real_table_value != null && theQueries2[index].get_fields_real_table_value.Length > 0)
                 {
-                    SanitiseItems(string.Format("{0}_{1}_0_", fieldsDefinition, qc.ToString()), ref command, theQueries2[index].get_fields_real_table_value);
+                    SanitiseItems(string.Format("{0}_{1}_0_", fieldsDefinition, realQueryCount.ToString()), ref command, theQueries2[index].get_fields_real_table_value);
                 }
 
                 //Fires the extra hook run
-                ExtraSanitisationProcessing(current, qc);
+                ExtraSanitisationProcessing(current, realQueryCount);
             }
         }
 
