@@ -53,17 +53,6 @@ namespace DotNetSDB
         }
 
         /// <summary>
-        /// This function allows an array of manual parameter binding and returns a concatenated string of the definitions to input into the query
-        /// </summary>
-        /// <param name="values"></param>
-        /// <returns></returns>
-        public string add_pure_sql_bind_array_to_string(object values)
-        {
-            var bindings = add_pure_sql_bind_array(values);
-            return string.Join(",", bindings);
-        }
-
-        /// <summary>
         /// This function adds an sql query to the current query object.
         /// </summary>
         /// <param name="sqlQuery"></param>

@@ -445,14 +445,14 @@
     <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\Variables.cs">
       <Link>SQLServer\General\FileTable Extension\Variables.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Delete - overriden.cs">
-      <Link>SQLServer\General\Functions\Delete - overriden.cs</Link>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Delete - extra.cs">
+      <Link>SQLServer\General\Functions\Delete - extra.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\Functions\Exist.cs">
       <Link>SQLServer\General\Functions\Exist.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Insert - overriden.cs">
-      <Link>SQLServer\General\Functions\Insert - overriden.cs</Link>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Insert - extra.cs">
+      <Link>SQLServer\General\Functions\Insert - extra.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\Functions\Select - extra.cs">
       <Link>SQLServer\General\Functions\Select - extra.cs</Link>
@@ -463,8 +463,8 @@
     <Compile Include="..\..\files\lib\SQLServer\General\Functions\Truncate.cs">
       <Link>SQLServer\General\Functions\Truncate.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Update - overriden.cs">
-      <Link>SQLServer\General\Functions\Update - overriden.cs</Link>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Update - extra.cs">
+      <Link>SQLServer\General\Functions\Update - extra.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\core.cs">
       <Link>SQLServer\General\TypeConvertor\core.cs</Link>

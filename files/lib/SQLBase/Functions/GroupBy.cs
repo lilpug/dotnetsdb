@@ -45,11 +45,11 @@ namespace DotNetSDB
 
         protected void GroupBySingleValidation(string tableName, string field)
         {
-            if (!string.IsNullOrWhiteSpace(tableName))
+            if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new Exception("Group Error: no table has been passed.");
             }
-            else if (!string.IsNullOrWhiteSpace(field))
+            else if (string.IsNullOrWhiteSpace(field))
             {
                 throw new Exception("Group Error: no field has been passed.");
             }
@@ -57,7 +57,7 @@ namespace DotNetSDB
 
         protected void GroupByMultipleValidation(string tableName, string[] fields)
         {
-            if (!string.IsNullOrWhiteSpace(tableName))
+            if (string.IsNullOrWhiteSpace(tableName))
             {
                 throw new Exception("Group Error: no table has been passed.");
             }

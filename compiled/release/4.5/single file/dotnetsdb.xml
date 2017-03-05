@@ -96,7 +96,7 @@
             <summary>
             This function adds the limit statement
             </summary>
-            <param name="startLocation"></param>        
+            <param name="maxRows"></param>        
         </member>
         <member name="M:DotNetSDB.MySLQCore.add_limit(System.Int32,System.Int32)">
             <summary>
@@ -105,7 +105,7 @@
             <param name="startLocation"></param>
             <param name="numberOfRows"></param>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.table_get_fields(System.String)">
+        <member name="M:DotNetSDB.MySLQCore.table_fields(System.String)">
             <summary>
             This function returns all the column names of a table
             </summary>
@@ -464,13 +464,6 @@
             <param name="values"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SQLBase.add_pure_sql_bind_array_to_string(System.Object)">
-            <summary>
-            This function allows an array of manual parameter binding and returns a concatenated string of the definitions to input into the query
-            </summary>
-            <param name="values"></param>
-            <returns></returns>
-        </member>
         <member name="M:DotNetSDB.SQLBase.add_pure_sql(System.String)">
             <summary>
             This function adds an sql query to the current query object.
@@ -507,7 +500,7 @@
             <param name="fields"></param>
             <param name="values">object[] only</param>
         </member>
-        <member name="M:DotNetSDB.SQLBase.add_update_fields(System.String,System.String,System.Object)">
+        <member name="M:DotNetSDB.SQLBase.add_update_additions(System.String,System.String,System.Object)">
             <summary>
             This function adds additional update fields and values
             </summary>
@@ -515,7 +508,7 @@
             <param name="field"></param>
             <param name="value">Single value</param>
         </member>
-        <member name="M:DotNetSDB.SQLBase.add_update_fields(System.String,System.String[],System.Object)">
+        <member name="M:DotNetSDB.SQLBase.add_update_additions(System.String,System.String[],System.Object)">
             <summary>
             This function adds additional update fields and values
             </summary>
@@ -698,12 +691,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.add_delete(System.String,System.Boolean)">
+        <member name="M:DotNetSDB.SqlServerCore.add_delete_return(System.String)">
             <summary>
             This function starts the delete query
             </summary>
             <param name="tableName">The Table that you want to delete from</param>
-            <param name="returnDeleted">Returns all the deleted rows and fields</param>
         </member>
         <member name="M:DotNetSDB.SqlServerCore.table_exist(System.String)">
             <summary>
@@ -712,54 +704,48 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.Boolean)">
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String)">
             <summary>
             This function adds the insert statement without fields or values
             </summary>
             <param name="tableName"></param>
-            <param name="returnInsert">returns all the inserted rows and fields</param>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.String,System.Boolean)">
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.String)">
             <summary>
             This functions adds the insert statement with a field only
             </summary>
             <param name="tableName"></param>
             <param name="field"></param>
-            <param name="returnInsert">returns all the inserted rows and fields</param>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.String[],System.Boolean)">
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.String[])">
             <summary>
             This functions adds the insert statement with fields only
             </summary>
             <param name="tableName"></param>
             <param name="fields"></param>
-            <param name="returnInsert">returns all the inserted rows and fields</param>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.Object,System.Boolean)">
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.Object)">
             <summary>
             This function adds the insert statement with only values
             </summary>
             <param name="tableName"></param>
             <param name="values">single value or object[] only</param>
-            <param name="returnInsert">returns all the inserted rows and fields</param>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.String,System.Object,System.Boolean)">
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.String,System.Object)">
             <summary>
             This function adds the insert statement with a field and value
             </summary>
             <param name="tableName"></param>
             <param name="field"></param>
             <param name="value">single value only</param>
-            <param name="returnInsert">returns all the inserted rows and fields</param>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.add_insert(System.String,System.String[],System.Object,System.Boolean)">
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.String[],System.Object)">
             <summary>
             This function adds the insert statement with the fields and values
             </summary>
             <param name="tableName"></param>
             <param name="fields"></param>
             <param name="values">object[] only</param>
-            <param name="returnInsert">returns all the inserted rows and fields</param>
         </member>
         <member name="M:DotNetSDB.SqlServerCore.add_select_top(System.Int32)">
             <summary>
@@ -767,7 +753,7 @@
             </summary>
             <param name="topValue"></param>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.table_get_fields(System.String)">
+        <member name="M:DotNetSDB.SqlServerCore.table_fields(System.String)">
             <summary>
             This function returns all the column names of a table
             </summary>
@@ -781,23 +767,21 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.add_update(System.String,System.String,System.Object,System.Boolean)">
+        <member name="M:DotNetSDB.SqlServerCore.add_update_return(System.String,System.String,System.Object)">
             <summary>
             This function adds additional update fields and values
             </summary>
             <param name="tableName"></param>
             <param name="field"></param>
             <param name="value"></param>
-            <param name="returnUpdated">returns all the updated rows and fields</param>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.add_update(System.String,System.String[],System.Object,System.Boolean)">
+        <member name="M:DotNetSDB.SqlServerCore.add_update_return(System.String,System.String[],System.Object)">
             <summary>
             This function adds additional update fields and values
             </summary>
             <param name="tableName"></param>
             <param name="fields"></param>
             <param name="values"></param>
-            <param name="returnUpdated">returns all the updated rows and fields</param>
         </member>
         <member name="T:DotNetSDB.SQLServerUserConnection">
             <summary>

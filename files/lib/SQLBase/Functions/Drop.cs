@@ -6,7 +6,7 @@
         /*           Main Front function            */
         /*##########################################*/
 
-        public void add_drop_table(string tableName)
+        public virtual void add_drop_table(string tableName)
         {
             Query theQuery = GetQuery();
 

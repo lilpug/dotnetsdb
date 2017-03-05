@@ -13,7 +13,7 @@ namespace DotNetSDB
         /// </summary>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        public string[] table_get_fields(string tableName)
+        public virtual string[] table_fields(string tableName)
         {
             Query2 theQuery = GetQuery2();
 

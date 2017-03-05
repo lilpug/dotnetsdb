@@ -27,16 +27,16 @@ namespace DotNetSDB
         /// <summary>
         /// This function adds the limit statement
         /// </summary>
-        /// <param name="startLocation"></param>        
-        public void add_limit(int startLocation)
+        /// <param name="maxRows"></param>        
+        public virtual void add_limit(int maxRows)
         {
-            if (startLocation <= 0)
+            if (maxRows <= 0)
             {
-                throw new Exception(string.Format("The limit start value starts at 1 and above, yours is currently '{0}'.", startLocation.ToString()));
+                throw new Exception(string.Format("The limit start value starts at 1 and above, yours is currently '{0}'.", maxRows.ToString()));
             }            
             Query theMain = GetQuery();
             Query2 theQuery = GetQuery2();
-            LimitCompile(theQuery, startLocation);
+            LimitCompile(theQuery, maxRows);
             theMain.orderList.Add("limit");
         }
 
@@ -45,7 +45,7 @@ namespace DotNetSDB
         /// </summary>
         /// <param name="startLocation"></param>
         /// <param name="numberOfRows"></param>
-        public void add_limit(int startLocation, int numberOfRows)
+        public virtual void add_limit(int startLocation, int numberOfRows)
         {
             if (startLocation < 0)
             {

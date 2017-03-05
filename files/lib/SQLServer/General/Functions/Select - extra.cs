@@ -12,7 +12,7 @@
         /// This function adds a top to the select statement
         /// </summary>
         /// <param name="topValue"></param>
-        public void add_select_top(int topValue)
+        public virtual void add_select_top(int topValue)
         {
             //Obtains the current query object
             Query2 theQuery = GetQuery2();

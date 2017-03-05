@@ -161,7 +161,7 @@ namespace DotNetSDB
         /// <param name="tableName"></param>
         /// <param name="field"></param>
         /// <param name="value">Single value</param>
-        public void add_update_fields(string tableName, string field, object value)
+        public void add_update_additions(string tableName, string field, object value)
         {
             Query theQuery = GetQuery();
 
@@ -186,7 +186,7 @@ namespace DotNetSDB
         /// <param name="tableName"></param>
         /// <param name="fields"></param>
         /// <param name="values">object[] only</param>
-        public void add_update_fields(string tableName, string[] fields, object values)
+        public void add_update_additions(string tableName, string[] fields, object values)
         {
             Query theQuery = GetQuery();
 

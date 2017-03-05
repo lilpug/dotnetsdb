@@ -14,7 +14,7 @@ namespace DotNetSDB
         /// </summary>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        public bool truncate_table(string tableName)
+        public virtual void truncate_table(string tableName)
         {
             //Checks if the value passed is null
             if (!string.IsNullOrWhiteSpace(tableName))
@@ -23,10 +23,7 @@ namespace DotNetSDB
                 compiledSql = string.Format("Truncate Table {0}", tableName);
 
                 run();
-                return true;
             }
-
-            return false;
         }
     }
 }
