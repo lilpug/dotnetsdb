@@ -404,7 +404,7 @@ namespace DotNetSDB.SqlServer.FileTable
 				}
 			}
 
-			public DataTable get_files_from_folder_dt(string tableName, string folderID)
+			public DataTable get_all_files_from_folder_dt(string tableName, string folderID)
 			{
 				try
 				{
@@ -486,53 +486,8 @@ namespace DotNetSDB.SqlServer.FileTable
                     throw errorHandler.CustomErrorOutput(e);
                 }
             }
-
-            public DataTable get_folders_from_folder_dt(string tableName, string folderID)
-            {
-                try
-                {
-                    if (!string.IsNullOrWhiteSpace(folderID))
-                    {
-                        string pathLocator = get_path_locator(tableName, folderID);
-
-                        connector.db.add_pure_sql(string.Format(@"
-							SELECT
-								stream_id
-								,file_stream
-								,name
-
-								--This is required because api output data does not understand the column types
-								,CAST(path_locator as varchar(max)) as path_locator
-								,CAST(parent_path_locator as varchar(max)) as parent_path_locator
-
-								,file_type
-								,cached_file_size
-								,creation_time
-								,last_write_time
-								,last_access_time
-								,is_directory
-								,is_offline
-								,is_hidden
-								,is_readonly
-								,is_archive
-								,is_system
-								,is_temporary
-							FROM {0}
-						", tableName));
-                        connector.db.add_where_normal(tableName, "is_directory", 1);
-                        connector.db.add_where_normal(tableName, "parent_path_locator", pathLocator);
-                        return connector.db.run_return_datatable();
-                    }
-
-                    return null;
-                }
-                catch (Exception e)
-                {
-                    throw errorHandler.CustomErrorOutput(e);
-                }
-            }
             
-            public DataTable get_root_folders(string tableName)
+            public DataTable get_all_root_folders(string tableName)
 			{
 				try
 				{
@@ -570,7 +525,7 @@ namespace DotNetSDB.SqlServer.FileTable
 				}
 			}
 
-			public DataTable get_folders_from_folder(string tableName, string folderID)
+			public DataTable get_all_folders_from_folder(string tableName, string folderID)
 			{
 				try
 				{

@@ -639,11 +639,11 @@ namespace DotNetSDB
                 }
 
                 //Rebuilds the connection string to adjust the timeout in this instance
-                int start = connection.IndexOf("Connection Timeout=");
+                int start = connection.IndexOf("connection timeout=");
                 int end = connection.IndexOf(";", start);
 
                 string sub = connection.Substring(start, (end + 1) - start);
-                string newConnection = connection.Replace(sub, string.Format("Connection Timeout={0};", timeoutSeconds));
+                string newConnection = connection.Replace(sub, string.Format("connection timeout={0};", timeoutSeconds));
 
                 //Uses the new connection string for the connection
                 using (myConnection = new SqlConnection(newConnection))

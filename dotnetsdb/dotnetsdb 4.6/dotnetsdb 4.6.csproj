@@ -17,22 +17,22 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\compiled\debug\4.6\</OutputPath>
+    <OutputPath>..\..\compiled\debug\net46\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\compiled\debug\4.6\dotnetsdb.xml</DocumentationFile>
+    <DocumentationFile>..\..\compiled\debug\net46\dotnetsdb.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\compiled\release\4.6\</OutputPath>
+    <OutputPath>..\..\compiled\release\net46\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\compiled\release\4.6\dotnetsdb.xml</DocumentationFile>
+    <DocumentationFile>..\..\compiled\release\net46\dotnetsdb.xml</DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>

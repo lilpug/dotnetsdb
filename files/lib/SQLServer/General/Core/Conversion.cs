@@ -51,7 +51,7 @@ namespace DotNetSDB
             }
 
             //Adds the column information section:
-            sb.Append(string.Format("],\"columns\": { \"count\": {0}, \"names\": [", myReader.FieldCount));
+            sb.Append(string.Format("],\"columns\": {{ \"count\": {0}, \"names\": [", myReader.FieldCount));
             for (int i = 0; i < myReader.FieldCount; i++)
             {
                 if (i == myReader.FieldCount - 1)
@@ -64,7 +64,7 @@ namespace DotNetSDB
                 }
             }
 
-            sb.Append(string.Format("]}, \"result_count\": {0} }", rowCount));
+            sb.Append(string.Format("]}}, \"result_count\": {0} }}", rowCount));
 
             return sb.ToString();
         }
