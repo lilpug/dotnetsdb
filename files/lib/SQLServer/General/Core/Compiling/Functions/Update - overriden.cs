@@ -18,7 +18,8 @@ namespace DotNetSDB
             string[] aliasTableSplit = current.updateTable.Split(' ');
             string alias = (aliasTableSplit.Length == 2) ? aliasTableSplit[1] : current.updateTable;
 
-            compiledSql += string.Format(" UPDATE {0} SET {1} {2} FROM {3}", alias, string.Join(", ", current.updateFields).TrimEnd(','), ((current2.updateReturned) ? " OUTPUT INSERTED.* " : " "), current.updateTable);
+            string returnOutput = ((current2.updateReturned) ? " OUTPUT INSERTED.* " : " ");
+            compiledSql += $" UPDATE {alias} SET {string.Join(", ", current.updateFields).TrimEnd(',')} {returnOutput} FROM {current.updateTable}";
 
             current.updateFields.Clear();
             current.updateTable = "";

@@ -38,11 +38,11 @@ namespace DotNetSDB
                 //Builds the string
                 if (startField != null && endField != null)
                 {
-                    temp_build += string.Format("{0} {1}.{2} {3}", startField, tableName, selectField, endField);
+                    temp_build += $"{startField} {tableName}.{selectField} {endField}";
                 }
                 else
                 {
-                    temp_build += string.Format("{0}.{1}", tableName, selectField);
+                    temp_build += $"{tableName}.{selectField}";
                 }
 
                 theQuery.selectFields.Add(temp_build);
@@ -89,11 +89,11 @@ namespace DotNetSDB
                     //Builds the string
                     if (startFields != null && endFields != null)
                     {
-                        temp_build += string.Format("{0}{1} {2}.{3} {4}", seperator, startFields[i], tableName, selectFields[i], endFields[i]);
+                        temp_build += $"{seperator}{startFields[i]} {tableName}.{selectFields[i]} {endFields[i]}";
                     }
                     else
                     {
-                        temp_build += string.Format("{0}{1}.{2}", seperator, tableName, selectFields[i]);
+                        temp_build += $"{seperator}{tableName}.{selectFields[i]}";
                     }
                 }
                 theQuery.selectFields.Add(temp_build);

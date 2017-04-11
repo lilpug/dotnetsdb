@@ -11,7 +11,8 @@ namespace DotNetSDB
         protected virtual void CompileSelect(Query current)
         {
             //This does not use the number as there can only be one main select for a query
-            compiledSql += string.Format("Select {0} {1} FROM {2}", (current.isDistinct) ? "DISTINCT " : "", string.Join(",", current.selectFields).TrimEnd(','), current.selectTable);
+            string distinct = (current.isDistinct) ? "DISTINCT " : "";
+            compiledSql += $"Select {distinct} {string.Join(",", current.selectFields).TrimEnd(',')} FROM {current.selectTable}";
             current.selectTable = "";
             current.selectFields.Clear();
         }

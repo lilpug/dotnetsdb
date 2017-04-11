@@ -18,7 +18,7 @@ namespace DotNetSDB
             string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
-            string temp_build = string.Format("{0} {1} ON {2}.{3} = {4}.{5}", joinType, tableName, alias, field, joinTable, joinField);
+            string temp_build = $"{joinType} {tableName} ON {alias}.{field} = {joinTable}.{joinField}";
 
             //adds it to the join statement lists
             theQuery.joinFields.Add(temp_build);
@@ -39,11 +39,11 @@ namespace DotNetSDB
                 //Determines when to start using the and on the join parameters
                 if (i == 0)//First params so init the join
                 {                    
-                    temp_build += string.Format("{0} {1} ON {2}.{3} = {4}.{5}", joinType, tableName, alias, fields[i], joinTable, joinFields[i]);                    
+                    temp_build += $"{joinType} {tableName} ON {alias}.{fields[i]} = {joinTable}.{joinFields[i]}";                    
                 }
                 else//Add the additional params
                 {
-                    temp_build += string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, fields[i], joinTable, joinFields[i]);
+                    temp_build += $" AND {alias}.{fields[i]} = {joinTable}.{joinFields[i]}";
                 }                
             }
 
@@ -60,7 +60,7 @@ namespace DotNetSDB
             string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
-            string temp_build = string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, field, joinTable, joinField);
+            string temp_build = $" AND {alias}.{field} = {joinTable}.{joinField}";
 
             //Adds it to the current join object
             theQuery.joinFields[theQuery.joinFields.Count - 1] = theQuery.joinFields[theQuery.joinFields.Count - 1] + temp_build;
@@ -78,7 +78,7 @@ namespace DotNetSDB
             string temp_build = "";
             for (int i = 0; i < fields.Length; i++)
             {
-                temp_build += string.Format("{0}{1}.{2} = {3}.{4}", " AND ", alias, fields[i], joinTable, joinFields[i]);
+                temp_build += $" AND {alias}.{fields[i]} = {joinTable}.{joinFields[i]}";
             }
 
             //Adds it to the current join object

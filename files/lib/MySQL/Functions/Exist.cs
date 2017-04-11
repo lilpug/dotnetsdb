@@ -18,7 +18,7 @@ namespace DotNetSDB
         {
             Query2 theQuery = GetQuery2();
             theQuery.exist_real_table_value = AddData(tableName + "%");
-            compiledSql = string.Format("select * from INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE {0}_1_0_0 AND TABLE_SCHEMA = '{1}'", existDefinition, db);
+            compiledSql = $"select * from INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE {existDefinition}_1_0_0 AND TABLE_SCHEMA = '{db}'";
             
             //Runs the query
             string[] results = run_return_string_array();

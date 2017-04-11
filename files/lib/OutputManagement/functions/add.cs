@@ -29,12 +29,12 @@ namespace DotNetSDB.output
                             if (info.singleLineLog)
                             {
                                 //Creates the error message which will be put into the log file
-                                string errorOutput = string.Format("Error Occured: {0} || ", now.ToString());
+                                string errorOutput = $"Error Occured: {now} || ";
 
                                 //Gets the two functions and their parameters chained down from hitting this function
-                                errorOutput += string.Format("Function Trace: {0} ({1})", stackTrace.GetFrame(2).GetMethod().Name, GetAllParameters(stackTrace.GetFrame(2).GetMethod().GetParameters()));
-                                errorOutput += string.Format("-> {0} ({1}) ||", stackTrace.GetFrame(1).GetMethod().Name, GetAllParameters(stackTrace.GetFrame(1).GetMethod().GetParameters()));
-                                errorOutput += string.Format("Error Details: {0}", errorMessage);
+                                errorOutput += $"Function Trace: {stackTrace.GetFrame(2).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(2).GetMethod().GetParameters())})";
+                                errorOutput += $"-> {stackTrace.GetFrame(1).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(1).GetMethod().GetParameters())}) ||";
+                                errorOutput += $"Error Details: {errorMessage}";
 
                                 //Locks the section to be thread safe as we are now processing a file
                                 lock (locker)
@@ -52,9 +52,9 @@ namespace DotNetSDB.output
                                 {
                                     using (TextWriter tw = new StreamWriter(Path.Combine(info.directory, fileName), true))
                                     {
-                                        tw.WriteLine(string.Format("Error Occured: {0}", now.ToString()));
-                                        tw.WriteLine(string.Format("Function Trace: {0} ({1}) -> {2} ({3})", stackTrace.GetFrame(2).GetMethod().Name, GetAllParameters(stackTrace.GetFrame(2).GetMethod().GetParameters()), stackTrace.GetFrame(1).GetMethod().Name, GetAllParameters(stackTrace.GetFrame(1).GetMethod().GetParameters())));
-                                        tw.WriteLine(string.Format("Error Details: {0}", errorMessage));
+                                        tw.WriteLine($"Error Occured: {now}");
+                                        tw.WriteLine($"Function Trace: {stackTrace.GetFrame(2).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(2).GetMethod().GetParameters())}) -> {stackTrace.GetFrame(1).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(1).GetMethod().GetParameters())})");
+                                        tw.WriteLine($"Error Details: {errorMessage}");
                                         tw.WriteLine("");
                                     }
                                 }

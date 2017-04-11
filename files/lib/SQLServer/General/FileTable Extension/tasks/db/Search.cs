@@ -12,10 +12,9 @@ namespace DotNetSDB.SqlServer.FileTable
 			{
 				try
 				{
-					connector.db.add_pure_sql(String.Format(@"
-					select *, CONVERT(varchar(max), file_stream) as text_data from {0}
-					where CONVERT(varchar(max), file_stream) like '%{1}%'
-					", tableName, connector.db.add_pure_sql_bind(searchContext)));
+					connector.db.add_pure_sql($@"
+					select *, CONVERT(varchar(max), file_stream) as text_data from {tableName}
+					where CONVERT(varchar(max), file_stream) like '%{connector.db.add_pure_sql_bind(searchContext)}%'");
 					return connector.db.run_return_datatable();
 				}
 				catch (Exception e)
@@ -29,11 +28,10 @@ namespace DotNetSDB.SqlServer.FileTable
 				try
 				{
 					string locator = get_path_locator(tableName, parentDirectoryID);
-					connector.db.add_pure_sql(String.Format(@"
-					select *, CONVERT(varchar(max), file_stream) as text_data from {0}
-					where CONVERT(varchar(max), file_stream) like '%{1}%'
-					and parent_path_locator = '{2}'
-					", tableName, connector.db.add_pure_sql_bind(searchContext), connector.db.add_pure_sql_bind(locator)));
+					connector.db.add_pure_sql($@"
+					select *, CONVERT(varchar(max), file_stream) as text_data from {tableName}
+					where CONVERT(varchar(max), file_stream) like '%{connector.db.add_pure_sql_bind(searchContext)}%'
+					and parent_path_locator = '{connector.db.add_pure_sql_bind(locator)}'");
 					return connector.db.run_return_datatable();
 				}
 				catch (Exception e)
@@ -46,11 +44,10 @@ namespace DotNetSDB.SqlServer.FileTable
 			{
 				try
 				{
-					connector.db.add_pure_sql(String.Format(@"
-					select *, CONVERT(varchar(max), file_stream) as text_data from {0}
-					where CONVERT(varchar(max), file_stream) like '%{1}%'
-					and parent_path_locator is NULL
-					", tableName, connector.db.add_pure_sql_bind(searchContext)));
+					connector.db.add_pure_sql($@"
+					select *, CONVERT(varchar(max), file_stream) as text_data from {tableName}
+					where CONVERT(varchar(max), file_stream) like '%{connector.db.add_pure_sql_bind(searchContext)}%'
+					and parent_path_locator is NULL");
 					return connector.db.run_return_datatable();
 				}
 				catch (Exception e)

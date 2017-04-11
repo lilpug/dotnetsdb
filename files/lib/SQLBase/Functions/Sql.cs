@@ -23,7 +23,7 @@ namespace DotNetSDB
                 throw new Exception("add_pure_sql_bind Error: The data your trying to bind is an array not singular, please use the 'add_pure_sql_bind_array' function for this.");
             }
             current.customRealValues.Add(holding);
-            return string.Format("{0}_{1}_{2}_0", customDefinition, theQueries.Count.ToString(), (current.customRealValues.Count - 1).ToString());
+            return $"{customDefinition}_{theQueries.Count}_{current.customRealValues.Count - 1}_0";
         }
 
         /// <summary>
@@ -42,13 +42,13 @@ namespace DotNetSDB
                 List<string> defs = new List<string>();
                 for (int i = 0; i < holding.Length; i++)
                 {
-                    defs.Add(string.Format("{0}_{1}_{2}_{3}", customDefinition, theQueries.Count.ToString(), (current.customRealValues.Count - 1).ToString(), i.ToString()));
+                    defs.Add($"{customDefinition}_{theQueries.Count}_{current.customRealValues.Count - 1}_{i}");
                 }
                 return defs.ToArray();
             }
             else
             {
-                return new string[] { string.Format("{0}_{1}_{2}_0", customDefinition, theQueries.Count.ToString(), (current.customRealValues.Count - 1).ToString()) };
+                return new string[] { $"{customDefinition}_{theQueries.Count}_{current.customRealValues.Count - 1}_0" };
             }
         }
 

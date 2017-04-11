@@ -8,7 +8,7 @@
 
         protected virtual void CompileLimit(Query3 current)
         {
-            compiledSql = string.Format(" {0}",LimitCompile(current, current.orderby, compiledSql));
+            compiledSql = $" {LimitCompile(current, current.orderby, compiledSql)}";
             current.limitCountOne = -1;
             current.limitCountTwo = -1;
             current.orderby = "";

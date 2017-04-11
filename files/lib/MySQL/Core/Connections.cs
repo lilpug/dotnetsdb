@@ -77,13 +77,15 @@ namespace DotNetSDB
         //Builds the sql authentication string
         protected void SqlAuthConnectionString()
         {
+            string extra = string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra;
+
             if (port == -1)
             {
-                connection = string.Format("Server={0};Database={1};UId={2};Pwd={3};Connection Timeout={4};AllowZeroDateTime=true;ConvertZeroDatetime=True;{5}", server, db, user, pwd, connectionTime.ToString(), (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
+                connection = $"Server={server};Database={db};UId={user};Pwd={pwd};Connection Timeout={connectionTime};AllowZeroDateTime=true;ConvertZeroDatetime=True;{extra}";
             }
             else
             {
-                connection = string.Format("Server={0},{1};Database={2};UId={3};Pwd={4};Connection Timeout={5};AllowZeroDateTime=true;ConvertZeroDatetime=True;{5}", server, port, db, user, pwd, connectionTime.ToString(), (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
+                connection = $"Server={server},{port};Database={db};UId={user};Pwd={pwd};Connection Timeout={connectionTime};AllowZeroDateTime=true;ConvertZeroDatetime=True;{extra}";
             }
         }
        

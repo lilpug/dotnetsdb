@@ -8,7 +8,7 @@
 
         protected virtual void CompileOffset(Query3 current)
         {
-            compiledSql += string.Format(" {0}", current.offset);
+            compiledSql += $" {current.offset}";
             current.offset = "";
         }
     }

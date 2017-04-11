@@ -26,7 +26,7 @@ namespace DotNetSDB
                     }
 
                     //Builds the string
-                    temp_build += string.Format("{0}{1}", seperator, definition + i.ToString());
+                    temp_build += $"{seperator}{definition + i.ToString()}";
                 }
 
                 theQuery.insertValues.Add(temp_build);
@@ -180,7 +180,7 @@ namespace DotNetSDB
         {
             Query theQuery = GetQuery();
             
-            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
+            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.insertValues.Count}_";
 
             //Validation
             InsertExistValidation(theQuery);
@@ -214,7 +214,7 @@ namespace DotNetSDB
         public virtual void add_insert(string tableName, string field, object value)
         {
             Query theQuery = GetQuery();
-            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
+            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.insertValues.Count}_";
 
             //Validation
             InsertExistValidation(theQuery);
@@ -246,7 +246,7 @@ namespace DotNetSDB
         public virtual void add_insert(string tableName, string[] fields, object values)
         {
             Query theQuery = GetQuery();
-            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
+            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.insertValues.Count}_";
 
             //Validation
             InsertExistValidation(theQuery);
@@ -308,7 +308,7 @@ namespace DotNetSDB
         public virtual void add_insert_values(object values)
         {
             Query theQuery = GetQuery();
-            string definition = string.Format("{0}_{1}_{2}_", insertDefinition, (theQueries.Count).ToString(), (theQuery.insertValues.Count).ToString());
+            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.insertValues.Count}_";
 
             //Validation
             InsertNotExistValidation(theQuery);

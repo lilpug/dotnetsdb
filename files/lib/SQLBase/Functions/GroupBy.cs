@@ -13,7 +13,7 @@ namespace DotNetSDB
             //validation check
             GroupBySingleValidation(tableName, field);
 
-            string temp_build = string.Format("{0}.{1}", tableName, field);
+            string temp_build = $"{tableName}.{field}";
 
             theQuery.groupbyFields.Add(temp_build);
         }
@@ -33,7 +33,7 @@ namespace DotNetSDB
                     seperator = ", ";
                 }
 
-                temp_build += string.Format("{0}{1}.{2}", seperator, tableName, fields[i]);
+                temp_build += $"{seperator}{tableName}.{fields[i]}";
             }
 
             theQuery.groupbyFields.Add(temp_build);

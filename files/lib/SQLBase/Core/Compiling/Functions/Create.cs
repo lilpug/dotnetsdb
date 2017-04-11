@@ -10,7 +10,7 @@ namespace DotNetSDB
 
         protected virtual void CompileCreate(Query current)
         {
-            compiledSql += string.Format(" CREATE TABLE {0} ({1})", current.createTable, string.Join(",", current.createFields).TrimEnd(','));
+            compiledSql += $" CREATE TABLE {current.createTable} ({string.Join(",", current.createFields).TrimEnd(',')})";
             current.createFields.Clear();
             current.createTable = "";
         }

@@ -10,10 +10,9 @@ namespace DotNetSDB.SqlServer.FileTable
                 try
                 {
                     //Checks if the filegroup has been activated on the database
-                    connector.db.add_pure_sql(string.Format(@"
+                    connector.db.add_pure_sql($@"
                     --Checks if the filegroup stream is enabled
-                    select (case when EXISTS(SELECT * FROM {0}.sys.database_files WHERE type_desc = 'FILESTREAM') then 1 else 0 end) as filegroup_activated
-                    ", dbName));
+                    select (case when EXISTS(SELECT * FROM {dbName}.sys.database_files WHERE type_desc = 'FILESTREAM') then 1 else 0 end) as filegroup_activated");
                     string resultOne = connector.db.run_return_string();
                     if (!string.IsNullOrWhiteSpace(resultOne) && resultOne == "1")
 
@@ -34,11 +33,10 @@ namespace DotNetSDB.SqlServer.FileTable
                 try
                 {
                     //Checks if the filegroup has been activated on the database
-                    connector.db.add_pure_sql(string.Format(@"
+                    connector.db.add_pure_sql($@"
                     SELECT non_transacted_access
                     FROM sys.database_filestream_options
-                    where DB_NAME(database_id) = '{0}'
-                    ", dbName));
+                    where DB_NAME(database_id) = '{dbName}'");
                     string resultOne = connector.db.run_return_string();
                     if (!string.IsNullOrWhiteSpace(resultOne) && resultOne == "2")
 

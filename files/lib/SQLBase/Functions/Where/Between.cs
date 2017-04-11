@@ -36,7 +36,7 @@ namespace DotNetSDB
             }
 
             //Builds the sql string
-            temp_build = string.Format("{0} {1}.{2} {3} BETWEEN {4}0 AND {4}1 {5}", startWrapper, tableName, field, whereOperator, definition, endWrapper);
+            temp_build = $"{startWrapper} {tableName}.{field} {whereOperator} BETWEEN {definition}0 AND {definition}1 {endWrapper}";
             theQuery.whereStatements.Add(temp_build);
         }
 
@@ -81,7 +81,7 @@ namespace DotNetSDB
         public void add_where_between(string tableName, string field, object values, string theOperator = null, string type = null, string startWrapper = null, string endWrapper = null)
         {
             Query theQuery = GetQuery();
-            string definition = string.Format("{0}_{1}_{2}_", whereDefinition, (theQueries.Count).ToString(), (theQuery.whereStatements.Count).ToString());
+            string definition = $"{whereDefinition}_{theQueries.Count}_{theQuery.whereStatements.Count}_";
 
             //Builds the query
             WhereBetweenCompile(theQuery, definition, tableName, field, values, theOperator, type, startWrapper, endWrapper);

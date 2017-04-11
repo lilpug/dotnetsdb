@@ -28,8 +28,8 @@ namespace DotNetSDB.output
                 if (now != DateTime.MinValue)
                 {
                     //Processes the filename
-                    string fileName = string.Format("{0}.log", (now.ToString().Split(' '))[0].Replace('/', '-'));
-                    fileName = string.Format(@"{0}.{1}", info.logName, fileName);
+                    string fileName = $"{(now.ToString().Split(' '))[0].Replace('/', '-')}.log";
+                    fileName = $@"{info.logName}.{fileName}";
 
                     //Checks if it exists, if not creates it before returning the name
                     if (!FileExists(fileName))

@@ -27,7 +27,7 @@ namespace DotNetSDB
             }
 
             //Builds the sql string
-            temp_build = string.Format("{0} {1}.{2} {3} {4} {5}", startWrapper, tableName, field, whereOperator, definition + "0 ", endWrapper);
+            temp_build = $"{startWrapper} {tableName}.{field} {whereOperator} {definition}0 {endWrapper}";
             theQuery.whereStatements.Add(temp_build);
         }
 
@@ -69,7 +69,7 @@ namespace DotNetSDB
         {
             Query theQuery = GetQuery();
             
-            string definition = string.Format("{0}_{1}_{2}_", whereDefinition, (theQueries.Count).ToString(), (theQuery.whereStatements.Count).ToString());
+            string definition = $"{whereDefinition}_{theQueries.Count}_{theQuery.whereStatements.Count}_";
 
             //Builds the query
             WhereNormalCompile(theQuery, definition, tableName, field, value, theOperator, type, startWrapper, endWrapper);

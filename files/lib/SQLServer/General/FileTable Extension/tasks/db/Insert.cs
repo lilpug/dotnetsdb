@@ -34,7 +34,7 @@ namespace DotNetSDB.SqlServer.FileTable
 				try
 				{
 					//Gets the new generated ID
-					string newID = CreateNewID(tableName, folderID);
+					string newID = CreateNewFolderPathLocator(tableName, folderID);
 					if (string.IsNullOrWhiteSpace(newID))
 					{
 						throw new Exception("Database FileTable Create File At Directory: The new hierarchyid could not be created.");
@@ -88,7 +88,7 @@ namespace DotNetSDB.SqlServer.FileTable
 				try
 				{
 					//Gets the new generated ID
-					string newID = CreateNewID(tableName, folderID);
+					string newID = CreateNewFolderPathLocator(tableName, folderID);
 					if (string.IsNullOrWhiteSpace(newID))
 					{
 						throw new Exception("Database FileTable Create File At Directory: The new hierarchyid could not be created.");

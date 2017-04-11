@@ -15,7 +15,9 @@
             string[] aliasTableSplit = current.deleteTable.Split(' ');
             string alias = (aliasTableSplit.Length == 2) ? aliasTableSplit[1] : current.deleteTable;
 
-            compiledSql += string.Format(" DELETE {0} {1} FROM {2}", alias, ((current2.deleteReturned) ? "OUTPUT DELETED.*" : ""), current.deleteTable);
+            string returnOutput = ((current2.deleteReturned) ? "OUTPUT DELETED.*" : "");
+
+            compiledSql += $" DELETE {alias} {returnOutput} FROM {current.deleteTable}";
             current.deleteTable = "";
             current2.deleteReturned = false;
         }

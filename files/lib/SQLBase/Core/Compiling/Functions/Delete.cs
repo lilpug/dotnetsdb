@@ -8,7 +8,7 @@
 
         protected virtual void CompileDelete(Query current)
         {
-            compiledSql += string.Format(" DELETE FROM {0}", current.deleteTable);
+            compiledSql += $" DELETE FROM {current.deleteTable}";
             current.deleteTable = "";
         }
     }

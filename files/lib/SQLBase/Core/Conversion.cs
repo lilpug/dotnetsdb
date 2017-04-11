@@ -58,7 +58,7 @@ namespace DotNetSDB
                 string rawOutput = DataTableToRawString(dt, delimiter);
 
                 //Creates the file
-                return CreateFile(string.Format(@"{0}\{1}{2}", Path.GetDirectoryName(fullFilePath), Path.GetFileNameWithoutExtension(fullFilePath), extension), rawOutput);
+                return CreateFile($@"{Path.GetDirectoryName(fullFilePath)}\{Path.GetFileNameWithoutExtension(fullFilePath)}{extension}", rawOutput);
             }
 
             return false;
@@ -75,13 +75,13 @@ namespace DotNetSDB
             }
 
             //Checks to ensure the file already exists before we try appending to it
-            if (File.Exists(string.Format(@"{0}\{1}{2}", Path.GetDirectoryName(fullFilePath), Path.GetFileNameWithoutExtension(fullFilePath), extension)))
+            if (File.Exists($@"{Path.GetDirectoryName(fullFilePath)}\{Path.GetFileNameWithoutExtension(fullFilePath)}{extension}"))
             {
                 //Gets the raw datatable output
                 string rawOutput = DataTableToRawString(dt, delimiter);
 
                 //Creates the file
-                return AppendFile(string.Format(@"{0}\{1}{2}", Path.GetDirectoryName(fullFilePath), Path.GetFileNameWithoutExtension(fullFilePath), extension), rawOutput);
+                return AppendFile($@"{Path.GetDirectoryName(fullFilePath)}\{Path.GetFileNameWithoutExtension(fullFilePath)}{extension}", rawOutput);
             }
 
             return false;

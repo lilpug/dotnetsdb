@@ -14,9 +14,10 @@ namespace DotNetSDB
             int index = theQueries.IndexOf(current);
 
             //This does not use the number as there can only be one main select for a query
-            compiledSql += string.Format("Select {0} {1} {2} FROM {3}", ((current.isDistinct) ? "DISTINCT" : ""),
-                ((theQueries2[index].selectTop > 0) ? string.Format("Top {0}", theQueries2[index].selectTop) : ""),
-                string.Join(",", current.selectFields).TrimEnd(','), current.selectTable);
+            string distinct = ((current.isDistinct) ? "DISTINCT" : "");
+            string top = ((theQueries2[index].selectTop > 0) ? $"Top {theQueries2[index].selectTop}" : "");
+
+            compiledSql += $"Select {distinct} {top} {string.Join(",", current.selectFields).TrimEnd(',')} FROM {current.selectTable}";
             current.selectTable = "";
             current.selectFields.Clear();
         }

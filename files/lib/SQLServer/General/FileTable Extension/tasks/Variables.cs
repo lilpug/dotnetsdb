@@ -27,7 +27,7 @@ namespace DotNetSDB.SqlServer.FileTable
                 }
                 else if (connector.dbVersion == "sqlserver2008")
                 {
-                    throw new Exception(string.Format("Database FileTable Tasks Initialisation: The database object version you have passed does not support filetables '{0}'.", connector.dbVersion));
+                    throw new Exception($"Database FileTable Tasks Initialisation: The database object version you have passed does not support filetables '{connector.dbVersion}'.");
                 }
                 else if (!connector.db.is_alive())
                 {

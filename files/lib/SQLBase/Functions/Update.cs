@@ -26,7 +26,7 @@ namespace DotNetSDB
                     theQuery.updateTable = tableName;
                 }
 
-                string temp_build = string.Format("{0}.{1} = {2}0", tableName, updateField, definition);
+                string temp_build = $"{tableName}.{updateField} = {definition}0";
 
                 //Builds the final statement
                 theQuery.updateFields.Add(temp_build);
@@ -65,7 +65,7 @@ namespace DotNetSDB
                         seperator = ", ";
                     }
 
-                    temp_build += string.Format("{0}{1}.{2} = {3}", seperator, tableName, updateFields[i], definition + i.ToString());
+                    temp_build += $"{seperator}{tableName}.{updateFields[i]} = {definition + i}";
                 }
 
                 //Builds the final statement
@@ -113,7 +113,7 @@ namespace DotNetSDB
 
             UpdateExistValidation(theQuery);
 
-            string definition = string.Format("{0}_{1}_{2}_", updateDefinition, (theQueries.Count).ToString(), (theQuery.updateFields.Count).ToString());
+            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.updateFields.Count}_";
 
             object[] holding = AddData(value);
             if (holding.Count() != 1)
@@ -140,7 +140,7 @@ namespace DotNetSDB
 
             UpdateExistValidation(theQuery);
 
-            string definition = string.Format("{0}_{1}_{2}_", updateDefinition, (theQueries.Count).ToString(), (theQuery.updateFields.Count).ToString());
+            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.updateFields.Count}_";
 
             object[] holding = AddData(values);
             if (holding.Count() != fields.Length)
@@ -167,7 +167,7 @@ namespace DotNetSDB
 
             UpdateNotExistValidation(theQuery);
 
-            string definition = string.Format("{0}_{1}_{2}_", updateDefinition, (theQueries.Count).ToString(), (theQuery.updateFields.Count).ToString());
+            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.updateFields.Count}_";
 
             object[] holding = AddData(value);
             if (holding.Count() != 1)
@@ -192,7 +192,7 @@ namespace DotNetSDB
 
             UpdateNotExistValidation(theQuery);
 
-            string definition = string.Format("{0}_{1}_{2}_", updateDefinition, (theQueries.Count).ToString(), (theQuery.updateFields.Count).ToString());
+            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.updateFields.Count}_";
 
             object[] holding = AddData(values);
             if (holding.Count() != fields.Length)

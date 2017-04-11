@@ -11,13 +11,13 @@ namespace DotNetSDB
         //This function is the mysql limit sql builder
         protected void LimitCompile(Query2 theQuery, int start)
         {
-            theQuery.limit = string.Format("LIMIT {0}", start);
+            theQuery.limit = $"LIMIT {start}";
         }
 
         //This function is the mysql limit sql builder
         protected void LimitCompile(Query2 theQuery, int start, int end)
         {
-            theQuery.limit = string.Format("LIMIT {0}, {1}", start, end);
+            theQuery.limit = $"LIMIT {start}, {end}";
         }        
 
         /*##########################################*/
@@ -32,7 +32,7 @@ namespace DotNetSDB
         {
             if (maxRows <= 0)
             {
-                throw new Exception(string.Format("The limit start value starts at 1 and above, yours is currently '{0}'.", maxRows.ToString()));
+                throw new Exception($"The limit start value starts at 1 and above, yours is currently '{maxRows.ToString()}'.");
             }            
             Query theMain = GetQuery();
             Query2 theQuery = GetQuery2();
@@ -49,11 +49,11 @@ namespace DotNetSDB
         {
             if (startLocation < 0)
             {
-                throw new Exception(string.Format("The limit start value starts at 0 and above, yours is currently '{0}'.", startLocation.ToString()));
+                throw new Exception($"The limit start value starts at 0 and above, yours is currently '{startLocation}'.");
             }
             if (numberOfRows < startLocation)
             {
-                throw new Exception(string.Format("The limit end value starts before the start value, start value: '{0}', end value: '{1}'.", startLocation.ToString(), numberOfRows.ToString()));
+                throw new Exception($"The limit end value starts before the start value, start value: '{startLocation}', end value: '{numberOfRows}'.");
             }
             Query theMain = GetQuery();
             Query2 theQuery = GetQuery2();

@@ -20,7 +20,7 @@ namespace DotNetSDB
                 {
                     counter++;
 
-                    var newDefinition = string.Format("{0}{1}", definition, counter.ToString());
+                    var newDefinition = $"{definition}{counter}";
 
                     command.Parameters.AddWithValue(newDefinition, ((data == null) ? DBNull.Value : data));
                     if (data != null)
@@ -34,7 +34,7 @@ namespace DotNetSDB
             }
             catch(Exception e)
             {
-                throw new Exception(string.Format("There seems to be an issue while sanitising definition: {0}{1}Basic Error Information: {2}{1}Error Details: {3}", definition + counter.ToString(), Environment.NewLine, e.Message, e.ToString()));
+                throw new Exception($"There seems to be an issue while sanitising definition: {definition + counter.ToString()}{Environment.NewLine}Basic Error Information: {e.Message}{Environment.NewLine}Error Details: {e.ToString()}");
             }
         }
 
@@ -54,7 +54,7 @@ namespace DotNetSDB
                 {
                     for(int i=0; i<current.whereRealValues.Count; i++)
                     {
-                        SanitiseItems(string.Format("{0}_{1}_{2}_", whereDefinition, realQueryCount.ToString(), i.ToString()), ref command, current.whereRealValues[i]);
+                        SanitiseItems($"{whereDefinition}_{realQueryCount}_{i}_", ref command, current.whereRealValues[i]);
                     }
                 }
 
@@ -62,7 +62,7 @@ namespace DotNetSDB
                 {
                     for(int i=0; i<current.updateRealValues.Count; i++)
                     {
-                        SanitiseItems(string.Format("{0}_{1}_{2}_", updateDefinition, realQueryCount.ToString(), i.ToString()), ref command, current.updateRealValues[i]);                        
+                        SanitiseItems($"{updateDefinition}_{realQueryCount}_{i}_", ref command, current.updateRealValues[i]);                        
                     }
                 }
 
@@ -70,7 +70,7 @@ namespace DotNetSDB
                 {   
                     for(int i=0; i< current.insertRealValues.Count; i++)
                     {   
-                        SanitiseItems(string.Format("{0}_{1}_{2}_", insertDefinition, realQueryCount.ToString(), i.ToString()), ref command, current.insertRealValues[i]);
+                        SanitiseItems($"{insertDefinition}_{realQueryCount}_{i}_", ref command, current.insertRealValues[i]);
                         
                     }
                 }
@@ -79,7 +79,7 @@ namespace DotNetSDB
                 {
                     for(int i=0; i< current.customRealValues.Count; i++)
                     {
-                        SanitiseItems(string.Format("{0}_{1}_{2}_", customDefinition, realQueryCount.ToString(), i.ToString()), ref command, current.customRealValues[i]);
+                        SanitiseItems($"{customDefinition}_{realQueryCount}_{i}_", ref command, current.customRealValues[i]);
                     }
                 }
 
@@ -89,12 +89,12 @@ namespace DotNetSDB
                 int index = theQueries.IndexOf(current);
                 if (theQueries2[index].exist_real_table_value != null && theQueries2[index].exist_real_table_value.Length > 0)
                 {
-                    SanitiseItems(string.Format("{0}_{1}_0_", existDefinition, realQueryCount.ToString()), ref command, theQueries2[index].exist_real_table_value);
+                    SanitiseItems($"{existDefinition}_{realQueryCount}_0_", ref command, theQueries2[index].exist_real_table_value);
                 }
 
                 if (theQueries2[index].get_fields_real_table_value != null && theQueries2[index].get_fields_real_table_value.Length > 0)
                 {
-                    SanitiseItems(string.Format("{0}_{1}_0_", fieldsDefinition, realQueryCount.ToString()), ref command, theQueries2[index].get_fields_real_table_value);
+                    SanitiseItems($"{fieldsDefinition}_{realQueryCount}_0_", ref command, theQueries2[index].get_fields_real_table_value);
                 }
 
                 //Fires the extra hook run

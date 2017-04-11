@@ -10,13 +10,12 @@ namespace DotNetSDB.SqlServer.FileTable
 			{
 				try
 				{
-					connector.db.add_pure_sql(String.Format(@"
-						CREATE TABLE {0} AS FileTable
+					connector.db.add_pure_sql($@"
+						CREATE TABLE {tableName} AS FileTable
 						WITH (
-								FileTable_Directory = '{1}',
+								FileTable_Directory = '{directoryName}',
 								FileTable_Collate_Filename = database_default
-								)
-						", tableName, directoryName));
+								)");
 					connector.db.run();
 				}
 				catch (Exception e)

@@ -28,7 +28,7 @@ namespace DotNetSDB
             }
 
             //Builds the sql string
-            temp_build = string.Format("{0} {1}.{2} IS {3} NULL {4}", startWrapper, tableName, field, whereOperator, endWrapper);
+            temp_build = $"{startWrapper} {tableName}.{field} IS {whereOperator} NULL {endWrapper}";
             theQuery.whereStatements.Add(temp_build);
         }
 

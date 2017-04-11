@@ -23,7 +23,7 @@ namespace DotNetSDB
                 string temp_build = "";
 
                 //Builds the string
-                temp_build += string.Format("{0} {1}", field, type);
+                temp_build += $"{field} {type}";
 
                 //Builds the final statement
                 theQuery.createFields.Add(temp_build);
@@ -62,7 +62,7 @@ namespace DotNetSDB
                     }
 
                     //Builds the string
-                    temp_build += string.Format("{0}{1} {2}", seperator, fields[i], types[i]);
+                    temp_build += $"{seperator}{fields[i]} {types[i]}";
                 }
 
                 //Builds the final statement

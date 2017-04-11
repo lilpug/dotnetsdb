@@ -10,7 +10,7 @@
         {
             if (current.sqlStartWrapper != "")
             {
-                compiledSql += string.Format(" {0}", current.sqlStartWrapper);
+                compiledSql += $" {current.sqlStartWrapper}";
                 current.sqlStartWrapper = "";
             }
         }
@@ -19,7 +19,7 @@
         {
             if (current.sqlEndWrapper != "")
             {
-                compiledSql += string.Format(" {0}", current.sqlEndWrapper);
+                compiledSql += $" {current.sqlEndWrapper}";
                 current.sqlEndWrapper = "";
             }
         }

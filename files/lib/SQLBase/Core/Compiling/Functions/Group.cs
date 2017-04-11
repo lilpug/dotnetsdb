@@ -10,7 +10,7 @@ namespace DotNetSDB
 
         protected virtual void CompileGroup(Query current)
         {
-            compiledSql += string.Format(" GROUP BY {0}", string.Join(",", current.groupbyFields).TrimEnd(','));
+            compiledSql += $" GROUP BY {string.Join(",", current.groupbyFields).TrimEnd(',')}";
             current.groupbyFields.Clear();
         }
     }

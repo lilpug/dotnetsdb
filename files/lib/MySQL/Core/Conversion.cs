@@ -35,8 +35,8 @@ namespace DotNetSDB
 
                 for (int i = 0; i < myReader.FieldCount; i++)
                 {
-                    sb.Append(string.Format("\"{0}\":", myReader.GetName(i)));
-                    sb.Append(string.Format("\"{0}\"", myReader[i]));
+                    sb.Append($"\"{myReader.GetName(i)}\":");
+                    sb.Append($"\"{myReader[i]}\"");
 
                     sb.Append(i == myReader.FieldCount - 1 ? "" : ",");
                 }
@@ -53,20 +53,20 @@ namespace DotNetSDB
             }
 
             //Adds the column information section:
-            sb.Append(string.Format("],\"columns\": {{ \"count\": {0}, \"names\": [", myReader.FieldCount));
+            sb.Append($"],\"columns\": {{ \"count\": {myReader.FieldCount}, \"names\": [");
             for (int i = 0; i < myReader.FieldCount; i++)
             {
                 if (i == myReader.FieldCount - 1)
                 {
-                    sb.Append(string.Format("\"{0}\"", myReader.GetName(i)));
+                    sb.Append($"\"{myReader.GetName(i)}\"");
                 }
                 else
                 {
-                    sb.Append(string.Format("\"{0}\",", myReader.GetName(i)));
+                    sb.Append($"\"{myReader.GetName(i)}\",");
                 }
             }
 
-            sb.Append(string.Format("]}}, \"result_count\": {0} }}", rowCount));
+            sb.Append($"]}}, \"result_count\": {rowCount} }}");
 
             return sb.ToString();
         }

@@ -20,7 +20,7 @@ namespace DotNetSDB
                 {
                     counter++;
 
-                    var newDefinition = string.Format("{0}{1}", definition, counter.ToString());
+                    var newDefinition = $"{definition}{counter}";
 
                     command.Parameters.AddWithValue(newDefinition, ((data == null) ? DBNull.Value : data));
                     if (data != null)
@@ -34,7 +34,7 @@ namespace DotNetSDB
             }
             catch(Exception e)
             {   
-                throw new Exception(string.Format("There seems to be an issue while sanitising definition: {0}{1}Basic Error Information: {2}{1}Error Details: {3}", definition + counter.ToString(), Environment.NewLine, e.Message, e.ToString()));
+                throw new Exception($"There seems to be an issue while sanitising definition: {definition + counter.ToString()}{Environment.NewLine}Basic Error Information: {e.Message}{Environment.NewLine}Error Details: {e.ToString()}");
             }
         }
     }

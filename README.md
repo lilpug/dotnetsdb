@@ -3,6 +3,8 @@ For information, documentation or any inquiries please refer to the main website
 
 http://dotnetsdb.com/
 
+[![NuGet](https://img.shields.io/nuget/v/DotNetSDB.svg?maxAge=259200)](https://www.nuget.org/packages/DotNetSDB/)
+
 ## Extra Credits
 This library uses the MySql.data.dll connector in order to create the flexibility with MySql database calls. The MySql connector is available from http://dev.mysql.com/downloads/connector/net/6.8.6.html, it is used under the FOSS exception Licenses, please see the MySql notice for further information.
 

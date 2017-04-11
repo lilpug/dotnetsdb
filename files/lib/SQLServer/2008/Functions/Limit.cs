@@ -39,7 +39,7 @@
             if (orderby != "")
             {
                 compiling = compiling.Replace(orderby, " ");
-                compiling = compiling.Replace("FROM", string.Format(", ROW_NUMBER() over ({0}) as theLimitRow FROM ", orderby));
+                compiling = compiling.Replace("FROM", $", ROW_NUMBER() over ({orderby}) as theLimitRow FROM ");
             }
             else
             {
@@ -54,7 +54,7 @@
 	                end
                 ";
 
-            compiling = string.Format("{0} select * into #database2008limitwrapper from  ( {1} ) as a where a.theLimitRow >= {2} and a.theLimitRow <= {3}", hashCheck, compiling, theQuery.limitCountOne.ToString(), theQuery.limitCountTwo.ToString());
+            compiling = $"{hashCheck} select * into #database2008limitwrapper from  ( {compiling} ) as a where a.theLimitRow >= {theQuery.limitCountOne} and a.theLimitRow <= {theQuery.limitCountTwo}";
 
             //If there is an order by this section pulls it apart and rebuilds it for the limit wrapper
 

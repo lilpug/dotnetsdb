@@ -28,7 +28,7 @@ namespace DotNetSDB
             string temp_build = "";
 
             //Builds the sql string
-            temp_build = string.Format("{0} {1}.{2} {3} LIKE {4}0 {5}", startWrapper, tableName, field, whereOperator, definition, endWrapper);
+            temp_build = $"{startWrapper} {tableName}.{field} {whereOperator} LIKE {definition}0 {endWrapper}";
             theQuery.whereStatements.Add(temp_build);
         }
 
@@ -69,7 +69,7 @@ namespace DotNetSDB
         public void add_where_like(string tableName, string field, object value, string theOperator = null, string type = null, string startWrapper = null, string endWrapper = null)
         {
             Query theQuery = GetQuery();
-            string definition = string.Format("{0}_{1}_{2}_", whereDefinition, (theQueries.Count).ToString(), (theQuery.whereStatements.Count).ToString());
+            string definition = $"{whereDefinition}_{theQueries.Count}_{theQuery.whereStatements.Count}_";
 
             //Builds the query
             WhereLikeCompile(theQuery, definition, tableName, field, value, theOperator, type, startWrapper, endWrapper);

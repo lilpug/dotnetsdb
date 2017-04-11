@@ -10,6 +10,22 @@ namespace DotNetSDB.SqlServer.FileTable
 		{
             //Steam Ids
 
+
+            public string GetName(string tableName, string streamID)
+            {
+                try
+                { 
+                    //Checks if the folder already 
+                    connector.db.add_select(tableName, "name");
+                    connector.db.add_where_normal(tableName, "stream_id", streamID);
+                    return connector.db.run_return_string();
+                }
+				catch (Exception e)
+				{
+					throw errorHandler.CustomErrorOutput(e);
+				}
+            }
+
 			public string get_root_folder_id(string tableName, string folderName)
 			{
 				try
@@ -223,7 +239,7 @@ namespace DotNetSDB.SqlServer.FileTable
                     connector.db.add_select(tableName, "name");
                     connector.db.add_where_normal(tableName, "is_archive", 1);
                     connector.db.add_where_is(tableName, "parent_path_locator");
-                    return connector.db.run_return_array();                    
+                    return connector.db.run_return_string_array();  
                 }
                 catch (Exception e)
                 {
@@ -240,7 +256,7 @@ namespace DotNetSDB.SqlServer.FileTable
                     connector.db.add_select(tableName, "name");
                     connector.db.add_where_normal(tableName, "is_archive", 1);
                     connector.db.add_where_normal(tableName, "parent_path_locator", pathLocator);
-                    return connector.db.run_return_array();
+                    return connector.db.run_return_string_array();
                 }
                 catch (Exception e)
                 {
@@ -255,7 +271,7 @@ namespace DotNetSDB.SqlServer.FileTable
                     connector.db.add_select(tableName, "name");
                     connector.db.add_where_normal(tableName, "is_directory", 1);
                     connector.db.add_where_is(tableName, "parent_path_locator");
-                    return connector.db.run_return_array();
+                    return connector.db.run_return_string_array();
                 }
                 catch (Exception e)
                 {
@@ -272,7 +288,7 @@ namespace DotNetSDB.SqlServer.FileTable
                     connector.db.add_select(tableName, "name");
                     connector.db.add_where_normal(tableName, "is_directory", 1);
                     connector.db.add_where_normal(tableName, "parent_path_locator", pathLocator);
-                    return connector.db.run_return_array();
+                    return connector.db.run_return_string_array();
                 }
                 catch (Exception e)
                 {
@@ -289,7 +305,7 @@ namespace DotNetSDB.SqlServer.FileTable
 			{
 				try
 				{
-					connector.db.add_pure_sql(string.Format(@"
+					connector.db.add_pure_sql($@"
 							SELECT
 								stream_id
 								,file_stream
@@ -311,8 +327,7 @@ namespace DotNetSDB.SqlServer.FileTable
 								,is_archive
 								,is_system
 								,is_temporary
-							FROM {0}
-						", tableName));
+							FROM {tableName}");
                     connector.db.add_where_is(tableName, "parent_path_locator");
                     return connector.db.run_return_datatable();
 				}
@@ -330,7 +345,7 @@ namespace DotNetSDB.SqlServer.FileTable
 					{
 						string pathLocator = get_path_locator(tableName, folderID);
 
-						connector.db.add_pure_sql(string.Format(@"
+						connector.db.add_pure_sql($@"
 							SELECT
 								stream_id
 								,file_stream
@@ -352,8 +367,7 @@ namespace DotNetSDB.SqlServer.FileTable
 								,is_archive
 								,is_system
 								,is_temporary
-							FROM {0}
-						", tableName));
+							FROM {tableName}");
 						connector.db.add_where_normal(tableName, "parent_path_locator", pathLocator);
 						return connector.db.run_return_datatable();
 					}
@@ -370,7 +384,7 @@ namespace DotNetSDB.SqlServer.FileTable
 			{
 				try
 				{
-					connector.db.add_pure_sql(string.Format(@"
+					connector.db.add_pure_sql($@"
 							SELECT
 								stream_id
 								,file_stream
@@ -392,8 +406,7 @@ namespace DotNetSDB.SqlServer.FileTable
 								,is_archive
 								,is_system
 								,is_temporary
-							FROM {0}
-						", tableName));
+							FROM {tableName}");
 					connector.db.add_where_normal(tableName, "is_archive", 1);
                     connector.db.add_where_is(tableName, "parent_path_locator");
                     return connector.db.run_return_datatable();
@@ -412,7 +425,7 @@ namespace DotNetSDB.SqlServer.FileTable
 					{
 						string pathLocator = get_path_locator(tableName, folderID);
 
-						connector.db.add_pure_sql(string.Format(@"
+						connector.db.add_pure_sql($@"
 							SELECT
 								stream_id
 								,file_stream
@@ -434,8 +447,7 @@ namespace DotNetSDB.SqlServer.FileTable
 								,is_archive
 								,is_system
 								,is_temporary
-							FROM {0}
-						", tableName));
+							FROM {tableName}");
 						connector.db.add_where_normal(tableName, "is_archive", 1);
 						connector.db.add_where_normal(tableName, "parent_path_locator", pathLocator);
 						return connector.db.run_return_datatable();
@@ -453,7 +465,7 @@ namespace DotNetSDB.SqlServer.FileTable
             {
                 try
                 {
-                    connector.db.add_pure_sql(string.Format(@"
+                    connector.db.add_pure_sql($@"
 							SELECT
 								stream_id
 								,file_stream
@@ -475,8 +487,7 @@ namespace DotNetSDB.SqlServer.FileTable
 								,is_archive
 								,is_system
 								,is_temporary
-							FROM {0}
-						", tableName));
+							FROM {tableName}");
                     connector.db.add_where_normal(tableName, "is_directory", 1);
                     connector.db.add_where_is(tableName, "parent_path_locator");
                     return connector.db.run_return_datatable();
@@ -491,7 +502,7 @@ namespace DotNetSDB.SqlServer.FileTable
 			{
 				try
 				{
-					connector.db.add_pure_sql(string.Format(@"
+					connector.db.add_pure_sql($@"
 							SELECT
 								stream_id
 								,file_stream
@@ -513,8 +524,7 @@ namespace DotNetSDB.SqlServer.FileTable
 								,is_archive
 								,is_system
 								,is_temporary
-							FROM {0}
-						", tableName));
+							FROM {tableName}");
 					connector.db.add_where_normal(tableName, "is_directory", 1);
                     connector.db.add_where_is(tableName, "parent_path_locator");
                     return connector.db.run_return_datatable();
@@ -533,7 +543,7 @@ namespace DotNetSDB.SqlServer.FileTable
 					{
 						string pathLocator = get_path_locator(tableName, folderID);
 
-						connector.db.add_pure_sql(string.Format(@"
+						connector.db.add_pure_sql($@"
 							SELECT
 								stream_id
 								,file_stream
@@ -555,8 +565,7 @@ namespace DotNetSDB.SqlServer.FileTable
 								,is_archive
 								,is_system
 								,is_temporary
-							FROM {0}
-						", tableName));
+							FROM {tableName}");
 						connector.db.add_where_normal(tableName, "is_directory", 1);
 						connector.db.add_where_normal(tableName, "parent_path_locator", pathLocator);
 						return connector.db.run_return_datatable();

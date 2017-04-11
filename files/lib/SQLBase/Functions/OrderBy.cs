@@ -23,11 +23,11 @@ namespace DotNetSDB
                 //Builds the string
                 if (!string.IsNullOrWhiteSpace(type))
                 {
-                    temp_build += string.Format("{0}.{1} {2}", tableName, field, type);
+                    temp_build += $"{tableName}.{field} {type}";
                 }
                 else
                 {
-                    temp_build += string.Format("{0}.{1}", tableName, field);
+                    temp_build += $"{tableName}.{field}";
                 }
 
                 //Compiles the final build of the order by sql
@@ -66,11 +66,11 @@ namespace DotNetSDB
                     //Builds the string
                     if (types != null)
                     {
-                        temp_build += string.Format("{0}{1}.{2} {3}", seperator, tableName, fields[i], types[i]);
+                        temp_build += $"{seperator}{tableName}.{fields[i]} {types[i]}";
                     }
                     else
                     {
-                        temp_build += string.Format("{0}{1}.{2}", seperator, tableName, fields[i]);
+                        temp_build += $"{seperator}{tableName}.{fields[i]}";
                     }
                 }
 

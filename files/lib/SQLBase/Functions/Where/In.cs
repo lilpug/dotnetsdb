@@ -26,7 +26,7 @@ namespace DotNetSDB
             string definitionBuild = "";
             for (int i = 0; i < check.Length; i++)
             {
-                definitionBuild += string.Format("{0}{1},", definition , i.ToString());
+                definitionBuild += $"{definition}{i},";
             }
 
             //Removes trailing dash
@@ -46,7 +46,7 @@ namespace DotNetSDB
             string temp_build = "";
 
             //Builds the sql string
-            temp_build = string.Format("{0} {1}.{2} {3} IN ({4}) {5}", startWrapper, tableName, field, whereOperator, definitionBuild, endWrapper);
+            temp_build = $"{startWrapper} {tableName}.{field} {whereOperator} IN ({definitionBuild}) {endWrapper}";
             theQuery.whereStatements.Add(temp_build);
         }
 
@@ -91,7 +91,7 @@ namespace DotNetSDB
         public void add_where_in(string tableName, string field, object values, string theOperator = null, string type = null, string startWrapper = null, string endWrapper = null)
         {
             Query theQuery = GetQuery();
-            string definition = string.Format("{0}_{1}_{2}_", whereDefinition, (theQueries.Count).ToString(), (theQuery.whereStatements.Count).ToString());
+            string definition = $"{whereDefinition}_{theQueries.Count}_{theQuery.whereStatements.Count}_";
 
             //Builds the query
             WhereInCompile(theQuery, definition, tableName, field, values, theOperator, type, startWrapper, endWrapper);

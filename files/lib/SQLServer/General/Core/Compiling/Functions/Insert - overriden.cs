@@ -24,15 +24,15 @@ namespace DotNetSDB
 
             if (current.insertFields.Count > 0)
             {
-                fields = string.Format(" ( {0} ) ", string.Join(",", current.insertFields));
+                fields = $" ( {string.Join(",", current.insertFields)} ) ";
             }
 
             if (current.insertValues.Count > 0)
             {
-                values = string.Format(" VALUES ({0}) ", string.Join("),(", current.insertValues));
+                values = $" VALUES ({string.Join("),(", current.insertValues)}) ";
             }
 
-            compiledSql += string.Format(" INSERT INTO  {0}{1}{2}{3}", current.insertTableName, fields, returnInsert, values);
+            compiledSql += $" INSERT INTO  {current.insertTableName}{fields}{returnInsert}{values}";
 
             current.insertTableName = "";
             current.insertFields.Clear();

@@ -11,7 +11,7 @@ namespace DotNetSDB
         //This functions adds the variables ready for compiling the offset query        
         protected void OffsetCompile(Query3 theQuery, int offset, int fetch)
         {
-            theQuery.offset = string.Format("OFFSET {0} ROWS FETCH NEXT {1} ROWS ONLY", offset, fetch);
+            theQuery.offset = $"OFFSET {offset} ROWS FETCH NEXT {fetch} ROWS ONLY";
         }
 
         /*##########################################*/
@@ -27,11 +27,11 @@ namespace DotNetSDB
         {
             if (offsetRows < 0)
             {
-                throw new Exception(string.Format("The offset start value starts at 0 and above, yours is currently '{0}'.", offsetRows.ToString()));
+                throw new Exception($"The offset start value starts at 0 and above, yours is currently '{offsetRows}'.");
             }
             if (numberOfRows < 0)
             {
-                throw new Exception(string.Format("The fetch rows cannot be below zero, yours is currently '{0}'.", numberOfRows.ToString()));
+                throw new Exception($"The fetch rows cannot be below zero, yours is currently '{numberOfRows}'.");
             }
             Query theMain = GetQuery();
             Query3 theQuery = GetQuery3();

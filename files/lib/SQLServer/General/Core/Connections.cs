@@ -132,26 +132,28 @@ namespace DotNetSDB
         //Builds the windows authentication string
         protected void WindowsAuthConnectionString()
         {
+            string extra = (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra);
             if (port == -1)
             {
-                connection = string.Format("Server={0};Database={1};Integrated Security=SSPI;connection timeout={2};{3}", server, db, connectionTime, (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
+                connection = $"Server={server};Database={db};Integrated Security=SSPI;connection timeout={connectionTime};{extra}";
             }
             else
             {
-                connection = string.Format("Server={0},{1};Database={2};Integrated Security=SSPI;connection timeout={3};{4}", server, port, db, connectionTime, (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
+                connection = $"Server={server},{port};Database={db};Integrated Security=SSPI;connection timeout={connectionTime};{extra}";
             }
         }
 
         //Builds the sql authentication string
         protected void SqlAuthConnectionString()
         {
+            string extra = (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra);
             if (port == -1)
             {
-                connection = string.Format("Server={0};Database={1};User Id={2};Password={3};connection timeout={4};{5}", server, db, user, pwd, connectionTime, (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
+                connection = $"Server={server};Database={db};User Id={user};Password={pwd};connection timeout={connectionTime};{extra}";
             }
             else
             {
-                connection = string.Format("Server={0},{1};Database={2};User Id={3};Password={4};connection timeout={5};{6}", server, port, db, user, pwd, connectionTime, (string.IsNullOrWhiteSpace(connectionStringExtra) ? "" : connectionStringExtra));
+                connection = $"Server={server},{port};Database={db};User Id={user};Password={pwd};connection timeout={connectionTime};{extra}";
             }
         }
         

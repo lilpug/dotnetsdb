@@ -54,12 +54,12 @@ namespace DotNetSDB.output
                 //Attempts to give the directory correct permissions
                 if (!GrantAccess(info.directory))
                 {
-                    throw new Exception(string.Format("OutputManagement Error: Could not give the correct permissions required to the directory '{0}'.", info.directory));
+                    throw new Exception($"OutputManagement Error: Could not give the correct permissions required to the directory '{info.directory}'.");
                 }
             }
             else
             {
-                throw new Exception(string.Format("OutputManagement Error: The variables object is not initialised."));
+                throw new Exception("OutputManagement Error: The variables object is not initialised.");
             }
         }
 

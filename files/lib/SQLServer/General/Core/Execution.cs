@@ -58,11 +58,11 @@ namespace DotNetSDB
                         {
                             if (e.Number == 1205)
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
+                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
                             }
                             else
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
+                                debugger.AddToLog($"{e.Message}\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
                             }
                         }
                     }
@@ -115,11 +115,11 @@ namespace DotNetSDB
                         {
                             if (e.Number == 1205)
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nStored Procedure: '{1}'", e.Message, procedureName));
+                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nStored Procedure: '{procedureName}'");
                             }
                             else
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nStored Procedure: '{1}'", e.Message, procedureName));
+                                debugger.AddToLog($"{e.Message}\r\nStored Procedure: '{procedureName}'");
                             }
                         }
                     }
@@ -176,11 +176,11 @@ namespace DotNetSDB
                         {
                             if (e.Number == 1205)
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
+                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
                             }
                             else
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
+                                debugger.AddToLog($"{e.Message}\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
                             }
                         }
                     }
@@ -236,11 +236,11 @@ namespace DotNetSDB
                         {
                             if (e.Number == 1205)
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nStored Procedure: '{1}'", e.Message, procedureName));
+                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nStored Procedure: '{procedureName}'");
                             }
                             else
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nStored Procedure: '{1}'", e.Message, procedureName));
+                                debugger.AddToLog($"{e.Message}\r\nStored Procedure: '{procedureName}'");
                             }
                         }
                     }
@@ -295,11 +295,11 @@ namespace DotNetSDB
                         {
                             if (e.Number == 1205)
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nDEADLOCK ERROR\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
+                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
                             }
                             else
                             {
-                                debugger.AddToLog(string.Format("{0}\r\nQuery: '{1}'", e.Message, GetCompiledSqlFromCommand(ref myCommand)));
+                                debugger.AddToLog($"{e.Message}\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
                             }
                         }
                     }
@@ -336,7 +336,7 @@ namespace DotNetSDB
                         //Logs the data
                         using (OutputManagement debugger = new OutputManagement(loggerDetails))
                         {
-                            debugger.AddToLog(string.Format("\r\nrun: '{0}'", e.Message));
+                            debugger.AddToLog($"\r\nrun: '{e.Message}'");
                         }
                     }
                     throw e;
@@ -383,7 +383,7 @@ namespace DotNetSDB
                         //Logs the data
                         using (OutputManagement debugger = new OutputManagement(loggerDetails))
                         {
-                            debugger.AddToLog(string.Format("\r\nrun_return_string: '{0}'", e.Message));
+                            debugger.AddToLog($"\r\nrun_return_string: '{e.Message}'");
                         }
                     }
                     throw e;
@@ -427,7 +427,7 @@ namespace DotNetSDB
                         //Logs the data
                         using (OutputManagement debugger = new OutputManagement(loggerDetails))
                         {
-                            debugger.AddToLog(string.Format("\r\nrun_return_array: '{0}'", e.Message));
+                            debugger.AddToLog($"\r\nrun_return_array: '{e.Message}'");
                         }
                     }
                     throw e;
@@ -473,7 +473,7 @@ namespace DotNetSDB
                         //Logs the data
                         using (OutputManagement debugger = new OutputManagement(loggerDetails))
                         {
-                            debugger.AddToLog(string.Format("\r\nrun_return_json: '{0}'", e.Message));
+                            debugger.AddToLog($"\r\nrun_return_json: '{e.Message}'");
                         }
                     }
                     throw e;
@@ -518,7 +518,7 @@ namespace DotNetSDB
                         //Logs the data
                         using (OutputManagement debugger = new OutputManagement(loggerDetails))
                         {
-                            debugger.AddToLog(string.Format("\r\nrun_return_datatable: '{0}'", e.Message));
+                            debugger.AddToLog($"\r\nrun_return_datatable: '{e.Message}'");
                         }
                     }
                     throw e;
@@ -563,7 +563,7 @@ namespace DotNetSDB
                         //Logs the data
                         using (OutputManagement debugger = new OutputManagement(loggerDetails))
                         {
-                            debugger.AddToLog(string.Format("\r\nrun_return_datatable: '{0}'", e.Message));
+                            debugger.AddToLog($"\r\nrun_return_datatable: '{e.Message}'");
                         }
                     }
                     throw e;
@@ -607,7 +607,7 @@ namespace DotNetSDB
                         //Logs the data
                         using (OutputManagement debugger = new OutputManagement(loggerDetails))
                         {
-                            debugger.AddToLog(string.Format("\r\nrun_return_dynamic: '{0}'", e.Message));
+                            debugger.AddToLog($"\r\nrun_return_dynamic: '{e.Message}'");
                         }
                     }
                     throw e;
@@ -643,7 +643,7 @@ namespace DotNetSDB
                 int end = connection.IndexOf(";", start);
 
                 string sub = connection.Substring(start, (end + 1) - start);
-                string newConnection = connection.Replace(sub, string.Format("connection timeout={0};", timeoutSeconds));
+                string newConnection = connection.Replace(sub, $"connection timeout={timeoutSeconds};");
 
                 //Uses the new connection string for the connection
                 using (myConnection = new SqlConnection(newConnection))
@@ -682,7 +682,7 @@ namespace DotNetSDB
                     //Logs the data
                     using (OutputManagement debugger = new OutputManagement(loggerDetails))
                     {
-                        debugger.AddToLog(string.Format("\r\nrun_bulk_copy: '{0}'", e.Message));
+                        debugger.AddToLog($"\r\nrun_bulk_copy: '{e.Message}'");
                     }
                 }
                 throw e;
@@ -717,7 +717,7 @@ namespace DotNetSDB
                     //Logs the data
                     using (OutputManagement debugger = new OutputManagement(loggerDetails))
                     {
-                        debugger.AddToLog(string.Format("\r\nrun_to_csv: '{0}'", e.Message));
+                        debugger.AddToLog($"\r\nrun_to_csv: '{e.Message}'");
                     }
                 }
                 throw e;
@@ -746,7 +746,7 @@ namespace DotNetSDB
                     //Logs the data
                     using (OutputManagement debugger = new OutputManagement(loggerDetails))
                     {
-                        debugger.AddToLog(string.Format("\r\nrun_append_to_csv: '{0}'", e.Message));
+                        debugger.AddToLog($"\r\nrun_append_to_csv: '{e.Message}'");
                     }
                 }
                 throw e;
@@ -774,7 +774,7 @@ namespace DotNetSDB
                     //Logs the data
                     using (OutputManagement debugger = new OutputManagement(loggerDetails))
                     {
-                        debugger.AddToLog(string.Format("\r\nrun_raw_output: '{0}'", e.Message));
+                        debugger.AddToLog($"\r\nrun_raw_output: '{e.Message}'");
                     }
                 }
                 throw e;
@@ -820,7 +820,7 @@ namespace DotNetSDB
                         //Logs the data
                         using (OutputManagement debugger = new OutputManagement(loggerDetails))
                         {
-                            debugger.AddToLog(string.Format("\r\nrun_procedure_return_datatable: '{0}'", e.Message));
+                            debugger.AddToLog($"\r\nrun_procedure_return_datatable: '{e.Message}'");
                         }
                     }
                     throw e;
@@ -860,7 +860,7 @@ namespace DotNetSDB
                         //Logs the data
                         using (OutputManagement debugger = new OutputManagement(loggerDetails))
                         {
-                            debugger.AddToLog(string.Format("\r\nrun_procedure: '{0}'", e.Message));
+                            debugger.AddToLog($"\r\nrun_procedure: '{e.Message}'");
                         }
                     }
                     throw e;
