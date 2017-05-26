@@ -1,6 +1,6 @@
 ﻿namespace DotNetSDB
 {
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         /*##########################################*/
         /*          Compiling Insert functions      */

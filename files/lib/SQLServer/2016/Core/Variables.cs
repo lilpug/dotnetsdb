@@ -2,7 +2,7 @@
 
 namespace DotNetSDB
 {
-    public partial class SqlServer2016
+    public partial class SQLServer2016
     {
         /*##########################################*/
         /*       FileTable Extension Variable       */

@@ -3,7 +3,7 @@ using System;
 
 namespace DotNetSDB
 {
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         /*##########################################*/
         /*     Sanitisation Compiling functions     */

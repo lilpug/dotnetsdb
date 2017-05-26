@@ -1,6 +1,6 @@
 ﻿namespace DotNetSDB
 {
-    public partial class SqlServer2014 : SqlServerCore
+    public partial class SQLServer2014 : SqlServerCore
     {
         /*##########################################*/
         /*      Main Compiling List functions       */

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DotNetSDB
 {
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         //This is the dispose method for disposing of the connection
         //Note: called at the end of a using statement

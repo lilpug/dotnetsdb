@@ -5,7 +5,7 @@ namespace DotNetSDB.Connector
     {
         //Database object initiator and checker functions 
 
-        internal void SqlServer2016(SqlServer2016 sqlserver)
+        internal void SqlServer2016(SQLServer2016 sqlserver)
         {
             if (sqlserver.is_alive())
             {
@@ -17,7 +17,7 @@ namespace DotNetSDB.Connector
             }
         }
 
-        internal void SqlServer2014(SqlServer2014 sqlserver)
+        internal void SqlServer2014(SQLServer2014 sqlserver)
         {
             if (sqlserver.is_alive())
             {
@@ -29,7 +29,7 @@ namespace DotNetSDB.Connector
             }
         }
 
-        internal void SqlServer2012(SqlServer2012 sqlserver)
+        internal void SqlServer2012(SQLServer2012 sqlserver)
         {
             if (sqlserver.is_alive())
             {
@@ -41,7 +41,7 @@ namespace DotNetSDB.Connector
             }
         }
 
-        internal void SqlServer2008(SqlServer2008 sqlserver)
+        internal void SqlServer2008(SQLServer2008 sqlserver)
         {
             if (sqlserver.is_alive())
             {
@@ -53,7 +53,7 @@ namespace DotNetSDB.Connector
             }
         }
 
-        internal void mysqlCore(MySLQCore mysqlDb)
+        internal void mysqlCore(MySQLCore mysqlDb)
         {
             if (mysql.is_alive())
             {

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DotNetSDB
 {
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         /*##########################################*/
         /*        Data Conversion functions         */

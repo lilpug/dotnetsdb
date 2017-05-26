@@ -4,43 +4,43 @@
         <name>dotnetsdb</name>
     </assembly>
     <members>
-        <member name="M:DotNetSDB.MySLQCore.run">
+        <member name="M:DotNetSDB.MySQLCore.run">
             <summary>
             <para>This executes the sql which has been added.</para>
             <para>Note: This does not return any data, it only executes the sql.</para>
             </summary>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_return_string">
+        <member name="M:DotNetSDB.MySQLCore.run_return_string">
             <summary>
             <para>This executes the sql which has been added and returns the first value as string.</para>
             </summary>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_return_string_array">
+        <member name="M:DotNetSDB.MySQLCore.run_return_string_array">
             <summary>
             <para>This executes the sql which has been added and returns a string array from the first value of the results.</para>
             </summary>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_return_json">
+        <member name="M:DotNetSDB.MySQLCore.run_return_json">
             <summary>
             <para>This executes the sql which has been added and returns the a json formatted string with the results.</para>
             </summary>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_return_datatable">
+        <member name="M:DotNetSDB.MySQLCore.run_return_datatable">
             <summary>
             <para>This executes the sql which has been added and returns the results in a datatable.</para>
             </summary>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_return_dataset(System.Boolean)">
+        <member name="M:DotNetSDB.MySQLCore.run_return_dataset(System.Boolean)">
             <summary>
             <para>This executes the sql which has been added and returns the results in a dataset.</para>
             </summary>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_return_dynamic">
+        <member name="M:DotNetSDB.MySQLCore.run_return_dynamic">
             <summary>
             <para>This executes the sql which has been added and returns a list of dynamic objects that are structured with the results.</para>
             </summary>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_to_csv(System.String,System.String)">
+        <member name="M:DotNetSDB.MySQLCore.run_to_csv(System.String,System.String)">
             <summary>
             <para>This executes the sql which has been added and creates a csv file using the file path and delimiter parameters specified.</para>
             </summary>
@@ -48,7 +48,7 @@
             <param name="delimiter">the delimiter used for the csv</param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_append_to_csv(System.String,System.String)">
+        <member name="M:DotNetSDB.MySQLCore.run_append_to_csv(System.String,System.String)">
             <summary>
             <para>This executes the sql which has been added and appends the results to a csv file using the file path and delimiter parameters specified.</para>
             </summary>
@@ -56,14 +56,14 @@
             <param name="delimiter">the delimiter used for the csv</param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_raw_output(System.String)">
+        <member name="M:DotNetSDB.MySQLCore.run_raw_output(System.String)">
             <summary>
             <para>This executes the sql which has been added and returns the raw string format using the delimiter parameter specified.</para>
             </summary>        
             <param name="delimiter">the delimiter</param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_procedure_return_datatable(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="M:DotNetSDB.MySQLCore.run_procedure_return_datatable(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             This executes the procedure passed and returns the results in a datatable.
             </summary>
@@ -71,7 +71,7 @@
             <param name="theParameters"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.run_procedure(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="M:DotNetSDB.MySQLCore.run_procedure(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
             <summary>
             <para>This executes the procedure passed.</para>
             <para>Note: This does not return any data, it only executes the procedure.</para>
@@ -79,40 +79,40 @@
             <param name="procedureName"></param>
             <param name="theParameters"></param>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.return_compiled_sql_string">
+        <member name="M:DotNetSDB.MySQLCore.return_compiled_sql_string">
             <summary>
             This function returns the sql query which will be built on a run function
             </summary>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.table_exist(System.String)">
+        <member name="M:DotNetSDB.MySQLCore.table_exist(System.String)">
             <summary>
             This function checks if a table exists
             </summary>
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.add_limit(System.Int32)">
+        <member name="M:DotNetSDB.MySQLCore.add_limit(System.Int32)">
             <summary>
             This function adds the limit statement
             </summary>
             <param name="maxRows"></param>        
         </member>
-        <member name="M:DotNetSDB.MySLQCore.add_limit(System.Int32,System.Int32)">
+        <member name="M:DotNetSDB.MySQLCore.add_limit(System.Int32,System.Int32)">
             <summary>
             This function adds the limit statement
             </summary>
             <param name="startLocation"></param>
             <param name="numberOfRows"></param>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.table_fields(System.String)">
+        <member name="M:DotNetSDB.MySQLCore.table_fields(System.String)">
             <summary>
             This function returns all the column names of a table
             </summary>
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySLQCore.truncate_table(System.String)">
+        <member name="M:DotNetSDB.MySQLCore.truncate_table(System.String)">
             <summary>
             This function truncates the table
             </summary>
@@ -575,21 +575,21 @@
             <param name="startWrapper">Optional start wrapper</param>
             <param name="endWrapper">Optional end wrapper</param>
         </member>
-        <member name="M:DotNetSDB.SqlServer2012.add_offset(System.Int32,System.Int32)">
+        <member name="M:DotNetSDB.SQLServer2012.add_offset(System.Int32,System.Int32)">
             <summary>
             Note: This function requires an orderby before using it
             </summary>
             <param name="offsetRows"></param>
             <param name="numberOfRows"></param>
         </member>
-        <member name="M:DotNetSDB.SqlServer2014.add_offset(System.Int32,System.Int32)">
+        <member name="M:DotNetSDB.SQLServer2014.add_offset(System.Int32,System.Int32)">
             <summary>
             Note: This function requires an orderby before using it
             </summary>
             <param name="offsetRows"></param>
             <param name="numberOfRows"></param>
         </member>
-        <member name="M:DotNetSDB.SqlServer2016.add_offset(System.Int32,System.Int32)">
+        <member name="M:DotNetSDB.SQLServer2016.add_offset(System.Int32,System.Int32)">
             <summary>
             Note: This function requires an orderby before using it
             </summary>

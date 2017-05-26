@@ -2,7 +2,7 @@
 
 namespace DotNetSDB
 {
-    public partial class SqlServer2014
+    public partial class SQLServer2014
     {
         /*##########################################*/
         /*       FileTable Extension Variable       */

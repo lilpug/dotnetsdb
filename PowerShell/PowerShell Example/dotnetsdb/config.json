@@ -1,0 +1,11 @@
+{
+	"connectionType" : "SQLServer2016",
+	"windowsAuth" : true,
+	"host" : "localhost\\SQLEXPRESS",
+	"database" : "testing_database",
+	"username" : "",
+	"password" : "",
+	"errorLogger" : true,	
+	"timeout" : 30,
+	"additionalConnectionString" : ""
+}

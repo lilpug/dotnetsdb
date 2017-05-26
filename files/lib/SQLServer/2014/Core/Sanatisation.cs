@@ -3,7 +3,7 @@ using System.Data.SqlClient; //used for sqlcommand etc
 
 namespace DotNetSDB
 {
-    public partial class SqlServer2014
+    public partial class SQLServer2014
     {
         /*##########################################*/
         /*     Sanitisation Compiling functions     */

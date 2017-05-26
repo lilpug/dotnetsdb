@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DotNetSDB
 {
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         //NOTE: even though we have another query object for the new features in this specific database version,
         //      we STILL use the normal query objects order list for the new commands!!

@@ -11,10 +11,10 @@ namespace DotNetSDB.output
         public string logName { get; set; }
         public int cleanUpDays { get; set; }
         public bool singleLineLog { get; set; }
-        public DateTime currentDateTime { get; set; }
+        public TimeZoneInfo timezoneInfo { get; set; }
 
         //Constructor
-        public OutputManagementSettings(string directoryPath, string theLogName, DateTime datetime, bool multiLineLogging = false, int cleanUpDaysAmount = 0)
+        public OutputManagementSettings(string directoryPath, string theLogName, TimeZoneInfo timezone, bool multiLineLogging = false, int cleanUpDaysAmount = 0)
         {
             if (!string.IsNullOrWhiteSpace(directoryPath) && !string.IsNullOrWhiteSpace(theLogName))
             {
@@ -28,7 +28,7 @@ namespace DotNetSDB.output
                 logName = theLogName;
                 singleLineLog = !multiLineLogging;//Inverts the output
                 cleanUpDays = cleanUpDaysAmount;
-                currentDateTime = datetime;
+                timezoneInfo = timezone;
             }
             else
             {
@@ -41,6 +41,15 @@ namespace DotNetSDB.output
     {
         //Holds all the variables required for this library
         private OutputManagementSettings info;
+
+        //On request creates a datetime object based the timezone information passed
+        protected DateTime Now
+        {
+            get
+            {
+                return TimeZoneInfo.ConvertTime(DateTime.Now, info.timezoneInfo);
+            }
+        }
 
         //Used to lock the thread while we add data to the log to ensure threadsafe compatibility
         private static object locker = new object();

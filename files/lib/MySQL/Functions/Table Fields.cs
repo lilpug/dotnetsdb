@@ -2,7 +2,7 @@
 
 namespace DotNetSDB
 {
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         /*##########################################*/
         /*       Table Fields SQL functions         */

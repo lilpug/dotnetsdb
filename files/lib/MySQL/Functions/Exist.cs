@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace DotNetSDB
 {
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         /*##########################################*/
         /*            Exist SQL function             */

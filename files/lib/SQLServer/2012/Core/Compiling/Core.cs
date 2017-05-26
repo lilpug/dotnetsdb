@@ -2,7 +2,7 @@
 
 namespace DotNetSDB
 {
-    public partial class SqlServer2012 : SqlServerCore
+    public partial class SQLServer2012 : SqlServerCore
     {
         //Extends the backup facility on runing a debug compile to the new functionality of query3
         private List<Query3> theBackup3 = new List<Query3>();

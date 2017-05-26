@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace DotNetSDB
 {
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         /*##########################################*/
         /*        Executing Query functions         */

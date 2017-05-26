@@ -16,8 +16,8 @@ namespace DotNetSDB.output
                     lock (locker)
                     {
                         //Calculates the start and end dates for the cleaning up process
-                        DateTime start = info.currentDateTime.AddDays(~info.cleanUpDays).Date;
-                        DateTime end = info.currentDateTime.Date;
+                        DateTime start = Now.AddDays(~info.cleanUpDays).Date;
+                        DateTime end = Now.Date;
 
                         //Gets all the current log files in the directory
                         string[] files = Directory.GetFiles(info.directory, "*.log");

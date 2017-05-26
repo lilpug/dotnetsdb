@@ -41,7 +41,7 @@
       <HintPath>..\..\files\dll\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\files\dll\MySql Connector\v4.0\MySql.Data.dll</HintPath>
+      <HintPath>..\..\files\dll\MySql Connector\net40\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

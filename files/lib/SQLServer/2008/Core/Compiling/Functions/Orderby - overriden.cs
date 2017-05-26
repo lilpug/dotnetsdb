@@ -1,7 +1,7 @@
 ﻿
 namespace DotNetSDB
 {
-    public partial class SqlServer2008 : SqlServerCore
+    public partial class SQLServer2008 : SqlServerCore
     {
         /*##########################################*/
         /*         Compiling OrderBy functions      */

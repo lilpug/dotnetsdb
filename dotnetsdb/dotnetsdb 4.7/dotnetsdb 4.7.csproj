@@ -1,0 +1,527 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D8AAC1FA-3EE5-4A2B-B0FF-FCA973884893}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>dotnetsdb</RootNamespace>
+    <AssemblyName>dotnetsdb</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\compiled\debug\net47\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\compiled\debug\net47\dotnetsdb.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\compiled\release\net47\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\compiled\release\net47\dotnetsdb.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.SqlServer.Types, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\files\dll\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\files\dll\MySql Connector\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\files\lib\Database Connector\Core.cs">
+      <Link>Database Connector\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\Database Connector\Init.cs">
+      <Link>Database Connector\Init.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\Database Connector\Variables.cs">
+      <Link>Database Connector\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Compiling\Compile List.cs">
+      <Link>MySQL\Core\Compiling\Compile List.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Compiling\Core.cs">
+      <Link>MySQL\Core\Compiling\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Compiling\Functions\Limit.cs">
+      <Link>MySQL\Core\Compiling\Functions\Limit.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Connections.cs">
+      <Link>MySQL\Core\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Conversion.cs">
+      <Link>MySQL\Core\Conversion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Dispose.cs">
+      <Link>MySQL\Core\Dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Execution.cs">
+      <Link>MySQL\Core\Execution.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Query2.cs">
+      <Link>MySQL\Core\Query2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Sanatisation.cs">
+      <Link>MySQL\Core\Sanatisation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Variables.cs">
+      <Link>MySQL\Core\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Debugging\Sql_Output.cs">
+      <Link>MySQL\Debugging\Sql_Output.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Functions\Exist.cs">
+      <Link>MySQL\Functions\Exist.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Functions\Limit.cs">
+      <Link>MySQL\Functions\Limit.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Functions\Table Fields.cs">
+      <Link>MySQL\Functions\Table Fields.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Functions\Truncate.cs">
+      <Link>MySQL\Functions\Truncate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\TypeConvertor\core.cs">
+      <Link>MySQL\TypeConvertor\core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\TypeConvertor\dispose.cs">
+      <Link>MySQL\TypeConvertor\dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\TypeConvertor\types.cs">
+      <Link>MySQL\TypeConvertor\types.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\TypeConvertor\variables.cs">
+      <Link>MySQL\TypeConvertor\variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\OutputManagement\Core.cs">
+      <Link>OutputManagement\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\OutputManagement\functions\add.cs">
+      <Link>OutputManagement\functions\add.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\OutputManagement\functions\Cleanup.cs">
+      <Link>OutputManagement\functions\Cleanup.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\OutputManagement\functions\Create.cs">
+      <Link>OutputManagement\functions\Create.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\OutputManagement\variables.cs">
+      <Link>OutputManagement\variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Compile List.cs">
+      <Link>SQLBase\Core\Compiling\Compile List.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Core.cs">
+      <Link>SQLBase\Core\Compiling\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Create.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Create.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Delete.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Delete.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Drop.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Drop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Group.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Group.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Insert.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Insert.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Join.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Join.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Orderby.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Orderby.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\PureSQL.cs">
+      <Link>SQLBase\Core\Compiling\Functions\PureSQL.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Select.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Select.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Update.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Update.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Where.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Where.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Compiling\Functions\Wrapper.cs">
+      <Link>SQLBase\Core\Compiling\Functions\Wrapper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Conversion.cs">
+      <Link>SQLBase\Core\Conversion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Data.cs">
+      <Link>SQLBase\Core\Data.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Dispose.cs">
+      <Link>SQLBase\Core\Dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Helpers.cs">
+      <Link>SQLBase\Core\Helpers.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Query.cs">
+      <Link>SQLBase\Core\Query.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Core\Variables.cs">
+      <Link>SQLBase\Core\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Debugging\Sql_Output.cs">
+      <Link>SQLBase\Debugging\Sql_Output.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Create.cs">
+      <Link>SQLBase\Functions\Create.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Delete.cs">
+      <Link>SQLBase\Functions\Delete.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Drop.cs">
+      <Link>SQLBase\Functions\Drop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\GroupBy.cs">
+      <Link>SQLBase\Functions\GroupBy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Insert.cs">
+      <Link>SQLBase\Functions\Insert.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Join.cs">
+      <Link>SQLBase\Functions\Join.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\OrderBy.cs">
+      <Link>SQLBase\Functions\OrderBy.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Select.cs">
+      <Link>SQLBase\Functions\Select.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Sql.cs">
+      <Link>SQLBase\Functions\Sql.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Update.cs">
+      <Link>SQLBase\Functions\Update.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Where\Between.cs">
+      <Link>SQLBase\Functions\Where\Between.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Where\In.cs">
+      <Link>SQLBase\Functions\Where\In.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Where\Is.cs">
+      <Link>SQLBase\Functions\Where\Is.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Where\Like.cs">
+      <Link>SQLBase\Functions\Where\Like.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLBase\Functions\Where\Normal.cs">
+      <Link>SQLBase\Functions\Where\Normal.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Compiling\Compile List.cs">
+      <Link>SQLServer\2008\Core\Compiling\Compile List.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Compiling\Core.cs">
+      <Link>SQLServer\2008\Core\Compiling\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Compiling\Functions\Limit.cs">
+      <Link>SQLServer\2008\Core\Compiling\Functions\Limit.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Compiling\Functions\Orderby - overriden.cs">
+      <Link>SQLServer\2008\Core\Compiling\Functions\Orderby - overriden.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Connections.cs">
+      <Link>SQLServer\2008\Core\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Dispose.cs">
+      <Link>SQLServer\2008\Core\Dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Query3.cs">
+      <Link>SQLServer\2008\Core\Query3.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Sanatisation.cs">
+      <Link>SQLServer\2008\Core\Sanatisation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Functions\Limit.cs">
+      <Link>SQLServer\2008\Functions\Limit.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2008\TypeConvertor\types.cs">
+      <Link>SQLServer\2008\TypeConvertor\types.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Compiling\Compile List.cs">
+      <Link>SQLServer\2012\Core\Compiling\Compile List.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Compiling\Core.cs">
+      <Link>SQLServer\2012\Core\Compiling\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Compiling\Functions\Offset.cs">
+      <Link>SQLServer\2012\Core\Compiling\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Connections.cs">
+      <Link>SQLServer\2012\Core\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Dispose.cs">
+      <Link>SQLServer\2012\Core\Dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Query3.cs">
+      <Link>SQLServer\2012\Core\Query3.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Sanatisation.cs">
+      <Link>SQLServer\2012\Core\Sanatisation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Variables.cs">
+      <Link>SQLServer\2012\Core\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Functions\Offset.cs">
+      <Link>SQLServer\2012\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2012\TypeConvertor\types.cs">
+      <Link>SQLServer\2012\TypeConvertor\types.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Compile List.cs">
+      <Link>SQLServer\2014\Core\Compiling\Compile List.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Core.cs">
+      <Link>SQLServer\2014\Core\Compiling\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Functions\Offset.cs">
+      <Link>SQLServer\2014\Core\Compiling\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Connections.cs">
+      <Link>SQLServer\2014\Core\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Dispose.cs">
+      <Link>SQLServer\2014\Core\Dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Query3.cs">
+      <Link>SQLServer\2014\Core\Query3.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Sanatisation.cs">
+      <Link>SQLServer\2014\Core\Sanatisation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Variables.cs">
+      <Link>SQLServer\2014\Core\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Functions\Offset.cs">
+      <Link>SQLServer\2014\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2014\TypeConvertor\types.cs">
+      <Link>SQLServer\2014\TypeConvertor\types.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Compile List.cs">
+      <Link>SQLServer\2016\Core\Compiling\Compile List.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Core.cs">
+      <Link>SQLServer\2016\Core\Compiling\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Functions\Offset.cs">
+      <Link>SQLServer\2016\Core\Compiling\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Connections.cs">
+      <Link>SQLServer\2016\Core\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Dispose.cs">
+      <Link>SQLServer\2016\Core\Dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Query3.cs">
+      <Link>SQLServer\2016\Core\Query3.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Sanatisation.cs">
+      <Link>SQLServer\2016\Core\Sanatisation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Variables.cs">
+      <Link>SQLServer\2016\Core\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Functions\Offset.cs">
+      <Link>SQLServer\2016\Functions\Offset.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\2016\TypeConvertor\types.cs">
+      <Link>SQLServer\2016\TypeConvertor\types.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Compile List.cs">
+      <Link>SQLServer\General\Core\Compiling\Compile List.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Core.cs">
+      <Link>SQLServer\General\Core\Compiling\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Functions\Delete - overriden.cs">
+      <Link>SQLServer\General\Core\Compiling\Functions\Delete - overriden.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Functions\Insert - overriden.cs">
+      <Link>SQLServer\General\Core\Compiling\Functions\Insert - overriden.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Functions\Select - overriden.cs">
+      <Link>SQLServer\General\Core\Compiling\Functions\Select - overriden.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Functions\Update - overriden.cs">
+      <Link>SQLServer\General\Core\Compiling\Functions\Update - overriden.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Connections.cs">
+      <Link>SQLServer\General\Core\Connections.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Conversion.cs">
+      <Link>SQLServer\General\Core\Conversion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Dispose.cs">
+      <Link>SQLServer\General\Core\Dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Execution.cs">
+      <Link>SQLServer\General\Core\Execution.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Query2.cs">
+      <Link>SQLServer\General\Core\Query2.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Sanatisation.cs">
+      <Link>SQLServer\General\Core\Sanatisation.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Variables.cs">
+      <Link>SQLServer\General\Core\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Debugging\Sql_Output.cs">
+      <Link>SQLServer\General\Debugging\Sql_Output.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\ErrorHandler\Errors.cs">
+      <Link>SQLServer\General\FileTable Extension\ErrorHandler\Errors.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\permissions\Exists.cs">
+      <Link>SQLServer\General\FileTable Extension\permissions\Exists.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\permissions\Permissions.cs">
+      <Link>SQLServer\General\FileTable Extension\permissions\Permissions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\permissions\Variables.cs">
+      <Link>SQLServer\General\FileTable Extension\permissions\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\Core.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\Core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\db\Create.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\db\Create.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\db\Delete.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\db\Delete.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\db\Exists.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\db\Exists.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\db\Get.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\db\Get.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\db\Insert.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\db\Insert.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\db\Search.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\db\Search.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\db\Update.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\db\Update.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\tasks\Variables.cs">
+      <Link>SQLServer\General\FileTable Extension\tasks\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\FileTable Extension\Variables.cs">
+      <Link>SQLServer\General\FileTable Extension\Variables.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Delete - extra.cs">
+      <Link>SQLServer\General\Functions\Delete - extra.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Exist.cs">
+      <Link>SQLServer\General\Functions\Exist.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Insert - extra.cs">
+      <Link>SQLServer\General\Functions\Insert - extra.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Select - extra.cs">
+      <Link>SQLServer\General\Functions\Select - extra.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Table Fields.cs">
+      <Link>SQLServer\General\Functions\Table Fields.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Truncate.cs">
+      <Link>SQLServer\General\Functions\Truncate.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Update - extra.cs">
+      <Link>SQLServer\General\Functions\Update - extra.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\core.cs">
+      <Link>SQLServer\General\TypeConvertor\core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\dispose.cs">
+      <Link>SQLServer\General\TypeConvertor\dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\types.cs">
+      <Link>SQLServer\General\TypeConvertor\types.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\variables.cs">
+      <Link>SQLServer\General\TypeConvertor\variables.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\files\merge\ILMerge.exe">
+      <Link>ILMerge.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\files\merge\merge.exe">
+      <Link>merge.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>RMDIR /S /Q "seperate files"
+RMDIR /S /Q "single file"
+
+merge 4 dotnetsdb.dll dotnetsdb.dll mysql.data.dll Microsoft.SqlServer.Types.dll
+
+mkdir "seperate files"
+mkdir "single file"
+
+move /Y dotnetsdb.dll  .\"seperate files"\dotnetsdb.dll
+move /Y mysql.data.dll  .\"seperate files"\mysql.data.dll
+move /Y Microsoft.SqlServer.Types.dll  .\"seperate files"\Microsoft.SqlServer.Types.dll
+
+move /Y .\merged\dotnetsdb.dll .\"single file"\dotnetsdb.dll
+
+copy /Y dotnetsdb.xml .\"single file"\dotnetsdb.xml
+copy /Y dotnetsdb.xml .\"seperate files"\dotnetsdb.xml
+copy /Y dotnetsdb.pdb .\"single file"\dotnetsdb.pdb
+copy /Y dotnetsdb.pdb .\"seperate files"\dotnetsdb.pdb
+
+DEL /F /Q dotnetsdb.pdb
+DEL /F /Q dotnetsdb.xml
+DEL /F /Q merge.exe
+DEL /F /Q ILMerge.exe
+RMDIR /S /Q merged</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

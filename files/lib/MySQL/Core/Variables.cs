@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 
 namespace DotNetSDB
 {
-    public partial class MySLQCore : SQLBase
+    public partial class MySQLCore : SQLBase
     {
         /*##########################################*/
         /*   OutputManagement Variable Definition   */

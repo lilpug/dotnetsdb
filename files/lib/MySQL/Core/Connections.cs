@@ -68,7 +68,7 @@ namespace DotNetSDB
     }
 
     //sql_server_database class (the IDispossible allows the class to be used with using statements)
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         /*######################################################*/
         /*    Database Connection String Compiling functions    */
@@ -93,7 +93,7 @@ namespace DotNetSDB
         /*      Database connection functions       */
         /*##########################################*/
 
-        public MySLQCore(MySQLUserConnection connectionInformation)
+        public MySQLCore(MySQLUserConnection connectionInformation)
         {
             //Sets the connection string
             db = connectionInformation.dbName;

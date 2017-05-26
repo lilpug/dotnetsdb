@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace DotNetSDB
 {
-    public partial class MySLQCore
+    public partial class MySQLCore
     {
         /*##########################################*/
         /*           Main Front function            */
