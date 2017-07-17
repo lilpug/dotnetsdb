@@ -23,7 +23,7 @@ namespace DotNetSDB
                 values = $" VALUES ({string.Join("),(", current.insertValues)}) ";
             }
 
-            compiledSql += $" INSERT INTO  {current.insertTableName}{fields}{values}";
+            compiledSql.Append($" INSERT INTO  {current.insertTableName}{fields}{values}");
 
             current.insertTableName = "";
             current.insertFields.Clear();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -25,11 +26,9 @@ namespace DotNetSDB
                     //Sets the table name
                     theQuery.updateTable = tableName;
                 }
-
-                string temp_build = $"{tableName}.{updateField} = {definition}0";
-
+                
                 //Builds the final statement
-                theQuery.updateFields.Add(temp_build);
+                theQuery.updateFields.Add($"{tableName}.{updateField} = {definition}0");
             }
             else
             {
@@ -54,22 +53,21 @@ namespace DotNetSDB
                     theQuery.updateTable = tableName;
                 }
 
-                string temp_build = "";
-
+                StringBuilder sb = new StringBuilder();
+                
                 for (int i = 0; i < updateFields.Length; i++)//Compiles the query string
                 {
                     //Determines if there should be a comma
-                    string seperator = "";
                     if (i != 0)
                     {
-                        seperator = ", ";
+                        sb.Append(", ");
                     }
 
-                    temp_build += $"{seperator}{tableName}.{updateFields[i]} = {definition + i}";
+                    sb.Append($"{tableName}.{updateFields[i]} = {definition + i}");
                 }
 
                 //Builds the final statement
-                theQuery.updateFields.Add(temp_build);
+                theQuery.updateFields.Add(sb.ToString());
             }
             else
             {

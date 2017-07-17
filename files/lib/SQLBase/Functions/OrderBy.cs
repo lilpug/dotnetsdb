@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -18,20 +19,20 @@ namespace DotNetSDB
 
             if (!string.IsNullOrWhiteSpace(field))
             {
-                string temp_build = "";
-
+                StringBuilder sb = new StringBuilder();
+                
                 //Builds the string
                 if (!string.IsNullOrWhiteSpace(type))
                 {
-                    temp_build += $"{tableName}.{field} {type}";
+                    sb.Append($"{tableName}.{field} {type}");
                 }
                 else
                 {
-                    temp_build += $"{tableName}.{field}";
+                    sb.Append($"{tableName}.{field}");
                 }
 
                 //Compiles the final build of the order by sql
-                theQuery.orderbyFields.Add(temp_build);
+                theQuery.orderbyFields.Add(sb.ToString());
             }
             else
             {
@@ -53,29 +54,29 @@ namespace DotNetSDB
                     throw new Exception("OrderBy Error: When using an orderby and ordering types there must be an equal amount of both fields and types.");
                 }
 
-                string temp_build = "";
+                StringBuilder sb = new StringBuilder();
+                
                 for (int i = 0; i < fields.Length; i++)
                 {
                     //Determines if there should be a comma
-                    string seperator = "";
                     if (i != 0)
                     {
-                        seperator = ", ";
+                        sb.Append(", ");
                     }
 
                     //Builds the string
                     if (types != null)
                     {
-                        temp_build += $"{seperator}{tableName}.{fields[i]} {types[i]}";
+                        sb.Append($"{tableName}.{fields[i]} {types[i]}");
                     }
                     else
                     {
-                        temp_build += $"{seperator}{tableName}.{fields[i]}";
+                        sb.Append($"{tableName}.{fields[i]}");
                     }
                 }
 
                 //Compiles the final build of the order by sql
-                theQuery.orderbyFields.Add(temp_build);
+                theQuery.orderbyFields.Add(sb.ToString());
             }
             else
             {

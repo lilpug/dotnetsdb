@@ -21,7 +21,7 @@ namespace DotNetSDB
                 compiling(true);
 
                 //gets the query ready and wraps the query in the deadlock solution
-                MySqlCommand myCommand = new MySqlCommand(compiledSql, myConnection);
+                MySqlCommand myCommand = new MySqlCommand(compiledSql.ToString(), myConnection);
 
                 //Checks for sanitisation
                 SanitisationProcess(ref myCommand);

@@ -32,7 +32,7 @@ namespace DotNetSDB
                 values = $" VALUES ({string.Join("),(", current.insertValues)}) ";
             }
 
-            compiledSql += $" INSERT INTO  {current.insertTableName}{fields}{returnInsert}{values}";
+            compiledSql.Append($" INSERT INTO  {current.insertTableName}{fields}{returnInsert}{values}");
 
             current.insertTableName = "";
             current.insertFields.Clear();

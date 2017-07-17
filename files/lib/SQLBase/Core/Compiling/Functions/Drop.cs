@@ -8,7 +8,7 @@
 
         protected virtual void CompileDrop(Query current)
         {
-            compiledSql += $" DROP TABLE {current.dropTableName}";
+            compiledSql.Append($" DROP TABLE {current.dropTableName}");
             current.dropTableName = "";
         }
     }

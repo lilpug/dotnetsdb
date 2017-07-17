@@ -12,7 +12,7 @@ namespace DotNetSDB
         {
             string orderby = $" ORDER BY {string.Join(", ", current.orderbyFields).TrimEnd(',')} ";
             //This does not use the number as there can only be one main select for a query
-            compiledSql += orderby;
+            compiledSql.Append(orderby);
 
             /* Extra Code Start */
             //Gets the index of the current query we are on

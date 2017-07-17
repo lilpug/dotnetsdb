@@ -24,12 +24,9 @@ namespace DotNetSDB
             {
                 theQuery.whereStatementsTypes.Add((!string.IsNullOrWhiteSpace(type)) ? type : "AND");
             }
-
-            string temp_build = "";
-
+            
             //Builds the sql string
-            temp_build = $"{startWrapper} {tableName}.{field} {whereOperator} LIKE {definition}0 {endWrapper}";
-            theQuery.whereStatements.Add(temp_build);
+            theQuery.whereStatements.Add($"{startWrapper} {tableName}.{field} {whereOperator} LIKE {definition}0 {endWrapper}");
         }
 
         /*##########################################*/

@@ -17,7 +17,7 @@ namespace DotNetSDB
         {
             Query2 theQuery = GetQuery2();
             theQuery.existRealTableValue = AddData(tableName);
-            compiledSql = $"SELECT 1 FROM {db}.sys.tables WHERE name = {existDefinition}_1_0_0";
+            compiledSql.Append($"SELECT 1 FROM {db}.sys.tables WHERE name = {existDefinition}_1_0_0");
             
             //Runs the query
             string[] results = run_return_string_array();

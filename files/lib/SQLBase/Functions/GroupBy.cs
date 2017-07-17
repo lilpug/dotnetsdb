@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -12,10 +13,8 @@ namespace DotNetSDB
         {
             //validation check
             GroupBySingleValidation(tableName, field);
-
-            string temp_build = $"{tableName}.{field}";
-
-            theQuery.groupbyFields.Add(temp_build);
+            
+            theQuery.groupbyFields.Add($"{tableName}.{field}");
         }
 
         protected void GroupByCompile(Query theQuery, string tableName, string[] fields)
@@ -23,20 +22,20 @@ namespace DotNetSDB
             //validation check
             GroupByMultipleValidation(tableName, fields);
 
-            string temp_build = "";
+            StringBuilder sb = new StringBuilder();
+            
             for (int i = 0; i < fields.Length; i++)
             {
                 //Determines if there should be a comma
-                string seperator = "";
                 if (i != 0)
                 {
-                    seperator = ", ";
+                    sb.Append(", ");
                 }
 
-                temp_build += $"{seperator}{tableName}.{fields[i]}";
+                sb.Append($"{tableName}.{fields[i]}");
             }
 
-            theQuery.groupbyFields.Add(temp_build);
+            theQuery.groupbyFields.Add(sb.ToString());
         }
 
         /*##########################################*/

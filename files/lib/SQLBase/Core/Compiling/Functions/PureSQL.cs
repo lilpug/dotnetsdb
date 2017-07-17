@@ -8,7 +8,7 @@
 
         protected virtual void CompilePureSQL(Query current)
         {
-            compiledSql += $" {current.pureSql[0]}";
+            compiledSql.Append($" {current.pureSql[0]}");
             current.pureSql.RemoveAt(0);
         }
     }

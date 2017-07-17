@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 
 namespace DotNetSDB.output
 {
@@ -24,20 +25,23 @@ namespace DotNetSDB.output
                         //Writes the single line log
                         if (info.singleLineLog)
                         {
+                            //Holds the created error output
+                            StringBuilder sb = new StringBuilder();
+
                             //Creates the error message which will be put into the log file
-                            string errorOutput = $"Error Occured: {Now} || ";
+                            sb.Append($"Error Occured: {Now} || ");
 
                             //Gets the two functions and their parameters chained down from hitting this function
-                            errorOutput += $"Function Trace: {stackTrace.GetFrame(2).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(2).GetMethod().GetParameters())})";
-                            errorOutput += $"-> {stackTrace.GetFrame(1).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(1).GetMethod().GetParameters())}) ||";
-                            errorOutput += $"Error Details: {errorMessage}";
+                            sb.Append($"Function Trace: {stackTrace.GetFrame(2).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(2).GetMethod().GetParameters())})");
+                            sb.Append($"-> {stackTrace.GetFrame(1).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(1).GetMethod().GetParameters())}) ||");
+                            sb.Append($"Error Details: {errorMessage}");
 
                             //Locks the section to be thread safe as we are now processing a file
                             lock (locker)
                             {
                                 using (TextWriter tw = new StreamWriter(Path.Combine(info.directory, fileName), true))
                                 {
-                                    tw.WriteLine(errorOutput);
+                                    tw.WriteLine(sb.ToString());
                                 }
                             }
                         }

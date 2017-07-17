@@ -22,7 +22,7 @@ namespace DotNetSDB
                 compiling(true);
 
                 //gets the query ready and wraps the query in the deadlock solution
-                SqlCommand myCommand = new SqlCommand(compiledSql, myConnection);
+                SqlCommand myCommand = new SqlCommand(compiledSql.ToString(), myConnection);
 
                 //Checks for sanitisation
                 SanitisationProcess(ref myCommand);

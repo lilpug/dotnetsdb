@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Text;
 
 namespace DotNetSDB.output
 {
@@ -23,15 +24,17 @@ namespace DotNetSDB.output
                 if (parameters.Length > 0)
                 {
                     string concatParams = "";
+                    StringBuilder sb = new StringBuilder();
+
                     for (int i = 0; i < parameters.Length; i++)
                     {
                         if (i == 0)
                         {
-                            concatParams += parameters[i];
+                            sb.Append(parameters[i]);
                         }
                         else
                         {
-                            concatParams += "," + parameters[i];
+                            sb.Append($", {parameters[i]}");
                         }
                     }
                     return concatParams;

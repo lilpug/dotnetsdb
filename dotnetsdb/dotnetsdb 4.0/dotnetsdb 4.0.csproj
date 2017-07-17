@@ -85,8 +85,8 @@
     <Compile Include="..\..\files\lib\MySQL\Core\Query2.cs">
       <Link>MySQL\Core\Query2.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\MySQL\Core\Sanatisation.cs">
-      <Link>MySQL\Core\Sanatisation.cs</Link>
+    <Compile Include="..\..\files\lib\MySQL\Core\Sanitisation.cs">
+      <Link>MySQL\Core\Sanitisation.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\MySQL\Core\Variables.cs">
       <Link>MySQL\Core\Variables.cs</Link>
@@ -262,8 +262,8 @@
     <Compile Include="..\..\files\lib\SQLServer\2008\Core\Query3.cs">
       <Link>SQLServer\2008\Core\Query3.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Sanatisation.cs">
-      <Link>SQLServer\2008\Core\Sanatisation.cs</Link>
+    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Sanitisation.cs">
+      <Link>SQLServer\2008\Core\Sanitisation.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2008\Functions\Limit.cs">
       <Link>SQLServer\2008\Functions\Limit.cs</Link>
@@ -289,8 +289,8 @@
     <Compile Include="..\..\files\lib\SQLServer\2012\Core\Query3.cs">
       <Link>SQLServer\2012\Core\Query3.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Sanatisation.cs">
-      <Link>SQLServer\2012\Core\Sanatisation.cs</Link>
+    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Sanitisation.cs">
+      <Link>SQLServer\2012\Core\Sanitisation.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2012\Core\Variables.cs">
       <Link>SQLServer\2012\Core\Variables.cs</Link>
@@ -319,8 +319,8 @@
     <Compile Include="..\..\files\lib\SQLServer\2014\Core\Query3.cs">
       <Link>SQLServer\2014\Core\Query3.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Sanatisation.cs">
-      <Link>SQLServer\2014\Core\Sanatisation.cs</Link>
+    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Sanitisation.cs">
+      <Link>SQLServer\2014\Core\Sanitisation.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2014\Core\Variables.cs">
       <Link>SQLServer\2014\Core\Variables.cs</Link>
@@ -349,8 +349,8 @@
     <Compile Include="..\..\files\lib\SQLServer\2016\Core\Query3.cs">
       <Link>SQLServer\2016\Core\Query3.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Sanatisation.cs">
-      <Link>SQLServer\2016\Core\Sanatisation.cs</Link>
+    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Sanitisation.cs">
+      <Link>SQLServer\2016\Core\Sanitisation.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2016\Core\Variables.cs">
       <Link>SQLServer\2016\Core\Variables.cs</Link>
@@ -394,8 +394,8 @@
     <Compile Include="..\..\files\lib\SQLServer\General\Core\Query2.cs">
       <Link>SQLServer\General\Core\Query2.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\Core\Sanatisation.cs">
-      <Link>SQLServer\General\Core\Sanatisation.cs</Link>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Sanitisation.cs">
+      <Link>SQLServer\General\Core\Sanitisation.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\Core\Variables.cs">
       <Link>SQLServer\General\Core\Variables.cs</Link>

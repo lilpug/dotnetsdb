@@ -20,7 +20,7 @@ namespace DotNetSDB
             if (!string.IsNullOrWhiteSpace(tableName))
             {
                 //Gives the sql string to the compiled_build
-                compiledSql = $"Truncate Table {tableName}";
+                compiledSql.Append($"Truncate Table {tableName}");
 
                 run();
             }

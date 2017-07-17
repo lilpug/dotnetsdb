@@ -19,7 +19,7 @@ namespace DotNetSDB
             theQuery.getFieldsRealTableValue = AddData(tableName);
 
             //Gives the sql string to the compiled_build
-            compiledSql = $"SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {fieldsDefinition}_1_0_0 ORDER BY ordinal_position;";
+            compiledSql.Append($"SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {fieldsDefinition}_1_0_0 ORDER BY ordinal_position;");
             
             return run_return_string_array();
         }

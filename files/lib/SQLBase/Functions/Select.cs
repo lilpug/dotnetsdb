@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -33,19 +34,19 @@ namespace DotNetSDB
                     theQuery.selectTable = tableName;
                 }
 
-                string temp_build = "";
+                StringBuilder sb = new StringBuilder();
 
                 //Builds the string
                 if (startField != null && endField != null)
                 {
-                    temp_build += $"{startField} {tableName}.{selectField} {endField}";
+                    sb.Append($"{startField} {tableName}.{selectField} {endField}");
                 }
                 else
                 {
-                    temp_build += $"{tableName}.{selectField}";
+                    sb.Append($"{tableName}.{selectField}");
                 }
 
-                theQuery.selectFields.Add(temp_build);
+                theQuery.selectFields.Add(sb.ToString());
             }
             else
             {
@@ -75,28 +76,27 @@ namespace DotNetSDB
                     //Sets the table name
                     theQuery.selectTable = tableName;
                 }
-
-                string temp_build = "";
+                StringBuilder sb = new StringBuilder();
+                
                 for (int i = 0; i < selectFields.Length; i++)
                 {
                     //Determines if there should be a comma
-                    string seperator = "";
                     if (i != 0)
                     {
-                        seperator = ", ";
+                        sb.Append(", ");
                     }
 
                     //Builds the string
                     if (startFields != null && endFields != null)
                     {
-                        temp_build += $"{seperator}{startFields[i]} {tableName}.{selectFields[i]} {endFields[i]}";
+                        sb.Append($"{startFields[i]} {tableName}.{selectFields[i]} {endFields[i]}");
                     }
                     else
                     {
-                        temp_build += $"{seperator}{tableName}.{selectFields[i]}";
+                        sb.Append($"{tableName}.{selectFields[i]}");
                     }
                 }
-                theQuery.selectFields.Add(temp_build);
+                theQuery.selectFields.Add(sb.ToString());
             }
             else
             {

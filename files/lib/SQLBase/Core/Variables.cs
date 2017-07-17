@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -13,7 +14,7 @@ namespace DotNetSDB
         protected List<Query> theQueries = new List<Query>();
 
         //This variable is used to compile the main sql query that will be executed
-        protected string compiledSql = "";
+        protected StringBuilder compiledSql = new StringBuilder();
 
         /*##########################################*/
         /*     Sanitisation Variable Definitions    */

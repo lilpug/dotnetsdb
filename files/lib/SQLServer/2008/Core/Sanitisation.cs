@@ -6,7 +6,7 @@ namespace DotNetSDB
     public partial class SQLServer2008
     {
         /*##########################################*/
-        /*     Sanatisation Compiling functions     */
+        /*     Sanitisation Compiling functions     */
         /*##########################################*/
 
         protected override void SanitiseItems(string definition, ref SqlCommand command, params object[] items)

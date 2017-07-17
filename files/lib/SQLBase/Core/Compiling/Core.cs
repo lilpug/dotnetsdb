@@ -54,7 +54,7 @@ namespace DotNetSDB
                 CompileBackup();
             }
 
-            compiledSql = " ";
+            compiledSql.Append(" ");
 
             foreach (Query current in theQueries)
             {
@@ -68,12 +68,12 @@ namespace DotNetSDB
                 CompileEndWrapper(current);
 
                 //Ends the query
-                compiledSql += "; ";
+                compiledSql.Append("; ");
             }
 
             compiledSql = compiledSql.Replace("  ", " "); //Removes any duplicate spaces with a space in the compile building
             compiledSql = compiledSql.Trim(); //Removes the whitespace at the start and end of the compile building
-
+            
             if (backup)
             {
                 CompileRestore();

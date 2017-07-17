@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -31,7 +32,7 @@ namespace DotNetSDB
 
             public string deleteTable = "";
 
-            public List<string> joinFields = new List<string>();
+            public List<StringBuilder> joinFields = new List<StringBuilder>();
             public List<string> whereStatements = new List<string>();
             public List<string> whereStatementsTypes = new List<string>();
 

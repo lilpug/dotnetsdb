@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -18,10 +19,10 @@ namespace DotNetSDB
             string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
-            string temp_build = $"{joinType} {tableName} ON {alias}.{field} = {joinTable}.{joinField}";
+            string tempBuild = $"{joinType} {tableName} ON {alias}.{field} = {joinTable}.{joinField}";
 
             //adds it to the join statement lists
-            theQuery.joinFields.Add(temp_build);
+            theQuery.joinFields.Add(new StringBuilder(tempBuild));
         }
 
         protected void JoinCompile(Query theQuery, string tableName, string joinType, string joinTable, string[] fields, string[] joinFields)
@@ -33,22 +34,23 @@ namespace DotNetSDB
             string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
-            string temp_build = "";
+            StringBuilder sb = new StringBuilder();
+            
             for (int i = 0; i < fields.Length; i++)
             {   
                 //Determines when to start using the and on the join parameters
                 if (i == 0)//First params so init the join
                 {                    
-                    temp_build += $"{joinType} {tableName} ON {alias}.{fields[i]} = {joinTable}.{joinFields[i]}";                    
+                    sb.Append($"{joinType} {tableName} ON {alias}.{fields[i]} = {joinTable}.{joinFields[i]}");                    
                 }
                 else//Add the additional params
                 {
-                    temp_build += $" AND {alias}.{fields[i]} = {joinTable}.{joinFields[i]}";
+                    sb.Append($" AND {alias}.{fields[i]} = {joinTable}.{joinFields[i]}");
                 }                
             }
 
             //adds it to the join statement lists
-            theQuery.joinFields.Add(temp_build);
+            theQuery.joinFields.Add(new StringBuilder(sb.ToString()));
         }
 
         protected void JoinAdditionalCompile(Query theQuery, string tableName, string joinTable, string field, string joinField)
@@ -60,10 +62,10 @@ namespace DotNetSDB
             string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
-            string temp_build = $" AND {alias}.{field} = {joinTable}.{joinField}";
+            string tempBuild = $" AND {alias}.{field} = {joinTable}.{joinField}";
 
             //Adds it to the current join object
-            theQuery.joinFields[theQuery.joinFields.Count - 1] = theQuery.joinFields[theQuery.joinFields.Count - 1] + temp_build;
+            theQuery.joinFields[theQuery.joinFields.Count - 1].Append(tempBuild);
         }
 
         protected void JoinAdditionalCompile(Query theQuery, string tableName, string joinTable, string[] fields, string[] joinFields)
@@ -75,14 +77,15 @@ namespace DotNetSDB
             string[] mainTables = tableName.Split(' ');
             string alias = (mainTables.Count() > 1) ? mainTables[1] : mainTables[0];
 
-            string temp_build = "";
+            StringBuilder sb = new StringBuilder();
+            
             for (int i = 0; i < fields.Length; i++)
             {
-                temp_build += $" AND {alias}.{fields[i]} = {joinTable}.{joinFields[i]}";
+                sb.Append($" AND {alias}.{fields[i]} = {joinTable}.{joinFields[i]}");
             }
 
             //Adds it to the current join object
-            theQuery.joinFields[theQuery.joinFields.Count - 1] = theQuery.joinFields[theQuery.joinFields.Count - 1] + temp_build;
+            theQuery.joinFields[theQuery.joinFields.Count - 1].Append(sb.ToString());
         }
 
         /*##########################################*/

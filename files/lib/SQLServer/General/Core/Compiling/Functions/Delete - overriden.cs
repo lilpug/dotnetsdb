@@ -17,7 +17,7 @@
 
             string returnOutput = ((current2.deleteReturned) ? "OUTPUT DELETED.*" : "");
 
-            compiledSql += $" DELETE {alias} {returnOutput} FROM {current.deleteTable}";
+            compiledSql.Append($" DELETE {alias} {returnOutput} FROM {current.deleteTable}");
             current.deleteTable = "";
             current2.deleteReturned = false;
         }

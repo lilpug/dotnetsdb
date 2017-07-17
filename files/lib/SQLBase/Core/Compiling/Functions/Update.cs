@@ -10,7 +10,7 @@ namespace DotNetSDB
 
         protected virtual void CompileUpdate(Query current)
         {
-            compiledSql += $" UPDATE {current.updateTable} SET {string.Join(", ", current.updateFields).TrimEnd(',')}";
+            compiledSql.Append($" UPDATE {current.updateTable} SET {string.Join(", ", current.updateFields).TrimEnd(',')}");
 
             current.updateFields.Clear();
             current.updateTable = "";

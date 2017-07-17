@@ -8,7 +8,7 @@
 
         protected virtual void CompileLimit(Query2 current)
         {
-            compiledSql += $" {current.limit}";
+            compiledSql.Append($" {current.limit}");
             current.limit = "";
         }
     }

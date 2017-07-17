@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -20,13 +21,8 @@ namespace DotNetSDB
                     theQuery.createTable = tableName;
                 }
 
-                string temp_build = "";
-
-                //Builds the string
-                temp_build += $"{field} {type}";
-
                 //Builds the final statement
-                theQuery.createFields.Add(temp_build);
+                theQuery.createFields.Add($"{field} {type}");
             }
             else
             {
@@ -51,22 +47,22 @@ namespace DotNetSDB
                     theQuery.createTable = tablelName;
                 }
 
-                string temp_build = "";
+                StringBuilder sb = new StringBuilder();
+                
                 for (int i = 0; i < fields.Length; i++)
                 {
                     //Determines if there should be a comma
-                    string seperator = "";
                     if (i != 0)
                     {
-                        seperator = ", ";
+                        sb.Append(", ");
                     }
 
                     //Builds the string
-                    temp_build += $"{seperator}{fields[i]} {types[i]}";
+                    sb.Append($"{fields[i]} {types[i]}");
                 }
 
                 //Builds the final statement
-                theQuery.createFields.Add(temp_build);
+                theQuery.createFields.Add(sb.ToString());
             }
             else
             {

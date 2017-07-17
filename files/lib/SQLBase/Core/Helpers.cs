@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -100,6 +101,50 @@ namespace DotNetSDB
             File.AppendAllText(theFilePath, data);
 
             return true;
+        }
+    }
+
+    public static class StringBuilderExtension
+    {
+        //This is an extension method to StringBuilder to allow us to Trim the string being built efficiently
+        public static StringBuilder Trim(this StringBuilder sb)
+        {
+            //Checks if the StringBuilder has any data first
+            if (sb.Length != 0)
+            {
+                int length = 0;
+                int num2 = sb.Length;
+
+                //Calculates how much white space is at the front of the builder
+                while ((sb[length] == ' ') && (length < num2))
+                {
+                    length++;
+                }
+
+                //Removes the start white spaces
+                if (length > 0)
+                {
+                    sb.Remove(0, length);
+                    num2 = sb.Length;
+                }
+
+                length = num2 - 1;
+
+                //Calculates how much white space is at the end of the builder
+                while ((sb[length] == ' ') && (length > -1))
+                {
+                    length--;
+                }
+
+                //Removes the end white spaces
+                if (length < (num2 - 1))
+                {
+                    sb.Remove(length + 1, (num2 - length) - 1);
+                }
+            }
+
+            //Returns the corrected StringBuilder or just the StringBuilder if its empty
+            return sb;
         }
     }
 }

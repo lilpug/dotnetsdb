@@ -17,7 +17,7 @@ namespace DotNetSDB
             string distinct = ((current.isDistinct) ? "DISTINCT" : "");
             string top = ((theQueries2[index].selectTop > 0) ? $"Top {theQueries2[index].selectTop}" : "");
 
-            compiledSql += $"Select {distinct} {top} {string.Join(",", current.selectFields).TrimEnd(',')} FROM {current.selectTable}";
+            compiledSql.Append($"Select {distinct} {top} {string.Join(",", current.selectFields).TrimEnd(',')} FROM {current.selectTable}");
             current.selectTable = "";
             current.selectFields.Clear();
         }

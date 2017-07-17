@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -15,21 +16,21 @@ namespace DotNetSDB
             //Checks if fields have been specified, if so there should be the same amount of parameters. otherwise does not matter
             if (theQuery.insertFields.Count() == 0 || theQuery.insertFields.Count() == values.Count())
             {
-                string temp_build = "";
+                StringBuilder sb = new StringBuilder();
+                
                 for (int i = 0; i < values.Length; i++)//Compiles the query string
                 {
                     //Determines if there should be a comma
-                    string seperator = "";
                     if (i != 0)
                     {
-                        seperator = ", ";
+                        sb.Append(", ");
                     }
 
                     //Builds the string
-                    temp_build += $"{seperator}{definition + i.ToString()}";
+                    sb.Append($"{definition + i.ToString()}");
                 }
 
-                theQuery.insertValues.Add(temp_build);
+                theQuery.insertValues.Add(sb.ToString());
             }
             else
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DotNetSDB
 {
@@ -23,15 +24,18 @@ namespace DotNetSDB
             }
 
             //Builds the values for the single definitions
-            string definitionBuild = "";
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < check.Length; i++)
             {
-                definitionBuild += $"{definition}{i},";
+                sb.Append($"{definition}{i}");
+
+                //Checks to make sure we only add a comma on everything but the last loop
+                if (i != (check.Length - 1))
+                {
+                    sb.Append(",");
+                }
             }
-
-            //Removes trailing dash
-            definitionBuild = definitionBuild.Remove(definitionBuild.Length - 1);
-
+            
             //Adds the operator *default and*
             if (theQuery.whereStatements.Count != 0)
             {
@@ -42,12 +46,9 @@ namespace DotNetSDB
             string whereOperator = (string.IsNullOrWhiteSpace(theOperator) ? "" : theOperator);
             string startWrapper = (!string.IsNullOrWhiteSpace(start) ? start : "");
             string endWrapper = (!string.IsNullOrWhiteSpace(end) ? end : "");
-
-            string temp_build = "";
-
+            
             //Builds the sql string
-            temp_build = $"{startWrapper} {tableName}.{field} {whereOperator} IN ({definitionBuild}) {endWrapper}";
-            theQuery.whereStatements.Add(temp_build);
+            theQuery.whereStatements.Add($"{startWrapper} {tableName}.{field} {whereOperator} IN ({sb.ToString()}) {endWrapper}");
         }
 
         /*##########################################*/

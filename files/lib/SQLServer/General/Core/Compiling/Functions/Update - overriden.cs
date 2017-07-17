@@ -19,7 +19,7 @@ namespace DotNetSDB
             string alias = (aliasTableSplit.Length == 2) ? aliasTableSplit[1] : current.updateTable;
 
             string returnOutput = ((current2.updateReturned) ? " OUTPUT INSERTED.* " : " ");
-            compiledSql += $" UPDATE {alias} SET {string.Join(", ", current.updateFields).TrimEnd(',')} {returnOutput} FROM {current.updateTable}";
+            compiledSql.Append($" UPDATE {alias} SET {string.Join(", ", current.updateFields).TrimEnd(',')} {returnOutput} FROM {current.updateTable}");
 
             current.updateFields.Clear();
             current.updateTable = "";

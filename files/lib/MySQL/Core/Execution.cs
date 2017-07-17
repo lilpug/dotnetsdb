@@ -21,14 +21,14 @@ namespace DotNetSDB
         protected virtual void CoreProcessing(MySqlConnection myConnection, int counter = 0)
         {
             //Checks if its already been compiled i.e. debug sql output
-            if (string.IsNullOrWhiteSpace(compiledSql))
+            if (compiledSql.Length == 0)
             {
                 //Compiles the querys into one massive query string
                 compiling();
             }
 
             //gets the query ready and wraps the query in the deadlock solution
-            MySqlCommand myCommand = new MySqlCommand(compiledSql, myConnection);
+            MySqlCommand myCommand = new MySqlCommand(compiledSql.ToString(), myConnection);
 
             myCommand.CommandTimeout = connectionTime;
 
@@ -134,7 +134,7 @@ namespace DotNetSDB
         protected virtual MySqlDataReader CoreProcessingReaderReturn(MySqlConnection myConnection, int counter = 0)
         {
             //Checks if its already been compiled i.e. debug sql output
-            if (string.IsNullOrWhiteSpace(compiledSql))
+            if (compiledSql.Length == 0)
             {
                 //Compiles the querys into one massive query string
                 compiling();
@@ -143,7 +143,7 @@ namespace DotNetSDB
             MySqlDataReader myReader = null;
 
             //gets the query ready and wraps the query in the deadlock solution
-            MySqlCommand myCommand = new MySqlCommand(compiledSql, myConnection);
+            MySqlCommand myCommand = new MySqlCommand(compiledSql.ToString(), myConnection);
 
             myCommand.CommandTimeout = connectionTime;
 
@@ -255,14 +255,14 @@ namespace DotNetSDB
         protected virtual MySqlDataAdapter CoreProcessingAdapterReturn(MySqlConnection myConnection, int counter = 0)
         {
             //Checks if its already been compiled i.e. debug sql output
-            if (string.IsNullOrWhiteSpace(compiledSql))
+            if (compiledSql.Length == 0)
             {
                 //Compiles the querys into one massive query string
                 compiling();
             }
 
             //gets the query ready and wraps the query in the deadlock solution
-            MySqlCommand myCommand = new MySqlCommand(compiledSql, myConnection);
+            MySqlCommand myCommand = new MySqlCommand(compiledSql.ToString(), myConnection);
 
             myCommand.CommandTimeout = connectionTime;
 
@@ -345,7 +345,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiledSql = "";
+                    compiledSql.Clear();
                 }
             }
         }
@@ -392,7 +392,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiledSql = "";
+                    compiledSql.Clear();
                 }
             }
         }
@@ -436,7 +436,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiledSql = "";
+                    compiledSql.Clear();
                 }
             }
         }
@@ -482,7 +482,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiledSql = "";
+                    compiledSql.Clear();
                 }
             }
         }
@@ -527,7 +527,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiledSql = "";
+                    compiledSql.Clear();
                 }
             }
         }
@@ -572,7 +572,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiledSql = "";
+                    compiledSql.Clear();
                 }
             }
         }
@@ -617,7 +617,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiledSql = "";
+                    compiledSql.Clear();
                 }
             }
         }
@@ -755,7 +755,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiledSql = "";
+                    compiledSql.Clear();
                 }
             }
         }
@@ -795,7 +795,7 @@ namespace DotNetSDB
                 {
                     //Clears the queries ready for the next
                     disposeAll();
-                    compiledSql = "";
+                    compiledSql.Clear();
                 }
             }
         }

@@ -17,9 +17,7 @@ namespace DotNetSDB
             string whereOperator = (string.IsNullOrWhiteSpace(theOperator) ? "=" : theOperator);
             string startWrapper = (!string.IsNullOrWhiteSpace(start) ? start : "");
             string endWrapper = (!string.IsNullOrWhiteSpace(end) ? end : "");
-
-            string temp_build = "";
-
+            
             //Adds the operator *default and*
             if (theQuery.whereStatements.Count != 0)
             {
@@ -27,8 +25,7 @@ namespace DotNetSDB
             }
 
             //Builds the sql string
-            temp_build = $"{startWrapper} {tableName}.{field} {whereOperator} {definition}0 {endWrapper}";
-            theQuery.whereStatements.Add(temp_build);
+            theQuery.whereStatements.Add($"{startWrapper} {tableName}.{field} {whereOperator} {definition}0 {endWrapper}");
         }
 
         /*##########################################*/
