@@ -4,6 +4,34 @@
         <name>dotnetsdb</name>
     </assembly>
     <members>
+        <member name="M:DotNetSDB.MySQLCore.WindowsAuthConnectionString">
+            <summary>
+            Builds the MySQL windows connection string
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.SqlAuthConnectionString">
+            <summary>
+            Builds the MySQL SQL user connection string
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.CoreCommandSetup">
+            <summary>
+            This is the core function that sets up the SQL command object ready for execution
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.DeadLockRetry``1(MySql.Data.MySqlClient.MySqlConnection,MySql.Data.MySqlClient.MySqlCommand,System.Int32,MySql.Data.MySqlClient.MySqlException,System.Func{MySql.Data.MySqlClient.MySqlConnection,System.Int32,``0})">
+            <summary>
+            This is the core Deadlock retry functionality
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="myConnection"></param>
+            <param name="myCommand"></param>
+            <param name="counter"></param>
+            <param name="exception"></param>
+            <param name="runFunction"></param>
+            <returns></returns>
+        </member>
         <member name="M:DotNetSDB.MySQLCore.run">
             <summary>
             <para>This executes the sql which has been added.</para>
@@ -63,21 +91,25 @@
             <param name="delimiter">the delimiter</param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySQLCore.run_procedure_return_datatable(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="T:DotNetSDB.MySQLCore.StoredProcedure">
             <summary>
-            This executes the procedure passed and returns the results in a datatable.
+            This object stores the internal stored procedure data
             </summary>
-            <param name="procedureName"></param>
-            <param name="theParameters"></param>
-            <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySQLCore.run_procedure(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="P:DotNetSDB.MySQLCore.StoredProcedure.Name">
             <summary>
-            <para>This executes the procedure passed.</para>
-            <para>Note: This does not return any data, it only executes the procedure.</para>
+            Holds the stored procedures name
             </summary>
-            <param name="procedureName"></param>
-            <param name="theParameters"></param>
+        </member>
+        <member name="P:DotNetSDB.MySQLCore.StoredProcedure.Parameters">
+            <summary>
+            Holds the stored procedures parameters that are going to be supplied
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLCore.Procedure">
+            <summary>
+            This variable stores the information for the stored procedure that is to be run on an execution method
+            </summary>
         </member>
         <member name="M:DotNetSDB.MySQLCore.return_compiled_sql_string">
             <summary>
@@ -105,6 +137,19 @@
             <param name="startLocation"></param>
             <param name="numberOfRows"></param>
         </member>
+        <member name="M:DotNetSDB.MySQLCore.ProcedureValidation(System.String)">
+            <summary>
+            This function runs validation checks against the stored procedure before setting it up
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.add_stored_procedure(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            This function adds a stored procedure and its parameters to be run
+            </summary>
+            <param name="name"></param>
+            <param name="parameters"></param>
+        </member>
         <member name="M:DotNetSDB.MySQLCore.table_fields(System.String)">
             <summary>
             This function returns all the column names of a table
@@ -119,30 +164,118 @@
             <param name="tableName"></param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.MySQLUserConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+        <member name="T:DotNetSDB.MySQLConnection">
             <summary>
-            This function is the initialisation for the mysql user connection class
+            The MySQL connection class
             </summary>
-            <param name="serverName"></param>
-            <param name="username"></param>
-            <param name="password"></param>
-            <param name="databaseName"></param>
-            <param name="connectionTimeout"></param>
-            <param name="errorLogger"></param>
-            <param name="additionalConnectionString"></param>
         </member>
-        <member name="M:DotNetSDB.MySQLUserConnection.#ctor(System.String,System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+        <member name="P:DotNetSDB.MySQLConnection.Server">
             <summary>
-            This function is the initialisation for the mysql user connection class
+            Holds the server location
             </summary>
-            <param name="serverName"></param>
-            <param name="username"></param>
-            <param name="password"></param>
-            <param name="databaseName"></param>
-            <param name="thePort"></param>
-            <param name="connectionTimeout"></param>
-            <param name="errorLogger"></param>
-            <param name="additionalConnectionString"></param>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.User">
+            <summary>
+            Holds the SQL username to use
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.Password">
+            <summary>
+            Holds the SQL user password to use
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.Database">
+            <summary>
+            Holds the database name to connect to
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.IntegratedSecurity">
+            <summary>
+            Holds whether or not to use windows authentication
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.Port">
+            <summary>
+            Holds the port to connect to *-1 means default*
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.ConnectionTimeout">
+            <summary>
+            Holds the connection timeout for the SQL connection
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.ConnectionStringExtra">
+            <summary>
+            Holds any extra connection string parameters
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.LoggerSettings">
+            <summary>
+            Holds the output management settings to use on failures
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.Validation">
+            <summary>
+            This function validates the connection information has the basic requirements
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,DotNetSDB.output.OutputManagementSettings)">
+            <summary>
+            This function sets up the MySQL connection based on a connection string
+            </summary>
+            <param name="connectionString">the MySQL connection string to use</param>
+            <param name="errorLogger">the error logger settings</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the MySQL connection based on an SQL user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="username">the SQL username to connect with</param>
+            <param name="password">the SQL user password to connect with</param>
+            <param name="database">database to connect to</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the MySQL connection based on an SQL user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="username">the SQL username to connect with</param>
+            <param name="password">the SQL user password to connect with</param>
+            <param name="database">database to connect to</param>   
+            <param name="port">the port to connect to the MySQL instance</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the MySQL connection based on a windows user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="database">database to connect to</param>        
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the MySQL connection based on a windows user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="database">database to connect to</param>        
+            <param name="port">the port to connect to the MySQL instance</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.Dispose">
+            <summary>
+            This is the core dispose function for the connection details
+            </summary>
         </member>
         <member name="T:DotNetSDB.MySqlTypeConvertor">
             <summary>
@@ -575,6 +708,28 @@
             <param name="startWrapper">Optional start wrapper</param>
             <param name="endWrapper">Optional end wrapper</param>
         </member>
+        <member name="T:DotNetSDB.SQLServer2008">
+            <summary>
+            The SQL Server 2008 class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            Initialises the SQL Server connection with the supplied connection object
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2012">
+            <summary>
+            The SQL Server 2012 class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            Initialises the SQL Server connection with the supplied connection object
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
+        </member>
         <member name="M:DotNetSDB.SQLServer2012.add_offset(System.Int32,System.Int32)">
             <summary>
             Note: This function requires an orderby before using it
@@ -582,12 +737,34 @@
             <param name="offsetRows"></param>
             <param name="numberOfRows"></param>
         </member>
+        <member name="T:DotNetSDB.SQLServer2014">
+            <summary>
+            The SQL Server 2014 class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            Initialises the SQL Server connection with the supplied connection object
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
+        </member>
         <member name="M:DotNetSDB.SQLServer2014.add_offset(System.Int32,System.Int32)">
             <summary>
             Note: This function requires an orderby before using it
             </summary>
             <param name="offsetRows"></param>
             <param name="numberOfRows"></param>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2016">
+            <summary>
+            The SQL Server 2016 class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2016.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            Initialises the SQL Server connection with the supplied connection object
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
         </member>
         <member name="M:DotNetSDB.SQLServer2016.add_offset(System.Int32,System.Int32)">
             <summary>
@@ -598,8 +775,48 @@
         </member>
         <member name="T:DotNetSDB.SqlServerCore">
             <summary>
-            The main core class for the sql server
+            The main core class for the SQL Server Base
             </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.WindowsAuthConnectionString">
+            <summary>
+            Builds the SQL Server windows connection string
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.SqlAuthConnectionString">
+            <summary>
+            Builds the SQL Server user connection string
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            This initialises the SQL Server connection
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.is_alive">
+            <summary>
+            This function checks to see if the connection information allows a connections or not
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.CoreCommandSetup">
+            <summary>
+            This is the core function that sets up the SQL command object ready for execution
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.DeadLockRetry``1(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlCommand,System.Int32,System.Data.SqlClient.SqlException,System.Func{System.Data.SqlClient.SqlConnection,System.Int32,``0})">
+            <summary>
+            This is the core Deadlock retry functionality
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="myConnection"></param>
+            <param name="myCommand"></param>
+            <param name="counter"></param>
+            <param name="exception"></param>
+            <param name="runFunction"></param>
+            <returns></returns>
         </member>
         <member name="M:DotNetSDB.SqlServerCore.run">
             <summary>
@@ -669,21 +886,25 @@
             <param name="delimiter">the delimiter</param>
             <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.run_procedure_return_datatable(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+        <member name="T:DotNetSDB.SqlServerCore.StoredProcedure">
             <summary>
-            This executes the procedure passed and returns the results in a datatable.
+            This object stores the internal stored procedure data
             </summary>
-            <param name="procedureName"></param>
-            <param name="theParameters"></param>
-            <returns></returns>
         </member>
-        <member name="M:DotNetSDB.SqlServerCore.run_procedure(System.String,System.Data.SqlClient.SqlParameter[])">
+        <member name="P:DotNetSDB.SqlServerCore.StoredProcedure.Name">
             <summary>
-            <para>This executes the procedure passed.</para>
-            <para>Note: This does not return any data, it only executes the procedure.</para>
+            Holds the stored procedures name
             </summary>
-            <param name="procedureName"></param>
-            <param name="theParameters"></param>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.StoredProcedure.Parameters">
+            <summary>
+            Holds the stored procedures parameters that are going to be supplied
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.Procedure">
+            <summary>
+            This variable stores the information for the stored procedure that is to be run on an execution method
+            </summary>
         </member>
         <member name="M:DotNetSDB.SqlServerCore.return_compiled_sql_string">
             <summary>
@@ -753,6 +974,19 @@
             </summary>
             <param name="topValue"></param>
         </member>
+        <member name="M:DotNetSDB.SqlServerCore.ProcedureValidation(System.String)">
+            <summary>
+            This function runs validation checks against the stored procedure before setting it up
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_stored_procedure(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            This function adds a stored procedure and its parameters to be run
+            </summary>
+            <param name="name"></param>
+            <param name="parameters"></param>
+        </member>
         <member name="M:DotNetSDB.SqlServerCore.table_fields(System.String)">
             <summary>
             This function returns all the column names of a table
@@ -783,61 +1017,118 @@
             <param name="fields"></param>
             <param name="values"></param>
         </member>
-        <member name="T:DotNetSDB.SQLServerUserConnection">
+        <member name="T:DotNetSDB.SQLServerConnection">
             <summary>
-            The sql server user connection class
+            The SQL Server connection class
             </summary>
         </member>
-        <member name="M:DotNetSDB.SQLServerUserConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+        <member name="P:DotNetSDB.SQLServerConnection.Server">
             <summary>
-            This function is the initialisation for the sql server user connection class
-            </summary>
-            <param name="serverName"></param>
-            <param name="username"></param>
-            <param name="password"></param>
-            <param name="databaseName"></param>        
-            <param name="connectionTimeout"></param>
-            <param name="errorLogger"></param>
-            <param name="additionalConnectionString"></param>
-        </member>
-        <member name="M:DotNetSDB.SQLServerUserConnection.#ctor(System.String,System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
-            <summary>
-            This function is the initialisation for the sql server user connection class
-            </summary>
-            <param name="serverName"></param>
-            <param name="username"></param>
-            <param name="password"></param>
-            <param name="databaseName"></param>
-            <param name="thePort"></param>
-            <param name="connectionTimeout"></param>
-            <param name="errorLogger"></param>
-            <param name="additionalConnectionString"></param>
-        </member>
-        <member name="T:DotNetSDB.SQLServerWindowsConnection">
-            <summary>
-            The sql server windows connection class
+            Holds the server location
             </summary>
         </member>
-        <member name="M:DotNetSDB.SQLServerWindowsConnection.#ctor(System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+        <member name="P:DotNetSDB.SQLServerConnection.User">
             <summary>
-            This function is the initialisation for the sql server windows connection class
+            Holds the SQL username to use
             </summary>
-            <param name="serverName"></param>
-            <param name="database"></param>        
-            <param name="connectionTimeout"></param>
-            <param name="errorLogger"></param>
-            <param name="additionalConnectionString"></param>
         </member>
-        <member name="M:DotNetSDB.SQLServerWindowsConnection.#ctor(System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+        <member name="P:DotNetSDB.SQLServerConnection.Password">
             <summary>
-            This function is the initialisation for the sql server windows connection class
+            Holds the SQL user password to use
             </summary>
-            <param name="serverName"></param>
-            <param name="database"></param>
-            <param name="thePort"></param>
-            <param name="connectionTimeout"></param>
-            <param name="errorLogger"></param>
-            <param name="additionalConnectionString"></param>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.Database">
+            <summary>
+            Holds the database name to connect to
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.IntegratedSecurity">
+            <summary>
+            Holds whether or not to use windows authentication
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.Port">
+            <summary>
+            Holds the port to connect to *-1 means default*
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.ConnectionTimeout">
+            <summary>
+            Holds the connection timeout for the SQL connection
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.ConnectionStringExtra">
+            <summary>
+            Holds any extra connection string parameters
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.LoggerSettings">
+            <summary>
+            Holds the output management settings to use on failures
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.Validation">
+            <summary>
+            This function validates the connection information has the basic requirements
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,DotNetSDB.output.OutputManagementSettings)">
+            <summary>
+            This function sets up the SQL Server connection based on a connection string
+            </summary>
+            <param name="connectionString">the SQL Server connection string to use</param>
+            <param name="errorLogger">the error logger settings</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the SQL Server connection based on an SQL user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="username">the SQL username to connect with</param>
+            <param name="password">the SQL user password to connect with</param>
+            <param name="database">database to connect to</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the SQL Server connection based on an SQL user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="username">the SQL username to connect with</param>
+            <param name="password">the SQL user password to connect with</param>
+            <param name="database">database to connect to</param>   
+            <param name="port">the port to connect to the SQL Server instance</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the SQL Server connection based on a windows user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="database">database to connect to</param>        
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the SQL Server connection based on a windows user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="database">database to connect to</param>        
+            <param name="port">the port to connect to the SQL Server instance</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.Dispose">
+            <summary>
+            This is the core dispose function for the connection details
+            </summary>
         </member>
         <member name="T:DotNetSDB.SqlServerTypeConvertor">
             <summary>

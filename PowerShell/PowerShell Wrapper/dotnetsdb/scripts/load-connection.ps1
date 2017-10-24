@@ -18,9 +18,15 @@ if($configLoaded)
 	# Gets the current scripts full path location
 	$ScriptDir = Split-Path -parent $MyInvocation.MyCommand.Path
 
-	# Loads the system.data library
+	# Loads the system.data library as we are using datatables
 	[void] [System.Reflection.Assembly]::LoadWithPartialName("System")
 
+	# Loads the MySQL.Data library dependency using the full path of the script as its in the same folder structure
+	[System.Reflection.Assembly]::LoadFile("$ScriptDir\..\dll\MySql.Data.dll")
+	
+	# Loads the Microsoft.SqlServer.Types library using the full path of the script as its in the same folder structure
+	[System.Reflection.Assembly]::LoadFile("$ScriptDir\..\dll\Microsoft.SqlServer.Types.dll")
+	
 	# Loads the DotNetSDB library using the full path of the script as its in the same folder structure
 	[System.Reflection.Assembly]::LoadFile("$ScriptDir\..\dll\dotnetsdb.dll")
 
@@ -45,12 +51,12 @@ if($configLoaded)
 	if($config.windowsAuth)
 	{
 		# Sets up the windows auth database connection
-		$con = New-Object DotNetSDB.SQLServerWindowsConnection -argumentlist $config.host, $config.database, $config.timeout, $logger, $config.additionalConnectionString
+		$con = New-Object DotNetSDB.SQLServerConnection -argumentlist $config.host, $config.database, $config.timeout, $logger, $config.additionalConnectionString
 	}
 	else
 	{
 		# Sets up the sql user database connection		
-		$con = New-Object DotNetSDB.SQLServerUserConnection -argumentlist $config.host, $config.username, $config.password, $config.database, $config.timeout, $logger, $config.additionalConnectionString
+		$con = New-Object DotNetSDB.SQLServerConnection -argumentlist $config.host, $config.username, $config.password, $config.database, $config.timeout, $logger, $config.additionalConnectionString
 	}
 
 	try

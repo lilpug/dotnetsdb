@@ -20,7 +20,16 @@ namespace DotNetSDB
                 {
                     counter++;
 
-                    var newDefinition = $"{definition}{counter}";
+                    //Use the definition literally if its a stored procedure
+                    string newDefinition = null;
+                    if (Procedure != null)
+                    {
+                        newDefinition = definition;
+                    }
+                    else
+                    {
+                        newDefinition = $"{definition}{counter}";
+                    }
 
                     command.Parameters.AddWithValue(newDefinition, ((data == null) ? DBNull.Value : data));
                     if (data != null)

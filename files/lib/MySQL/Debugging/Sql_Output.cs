@@ -46,7 +46,7 @@ namespace DotNetSDB
             return Regex.Replace(text, @"" + search + "+", replace);
         }
 
-        protected string GetCompiledSqlFromCommand(ref MySqlCommand myCommand)
+        protected string GetCompiledSqlFromCommand(MySqlCommand myCommand)
         {
             try
             {

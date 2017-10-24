@@ -2,7 +2,7 @@
 
 namespace DotNetSDB.SqlServer.FileTable
 {    
-    public partial class SqlServerFileTableExtension
+    public partial class SQLServerFileTableExtension
     {
 		private partial class ErrorHandler
         { 			

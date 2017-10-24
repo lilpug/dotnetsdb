@@ -8,6 +8,6 @@ namespace DotNetSDB
         /*       FileTable Extension Variable       */
         /*##########################################*/
 
-        public SqlServerFileTableExtension filetable;
+        public SQLServerFileTableExtension filetable;
     }
 }

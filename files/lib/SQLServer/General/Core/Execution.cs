@@ -16,259 +16,148 @@ namespace DotNetSDB
         //These functions are the core sql execution functions
         //Note: the reason the using statement is not within the core processing as when returning data from the reader or adapter the connection needs to be alive still
 
-        //Normal
-
-        protected virtual void CoreProcessing(SqlConnection myConnection, int counter = 0)
+        /// <summary>
+        /// This is the core function that sets up the SQL command object ready for execution
+        /// </summary>
+        /// <returns></returns>
+        protected virtual SqlCommand CoreCommandSetup()
         {
-            //Checks if its already been compiled i.e. debug sql output
-            if (compiledSql.Length == 0)
+            SqlCommand myCommand = null;
+
+            //Checks if we are running a stored procedure or normal query
+            if (Procedure != null)
             {
-                //Compiles the querys into one massive query string
-                compiling();
+                //Checks if its already been compiled i.e. debug sql output
+                if (compiledSql.Length == 0)
+                {
+                    //Compiles the querys into one massive query string
+                    compiling();
+                }
+
+                //Throws an exception if any SQL query exists as we also have stored procedure flags
+                if (compiledSql.Length > 0)
+                {
+                    throw new Exception("Database Execution Error: You cannot run both a stored procedure and an SQL query at the same time.");
+                }
+
+                //gets the insert query ready
+                myCommand = new SqlCommand(Procedure.Name, myConnection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+            }
+            //Normal query
+            else
+            {
+                //Checks if its already been compiled i.e. debug sql output
+                if (compiledSql.Length == 0)
+                {
+                    //Compiles the querys into one massive query string
+                    compiling();
+                }
+
+                //gets the query ready and wraps the query in the deadlock solution
+                myCommand = new SqlCommand(compiledSql.ToString(), myConnection);
             }
 
-            //gets the query ready and wraps the query in the deadlock solution
-            SqlCommand myCommand = new SqlCommand(compiledSql.ToString(), myConnection);
-
+            //Adds the connection timeout
             myCommand.CommandTimeout = connectionTime;
 
             //Checks for sanitisation
             SanitisationProcess(ref myCommand);
+
+            return myCommand;
+        }
+        
+        /// <summary>
+        /// This is the core Deadlock retry functionality
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="myConnection"></param>
+        /// <param name="myCommand"></param>
+        /// <param name="counter"></param>
+        /// <param name="exception"></param>
+        /// <param name="runFunction"></param>
+        /// <returns></returns>
+        protected virtual T DeadLockRetry<T>(SqlConnection myConnection, SqlCommand myCommand, int counter, SqlException exception, Func<SqlConnection, int, T> runFunction)
+        {
+            //Deadlock issue: re-attempt based on the number of tries we can do
+            if (exception.Number == 1205 && counter < maxDeadlockTry)
+            {
+                Thread.Sleep(1000);
+                return runFunction(myConnection, counter+1);
+            }
+            else
+            {
+                //Checks if a logger has been attached
+                if (loggerDetails != null)
+                {
+                    //Logs the data
+                    using (OutputManagement debugger = new OutputManagement(loggerDetails))
+                    {
+                        if (exception.Number == 1205)
+                        {
+                            debugger.AddToLog($"{exception.Message}{Environment.NewLine}DEADLOCK ERROR{Environment.NewLine}Query: '{GetCompiledSqlFromCommand(myCommand)}'");
+                        }
+                        else
+                        {
+                            debugger.AddToLog($"{exception.Message}{Environment.NewLine}Query: '{GetCompiledSqlFromCommand(myCommand)}'");
+                        }
+                    }
+                }
+                throw exception;
+            }
+        }
+
+        //Normal
+        
+        protected virtual bool CoreProcessing(SqlConnection myConnection, int counter = 0)
+        {
+            //Sets up the command object
+            SqlCommand myCommand = CoreCommandSetup();
 
             try
             {
                 //Executes the query *if it does not throw an exception then it was done so successfully*
                 var value = myCommand.ExecuteNonQuery();
+
+                return true;
             }
             catch (SqlException e)
             {
-                //Deadlock issue: re-attempt based on the number of tries we can do
-                if (e.Number == 1205 && counter < maxDeadlockTry)
-                {
-                    Thread.Sleep(1000);
-                    CoreProcessing(myConnection, counter + 1);
-                }
-                else
-                {
-                    //Checks if a logger has been attached
-                    if (loggerDetails != null)
-                    {
-                        //Logs the data
-                        using (OutputManagement debugger = new OutputManagement(loggerDetails))
-                        {
-                            if (e.Number == 1205)
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
-                            }
-                            else
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
-                            }
-                        }
-                    }
-                    throw e;
-                }
-            }            
-        }
-
-        protected virtual void CoreProcedureProcessing(string procedureName, SqlConnection myConnection, int counter = 0, SqlParameter[] theParameters = null)
-        {
-            //Gets the output reader ready
-            SqlCommand myCommand = new SqlCommand();
-
-            //gets the insert query ready
-            myCommand = new SqlCommand(procedureName, myConnection);
-
-            myCommand.CommandType = CommandType.StoredProcedure;
-            myCommand.CommandTimeout = connectionTime;
-
-            //Checks its not null
-            if (theParameters != null)
-            {
-                //Adds all the parameters
-                foreach (SqlParameter parameter in theParameters)
-                {
-                    myCommand.Parameters.Add(parameter);
-                }
-            }
-
-            try
-            {
-                //Executes the query *if it does not throw an exception then it was done so successfully*
-                myCommand.ExecuteNonQuery();
-            }
-            catch (SqlException e)
-            {
-                //Deadlock issue: re-attempt based on the number of tries we can do
-                if (e.Number == 1205 && counter < maxDeadlockTry)
-                {
-                    Thread.Sleep(1000);
-                    CoreProcedureProcessing(procedureName, myConnection, counter + 1);
-                }
-                else
-                {
-                    //Checks if a logger has been attached
-                    if (loggerDetails != null)
-                    {
-                        //Logs the data
-                        using (OutputManagement debugger = new OutputManagement(loggerDetails))
-                        {
-                            if (e.Number == 1205)
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nStored Procedure: '{procedureName}'");
-                            }
-                            else
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nStored Procedure: '{procedureName}'");
-                            }
-                        }
-                    }
-                    throw e;
-                }
+                //Runs the deadlock retry function
+                return DeadLockRetry<bool>(myConnection, myCommand, counter, e, CoreProcessing);
             }
         }
-
+        
         //SqlDataReader
         //Note: This is more quicker and effective on memory as it does not store all the results in memory only a single row before iteration
 
         protected virtual SqlDataReader CoreProcessingReaderReturn(SqlConnection myConnection, int counter = 0)
         {
-            //Checks if its already been compiled i.e. debug sql output
-            if (compiledSql.Length == 0)
-            {
-                //Compiles the querys into one massive query string
-                compiling();
-            }
-
-            SqlDataReader myReader = null;
-
-            //gets the query ready and wraps the query in the deadlock solution
-            SqlCommand myCommand = new SqlCommand(compiledSql.ToString(), myConnection);
-
-            myCommand.CommandTimeout = connectionTime;
-
-            //Checks for sanitisation
-            SanitisationProcess(ref myCommand);
+            //Sets up the command object
+            SqlCommand myCommand = CoreCommandSetup();
 
             try
             {
-                //Executes the command and puts it into the reader
-                myReader = myCommand.ExecuteReader();                
-
-                return myReader;
+                //Executes the command and returns the reader it into the reader
+                return myCommand.ExecuteReader(); 
             }
             catch (SqlException e)
             {
-                //Deadlock issue: re-attempt based on the number of tries we can do
-                if (e.Number == 1205 && counter < maxDeadlockTry)
-                {
-                    Thread.Sleep(1000);
-                    //If after some delay the recursions succeeds then return its datareader chain to the original instance
-                    return CoreProcessingReaderReturn(myConnection, counter + 1);
-                }
-                else
-                {
-                    //Checks if a logger has been attached
-                    if (loggerDetails != null)
-                    {
-                        //Logs the data
-                        using (OutputManagement debugger = new OutputManagement(loggerDetails))
-                        {
-                            if (e.Number == 1205)
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
-                            }
-                            else
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
-                            }
-                        }
-                    }
-                    throw e;
-                }
+                //Runs the deadlock retry function
+                return DeadLockRetry(myConnection, myCommand, counter, e, CoreProcessingReaderReturn);
             }
         }
-
-        protected virtual SqlDataReader CoreProcedureProcessingReaderReturn(string procedureName, SqlConnection myConnection, int counter = 0, Dictionary<string, object> theParameters = null)
-        {
-            //Gets the output reader ready
-            SqlDataReader myReader = null;
-            SqlCommand myCommand = new SqlCommand();
-
-            //gets the insert query ready
-            myCommand = new SqlCommand(procedureName, myConnection);
-
-            myCommand.CommandType = CommandType.StoredProcedure;
-            myCommand.CommandTimeout = connectionTime;
-
-            //Checks its not null
-            if (theParameters != null && theParameters.Keys.Count > 0)
-            {
-                //Adds all the parameters
-                foreach (string parameter in theParameters.Keys)
-                {
-                    myCommand.Parameters.Add(new SqlParameter(parameter, theParameters[parameter]));
-                }
-            }
-
-            try
-            {
-                //Executes the command and puts it into the reader
-                myReader = myCommand.ExecuteReader();                
-
-                return myReader;
-            }
-            catch (SqlException e)
-            {
-                //Deadlock issue: re-attempt based on the number of tries we can do
-                if (e.Number == 1205 && counter < maxDeadlockTry)
-                {
-                    Thread.Sleep(1000);
-                    return CoreProcedureProcessingReaderReturn(procedureName, myConnection, counter + 1, theParameters);
-                }
-                else
-                {
-                    //Checks if a logger has been attached
-                    if (loggerDetails != null)
-                    {
-                        //Logs the data
-                        using (OutputManagement debugger = new OutputManagement(loggerDetails))
-                        {
-                            if (e.Number == 1205)
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nStored Procedure: '{procedureName}'");
-                            }
-                            else
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nStored Procedure: '{procedureName}'");
-                            }
-                        }
-                    }
-                    throw e;
-                }
-            }
-        }
-
+        
         //SqlDataAdapter
         //Note: This stores all the result set directly in memory
 
         protected virtual SqlDataAdapter CoreProcessingAdapterReturn(SqlConnection myConnection, int counter = 0)
-        {
-            //Checks if its already been compiled i.e. debug sql output
-            if (compiledSql.Length == 0)
-            {
-                //Compiles the querys into one massive query string
-                compiling();
-            }
-
-            //gets the query ready and wraps the query in the deadlock solution
-            SqlCommand myCommand = new SqlCommand(compiledSql.ToString(), myConnection);
-
-            myCommand.CommandTimeout = connectionTime;
-
-            //Checks for sanitisation
-            SanitisationProcess(ref myCommand);
-
+        {   
+            //Sets up the command object
+            SqlCommand myCommand = CoreCommandSetup();
+            
             try
             {
                 //Executes the command and puts it into the reader
@@ -278,35 +167,11 @@ namespace DotNetSDB
             }
             catch (SqlException e)
             {
-                //Deadlock issue: re-attempt based on the number of tries we can do
-                if (e.Number == 1205 && counter < maxDeadlockTry)
-                {
-                    Thread.Sleep(1000);
-                    //If after some delay the recursions succeeds then return its datareader chain to the original instance
-                    return CoreProcessingAdapterReturn(myConnection, counter + 1);
-                }
-                else
-                {
-                    //Checks if a logger has been attached
-                    if (loggerDetails != null)
-                    {
-                        //Logs the data
-                        using (OutputManagement debugger = new OutputManagement(loggerDetails))
-                        {
-                            if (e.Number == 1205)
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nDEADLOCK ERROR\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
-                            }
-                            else
-                            {
-                                debugger.AddToLog($"{e.Message}\r\nQuery: '{GetCompiledSqlFromCommand(ref myCommand)}'");
-                            }
-                        }
-                    }
-                    throw e;
-                }
+                //Runs the deadlock retry function
+                return DeadLockRetry(myConnection, myCommand, counter, e, CoreProcessingAdapterReturn);
             }
         }
+
 
         /*##########################################*/
         /*        Normal Sql Query functions        */
@@ -343,9 +208,10 @@ namespace DotNetSDB
                 }
                 finally
                 {
-                    //Clears the queries ready for the next
+                    //Clears the queries and stored procedure ready for the next
                     disposeAll();
                     compiledSql.Clear();
+                    Procedure = null;
                 }
             }
         }
@@ -390,9 +256,10 @@ namespace DotNetSDB
                 }
                 finally
                 {
-                    //Clears the queries ready for the next
+                    //Clears the queries and stored procedure ready for the next
                     disposeAll();
                     compiledSql.Clear();
+                    Procedure = null;
                 }
             }
         }
@@ -434,9 +301,10 @@ namespace DotNetSDB
                 }
                 finally
                 {
-                    //Clears the queries ready for the next
+                    //Clears the queries and stored procedure ready for the next
                     disposeAll();
                     compiledSql.Clear();
+                    Procedure = null;
                 }
             }
         }
@@ -480,9 +348,10 @@ namespace DotNetSDB
                 }
                 finally
                 {
-                    //Clears the queries ready for the next
+                    //Clears the queries and stored procedure ready for the next
                     disposeAll();
                     compiledSql.Clear();
+                    Procedure = null;
                 }
             }
         }
@@ -525,9 +394,10 @@ namespace DotNetSDB
                 }
                 finally
                 {
-                    //Clears the queries ready for the next
+                    //Clears the queries and stored procedure ready for the next
                     disposeAll();
                     compiledSql.Clear();
+                    Procedure = null;
                 }
             }
         }
@@ -570,9 +440,10 @@ namespace DotNetSDB
                 }
                 finally
                 {
-                    //Clears the queries ready for the next
+                    //Clears the queries and stored procedure ready for the next
                     disposeAll();
                     compiledSql.Clear();
+                    Procedure = null;
                 }
             }
         }
@@ -614,9 +485,10 @@ namespace DotNetSDB
                 }
                 finally
                 {
-                    //Clears the queries ready for the next
+                    //Clears the queries and stored procedure ready for the next
                     disposeAll();
                     compiledSql.Clear();
+                    Procedure = null;
                 }
             }
         }
@@ -689,9 +561,10 @@ namespace DotNetSDB
             }
             finally
             {
-                //Clears the queries ready for the next
+                //Clears the queries and stored procedure ready for the next
                 disposeAll();
                 compiledSql.Clear();
+                Procedure = null;
             }
         }
         
@@ -778,99 +651,6 @@ namespace DotNetSDB
                     }
                 }
                 throw e;
-            }
-        }
-
-
-        /*##########################################*/
-        /*        Procedure Sql Query functions     */
-        /*##########################################*/
-
-        /// <summary>
-        /// This executes the procedure passed and returns the results in a datatable.
-        /// </summary>
-        /// <param name="procedureName"></param>
-        /// <param name="theParameters"></param>
-        /// <returns></returns>
-        public virtual DataTable run_procedure_return_datatable(string procedureName, Dictionary<string, object> theParameters = null)
-        {
-            using (myConnection = new SqlConnection(connection))
-            {
-                //Opens the connection
-                myConnection.Open();
-
-                //Runs the core processing for a procedure and returns the data reader from it
-                SqlDataReader myReader = CoreProcedureProcessingReaderReturn(procedureName, myConnection, 0, theParameters);
-
-                try
-                {
-                    DataTable theResults = ResultToDataTable(ref myReader);
-
-                    //Closes the connections that are open
-                    myReader.Close();
-
-                    //This section Processes the results into datatable format
-                    return theResults;
-                }
-                catch (Exception e)
-                {
-                    //Checks if a logger has been attached
-                    if (loggerDetails != null)
-                    {
-                        //Logs the data
-                        using (OutputManagement debugger = new OutputManagement(loggerDetails))
-                        {
-                            debugger.AddToLog($"\r\nrun_procedure_return_datatable: '{e.Message}'");
-                        }
-                    }
-                    throw e;
-                }
-                finally
-                {
-                    //Clears the queries ready for the next
-                    disposeAll();
-                    compiledSql.Clear();
-                }
-            }
-        }
-
-        /// <summary>
-        /// <para>This executes the procedure passed.</para>
-        /// <para>Note: This does not return any data, it only executes the procedure.</para>
-        /// </summary>
-        /// <param name="procedureName"></param>
-        /// <param name="theParameters"></param>
-        public virtual void run_procedure(string procedureName, SqlParameter[] theParameters = null)
-        {
-            using (myConnection = new SqlConnection(connection))
-            {
-                //Opens the connection
-                myConnection.Open();
-
-                try
-                {
-                    //Runs the core processing for a procedure
-                    CoreProcedureProcessing(procedureName, myConnection, 0, theParameters);
-                }
-                catch (Exception e)
-                {
-                    //Checks if a logger has been attached
-                    if (loggerDetails != null)
-                    {
-                        //Logs the data
-                        using (OutputManagement debugger = new OutputManagement(loggerDetails))
-                        {
-                            debugger.AddToLog($"\r\nrun_procedure: '{e.Message}'");
-                        }
-                    }
-                    throw e;
-                }
-                finally
-                {
-                    //Clears the queries ready for the next
-                    disposeAll();
-                    compiledSql.Clear();
-                }
             }
         }
     }

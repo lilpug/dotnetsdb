@@ -1,27 +1,25 @@
 ﻿using DotNetSDB.Connector;
 using DotNetSDB.SqlServer.FileTable;
-using System.Data.SqlClient; //Used for sqlCommand etc
 
 namespace DotNetSDB
 {
+    /// <summary>
+    /// The SQL Server 2014 class
+    /// </summary>
     public partial class SQLServer2014 : SqlServerCore
     {
         /*##########################################*/
         /*      Database connection functions       */
         /*##########################################*/
 
-        //This is the constructor which initiases the connection to the database (overload function)
-        public SQLServer2014(SQLServerUserConnection connectionInformation)
+        /// <summary>
+        /// Initialises the SQL Server connection with the supplied connection object
+        /// </summary>
+        /// <param name="connectionInformation">the SQL Server Connection Object</param>
+        public SQLServer2014(SQLServerConnection connectionInformation)
             : base(connectionInformation)
         {
-            filetable = new SqlServerFileTableExtension(new DatabaseConnector(this), db);
-        }
-
-        //This is the constructor which initiases the connection to the database via windows authentication (overload function)
-        public SQLServer2014(SQLServerWindowsConnection connectionInformation)
-            : base(connectionInformation)
-        {
-            filetable = new SqlServerFileTableExtension(new DatabaseConnector(this), db);
+            filetable = new SQLServerFileTableExtension(new DatabaseConnector(this), db);
         }
     }
 }

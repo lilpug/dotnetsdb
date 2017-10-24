@@ -88,6 +88,9 @@
     <Compile Include="..\..\files\lib\MySQL\Core\Sanitisation.cs">
       <Link>MySQL\Core\Sanitisation.cs</Link>
     </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Core\Stored Procedure.cs">
+      <Link>MySQL\Core\Stored Procedure.cs</Link>
+    </Compile>
     <Compile Include="..\..\files\lib\MySQL\Core\Variables.cs">
       <Link>MySQL\Core\Variables.cs</Link>
     </Compile>
@@ -99,6 +102,9 @@
     </Compile>
     <Compile Include="..\..\files\lib\MySQL\Functions\Limit.cs">
       <Link>MySQL\Functions\Limit.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\MySQL\Functions\Stored Procedure.cs">
+      <Link>MySQL\Functions\Stored Procedure.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\MySQL\Functions\Table Fields.cs">
       <Link>MySQL\Functions\Table Fields.cs</Link>
@@ -397,6 +403,9 @@
     <Compile Include="..\..\files\lib\SQLServer\General\Core\Sanitisation.cs">
       <Link>SQLServer\General\Core\Sanitisation.cs</Link>
     </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Core\Stored Procedure.cs">
+      <Link>SQLServer\General\Core\Stored Procedure.cs</Link>
+    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\Core\Variables.cs">
       <Link>SQLServer\General\Core\Variables.cs</Link>
     </Compile>
@@ -457,6 +466,9 @@
     <Compile Include="..\..\files\lib\SQLServer\General\Functions\Select - extra.cs">
       <Link>SQLServer\General\Functions\Select - extra.cs</Link>
     </Compile>
+    <Compile Include="..\..\files\lib\SQLServer\General\Functions\Stored Procedure.cs">
+      <Link>SQLServer\General\Functions\Stored Procedure.cs</Link>
+    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\Functions\Table Fields.cs">
       <Link>SQLServer\General\Functions\Table Fields.cs</Link>
     </Compile>
@@ -480,42 +492,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\..\files\merge\ILMerge.exe">
-      <Link>ILMerge.exe</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\files\merge\merge.exe">
-      <Link>merge.exe</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>RMDIR /S /Q "seperate files"
-RMDIR /S /Q "single file"
-
-merge 4 dotnetsdb.dll dotnetsdb.dll mysql.data.dll Microsoft.SqlServer.Types.dll
-
-mkdir "seperate files"
-mkdir "single file"
-
-move /Y dotnetsdb.dll  .\"seperate files"\dotnetsdb.dll
-move /Y mysql.data.dll  .\"seperate files"\mysql.data.dll
-move /Y Microsoft.SqlServer.Types.dll  .\"seperate files"\Microsoft.SqlServer.Types.dll
-
-move /Y .\merged\dotnetsdb.dll .\"single file"\dotnetsdb.dll
-
-copy /Y dotnetsdb.xml .\"single file"\dotnetsdb.xml
-copy /Y dotnetsdb.xml .\"seperate files"\dotnetsdb.xml
-copy /Y dotnetsdb.pdb .\"single file"\dotnetsdb.pdb
-copy /Y dotnetsdb.pdb .\"seperate files"\dotnetsdb.pdb
-
-DEL /F /Q dotnetsdb.pdb
-DEL /F /Q dotnetsdb.xml
-DEL /F /Q merge.exe
-DEL /F /Q ILMerge.exe
-RMDIR /S /Q merged</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

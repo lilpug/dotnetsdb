@@ -1,21 +1,19 @@
-﻿using System.Data.SqlClient; //Used for sqlCommand etc
-
-namespace DotNetSDB
+﻿namespace DotNetSDB
 {
+    /// <summary>
+    /// The SQL Server 2008 class
+    /// </summary>
     public partial class SQLServer2008 : SqlServerCore
     {
         /*##########################################*/
         /*      Database connection functions       */
         /*##########################################*/
 
-        //This is the constructor which initiases the connection to the database (overload function)
-        public SQLServer2008(SQLServerUserConnection connectionInformation)
-            : base(connectionInformation)
-        {
-        }
-
-        //This is the constructor which initiases the connection to the database via windows authentication (overload function)
-        public SQLServer2008(SQLServerWindowsConnection connectionInformation)
+        /// <summary>
+        /// Initialises the SQL Server connection with the supplied connection object
+        /// </summary>
+        /// <param name="connectionInformation">the SQL Server Connection Object</param>
+        public SQLServer2008(SQLServerConnection connectionInformation)
             : base(connectionInformation)
         {
         }

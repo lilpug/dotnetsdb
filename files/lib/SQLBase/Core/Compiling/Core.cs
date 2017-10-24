@@ -54,7 +54,11 @@ namespace DotNetSDB
                 CompileBackup();
             }
 
-            compiledSql.Append(" ");
+            //If its not empty and we are adding to it then put a space in
+            if (compiledSql.Length > 0)
+            {
+                compiledSql.Append(" ");
+            }
 
             foreach (Query current in theQueries)
             {
@@ -72,7 +76,11 @@ namespace DotNetSDB
             }
 
             compiledSql = compiledSql.Replace("  ", " "); //Removes any duplicate spaces with a space in the compile building
-            compiledSql = compiledSql.Trim(); //Removes the whitespace at the start and end of the compile building
+
+            if(compiledSql.Length > 0 && !string.IsNullOrWhiteSpace(compiledSql.ToString()))
+            {
+                compiledSql = compiledSql.Trim(); //Removes the whitespace at the start and end of the compile building
+            }            
             
             if (backup)
             {

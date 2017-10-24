@@ -20,7 +20,16 @@ namespace DotNetSDB
                 {
                     counter++;
 
-                    var newDefinition = $"{definition}{counter}";
+                    //Use the definition literally if its a stored procedure
+                    string newDefinition = null;
+                    if (Procedure != null)
+                    {
+                        newDefinition = definition;
+                    }
+                    else
+                    {
+                        newDefinition = $"{definition}{counter}";
+                    }
 
                     command.Parameters.AddWithValue(newDefinition, ((data == null) ? DBNull.Value : data));
                     if (data != null)
@@ -41,64 +50,84 @@ namespace DotNetSDB
         //This function processes all the different sanitisations that have been declared
         protected void SanitisationProcess(ref MySqlCommand command)
         {
-            //The definition is broken into the following numbers:-
-            //Operator definition, query number, operator number, value number
-
-            //This loops through all the querys checking the values sanitize correctly
-            for(int qc=0; qc<theQueries.Count; qc++)
+            //This checks if we are sanitising a stored procedure or a query
+            if (Procedure != null)
             {
-                Query current = theQueries[qc];
-                int realQueryCount = qc + 1;
+                //Runs the stored procedure process
 
-                if (current.whereRealValues.Count != 0)
+                //Checks if any parameters have been supplied with the command to call the stored procedure
+                if (Procedure.Parameters != null && Procedure.Parameters.Count > 0)
                 {
-                    for(int i=0; i<current.whereRealValues.Count; i++)
+                    //Loops over all the keys in the stored procedure
+                    foreach (string name in Procedure.Parameters.Keys)
                     {
-                        SanitiseItems($"{whereDefinition}_{realQueryCount}_{i}_", ref command, current.whereRealValues[i]);
+                        SanitiseItems(name, ref command, Procedure.Parameters[name]);
                     }
                 }
+            }
+            else
+            {
+                //Runs the query process
 
-                if (current.updateRealValues.Count != 0)
+                //The definition is broken into the following numbers:-
+                //Operator definition, query number, operator number, value number
+
+                //This loops through all the querys checking the values sanitize correctly
+                for (int qc = 0; qc < theQueries.Count; qc++)
                 {
-                    for(int i=0; i<current.updateRealValues.Count; i++)
+                    Query current = theQueries[qc];
+                    int realQueryCount = qc + 1;
+
+                    if (current.whereRealValues.Count != 0)
                     {
-                        SanitiseItems($"{updateDefinition}_{realQueryCount}_{i}_", ref command, current.updateRealValues[i]);                        
+                        for (int i = 0; i < current.whereRealValues.Count; i++)
+                        {
+                            SanitiseItems($"{whereDefinition}_{realQueryCount}_{i}_", ref command, current.whereRealValues[i]);
+                        }
                     }
-                }
 
-                if (current.insertRealValues.Count != 0)
-                {   
-                    for(int i=0; i< current.insertRealValues.Count; i++)
-                    {   
-                        SanitiseItems($"{insertDefinition}_{realQueryCount}_{i}_", ref command, current.insertRealValues[i]);
-                        
-                    }
-                }
-
-                if (current.customRealValues.Count != 0)
-                {
-                    for(int i=0; i< current.customRealValues.Count; i++)
+                    if (current.updateRealValues.Count != 0)
                     {
-                        SanitiseItems($"{customDefinition}_{realQueryCount}_{i}_", ref command, current.customRealValues[i]);
+                        for (int i = 0; i < current.updateRealValues.Count; i++)
+                        {
+                            SanitiseItems($"{updateDefinition}_{realQueryCount}_{i}_", ref command, current.updateRealValues[i]);
+                        }
                     }
+
+                    if (current.insertRealValues.Count != 0)
+                    {
+                        for (int i = 0; i < current.insertRealValues.Count; i++)
+                        {
+                            SanitiseItems($"{insertDefinition}_{realQueryCount}_{i}_", ref command, current.insertRealValues[i]);
+
+                        }
+                    }
+
+                    if (current.customRealValues.Count != 0)
+                    {
+                        for (int i = 0; i < current.customRealValues.Count; i++)
+                        {
+                            SanitiseItems($"{customDefinition}_{realQueryCount}_{i}_", ref command, current.customRealValues[i]);
+                        }
+                    }
+
+                    //This section does the extra functions via Mysql Core
+
+                    //Gets the index of the current query we are on
+                    int index = theQueries.IndexOf(current);
+                    if (theQueries2[index].exist_real_table_value != null && theQueries2[index].exist_real_table_value.Length > 0)
+                    {
+                        SanitiseItems($"{existDefinition}_{realQueryCount}_0_", ref command, theQueries2[index].exist_real_table_value);
+                    }
+
+                    if (theQueries2[index].get_fields_real_table_value != null && theQueries2[index].get_fields_real_table_value.Length > 0)
+                    {
+                        SanitiseItems($"{fieldsDefinition}_{realQueryCount}_0_", ref command, theQueries2[index].get_fields_real_table_value);
+                    }
+
+                    //Fires the extra hook run
+                    ExtraSanitisationProcessing(current, realQueryCount);
                 }
-
-                //This section does the extra functions via Mysql Core
-
-                //Gets the index of the current query we are on
-                int index = theQueries.IndexOf(current);
-                if (theQueries2[index].exist_real_table_value != null && theQueries2[index].exist_real_table_value.Length > 0)
-                {
-                    SanitiseItems($"{existDefinition}_{realQueryCount}_0_", ref command, theQueries2[index].exist_real_table_value);
-                }
-
-                if (theQueries2[index].get_fields_real_table_value != null && theQueries2[index].get_fields_real_table_value.Length > 0)
-                {
-                    SanitiseItems($"{fieldsDefinition}_{realQueryCount}_0_", ref command, theQueries2[index].get_fields_real_table_value);
-                }
-
-                //Fires the extra hook run
-                ExtraSanitisationProcessing(current, realQueryCount);
             }
         }
 

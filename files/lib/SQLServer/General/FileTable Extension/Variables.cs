@@ -3,7 +3,7 @@ using System;
 
 namespace DotNetSDB.SqlServer.FileTable
 {
-    public partial class SqlServerFileTableExtension
+    public partial class SQLServerFileTableExtension
     {
         //Holds the database connection in a dynamic object *thus we can use all versions of sql server in one class*
         private DatabaseConnector connector;
@@ -12,7 +12,7 @@ namespace DotNetSDB.SqlServer.FileTable
 		public FileTablePermissions permissions;			
 		public FileTableTasks tasks;
 			
-        public SqlServerFileTableExtension(DatabaseConnector databaseObject, string databaseName)
+        public SQLServerFileTableExtension(DatabaseConnector databaseObject, string databaseName)
         {
             //Sets the connection object
             connector = databaseObject;
