@@ -7,10 +7,18 @@ namespace DotNetSDB.SqlServer.FileTable
 {    
     public partial class SQLServerFileTableExtension
     {
+        /// <summary>
+        /// This is the FileTableTasks class
+        /// </summary>
 		public partial class FileTableTasks
 		{
-            //This function returns a name which is not in use compared to the array passed
-            //Note: this will work for both folders and files as file extension will be blank on the folder version
+            /// <summary>
+            /// This function returns a name which is not in use compared to the array passed
+            /// Note: this will work for both folders and files as file extension will be blank on the folder version
+            /// </summary>
+            /// <param name="name"></param>
+            /// <param name="allNames"></param>
+            /// <returns></returns>
             private string GetNewName(string name, string[] allNames)
             {
                 //Seperates the filename and extension for help building the new filename
@@ -52,24 +60,29 @@ namespace DotNetSDB.SqlServer.FileTable
                 return name;
             }
 
-            //This function generates a new path locator ID based on the parents path locator
-            //Note: when injecting files into a filetable via sql query this has to be done as its not auto generated.
+            /// <summary>
+            /// This function generates a new path locator ID based on the parents path locator
+            /// Note: when injecting files into a filetable via sql query this has to be done as its not auto generated
+            /// </summary>
+            /// <param name="tableName"></param>
+            /// <param name="streamID"></param>
+            /// <returns></returns>
             private string CreateNewFolderPathLocator(string tableName, string streamID)
 			{
 				try
 				{
 					//Gets the path locator for combining with the new ID
-					connector.db.add_select(tableName, "path_locator", "CAST( ", " AS varchar(max)) as path_locator");
-					connector.db.add_where_normal(tableName, "stream_id", streamID);
-					connector.db.add_where_normal(tableName, "is_directory", 1);
-					string folderLocator = connector.db.run_return_string();
+					connector.DB.add_select(tableName, "path_locator", "CAST( ", " AS varchar(max)) as path_locator");
+					connector.DB.add_where_normal(tableName, "stream_id", streamID);
+					connector.DB.add_where_normal(tableName, "is_directory", 1);
+					string folderLocator = connector.DB.run_return_string();
 
 					//Ensures the path locator is not empty
 					if (!string.IsNullOrWhiteSpace(folderLocator))
 					{
 						//Creates the new ID and outputs it
-						connector.db.add_pure_sql($"select CONCAT('{folderLocator}', CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 1, 6))) +'.'+ CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 7, 6))) +'.'+ CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 13, 4))), '/') as path");
-						return connector.db.run_return_string();
+						connector.DB.add_pure_sql($"select CONCAT('{folderLocator}', CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 1, 6))) +'.'+ CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 7, 6))) +'.'+ CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 13, 4))), '/') as path");
+						return connector.DB.run_return_string();
 					}
 					else
 					{
@@ -82,15 +95,19 @@ namespace DotNetSDB.SqlServer.FileTable
 				}
 			}
 
-            //This function generates a new path locator ID based on the root directory path locator
-            //Note: when injecting files into a filetable via sql query this has to be done as its not auto generated.
+            /// <summary>
+            /// This function generates a new path locator ID based on the root folder path locator
+            /// Note: when injecting files into a filetable via sql query this has to be done as its not auto generated.
+            /// </summary>
+            /// <param name="tableName"></param>
+            /// <returns></returns>
             private string CreateNewRootPathLocator(string tableName)
             {
                 try
                 {   
                     //Creates the new ID for the root of the table and outputs it
-                    connector.db.add_pure_sql($"select CONCAT(GetPathLocator(FileTableRootPath('{tableName}')).ToString(), CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 1, 6))) +'.'+ CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 7, 6))) +'.'+ CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 13, 4))), '/') as path");
-                    return connector.db.run_return_string();
+                    connector.DB.add_pure_sql($"select CONCAT(GetPathLocator(FileTableRootPath('{tableName}')).ToString(), CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 1, 6))) +'.'+ CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 7, 6))) +'.'+ CONVERT(VARCHAR(20), CONVERT(BIGINT, SUBSTRING(CONVERT(BINARY(16), NEWID()), 13, 4))), '/') as path");
+                    return connector.DB.run_return_string();
                 }
                 catch (Exception e)
                 {
@@ -98,16 +115,21 @@ namespace DotNetSDB.SqlServer.FileTable
                 }
             }
 
-            //This function recursively deletes a folder structure and all its content within it
+            /// <summary>
+            /// This function recursively deletes a folder structure and all its content within it
+            /// </summary>
+            /// <param name="tableName"></param>
+            /// <param name="locator"></param>
+            /// <param name="deleteBaseFolder"></param>
             private void DeleteFolderContentRecursively(string tableName, string locator, bool deleteBaseFolder = true)
 			{
 				try
 				{
                     //Gets the path_locators for all the folders which are within our current one
-                    connector.db.add_select(tableName, "path_locator", "CAST( ", " AS varchar(max)) as path_locator");
-					connector.db.add_where_normal(tableName, "parent_path_locator", locator);
-					connector.db.add_where_normal(tableName, "is_directory", 1);
-					DataTable dt = connector.db.run_return_datatable();
+                    connector.DB.add_select(tableName, "path_locator", "CAST( ", " AS varchar(max)) as path_locator");
+					connector.DB.add_where_normal(tableName, "parent_path_locator", locator);
+					connector.DB.add_where_normal(tableName, "is_directory", 1);
+					DataTable dt = connector.DB.run_return_datatable();
 
                     //Loops over all the folders
 					foreach (DataRow dr in dt.Rows)
@@ -124,20 +146,20 @@ namespace DotNetSDB.SqlServer.FileTable
 					}
 
 					//Removes the files in the directory
-					connector.db.add_delete(tableName);
-					connector.db.add_where_normal(tableName, "parent_path_locator", locator);
-					connector.db.add_where_normal(tableName, "is_directory", 0);
-					connector.db.add_where_normal(tableName, "is_archive", 1);
-					connector.db.run();
+					connector.DB.add_delete(tableName);
+					connector.DB.add_where_normal(tableName, "parent_path_locator", locator);
+					connector.DB.add_where_normal(tableName, "is_directory", 0);
+					connector.DB.add_where_normal(tableName, "is_archive", 1);
+					connector.DB.run();
 
                     //Checks if we should remove the base folder
                     if (deleteBaseFolder)
                     {
                         //Removes the directory now its empty
-                        connector.db.add_delete(tableName);
-                        connector.db.add_where_normal(tableName, "path_locator", locator);
-                        connector.db.add_where_normal(tableName, "is_directory", 1);
-                        connector.db.run();
+                        connector.DB.add_delete(tableName);
+                        connector.DB.add_where_normal(tableName, "path_locator", locator);
+                        connector.DB.add_where_normal(tableName, "is_directory", 1);
+                        connector.DB.run();
                     }
 				}
 				catch (Exception e)
@@ -145,8 +167,14 @@ namespace DotNetSDB.SqlServer.FileTable
 					throw errorHandler.CustomErrorOutput(e);
 				}
 			}
-            
-            //This function recursively moves a folder structure and all its content within it to a different location
+
+            /// <summary>
+            /// This function recursively moves a folder structure and all its content within it to a different location
+            /// </summary>
+            /// <param name="tableName"></param>
+            /// <param name="moveLocationID"></param>
+            /// <param name="folderName"></param>
+            /// <param name="locator"></param>
             private void MoveFolderRecursively(string tableName, string moveLocationID, string folderName, string locator)
             {
                 try
@@ -158,12 +186,12 @@ namespace DotNetSDB.SqlServer.FileTable
                     string newFolderID = get_folder_id(tableName, moveLocationID, folderName);
 
                     //Gets the name and path_locators for all the folders which are within our current one
-                    connector.db.add_select(tableName, new string[] { "name", "path_locator" },
+                    connector.DB.add_select(tableName, new string[] { "name", "path_locator" },
                                                        new string[] { null, "CAST( " },
                                                        new string[] { null, " AS varchar(max)) as path_locator" });
-                    connector.db.add_where_normal(tableName, "parent_path_locator", locator);
-                    connector.db.add_where_normal(tableName, "is_directory", 1);
-                    DataTable dt = connector.db.run_return_datatable();
+                    connector.DB.add_where_normal(tableName, "parent_path_locator", locator);
+                    connector.DB.add_where_normal(tableName, "is_directory", 1);
+                    DataTable dt = connector.DB.run_return_datatable();
 
                     //Loops over all the folder entries
                     foreach (DataRow dr in dt.Rows)
@@ -181,10 +209,10 @@ namespace DotNetSDB.SqlServer.FileTable
                     }
 
                     //Gets all the file stream IDs for the current folder
-                    connector.db.add_select(tableName, "stream_id");
-                    connector.db.add_where_normal(tableName, "is_archive", 1);
-                    connector.db.add_where_normal(tableName, "parent_path_locator", locator);
-                    var fileStreamIDs = connector.db.run_return_string_array();
+                    connector.DB.add_select(tableName, "stream_id");
+                    connector.DB.add_where_normal(tableName, "is_archive", 1);
+                    connector.DB.add_where_normal(tableName, "parent_path_locator", locator);
+                    var fileStreamIDs = connector.DB.run_return_string_array();
 
                     //This variable is used to determine if we are going over the threshold of query building
                     int counter = 0;
@@ -194,7 +222,7 @@ namespace DotNetSDB.SqlServer.FileTable
                     foreach (string fileID in fileStreamIDs)
                     {
                         //Tells the database library to start a new query within the same statement
-                        connector.db.start_new_query();
+                        connector.DB.start_new_query();
 
                         //Generates the new locator ID for that folder
                         string newID = CreateNewFolderPathLocator(tableName, newFolderID);
@@ -204,8 +232,8 @@ namespace DotNetSDB.SqlServer.FileTable
                         }
 
                         //Updates the path locator to point to the new directory
-                        connector.db.add_update(tableName, "path_locator", newID);
-                        connector.db.add_where_normal(tableName, "stream_id", fileID);
+                        connector.DB.add_update(tableName, "path_locator", newID);
+                        connector.DB.add_where_normal(tableName, "stream_id", fileID);
 
                         //Increments the counter
                         counter++;
@@ -214,7 +242,7 @@ namespace DotNetSDB.SqlServer.FileTable
                         if (counter >= 1000)
                         {
                             //Runs the built query
-                            connector.db.run();
+                            connector.DB.run();
 
                             //Resets the counter
                             counter = 0;
@@ -225,29 +253,29 @@ namespace DotNetSDB.SqlServer.FileTable
                     if (counter != 0)
                     {
                         //Runs the built query
-                        connector.db.run();
+                        connector.DB.run();
                     }
 
                     //Gets the old stream ID
-                    connector.db.add_select(tableName, "stream_id");
-                    connector.db.add_where_normal(tableName, "path_locator", locator);
-                    string oldStreamID = connector.db.run_return_string();
+                    connector.DB.add_select(tableName, "stream_id");
+                    connector.DB.add_where_normal(tableName, "path_locator", locator);
+                    string oldStreamID = connector.DB.run_return_string();
 
                     //Deletes the old folder and its content
                     delete_folder(tableName, oldStreamID);
 
                     //Trys to get a value for the locator we just deleted
-                    connector.db.add_select(tableName, "stream_id");
-                    connector.db.add_where_normal(tableName, "path_locator", locator);
-                    string check = connector.db.run_return_string();
+                    connector.DB.add_select(tableName, "stream_id");
+                    connector.DB.add_where_normal(tableName, "path_locator", locator);
+                    string check = connector.DB.run_return_string();
 
                     //Checks the value is empty to ensure it has been deleted before switching the stream IDs
                     if(string.IsNullOrWhiteSpace(check))
                     {
                         //Updates the id back to the original version
-                        connector.db.add_update(tableName, "stream_id", oldStreamID);
-                        connector.db.add_where_normal(tableName, "stream_id", newFolderID);
-                        connector.db.run();
+                        connector.DB.add_update(tableName, "stream_id", oldStreamID);
+                        connector.DB.add_where_normal(tableName, "stream_id", newFolderID);
+                        connector.DB.run();
                     }
                 }
                 catch (Exception e)

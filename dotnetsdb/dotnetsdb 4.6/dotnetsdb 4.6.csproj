@@ -250,9 +250,6 @@
     <Compile Include="..\..\files\lib\SQLServer\2008\Core\Compiling\Compile List.cs">
       <Link>SQLServer\2008\Core\Compiling\Compile List.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Compiling\Core.cs">
-      <Link>SQLServer\2008\Core\Compiling\Core.cs</Link>
-    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2008\Core\Compiling\Functions\Limit.cs">
       <Link>SQLServer\2008\Core\Compiling\Functions\Limit.cs</Link>
     </Compile>
@@ -261,9 +258,6 @@
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2008\Core\Connections.cs">
       <Link>SQLServer\2008\Core\Connections.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2008\Core\Dispose.cs">
-      <Link>SQLServer\2008\Core\Dispose.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2008\Core\Query3.cs">
       <Link>SQLServer\2008\Core\Query3.cs</Link>
@@ -280,17 +274,11 @@
     <Compile Include="..\..\files\lib\SQLServer\2012\Core\Compiling\Compile List.cs">
       <Link>SQLServer\2012\Core\Compiling\Compile List.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Compiling\Core.cs">
-      <Link>SQLServer\2012\Core\Compiling\Core.cs</Link>
-    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2012\Core\Compiling\Functions\Offset.cs">
       <Link>SQLServer\2012\Core\Compiling\Functions\Offset.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2012\Core\Connections.cs">
       <Link>SQLServer\2012\Core\Connections.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2012\Core\Dispose.cs">
-      <Link>SQLServer\2012\Core\Dispose.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2012\Core\Query3.cs">
       <Link>SQLServer\2012\Core\Query3.cs</Link>
@@ -310,17 +298,11 @@
     <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Compile List.cs">
       <Link>SQLServer\2014\Core\Compiling\Compile List.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Core.cs">
-      <Link>SQLServer\2014\Core\Compiling\Core.cs</Link>
-    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Functions\Offset.cs">
       <Link>SQLServer\2014\Core\Compiling\Functions\Offset.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2014\Core\Connections.cs">
       <Link>SQLServer\2014\Core\Connections.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2014\Core\Dispose.cs">
-      <Link>SQLServer\2014\Core\Dispose.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2014\Core\Query3.cs">
       <Link>SQLServer\2014\Core\Query3.cs</Link>
@@ -340,17 +322,11 @@
     <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Compile List.cs">
       <Link>SQLServer\2016\Core\Compiling\Compile List.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Core.cs">
-      <Link>SQLServer\2016\Core\Compiling\Core.cs</Link>
-    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Functions\Offset.cs">
       <Link>SQLServer\2016\Core\Compiling\Functions\Offset.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2016\Core\Connections.cs">
       <Link>SQLServer\2016\Core\Connections.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2016\Core\Dispose.cs">
-      <Link>SQLServer\2016\Core\Dispose.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2016\Core\Query3.cs">
       <Link>SQLServer\2016\Core\Query3.cs</Link>
@@ -366,12 +342,6 @@
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2016\TypeConvertor\types.cs">
       <Link>SQLServer\2016\TypeConvertor\types.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Compile List.cs">
-      <Link>SQLServer\General\Core\Compiling\Compile List.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Core.cs">
-      <Link>SQLServer\General\Core\Compiling\Core.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Functions\Delete - overriden.cs">
       <Link>SQLServer\General\Core\Compiling\Functions\Delete - overriden.cs</Link>

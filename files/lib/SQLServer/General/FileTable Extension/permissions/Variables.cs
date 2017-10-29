@@ -3,17 +3,33 @@ using System;
 
 namespace DotNetSDB.SqlServer.FileTable
 {
+    /// <summary>
+    /// This is the SQL Server Filetable Extension class for DotNetSDB
+    /// </summary>
     public partial class SQLServerFileTableExtension
     {			
 		public partial class FileTablePermissions
 		{
-            //Holds the database connection in a dynamic object *thus we can use all versions of sql server in one class*
+            /// <summary>
+            /// Variable that holds the connection in a dynamic object state *thus we can use all versions of sql server in one class*
+            /// </summary>
             private DatabaseConnector connector;
 
+            /// <summary>
+            /// Variable that holds the generic filetable error object
+            /// </summary>
             private ErrorHandler errorHandler = new ErrorHandler();
 
+            /// <summary>
+            /// Variable that holds the database name
+            /// </summary>
             private string dbName;
 
+            /// <summary>
+            /// This function initialises the FileTableExtension object using the database connection and database name supplied
+            /// </summary>
+            /// <param name="databaseObject"></param>
+            /// <param name="databaseName"></param>
 			public FileTablePermissions(DatabaseConnector databaseObject, string databaseName)
 			{
                 //Sets the database name the connection is using
@@ -27,19 +43,19 @@ namespace DotNetSDB.SqlServer.FileTable
                 {
                     throw new Exception("Database FileTable Permissions Initialisation: The database name you have passed is null.");
                 }
-                else if (connector == null || connector.db == null)
+                else if (connector == null || connector.DB == null)
                 {
                     throw new Exception("Database FileTable Permissions Initialisation: The database object you have passed is null.");
                 }
-                else if(!connector.isDbSqlServer)
+                else if(!connector.IsDbSqlServer)
                 {
                     throw new Exception("Database FileTable Permissions Initialisation: The database object you have passed is not a sql server object.");
                 }
-                else if (connector.dbVersion == "sqlserver2008")
+                else if (connector.DBVersion == "sqlserver2008")
                 {
-                    throw new Exception($"Database FileTable Permissions Initialisation: The database object version you have passed does not support filetables '{connector.dbVersion}'.");
+                    throw new Exception($"Database FileTable Permissions Initialisation: The database object version you have passed does not support filetables '{connector.DBVersion}'.");
                 }
-                else if (!connector.db.is_alive())
+                else if (!connector.DB.is_alive())
                 {
                     throw new Exception("Database FileTable Permissions Initialisation: The database object is not connected.");
                 }

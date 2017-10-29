@@ -7,11 +7,16 @@ namespace DotNetSDB
         /*##########################################*/
         /*       Offset Compiling functions         */
         /*##########################################*/
-
-        //This functions adds the variables ready for compiling the offset query        
-        protected void OffsetCompile(Query3 theQuery, int offset, int fetch)
+        
+        /// <summary>
+        /// This function deals with creating the Offset SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="offset"></param>
+        /// <param name="fetch"></param>
+        protected void OffsetCompile(QueryExtension2 theQuery, int offset, int fetch)
         {
-            theQuery.offset = $"OFFSET {offset} ROWS FETCH NEXT {fetch} ROWS ONLY";
+            theQuery.Offset = $"OFFSET {offset} ROWS FETCH NEXT {fetch} ROWS ONLY";
         }
 
         /*##########################################*/
@@ -33,10 +38,12 @@ namespace DotNetSDB
             {
                 throw new Exception($"The fetch rows cannot be below zero, yours is currently '{numberOfRows}'.");
             }
-            Query theMain = GetQuery();
-            Query3 theQuery = GetQuery3();
+
+            //Converts the query object to QueryExtension
+            QueryExtension2 theQuery = (QueryExtension2)GetQuery();
+
             OffsetCompile(theQuery, offsetRows, numberOfRows);
-            theMain.orderList.Add("offset");
+            theQuery.OrderList.Add("offset");
         }
     }
 }

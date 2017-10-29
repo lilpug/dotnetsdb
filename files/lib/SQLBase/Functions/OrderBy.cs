@@ -9,7 +9,13 @@ namespace DotNetSDB
         /*       OrderBy Compiling functions        */
         /*##########################################*/
 
-        //This function builds the fields for the orderBy
+        /// <summary>
+        /// This function deals with creating the order by SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="field"></param>
+        /// <param name="type"></param>
         protected void OrderByCompile(Query theQuery, string tableName, string field, string type = null)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -32,7 +38,7 @@ namespace DotNetSDB
                 }
 
                 //Compiles the final build of the order by sql
-                theQuery.orderbyFields.Add(sb.ToString());
+                theQuery.OrderbyFields.Add(sb.ToString());
             }
             else
             {
@@ -40,6 +46,13 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function deals with creating the order by SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="fields"></param>
+        /// <param name="types"></param>
         protected void OrderByCompile(Query theQuery, string tableName, string[] fields, string[] types = null)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -76,7 +89,7 @@ namespace DotNetSDB
                 }
 
                 //Compiles the final build of the order by sql
-                theQuery.orderbyFields.Add(sb.ToString());
+                theQuery.OrderbyFields.Add(sb.ToString());
             }
             else
             {
@@ -89,7 +102,7 @@ namespace DotNetSDB
         /*##########################################*/
 
         /// <summary>
-        /// This function creates the main orderby statement.
+        /// This function creates the main orderby statement
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="field"></param>
@@ -98,7 +111,7 @@ namespace DotNetSDB
         {
             Query theQuery = GetQuery();
 
-            if (theQuery.orderList.Contains("orderby"))
+            if (theQuery.OrderList.Contains("orderby"))
             {
                 throw new Exception("OrderBy Error: a main orderby statement has already been defined, for additional fields use add_orderby_fields.");
             }
@@ -107,11 +120,11 @@ namespace DotNetSDB
             OrderByCompile(theQuery, tableName, field, type);
 
             //Adds the command
-            theQuery.orderList.Add("orderby");
+            theQuery.OrderList.Add("orderby");
         }
 
         /// <summary>
-        /// This function creates the main orderby statement.
+        /// This function creates the main orderby statement
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="fields"></param>
@@ -120,7 +133,7 @@ namespace DotNetSDB
         {
             Query theQuery = GetQuery();
 
-            if (theQuery.orderList.Contains("orderby"))
+            if (theQuery.OrderList.Contains("orderby"))
             {
                 throw new Exception("OrderBy Error: a main orderby statement has already been defined, for additional fields use add_orderby_fields.");
             }
@@ -129,7 +142,7 @@ namespace DotNetSDB
             OrderByCompile(theQuery, tableName, fields, types);
 
             //Adds the command
-            theQuery.orderList.Add("orderby");
+            theQuery.OrderList.Add("orderby");
         }
 
         /// <summary>
@@ -142,7 +155,7 @@ namespace DotNetSDB
         {
             Query theQuery = GetQuery();
 
-            if (!theQuery.orderList.Contains("orderby"))
+            if (!theQuery.OrderList.Contains("orderby"))
             {
                 throw new Exception("OrderBy Error: you cannot add additional fields and types without defining a main orderby statement first.");
             }
@@ -161,7 +174,7 @@ namespace DotNetSDB
         {
             Query theQuery = GetQuery();
 
-            if (!theQuery.orderList.Contains("orderby"))
+            if (!theQuery.OrderList.Contains("orderby"))
             {
                 throw new Exception("OrderBy Error: you cannot add additional fields and types without defining a main orderby statement first.");
             }

@@ -510,7 +510,7 @@ namespace DotNetSDB
         }
 
         /// <summary>
-        /// This function checks to see if the connection information allows a connections or not
+        /// This function checks to see if the supplied connection information allows connections or not
         /// </summary>
         /// <returns></returns>
         public bool is_alive()
@@ -529,11 +529,14 @@ namespace DotNetSDB
 
             return true;
         }
-        
+
         /*##########################################*/
         /*    Database connection Initialisation    */
         /*##########################################*/
 
+        /// <summary>
+        /// Checks to see if we can connect to the database using the supplied details from the constructor
+        /// </summary>
         private void ConnectionInit()
         {
             //Trys to connect to see if it will work

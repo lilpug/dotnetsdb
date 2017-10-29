@@ -33,8 +33,14 @@
                         ;
             */
 
-        //This function is the sql server limit wrapper that allows us to limit the rows
-        protected string LimitCompile(Query3 theQuery, string orderby, string compiling)
+        /// <summary>
+        /// This function deals with creating the limit wrapper SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="orderby"></param>
+        /// <param name="compiling"></param>
+        /// <returns></returns>
+        protected string LimitCompile(QueryExtension2 theQuery, string orderby, string compiling)
         {
             if (orderby != "")
             {
@@ -54,7 +60,7 @@
 	                end
                 ";
 
-            compiling = $"{hashCheck} select * into #database2008limitwrapper from  ( {compiling} ) as a where a.theLimitRow >= {theQuery.limitCountOne} and a.theLimitRow <= {theQuery.limitCountTwo}";
+            compiling = $"{hashCheck} select * into #database2008limitwrapper from  ( {compiling} ) as a where a.theLimitRow >= {theQuery.LimitCountOne} and a.theLimitRow <= {theQuery.LimitCountTwo}";
 
             //If there is an order by this section pulls it apart and rebuilds it for the limit wrapper
 
@@ -109,15 +115,20 @@
         /*           Main Front functions           */
         /*##########################################*/
 
+        /// <summary>
+        /// This function adds a limit wrapper statement around the query
+        /// </summary>
+        /// <param name="minValue"></param>
+        /// <param name="maxValue"></param>
         public void add_limit(int minValue, int maxValue)
         {
-            Query theMain = GetQuery();
-            Query3 theQuery = GetQuery3();
+            //Converts the query object to QueryExtension
+            QueryExtension2 theQuery = (QueryExtension2)GetQuery();
 
-            theQuery.limitCountOne = minValue;
-            theQuery.limitCountTwo = maxValue;
+            theQuery.LimitCountOne = minValue;
+            theQuery.LimitCountTwo = maxValue;
 
-            theMain.orderList.Add("limit");
+            theQuery.OrderList.Add("limit");
         }
     }
 }

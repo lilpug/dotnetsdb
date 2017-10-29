@@ -31,7 +31,7 @@ namespace DotNetSDB
                 if (compiledSql.Length == 0)
                 {
                     //Compiles the querys into one massive query string
-                    compiling();
+                    Compiling();
                 }
 
                 //Throws an exception if any SQL query exists as we also have stored procedure flags
@@ -53,7 +53,7 @@ namespace DotNetSDB
                 if (compiledSql.Length == 0)
                 {
                     //Compiles the querys into one massive query string
-                    compiling();
+                    Compiling();
                 }
 
                 //gets the query ready and wraps the query in the deadlock solution
@@ -110,7 +110,13 @@ namespace DotNetSDB
         }
 
         //Normal
-        
+
+        /// <summary>
+        /// This function deals with the main compiling and running of any queries or stored procedure that do not require a return function
+        /// </summary>
+        /// <param name="myConnection"></param>
+        /// <param name="counter"></param>
+        /// <returns></returns>
         protected virtual bool CoreProcessing(SqlConnection myConnection, int counter = 0)
         {
             //Sets up the command object
@@ -129,10 +135,16 @@ namespace DotNetSDB
                 return DeadLockRetry<bool>(myConnection, myCommand, counter, e, CoreProcessing);
             }
         }
-        
+
         //SqlDataReader
         //Note: This is more quicker and effective on memory as it does not store all the results in memory only a single row before iteration
 
+        /// <summary>
+        /// This function deals with the main compiling and running of any queries or stored procedure that does require a return function
+        /// </summary>
+        /// <param name="myConnection"></param>
+        /// <param name="counter"></param>
+        /// <returns></returns>
         protected virtual SqlDataReader CoreProcessingReaderReturn(SqlConnection myConnection, int counter = 0)
         {
             //Sets up the command object
@@ -149,10 +161,16 @@ namespace DotNetSDB
                 return DeadLockRetry(myConnection, myCommand, counter, e, CoreProcessingReaderReturn);
             }
         }
-        
+
         //SqlDataAdapter
         //Note: This stores all the result set directly in memory
 
+        /// <summary>
+        /// This function deals with the main compiling and running of any queries or stored procedure that require any kind of dataset format being returned
+        /// </summary>
+        /// <param name="myConnection"></param>
+        /// <param name="counter"></param>
+        /// <returns></returns>
         protected virtual SqlDataAdapter CoreProcessingAdapterReturn(SqlConnection myConnection, int counter = 0)
         {   
             //Sets up the command object
@@ -209,7 +227,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -257,7 +275,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -302,7 +320,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -349,7 +367,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -395,7 +413,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -441,7 +459,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -486,7 +504,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -496,8 +514,9 @@ namespace DotNetSDB
         /// <summary>
         /// This executes a bulk insert using the data in the datatable
         /// </summary>
-        /// <param name="sourceData">Datatable that holds all the data to be inserted.</param>
-        /// <param name="sourceData">NOTE: The datatable table name and column names have to match the table that is being inserted to.</param>
+        /// <param name="sourceData">Datatable that holds all the data to be inserted.
+        /// NOTE: The datatable table name and column names have to match the table that is being inserted to.
+        /// </param>
         /// <param name="batchSize">The max records to insert at a time.</param>
         /// <param name="timeoutSeconds">The maximum timeout per batch insert.</param>
         public virtual void run_bulk_copy(DataTable sourceData, int batchSize = 500, int timeoutSeconds = 30)
@@ -562,7 +581,7 @@ namespace DotNetSDB
             finally
             {
                 //Clears the queries and stored procedure ready for the next
-                disposeAll();
+                DisposeAll();
                 compiledSql.Clear();
                 Procedure = null;
             }

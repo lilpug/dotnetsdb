@@ -8,22 +8,25 @@ namespace DotNetSDB
         /*          Compiling Select functions      */
         /*##########################################*/
 
-        //Overrides the default to accept Top for Sql Server
+        /// <summary>
+        /// This function compiles the update query and adds it to the query being built
+        /// </summary>
+        /// <param name="current"></param>
         protected override void CompileUpdate(Query current)
         {
-            int index = theQueries.IndexOf(current);
-            Query2 current2 = theQueries2[index];
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)current;
 
             //Calculates if the first entry should be the alias if one is supplied
-            string[] aliasTableSplit = current.updateTable.Split(' ');
-            string alias = (aliasTableSplit.Length == 2) ? aliasTableSplit[1] : current.updateTable;
+            string[] aliasTableSplit = theQuery.UpdateTable.Split(' ');
+            string alias = (aliasTableSplit.Length == 2) ? aliasTableSplit[1] : theQuery.UpdateTable;
 
-            string returnOutput = ((current2.updateReturned) ? " OUTPUT INSERTED.* " : " ");
-            compiledSql.Append($" UPDATE {alias} SET {string.Join(", ", current.updateFields).TrimEnd(',')} {returnOutput} FROM {current.updateTable}");
+            string returnOutput = ((theQuery.UpdateReturned) ? " OUTPUT INSERTED.* " : " ");
+            compiledSql.Append($" UPDATE {alias} SET {string.Join(", ", theQuery.UpdateFields).TrimEnd(',')} {returnOutput} FROM {theQuery.UpdateTable}");
 
-            current.updateFields.Clear();
-            current.updateTable = "";
-            current2.updateReturned = false;
+            theQuery.UpdateFields.Clear();
+            theQuery.UpdateTable = "";
+            theQuery.UpdateReturned = false;
         }
     }
 }

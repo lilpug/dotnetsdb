@@ -3,13 +3,20 @@
     public partial class MySQLCore
     {
         /*##########################################*/
-        /*          Compiling Insert functions      */
+        /*        Compiling Limit functions         */
         /*##########################################*/
 
-        protected virtual void CompileLimit(Query2 current)
+        /// <summary>
+        /// This function compiles the limit SQL
+        /// </summary>
+        /// <param name="current"></param>
+        protected virtual void CompileLimit(Query current)
         {
-            compiledSql.Append($" {current.limit}");
-            current.limit = "";
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)current;
+
+            compiledSql.Append($" {theQuery.Limit}");
+            theQuery.Limit = null;
         }
     }
 }

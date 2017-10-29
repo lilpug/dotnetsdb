@@ -2,13 +2,25 @@
 
 namespace DotNetSDB
 {
+    /// <summary>
+    /// This is the SQLBase class which is used as a base throughout the MySQL and SQL Server classes
+    /// </summary>
     public abstract partial class SQLBase
     {
         /*##########################################*/
         /*              Where is function           */
         /*##########################################*/
 
-        //This function deals with processing through the where like clause
+        /// <summary>
+        /// This function deals with creating the where is SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="field"></param>
+        /// <param name="theOperator"></param>
+        /// <param name="type"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         protected void WhereIsCompile(Query theQuery, string tableName, string field, string theOperator, string type = null, string start = null, string end = null)
         {
             //validation
@@ -20,19 +32,26 @@ namespace DotNetSDB
             string endWrapper = (!string.IsNullOrWhiteSpace(end) ? end : "");
             
             //Adds the operator *default and*
-            if (theQuery.whereStatements.Count != 0)
+            if (theQuery.WhereStatements.Count != 0)
             {
-                theQuery.whereStatementsTypes.Add((!string.IsNullOrWhiteSpace(type)) ? type : "AND");
+                theQuery.WhereStatementsTypes.Add((!string.IsNullOrWhiteSpace(type)) ? type : "AND");
             }
 
             //Builds the sql string
-            theQuery.whereStatements.Add($"{startWrapper} {tableName}.{field} IS {whereOperator} NULL {endWrapper}");
+            theQuery.WhereStatements.Add($"{startWrapper} {tableName}.{field} IS {whereOperator} NULL {endWrapper}");
         }
 
         /*##########################################*/
         /*      Where Is Validation functions       */
         /*##########################################*/
 
+        /// <summary>
+        /// This function validates the where is variables
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="field"></param>
+        /// <param name="type"></param>
         protected void WhereIsValidation(Query theQuery, string tableName, string field, string type)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -43,7 +62,7 @@ namespace DotNetSDB
             {
                 throw new Exception("Where Is Error: The Field supplied is empty.");
             }
-            else if (!string.IsNullOrWhiteSpace(type) && theQuery.whereStatements.Count == 0)
+            else if (!string.IsNullOrWhiteSpace(type) && theQuery.WhereStatements.Count == 0)
             {
                 throw new Exception("Where Is Error: The where type is supplied but this is the first where clause so there will be no type used.");
             }
@@ -70,10 +89,10 @@ namespace DotNetSDB
             WhereIsCompile(theQuery, tableName, field, theOperator, type, startWrapper, endWrapper);
 
             //Adds the null value to a list for binding and sanitization later
-            theQuery.whereRealValues.Add(AddData(null));
+            theQuery.WhereRealValues.Add(AddData(null));
 
             //Adds the command
-            theQuery.orderList.Add("where");
+            theQuery.OrderList.Add("where");
         }
     }
 }

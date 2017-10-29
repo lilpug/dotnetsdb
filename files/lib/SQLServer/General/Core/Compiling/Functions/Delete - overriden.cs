@@ -6,20 +6,22 @@
         /*          Compiling Delete functions      */
         /*##########################################*/
 
+        /// <summary>
+        /// This function compiles the delete query and adds it to the query being built
+        /// </summary>
+        /// <param name="current"></param>
         protected override void CompileDelete(Query current)
         {
-            int index = theQueries.IndexOf(current);
-            Query2 current2 = theQueries2[index];
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)current;
             
             //Calculates if the first entry should be the alias if one is supplied
-            string[] aliasTableSplit = current.deleteTable.Split(' ');
-            string alias = (aliasTableSplit.Length == 2) ? aliasTableSplit[1] : current.deleteTable;
+            string[] aliasTableSplit = theQuery.DeleteTable.Split(' ');
+            string alias = (aliasTableSplit.Length == 2) ? aliasTableSplit[1] : theQuery.DeleteTable;
 
-            string returnOutput = ((current2.deleteReturned) ? "OUTPUT DELETED.*" : "");
+            string returnOutput = ((theQuery.DeleteReturned) ? "OUTPUT DELETED.*" : "");
 
-            compiledSql.Append($" DELETE {alias} {returnOutput} FROM {current.deleteTable}");
-            current.deleteTable = "";
-            current2.deleteReturned = false;
+            compiledSql.Append($" DELETE {alias} {returnOutput} FROM {theQuery.DeleteTable}");
         }
     }
 }

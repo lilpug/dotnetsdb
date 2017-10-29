@@ -10,27 +10,24 @@ namespace DotNetSDB
         /*              Dispose functions           */
         /*##########################################*/
 
-        //This is used to ensure the clean up does not fire multiple times once its all cleared up
+        /// <summary>
+        /// Core variable for determining if the object has already been disposed of
+        /// </summary>
         protected bool isDisposed = false;
 
+        /// <summary>
+        /// This is the core dispose method for the SQL Server type convertor object
+        /// </summary>
         public virtual void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        //This disposes of the types
-        protected virtual void Dispose(bool disposing)
-        {
             if (!isDisposed)
-            {                
-                if (disposing)
-                {
-                    typeList.Clear();
-                    typeList = null;
-                }
+            {   
+                TypeList.Clear();
+                TypeList = null;
+
                 isDisposed = true;
             }
+            GC.SuppressFinalize(this);
         }
     }
 }

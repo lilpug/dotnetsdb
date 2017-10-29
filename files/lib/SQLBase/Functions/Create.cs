@@ -9,20 +9,29 @@ namespace DotNetSDB
         /*     Create Table Compiling functions     */
         /*##########################################*/
 
-        //This function builds the create table sql
+        /// <summary>
+        /// This function deals with creating the create table SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="field"></param>
+        /// <param name="type"></param>
         protected void CreateCompile(Query theQuery, string tableName, string field, string type)
         {
+            //Validates the table name is ok
+            CreateTableNameValidation(tableName);
+
             if (!string.IsNullOrWhiteSpace(field) && !string.IsNullOrWhiteSpace(type))
             {
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.createTable) && !string.IsNullOrWhiteSpace(tableName))
+                if (string.IsNullOrWhiteSpace(theQuery.CreateTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    theQuery.createTable = tableName;
+                    theQuery.CreateTable = tableName;
                 }
 
                 //Builds the final statement
-                theQuery.createFields.Add($"{field} {type}");
+                theQuery.CreateFields.Add($"{field} {type}");
             }
             else
             {
@@ -30,8 +39,18 @@ namespace DotNetSDB
             }
         }
 
-        protected void CreateCompile(Query theQuery, string tablelName, string[] fields, string[] types)
+        /// <summary>
+        /// This function builds the create table SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="fields"></param>
+        /// <param name="types"></param>
+        protected void CreateCompile(Query theQuery, string tableName, string[] fields, string[] types)
         {
+            //Validates the table name is ok
+            CreateTableNameValidation(tableName);
+
             if (fields != null && types != null)
             {
                 //Checks if the sizes are not the same and if not returns a false
@@ -41,10 +60,10 @@ namespace DotNetSDB
                 }
 
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.createTable) && !string.IsNullOrWhiteSpace(tablelName))
+                if (string.IsNullOrWhiteSpace(theQuery.CreateTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    theQuery.createTable = tablelName;
+                    theQuery.CreateTable = tableName;
                 }
 
                 StringBuilder sb = new StringBuilder();
@@ -62,7 +81,7 @@ namespace DotNetSDB
                 }
 
                 //Builds the final statement
-                theQuery.createFields.Add(sb.ToString());
+                theQuery.CreateFields.Add(sb.ToString());
             }
             else
             {
@@ -74,25 +93,37 @@ namespace DotNetSDB
         /*        Create Validation functions       */
         /*##########################################*/
 
-        protected void CreateSingleValidation(string tableName)
+        /// <summary>
+        /// This function validates the create table name
+        /// </summary>
+        /// <param name="tableName"></param>
+        protected void CreateTableNameValidation(string tableName)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
-                throw new Exception("Delete Error: No table name has been supplied.");
+                throw new Exception("Create Table Error: No table name has been supplied.");
             }
         }
 
+        /// <summary>
+        /// This function validates that the create table base statement has been added before trying to add additional fields
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void CreateNotExistValidation(Query theQuery)
         {
-            if (!theQuery.orderList.Contains("create"))
+            if (!theQuery.OrderList.Contains("create"))
             {
                 throw new Exception("Create Table Error: you cannot add additional fields and types without defining a main create statement first.");
             }
         }
 
+        /// <summary>
+        /// This function validates that the create table query has not already been run as a new one is about to be added
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void CreateExistValidation(Query theQuery)
         {
-            if (theQuery.orderList.Contains("create"))
+            if (theQuery.OrderList.Contains("create"))
             {
                 throw new Exception("Create Table Error: a main create table statement has already been defined, for additional fields and types use add_create_fields.");
             }
@@ -117,7 +148,7 @@ namespace DotNetSDB
             CreateCompile(theQuery, newTableName, newFieldsName, newFieldType);
 
             //Adds the command
-            theQuery.orderList.Add("create");
+            theQuery.OrderList.Add("create");
         }
 
         /// <summary>
@@ -135,7 +166,7 @@ namespace DotNetSDB
             CreateCompile(theQuery, newTableName, newFieldsNames, newFieldTypes);
 
             //Adds the command
-            theQuery.orderList.Add("create");
+            theQuery.OrderList.Add("create");
         }
 
         /// <summary>

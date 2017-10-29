@@ -31,7 +31,7 @@ namespace DotNetSDB
                 if (compiledSql.Length == 0)
                 {
                     //Compiles the querys into one massive query string
-                    compiling();
+                    Compiling();
                 }
 
                 //Throws an exception if any SQL query exists as we also have stored procedure flags
@@ -53,7 +53,7 @@ namespace DotNetSDB
                 if (compiledSql.Length == 0)
                 {
                     //Compiles the querys into one massive query string
-                    compiling();
+                    Compiling();
                 }
 
                 //gets the query ready and wraps the query in the deadlock solution
@@ -108,9 +108,15 @@ namespace DotNetSDB
                 throw exception;
             }
         }
-
+        
         //Normal
 
+        /// <summary>
+        /// This function deals with the main compiling and running of any queries or stored procedure that do not require a return function
+        /// </summary>
+        /// <param name="myConnection"></param>
+        /// <param name="counter"></param>
+        /// <returns></returns>
         protected virtual bool CoreProcessing(MySqlConnection myConnection, int counter = 0)
         {
             //Sets up the command object
@@ -133,6 +139,12 @@ namespace DotNetSDB
         //SqlDataReader
         //Note: This is more quicker and effective on memory as it does not store all the results in memory only a single row before iteration
 
+        /// <summary>
+        /// This function deals with the main compiling and running of any queries or stored procedure that does require a return function
+        /// </summary>
+        /// <param name="myConnection"></param>
+        /// <param name="counter"></param>
+        /// <returns></returns>
         protected virtual MySqlDataReader CoreProcessingReaderReturn(MySqlConnection myConnection, int counter = 0)
         {
             //Sets up the command object
@@ -153,6 +165,12 @@ namespace DotNetSDB
         //SqlDataAdapter
         //Note: This stores all the result set directly in memory
 
+        /// <summary>
+        /// This function deals with the main compiling and running of any queries or stored procedure that require any kind of dataset format being returned
+        /// </summary>
+        /// <param name="myConnection"></param>
+        /// <param name="counter"></param>
+        /// <returns></returns>
         protected virtual MySqlDataAdapter CoreProcessingAdapterReturn(MySqlConnection myConnection, int counter = 0)
         {
             //Sets up the command object
@@ -160,7 +178,7 @@ namespace DotNetSDB
 
             try
             {
-                //Executes the command and puts it into the reader
+                //Executes the command and puts it into the adapter
                 MySqlDataAdapter myAdapter = new MySqlDataAdapter(myCommand);
 
                 return myAdapter;
@@ -209,7 +227,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -257,7 +275,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -302,7 +320,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -349,7 +367,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -395,7 +413,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -441,7 +459,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }
@@ -486,7 +504,7 @@ namespace DotNetSDB
                 finally
                 {
                     //Clears the queries and stored procedure ready for the next
-                    disposeAll();
+                    DisposeAll();
                     compiledSql.Clear();
                     Procedure = null;
                 }

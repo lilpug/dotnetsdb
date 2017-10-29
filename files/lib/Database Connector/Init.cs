@@ -3,13 +3,13 @@ namespace DotNetSDB.Connector
 {
     public sealed partial class DatabaseConnector : IDisposable
     {
-        //Database object initiator and checker functions 
+        //These functions are the database object initiator and checker functions 
 
         internal void SqlServer2016(SQLServer2016 sqlserver)
         {
             if (sqlserver.is_alive())
             {
-                sqlserver2016 = sqlserver;
+                Sqlserver2016 = sqlserver;
             }
             else
             {
@@ -21,7 +21,7 @@ namespace DotNetSDB.Connector
         {
             if (sqlserver.is_alive())
             {
-                sqlserver2014 = sqlserver;
+                Sqlserver2014 = sqlserver;
             }
             else
             {
@@ -33,7 +33,7 @@ namespace DotNetSDB.Connector
         {
             if (sqlserver.is_alive())
             {
-                sqlserver2012 = sqlserver;
+                Sqlserver2012 = sqlserver;
             }
             else
             {
@@ -45,7 +45,7 @@ namespace DotNetSDB.Connector
         {
             if (sqlserver.is_alive())
             {
-                sqlserver2008 = sqlserver;
+                Sqlserver2008 = sqlserver;
             }
             else
             {
@@ -53,11 +53,11 @@ namespace DotNetSDB.Connector
             }
         }
 
-        internal void mysqlCore(MySQLCore mysqlDb)
+        internal void MysqlCore(MySQLCore mysqlDb)
         {
-            if (mysql.is_alive())
+            if (MySQL.is_alive())
             {
-                mysql = mysqlDb;
+                MySQL = mysqlDb;
             }
             else
             {

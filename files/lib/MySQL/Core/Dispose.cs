@@ -5,8 +5,9 @@ namespace DotNetSDB
 {
     public partial class MySQLCore
     {
-        //This is the dispose method for disposing of the connection
-        //Note: called at the end of a using statement
+        /// <summary>
+        /// This is the dispose method for disposing of the connection
+        /// </summary>
         public override void Dispose()
         {
             base.Dispose();
@@ -21,20 +22,6 @@ namespace DotNetSDB
             loggerDetails = null;
             maxDeadlockTry = -1;
             connectionTime = -1;
-        }
-
-        //This function is used to clear and dispose the query2 objects
-        //Note: This function hooks into the disposeAll feature which is run on cleanup
-        protected override void ExtraDispose()
-        {
-            //Runs the base first then executes the extras
-            base.ExtraDispose();
-
-            foreach (Query2 q in theQueries2)
-            {
-                q.Dispose();
-            }
-            theQueries2.Clear();            
         }
     }
 }

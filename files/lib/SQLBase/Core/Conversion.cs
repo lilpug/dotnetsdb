@@ -13,7 +13,12 @@ namespace DotNetSDB
         /*        Data Conversion functions         */
         /*##########################################*/
 
-        //This function returns a raw string from a datatable using the specified parameters
+        /// <summary>
+        /// This function returns a raw string from a datatable using the specified parameters
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="delimiter"></param>
+        /// <returns></returns>
         protected string DataTableToRawString(DataTable dt, string delimiter = ",")
         {
             //Initialises the string builder
@@ -41,7 +46,13 @@ namespace DotNetSDB
             return sb.ToString();
         }
 
-        //This function creates a csv file from a datatable using the specified parameters
+        /// <summary>
+        /// This function creates a csv file from a datatable using the specified parameters
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="fullFilePath"></param>
+        /// <param name="delimiter"></param>
+        /// <returns></returns>
         protected bool DataTableToCSV(DataTable dt, string fullFilePath, string delimiter = ",")
         {
             //Checks to ensure the parent directory exists
@@ -64,7 +75,13 @@ namespace DotNetSDB
             return false;
         }
 
-        //This function appends to an existing csv file from a datatable using the specified parameters
+        /// <summary>
+        /// This function appends to an existing csv file from a datatable using the specified parameters
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="fullFilePath"></param>
+        /// <param name="delimiter"></param>
+        /// <returns></returns>
         protected bool DataTableAppendCSV(DataTable dt, string fullFilePath, string delimiter = ",")
         {
             //Adds the csv extension if one has not been supplied in the file path

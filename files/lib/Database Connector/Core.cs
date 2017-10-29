@@ -3,30 +3,32 @@ namespace DotNetSDB.Connector
 {
     public sealed partial class DatabaseConnector : IDisposable
     {
-        //Returns the database object
-        public dynamic db
+        /// <summary>
+        /// Returns a dynamic database object
+        /// </summary>
+        public dynamic DB
         {
             get
             {
-                if (sqlserver2016 != null)
+                if (Sqlserver2016 != null)
                 {
-                    return sqlserver2016;
+                    return Sqlserver2016;
                 }
-                else if (sqlserver2014 != null)
+                else if (Sqlserver2014 != null)
                 {
-                    return sqlserver2014;
+                    return Sqlserver2014;
                 }    
-                else if (sqlserver2012 != null)
+                else if (Sqlserver2012 != null)
                 {
-                    return sqlserver2012;
+                    return Sqlserver2012;
                 }
-                else if (sqlserver2008 != null)
+                else if (Sqlserver2008 != null)
                 {
-                    return sqlserver2008;
+                    return Sqlserver2008;
                 }
-                else if (mysql != null)
+                else if (MySQL != null)
                 {
-                    return mysql;
+                    return MySQL;
                 }
                 else
                 {
@@ -35,28 +37,30 @@ namespace DotNetSDB.Connector
             }
         }
 
-        //Returns the database version being used
-        public string dbVersion
+        /// <summary>
+        /// Returns the database version being used
+        /// </summary>
+        public string DBVersion
         {
             get
             {
-                if (sqlserver2016 != null)
+                if (Sqlserver2016 != null)
                 {
                     return "sqlserver2016";
                 }
-                else if (sqlserver2014 != null)
+                else if (Sqlserver2014 != null)
                 {
                     return "sqlserver2014";
                 }
-                else if (sqlserver2012 != null)
+                else if (Sqlserver2012 != null)
                 {
                     return "sqlserver2012";
                 }
-                else if (sqlserver2008 != null)
+                else if (Sqlserver2008 != null)
                 {
                     return "sqlserver2008";
                 }
-                else if (mysql != null)
+                else if (MySQL != null)
                 {
                     return "mysql";
                 }
@@ -67,12 +71,14 @@ namespace DotNetSDB.Connector
             }
         }
 
-        //Returns if the database object is using mysql or not
-        public bool isDbMysql
+        /// <summary>
+        /// Returns if the database object is using MySQL or not
+        /// </summary>
+        public bool IsDbMysql
         {
             get
             {
-                if (sqlserver2016 != null || sqlserver2014 != null || sqlserver2012 != null || sqlserver2008 != null)
+                if (Sqlserver2016 != null || Sqlserver2014 != null || Sqlserver2012 != null || Sqlserver2008 != null)
                 {
                     return false;
                 }
@@ -83,12 +89,14 @@ namespace DotNetSDB.Connector
             }
         }
 
-        //Returns if the database object is using sql server or not
-        public bool isDbSqlServer
+        /// <summary>
+        /// Returns if the database object is using SQL Server or not
+        /// </summary>
+        public bool IsDbSqlServer
         {
             get
             {
-                if (mysql != null)
+                if (MySQL != null)
                 {
                     return false;
                 }
@@ -99,11 +107,14 @@ namespace DotNetSDB.Connector
             }
         }
 
-        public Type dbType
+        /// <summary>
+        /// Returns the current database class type
+        /// </summary>
+        public Type DbType
         {
             get
             {
-                return db.GetType();
+                return DB.GetType();
             }
         }
     }

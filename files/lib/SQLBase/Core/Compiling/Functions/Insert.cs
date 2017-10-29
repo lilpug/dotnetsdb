@@ -8,26 +8,26 @@ namespace DotNetSDB
         /*          Compiling Insert functions      */
         /*##########################################*/
 
+        /// <summary>
+        /// This function compiles the insert query and adds it to the query being built
+        /// </summary>
+        /// <param name="current"></param>
         protected virtual void CompileInsert(Query current)
         {
             string fields = "";
             string values = "";
 
-            if (current.insertFields.Count > 0)
+            if (current.InsertFields.Count > 0)
             {
-                fields = $" ( {string.Join(",", current.insertFields)} ) ";
+                fields = $" ( {string.Join(",", current.InsertFields)} ) ";
             }
 
-            if (current.insertValues.Count > 0)
+            if (current.InsertValues.Count > 0)
             {
-                values = $" VALUES ({string.Join("),(", current.insertValues)}) ";
+                values = $" VALUES ({string.Join("),(", current.InsertValues)}) ";
             }
 
-            compiledSql.Append($" INSERT INTO  {current.insertTableName}{fields}{values}");
-
-            current.insertTableName = "";
-            current.insertFields.Clear();
-            current.insertValues.Clear();
+            compiledSql.Append($" INSERT INTO  {current.InsertTableName}{fields}{values}");
         }
     }
 }

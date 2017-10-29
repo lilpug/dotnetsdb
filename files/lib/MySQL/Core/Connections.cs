@@ -455,11 +455,15 @@ namespace DotNetSDB
                 connection = $"Server={server},{port};Database={db};UId={user};Pwd={pwd};Connection Timeout={connectionTime};AllowZeroDateTime=true;ConvertZeroDatetime=True;{extra}";
             }
         }
-        
+
         /*##########################################*/
         /*      Database connection functions       */
         /*##########################################*/
 
+        /// <summary>
+        /// This initialises the MySQL connection
+        /// </summary>
+        /// <param name="connectionInformation"></param>
         public MySQLCore(MySQLConnection connectionInformation)
         {
             if (connectionInformation != null)
@@ -509,7 +513,10 @@ namespace DotNetSDB
             }
         }
 
-        //This function checks to see if the connection information allows connections or not
+        /// <summary>
+        /// This function checks to see if the supplied connection information allows connections or not
+        /// </summary>
+        /// <returns></returns>
         public bool is_alive()
         {
             try
@@ -531,6 +538,9 @@ namespace DotNetSDB
         /*    Database connection Initialisation    */
         /*##########################################*/
 
+        /// <summary>
+        /// Checks to see if we can connect to the database using the supplied details from the constructor
+        /// </summary>
         private void ConnectionInit()
         {
             //Trys to connect to see if it will work

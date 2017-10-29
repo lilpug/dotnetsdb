@@ -6,6 +6,11 @@ namespace DotNetSDB.SqlServer.FileTable
     {
 		public partial class FileTableTasks
 		{			
+            /// <summary>
+            /// This function deletes a folder from a filetable
+            /// </summary>
+            /// <param name="tableName"></param>
+            /// <param name="streamID"></param>
 			public void delete_folder(string tableName, string streamID)
 			{
 				try
@@ -19,7 +24,7 @@ namespace DotNetSDB.SqlServer.FileTable
 					}
 					else
 					{
-						throw new Exception("Database FileTable Directory Delete: A path locator could not be retrieved from the stream ID.");
+						throw new Exception("Database FileTable Folder Delete: A path locator could not be retrieved from the stream ID.");
 					}
 				}
 				catch (Exception e)
@@ -28,6 +33,11 @@ namespace DotNetSDB.SqlServer.FileTable
 				}
 			}
 
+            /// <summary>
+            /// This function deletes all the content in a folder in the filetable
+            /// </summary>
+            /// <param name="tableName"></param>
+            /// <param name="streamID"></param>
             public void delete_folder_contents(string tableName, string streamID)
             {
                 try
@@ -41,7 +51,7 @@ namespace DotNetSDB.SqlServer.FileTable
                     }
                     else
                     {
-                        throw new Exception("Database FileTable Directory Content Delete: A path locator could not be retrieved from the stream ID.");
+                        throw new Exception("Database FileTable Folder Content Delete: A path locator could not be retrieved from the stream ID.");
                     }
                 }
                 catch (Exception e)
@@ -50,15 +60,20 @@ namespace DotNetSDB.SqlServer.FileTable
                 }
             }
 
+            /// <summary>
+            /// This function deletes a file in the filetable
+            /// </summary>
+            /// <param name="tableName"></param>
+            /// <param name="streamID"></param>
             public void delete_file(string tableName, string streamID)
 			{
 				try
 				{
-					connector.db.add_delete(tableName);
-					connector.db.add_where_normal(tableName, "stream_id", streamID);
-					connector.db.add_where_normal(tableName, "is_directory", 0);
-					connector.db.add_where_normal(tableName, "is_archive", 1);
-					connector.db.run();
+					connector.DB.add_delete(tableName);
+					connector.DB.add_where_normal(tableName, "stream_id", streamID);
+					connector.DB.add_where_normal(tableName, "is_directory", 0);
+					connector.DB.add_where_normal(tableName, "is_archive", 1);
+					connector.DB.run();
 				}
 				catch (Exception e)
 				{

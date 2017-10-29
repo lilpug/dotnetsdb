@@ -13,12 +13,13 @@
         public virtual void add_delete_return(string tableName)
         {
             //Runs the original delete
-            add_delete(tableName);            
+            add_delete(tableName);
 
-            Query2 theQuery2 = GetQuery2();
-            
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)GetQuery();
+
             //Adds the extra feature to the query2
-            theQuery2.deleteReturned = true;
+            theQuery.DeleteReturned = true;
         }
     }
 }

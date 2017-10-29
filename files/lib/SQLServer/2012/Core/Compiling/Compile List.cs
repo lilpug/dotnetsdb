@@ -1,22 +1,20 @@
 ﻿namespace DotNetSDB
 {
     public partial class SQLServer2012 : SqlServerCore
-    {
-        /*##########################################*/
-        /*      Main Compiling List functions       */
-        /*##########################################*/
-
+    {   
+        /// <summary>
+        /// This function hooks into the extra compiling function so we can run the extra compiling features for query extensions
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="key"></param>
         protected override void ExtraCompileList(Query current, string key)
         {
             //Runs the base first then executes the extras
             base.ExtraCompileList(current, key);
-
-            //Gets the index of the current query we are on
-            int index = theQueries.IndexOf(current);
-
+            
             if (key == "offset")
             {
-                CompileOffset(theQueries3[index]);
+                CompileOffset(current);
             }
         }
     }

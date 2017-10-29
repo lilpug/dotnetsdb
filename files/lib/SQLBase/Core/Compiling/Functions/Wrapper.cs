@@ -6,21 +6,26 @@
         /*         Compiling Wrapper functions      */
         /*##########################################*/
 
+        /// <summary>
+        /// This function compiles the query start wrapper and adds it to the query being built
+        /// </summary>
+        /// <param name="current"></param>
         protected virtual void CompileStartWrapper(Query current)
         {
-            if (current.sqlStartWrapper != "")
+            if (!string.IsNullOrWhiteSpace(current.SqlStartWrapper))
             {
-                compiledSql.Append($" {current.sqlStartWrapper}");
-                current.sqlStartWrapper = "";
+                compiledSql.Append($" {current.SqlStartWrapper}");
             }
         }
 
+        /// <summary>
+        /// This function compiles the query end wrapper and adds it to the query being built
+        /// </summary>
         protected virtual void CompileEndWrapper(Query current)
         {
-            if (current.sqlEndWrapper != "")
+            if (!string.IsNullOrWhiteSpace(current.SqlEndWrapper))
             {
-                compiledSql.Append($" {current.sqlEndWrapper}");
-                current.sqlEndWrapper = "";
+                compiledSql.Append($" {current.SqlEndWrapper}");
             }
         }
     }

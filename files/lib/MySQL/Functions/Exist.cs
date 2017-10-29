@@ -16,8 +16,10 @@ namespace DotNetSDB
         /// <returns></returns>
         public virtual bool table_exist(string tableName)
         {
-            Query2 theQuery = GetQuery2();
-            theQuery.exist_real_table_value = AddData(tableName + "%");
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)GetQuery();
+            
+            theQuery.ExistRealTableValue = AddData(tableName + "%");
             compiledSql.Append($"select * from INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME LIKE {existDefinition}_1_0_0 AND TABLE_SCHEMA = '{db}'");
             
             //Runs the query

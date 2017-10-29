@@ -9,93 +9,147 @@ namespace DotNetSDB
     /// </summary>
     public partial class SqlServerTypeConvertor
     {
-        public virtual void typeBool()
+        /// <summary>
+        /// Adds the boolean type conversions
+        /// </summary>
+        public virtual void TypeBool()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(bool), DbType.Boolean, SqlDbType.Bit));
+            TypeList.Add(new DbTypeMapEntry(typeof(bool), DbType.Boolean, SqlDbType.Bit));
         }
 
-        public virtual void typeByte()
+        /// <summary>
+        /// Adds the byte type conversions
+        /// </summary>
+        public virtual void TypeByte()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(byte), DbType.Binary, SqlDbType.TinyInt));
+            TypeList.Add(new DbTypeMapEntry(typeof(byte), DbType.Binary, SqlDbType.TinyInt));
         }
 
-        public virtual void typeByteArray()
+        /// <summary>
+        /// Adds the byte array type conversions
+        /// </summary>
+        public virtual void TypeByteArray()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(byte[]), DbType.Binary, SqlDbType.VarBinary));
+            TypeList.Add(new DbTypeMapEntry(typeof(byte[]), DbType.Binary, SqlDbType.VarBinary));
         }
 
-        public virtual void typeDateTime()
+        /// <summary>
+        /// Adds the datetime type conversions
+        /// </summary>
+        public virtual void TypeDateTime()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(DateTime), DbType.DateTime, SqlDbType.DateTime));
+            TypeList.Add(new DbTypeMapEntry(typeof(DateTime), DbType.DateTime, SqlDbType.DateTime));
         }
 
-        public virtual void typeDecimal()
+        /// <summary>
+        /// Adds the decimal type conversions
+        /// </summary>
+        public virtual void TypeDecimal()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(Decimal), DbType.Decimal, SqlDbType.Decimal));
+            TypeList.Add(new DbTypeMapEntry(typeof(Decimal), DbType.Decimal, SqlDbType.Decimal));
         }
 
-        public virtual void typeDouble()
+        /// <summary>
+        /// Adds the double type conversions
+        /// </summary>
+        public virtual void TypeDouble()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(double), DbType.Double, SqlDbType.Float));
+            TypeList.Add(new DbTypeMapEntry(typeof(double), DbType.Double, SqlDbType.Float));
         }
 
-        public virtual void typeGUID()
+        /// <summary>
+        /// Adds the guid type conversions
+        /// </summary>
+        public virtual void TypeGUID()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(Guid), DbType.Guid, SqlDbType.UniqueIdentifier));
+            TypeList.Add(new DbTypeMapEntry(typeof(Guid), DbType.Guid, SqlDbType.UniqueIdentifier));
         }
 
-        public virtual void typeInt16()
+        /// <summary>
+        /// Adds the int16 type conversions
+        /// </summary>
+        public virtual void TypeInt16()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(Int16), DbType.Int16, SqlDbType.SmallInt));
+            TypeList.Add(new DbTypeMapEntry(typeof(Int16), DbType.Int16, SqlDbType.SmallInt));
         }
 
-        public virtual void typeInt32()
+        /// <summary>
+        /// Adds the int32 type conversions
+        /// </summary>
+        public virtual void TypeInt32()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(Int32), DbType.Int32, SqlDbType.Int));
+            TypeList.Add(new DbTypeMapEntry(typeof(Int32), DbType.Int32, SqlDbType.Int));
         }
 
-        public virtual void typeInt64()
+        /// <summary>
+        /// Adds the int64 type conversions
+        /// </summary>
+        public virtual void TypeInt64()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(Int64), DbType.Int64, SqlDbType.BigInt));
+            TypeList.Add(new DbTypeMapEntry(typeof(Int64), DbType.Int64, SqlDbType.BigInt));
         }
 
-        public virtual void typeLong()
+        /// <summary>
+        /// Adds the long type conversions
+        /// </summary>
+        public virtual void TypeLong()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(long), DbType.Int64, SqlDbType.BigInt));
+            TypeList.Add(new DbTypeMapEntry(typeof(long), DbType.Int64, SqlDbType.BigInt));
         }
 
-        public virtual void typeObject()
+        /// <summary>
+        /// Adds the object type conversions
+        /// </summary>
+        public virtual void TypeObject()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(object), DbType.Object, SqlDbType.Variant));
+            TypeList.Add(new DbTypeMapEntry(typeof(object), DbType.Object, SqlDbType.Variant));
         }
 
-        public virtual void typeString()
+        /// <summary>
+        /// Adds the string type conversions
+        /// </summary>
+        public virtual void TypeString()
         {
-            typeList.Add(new DbTypeMapEntry(typeof(string), DbType.String, SqlDbType.VarChar));
+            TypeList.Add(new DbTypeMapEntry(typeof(string), DbType.String, SqlDbType.VarChar));
         }
 
-        public virtual void extraType()
+        /// <summary>
+        /// Adds the datatable type conversions
+        /// </summary>
+        public virtual void TypeTable()
+        {
+            TypeList.Add(new DbTypeMapEntry(typeof(DataTable), DbType.Object, SqlDbType.Structured));
+        }
+
+        /// <summary>
+        /// Adds any additional types which might be put in through inheritance
+        /// </summary>
+        public virtual void ExtraType()
         {
         }
 
-        private void init()
+        /// <summary>
+        /// This function is the loading function for the types
+        /// </summary>
+        private void LoadTypes()
         {
-            typeBool();
-            typeByte();
-            typeByteArray();
-            typeDateTime();
-            typeDecimal();
-            typeDouble();
-            typeGUID();
-            typeInt16();
-            typeInt32();
-            typeInt64();
-            typeLong();
-            typeObject();
-            typeString();
+            TypeBool();
+            TypeByte();
+            TypeByteArray();
+            TypeDateTime();
+            TypeDecimal();
+            TypeDouble();
+            TypeGUID();
+            TypeInt16();
+            TypeInt32();
+            TypeInt64();
+            TypeLong();
+            TypeObject();
+            TypeString();
+            TypeTable();
 
             //This one is run for any extra hooks we want to add in later versions
-            extraType();
+            ExtraType();
         }
     }
 }

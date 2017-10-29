@@ -7,32 +7,28 @@ namespace DotNetSDB
         /*##########################################*/
         /*          Database Cleanup Variable       */
         /*##########################################*/
+        /// <summary>
+        /// Core variable for determining if the object has already been disposed of
+        /// </summary>
+        protected bool IsDisposed { get; set; }
 
-        protected bool _disposed = false;
-
-        //This is the dispose method for disposing of the connection
-        //Note: called at the end of a using statement
+        /// <summary>
+        /// This is the dispose method for disposing of the connection
+        /// </summary>
         public virtual void Dispose()
         {
-            Dispose(true);
+            if (!IsDisposed)
+            {   
+                DisposeAll();
+                IsDisposed = true;
+            }
             GC.SuppressFinalize(this);
         }
-
-        //This disposes of the connection
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposed)
-            {
-                if (disposing)
-                {
-                    disposeAll();
-                }
-                _disposed = true;
-            }
-        }
-
-        //This disposes all the query objects once finished
-        protected void disposeAll()
+        
+        /// <summary>
+        /// This disposes all the query objects once finished
+        /// </summary>
+        protected void DisposeAll()
         {
             foreach (Query q in theQueries)
             {
@@ -44,7 +40,9 @@ namespace DotNetSDB
             ExtraDispose();
         }
 
-        //This function is used as an extra hook for inheritance
+        /// <summary>
+        /// This function is used as an extra hook for inheritance
+        /// </summary>
         protected virtual void ExtraDispose()
         {
         }

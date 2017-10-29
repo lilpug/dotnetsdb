@@ -5,14 +5,17 @@
         /*##########################################*/
         /*           Main Front function            */
         /*##########################################*/
-
+        /// <summary>
+        /// This function adds a drop table statement
+        /// </summary>
+        /// <param name="tableName"></param>
         public virtual void add_drop_table(string tableName)
         {
             Query theQuery = GetQuery();
 
-            theQuery.dropTableName = tableName;
+            theQuery.DropTableName = tableName;
 
-            theQuery.orderList.Add("drop");
+            theQuery.OrderList.Add("drop");
 
             start_new_query();
         }

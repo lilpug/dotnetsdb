@@ -18,8 +18,15 @@ namespace DotNetSDB
         {
             try
             {
+                //Check if its not empty, if its not then clear it as we are about to compile all of it again
+                //Note: this is different to execution as we are compiling it all again so it needs to be wiped in case of additions
+                if(!string.IsNullOrWhiteSpace(compiledSql.ToString()))
+                {
+                    compiledSql.Clear();
+                }
+
                 //Compiles the sql in debug mode
-                compiling(true);
+                Compiling(true);
 
                 //gets the query ready and wraps the query in the deadlock solution
                 SqlCommand myCommand = new SqlCommand(compiledSql.ToString(), myConnection);
@@ -41,12 +48,24 @@ namespace DotNetSDB
             catch { }
             return null;
         }
-        
+
+        /// <summary>
+        /// This function is used to replace a specific value within a string
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="search"></param>
+        /// <param name="replace"></param>
+        /// <returns></returns>
         protected string ReplaceOccurrences(string text, string search, string replace)
         {
             return Regex.Replace(text, @"" + search + "+", replace);
         }
 
+        /// <summary>
+        /// This function obtains the compiled SQL from a MySQL command object
+        /// </summary>
+        /// <param name="myCommand"></param>
+        /// <returns></returns>
         protected string GetCompiledSqlFromCommand(SqlCommand myCommand)
         {
             try
@@ -66,7 +85,11 @@ namespace DotNetSDB
             return null;
         }
 
-        //This returns the parameters value in the specific format
+        /// <summary>
+        /// This returns the parameters value in the specific format
+        /// </summary>
+        /// <param name="sp"></param>
+        /// <returns></returns>
         protected string ParameterValueForSQL(SqlParameter sp)
         {
             string retval = "";
@@ -100,7 +123,11 @@ namespace DotNetSDB
             return retval;
         }
 
-        //This deals with boolean and bit values
+        /// <summary>
+        /// This function deals with boolean and bit value conversions
+        /// </summary>
+        /// <param name="o"></param>
+        /// <returns></returns>
         protected bool ToBooleanOrDefault(object o)
         {
             bool ReturnVal = false;

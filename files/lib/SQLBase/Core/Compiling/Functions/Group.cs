@@ -8,10 +8,13 @@ namespace DotNetSDB
         /*           Compiling Group functions      */
         /*##########################################*/
 
+        /// <summary>
+        /// This function compiles the group query and adds it to the query being built
+        /// </summary>
+        /// <param name="current"></param>
         protected virtual void CompileGroup(Query current)
         {
-            compiledSql.Append($" GROUP BY {string.Join(",", current.groupbyFields).TrimEnd(',')}");
-            current.groupbyFields.Clear();
+            compiledSql.Append($" GROUP BY {string.Join(",", current.GroupbyFields).TrimEnd(',')}");
         }
     }
 }

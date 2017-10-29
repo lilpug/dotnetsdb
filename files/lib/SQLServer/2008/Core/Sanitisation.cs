@@ -9,6 +9,12 @@ namespace DotNetSDB
         /*     Sanitisation Compiling functions     */
         /*##########################################*/
 
+        /// <summary>
+        /// This function sanitise and parameter binds the query values using the 2008 type lookup class
+        /// </summary>
+        /// <param name="definition"></param>
+        /// <param name="command"></param>
+        /// <param name="items"></param>
         protected override void SanitiseItems(string definition, ref SqlCommand command, params object[] items)
         {
             //Note: We do this here and in a foreach so if we get any errors we can build the error definition section in the exception.

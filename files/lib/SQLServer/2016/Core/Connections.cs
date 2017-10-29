@@ -19,7 +19,7 @@ namespace DotNetSDB
         public SQLServer2016(SQLServerConnection connectionInformation)
             : base(connectionInformation)
         {
-            filetable = new SQLServerFileTableExtension(new DatabaseConnector(this), db);
+            Filetable = new SQLServerFileTableExtension(new DatabaseConnector(this), db);
         }
     }
 }

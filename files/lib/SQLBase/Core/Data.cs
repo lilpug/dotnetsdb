@@ -8,9 +8,13 @@ namespace DotNetSDB
         /*##########################################*/
         /*          Adding raw data functions       */
         /*##########################################*/
-
-        //This function looks at the data and if a cast exception is thrown it then uses a different approach to be able to type cast it correctly
-        //Note: This is done as string[] will type cast normally but elements like byte[] will not the index's do not match
+        
+        /// <summary>
+        /// This function looks at the data and if a cast exception is thrown it then uses a different approach to be able to type cast it correctly
+        /// Note: This is done as string[] will type cast normally but elements like byte[] will not the index's do not match
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         protected virtual object[] AddData(object data)
         {
             object[] results;

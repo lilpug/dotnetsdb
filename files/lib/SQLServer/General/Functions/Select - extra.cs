@@ -14,9 +14,10 @@
         /// <param name="topValue"></param>
         public virtual void add_select_top(int topValue)
         {
-            //Obtains the current query object
-            Query2 theQuery = GetQuery2();
-            theQuery.selectTop = topValue;
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)GetQuery();
+
+            theQuery.SelectTop = topValue;
         }
     }
 }

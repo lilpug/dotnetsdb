@@ -14,6 +14,9 @@ namespace DotNetSDB
         //Note: This means it backs up the query and then returns it to its original state before the compiling started
         private List<Query> theBackup = new List<Query>();
 
+        /// <summary>
+        /// This function loops through all the stored query objects and deep clones them into a backup list
+        /// </summary>
         protected virtual void CompileBackup()
         {
             theBackup.Clear();
@@ -23,6 +26,9 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function loops through all the backed up query objects and restores them back into the query object list
+        /// </summary>
         protected virtual void CompileRestore()
         {
             theQueries.Clear();
@@ -33,6 +39,12 @@ namespace DotNetSDB
             theBackup.Clear();
         }
 
+        /// <summary>
+        /// This function takes an object and deep clones it as most copies in .NET just copy the reference
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         protected static T DeepClone<T>(T obj)
         {
             using (var stream = new MemoryStream())
@@ -47,7 +59,7 @@ namespace DotNetSDB
         /// <summary>
         /// This function is the main compiling function which deals with putting all the queries together into one massive statement to be executed.
         /// </summary>
-        protected void compiling(bool backup = false)
+        protected void Compiling(bool backup = false)
         {
             if (backup)
             {

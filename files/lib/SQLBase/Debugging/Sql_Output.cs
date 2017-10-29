@@ -15,10 +15,10 @@
             int mainCounter = 0;
             for (int i = 0; i < theQueries.Count; i++)
             {
-                mainCounter += theQueries[i].insertRealValues.Count;
-                mainCounter += theQueries[i].updateRealValues.Count;
-                mainCounter += theQueries[i].whereRealValues.Count;
-                mainCounter += theQueries[i].customRealValues.Count;
+                mainCounter += theQueries[i].InsertRealValues.Count;
+                mainCounter += theQueries[i].UpdateRealValues.Count;
+                mainCounter += theQueries[i].WhereRealValues.Count;
+                mainCounter += theQueries[i].CustomRealValues.Count;
             }
             return mainCounter;
         }

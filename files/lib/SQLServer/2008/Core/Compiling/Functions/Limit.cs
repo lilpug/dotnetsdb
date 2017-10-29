@@ -6,14 +6,20 @@
         /*          Compiling Limit functions       */
         /*##########################################*/
 
-        protected virtual void CompileLimit(Query3 current)
+        /// <summary>
+        /// This function compiles the limit query wrapper and adds it to the query being built
+        /// </summary>
+        /// <param name="current"></param>
+        protected virtual void CompileLimit(Query current)
         {
-            string temp = $" {LimitCompile(current, current.orderby, compiledSql.ToString())}";
+            //Converts the query object to QueryExtension
+            QueryExtension2 theQuery = (QueryExtension2)current;
+            
+            string temp = $" {LimitCompile(theQuery, theQuery.Orderby, compiledSql.ToString())}";
+
+            //Wipes the query and then adds it back as this is the wrapper for the entire query
             compiledSql.Clear();
             compiledSql.Append(temp);
-            current.limitCountOne = -1;
-            current.limitCountTwo = -1;
-            current.orderby = "";
         }
     }
 }

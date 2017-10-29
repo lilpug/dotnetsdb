@@ -2,16 +2,40 @@
 
 namespace DotNetSDB.Connector
 {
+    /// <summary>
+    /// This is the DatabaseConnector class which is used as a bridge to store all connections via dynamic objects
+    /// </summary>
     public sealed partial class DatabaseConnector : IDisposable
     {
-        //Storage objects
-        public SQLServer2016 sqlserver2016;
-        public SQLServer2014 sqlserver2014;
-        public SQLServer2012 sqlserver2012;
-        public SQLServer2008 sqlserver2008;
-        public MySQLCore mysql;
+        /// <summary>
+        /// Can stores the SQL Server 2016 database object
+        /// </summary>
+        public SQLServer2016 Sqlserver2016 { get; set; }
 
-        //Constructor for determining which database connection has been passed
+        /// <summary>
+        /// Can stores the SQL Server 2014 database object
+        /// </summary>
+        public SQLServer2014 Sqlserver2014 { get; set; }
+
+        /// <summary>
+        /// Can stores the SQL Server 2012 database object
+        /// </summary>
+        public SQLServer2012 Sqlserver2012 { get; set; }
+        
+        /// <summary>
+        /// Can stores the SQL Server 2008 database object
+        /// </summary>
+        public SQLServer2008 Sqlserver2008 { get; set; }
+
+        /// <summary>
+        /// Can stores the MySQL database object
+        /// </summary>
+        public MySQLCore MySQL { get; set; }
+
+        /// <summary>
+        /// Constructor for determining which database connection has been passed
+        /// </summary>
+        /// <param name="dbObject"></param>
         public DatabaseConnector(object dbObject)
         {
             if (dbObject.GetType() == typeof(SQLServer2016))
@@ -32,7 +56,7 @@ namespace DotNetSDB.Connector
             }
             else if (dbObject.GetType() == typeof(MySQLCore))
             {
-                mysqlCore((MySQLCore)dbObject);
+                MysqlCore((MySQLCore)dbObject);
             }
             else
             {
@@ -40,32 +64,44 @@ namespace DotNetSDB.Connector
             }
         }
 
-        //Deconstructor
+        /// <summary>
+        /// Core variable for determining if the object has already been disposed of
+        /// </summary>
+        private bool isDisposed = false;
+
+        /// <summary>
+        /// This is the core dispose method for the database connector object
+        /// </summary>
         public void Dispose()
         {
-            if (sqlserver2016 != null)
+            if (!isDisposed)
             {
-                sqlserver2016.Dispose();
-            }
+                if (Sqlserver2016 != null)
+                {
+                    Sqlserver2016.Dispose();
+                }
 
-            if (sqlserver2014 != null)
-            {
-                sqlserver2014.Dispose();
-            }
+                if (Sqlserver2014 != null)
+                {
+                    Sqlserver2014.Dispose();
+                }
 
-            if (sqlserver2012 != null)
-            {
-                sqlserver2012.Dispose();
-            }
+                if (Sqlserver2012 != null)
+                {
+                    Sqlserver2012.Dispose();
+                }
 
-            if (sqlserver2008 != null)
-            {
-                sqlserver2008.Dispose();
-            }
+                if (Sqlserver2008 != null)
+                {
+                    Sqlserver2008.Dispose();
+                }
 
-            if (mysql != null)
-            {
-                mysql.Dispose();
+                if (MySQL != null)
+                {
+                    MySQL.Dispose();
+                }
+
+                isDisposed = true;
             }
         }
     }

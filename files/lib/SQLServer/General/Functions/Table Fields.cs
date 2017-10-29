@@ -14,9 +14,10 @@ namespace DotNetSDB
         /// <returns></returns>
         public virtual string[] table_fields(string tableName)
         {
-            Query2 theQuery = GetQuery2();
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)GetQuery();
 
-            theQuery.getFieldsRealTableValue = AddData(tableName);
+            theQuery.GetFieldsRealTableValue = AddData(tableName);
 
             //Gives the sql string to the compiled_build
             compiledSql.Append($"SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = {fieldsDefinition}_1_0_0 ORDER BY ordinal_position;");

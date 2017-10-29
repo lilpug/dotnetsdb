@@ -1,64 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace DotNetSDB
 {
     public partial class MySQLCore
     {
-        //NOTE: even though we have another query object for the new features in this specific database version,
-        //      we STILL use the normal query objects order list for the new commands!!
-
-        //This holds the extra query variables for this specific database version
+        /// <summary>
+        /// This holds the extra query variables for this specific database version
+        /// </summary>
         [Serializable]
-        protected class Query2
+        protected class QueryExtension : Query
         {
-            //Variables for the offset
-            public string limit = "";
+            /// <summary>
+            /// Variable that stores the built limit
+            /// </summary>
+            public string Limit { get;set; }
 
-            public object[] exist_real_table_value = new object[0];
-            public object[] get_fields_real_table_value = new object[0];            
+            /// <summary>
+            /// Variable that holds the exist table values
+            /// </summary>
+            public object[] ExistRealTableValue { get; set; }
 
-            public void Dispose(bool disposing)
+            /// <summary>
+            /// Variable that holds the get fields values
+            /// </summary>
+            public object[] GetFieldsRealTableValue { get; set; }
+
+            /// <summary>
+            /// This is the main constructor that loads up the extended query variables
+            /// </summary>
+            public QueryExtension() : base()
             {
-                if (disposing)
+            }
+            
+            /// <summary>
+            /// This is the core disposal method for the Query Extension object
+            /// </summary>
+            public override void Dispose()
+            {
+                //Checks if the disposal method has already run
+                if (!IsDisposed)
                 {
-                    limit = "";
+                    Limit = null;
 
-                    exist_real_table_value = null;
-                    get_fields_real_table_value = null;
+                    ExistRealTableValue = null;
+                    GetFieldsRealTableValue = null;
                 }
-            }
 
-            public void Dispose()
-            {
-                Dispose(true);
-                GC.SuppressFinalize(this);
+                //Calls the parents disposal method 
+                base.Dispose();
             }
         }
 
-        //This variable holds all the query objects for this specific database version
-        private List<Query2> theQueries2 = new List<Query2>();
-
-        //This function is run every time a Top layer function is run to get the query object
-        protected Query2 GetQuery2()
-        {
-            //This runs in case its the first initiation, if so it creates the new query object before getting it
-            if (theQueries2.Count == 0)
-            {
-                start_new_query();
-            }
-
-            //Returns the latest query element
-            return theQueries2[theQueries2.Count - 1];
-        }
-
-        //This function is used to create a new query object for running a new query
+        /// <summary>
+        /// This function is used to override the default object creation creation to ensure its what we require
+        /// </summary>
         public override void start_new_query()
         {
-            //Runs the base first then executes the extras
-            base.start_new_query();
-
-            theQueries2.Add(new Query2());
+            theQueries.Add(new QueryExtension());
         }
     }
 }

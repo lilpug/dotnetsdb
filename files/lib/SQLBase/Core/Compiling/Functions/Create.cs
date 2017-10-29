@@ -8,11 +8,13 @@ namespace DotNetSDB
         /*          Compiling Create functions      */
         /*##########################################*/
 
+        /// <summary>
+        /// This function compiles the create query and adds it to the query being built
+        /// </summary>
+        /// <param name="current"></param>
         protected virtual void CompileCreate(Query current)
         {
-            compiledSql.Append($" CREATE TABLE {current.createTable} ({string.Join(",", current.createFields).TrimEnd(',')})");
-            current.createFields.Clear();
-            current.createTable = "";
+            compiledSql.Append($" CREATE TABLE {current.CreateTable} ({string.Join(",", current.CreateFields).TrimEnd(',')})");
         }
     }
 }

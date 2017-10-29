@@ -9,14 +9,26 @@ namespace DotNetSDB
         /*       GroupBy Compiling functions        */
         /*##########################################*/
 
+        /// <summary>
+        /// This function deals with creating the group by SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="field"></param>
         protected void GroupByCompile(Query theQuery, string tableName, string field)
         {
             //validation check
             GroupBySingleValidation(tableName, field);
             
-            theQuery.groupbyFields.Add($"{tableName}.{field}");
+            theQuery.GroupbyFields.Add($"{tableName}.{field}");
         }
 
+        /// <summary>
+        /// This function deals with creating the group by SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="fields"></param>
         protected void GroupByCompile(Query theQuery, string tableName, string[] fields)
         {
             //validation check
@@ -35,13 +47,18 @@ namespace DotNetSDB
                 sb.Append($"{tableName}.{fields[i]}");
             }
 
-            theQuery.groupbyFields.Add(sb.ToString());
+            theQuery.GroupbyFields.Add(sb.ToString());
         }
 
         /*##########################################*/
         /*      GroupBy Validation functions        */
         /*##########################################*/
 
+        /// <summary>
+        /// This function validates the group by variables
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="field"></param>
         protected void GroupBySingleValidation(string tableName, string field)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -54,6 +71,11 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function validates the group by variables
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="fields"></param>
         protected void GroupByMultipleValidation(string tableName, string[] fields)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -66,17 +88,25 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function validates that the group by base statement has been added before trying to add additional fields
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void GroupByNotExistValidation(Query theQuery)
         {
-            if (!theQuery.orderList.Contains("groupby"))
+            if (!theQuery.OrderList.Contains("groupby"))
             {
-                throw new Exception("Group Error: you cannot add group by fields without defining a main grpup by statement first.");
+                throw new Exception("Group Error: you cannot add group by fields without defining a main group by statement first.");
             }
         }
 
+        /// <summary>
+        /// This function validates that the group by query has not already been run as a new one is about to be added
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void GroupByExistValidation(Query theQuery)
         {
-            if (theQuery.orderList.Contains("groupby"))
+            if (theQuery.OrderList.Contains("groupby"))
             {
                 throw new Exception("Group Error: a main group by statement has already been defined, for additional fields use add_groupby_fields.");
             }
@@ -100,7 +130,7 @@ namespace DotNetSDB
 
             GroupByCompile(theQuery, tableName, field);
 
-            theQuery.orderList.Add("groupby");
+            theQuery.OrderList.Add("groupby");
         }
 
         /// <summary>
@@ -117,7 +147,7 @@ namespace DotNetSDB
 
             GroupByCompile(theQuery, tableName, fields);
 
-            theQuery.orderList.Add("groupby");
+            theQuery.OrderList.Add("groupby");
         }
 
         /// <summary>

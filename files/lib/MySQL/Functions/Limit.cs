@@ -8,16 +8,25 @@ namespace DotNetSDB
         /*        Limit Compiling functions         */
         /*##########################################*/
 
-        //This function is the mysql limit sql builder
-        protected void LimitCompile(Query2 theQuery, int start)
+        /// <summary>
+        /// This function is the MySQL limit SQL builder
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="start"></param>
+        protected void LimitCompile(QueryExtension theQuery, int start)
         {
-            theQuery.limit = $"LIMIT {start}";
+            theQuery.Limit = $"LIMIT {start}";
         }
 
-        //This function is the mysql limit sql builder
-        protected void LimitCompile(Query2 theQuery, int start, int end)
+        /// <summary>
+        /// This function is the MySQL limit SQL builder
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        protected void LimitCompile(QueryExtension theQuery, int start, int end)
         {
-            theQuery.limit = $"LIMIT {start}, {end}";
+            theQuery.Limit = $"LIMIT {start}, {end}";
         }        
 
         /*##########################################*/
@@ -33,11 +42,13 @@ namespace DotNetSDB
             if (maxRows <= 0)
             {
                 throw new Exception($"The limit start value starts at 1 and above, yours is currently '{maxRows.ToString()}'.");
-            }            
-            Query theMain = GetQuery();
-            Query2 theQuery = GetQuery2();
+            }
+
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)GetQuery();
+
             LimitCompile(theQuery, maxRows);
-            theMain.orderList.Add("limit");
+            theQuery.OrderList.Add("limit");
         }
 
         /// <summary>
@@ -55,10 +66,12 @@ namespace DotNetSDB
             {
                 throw new Exception($"The limit end value starts before the start value, start value: '{startLocation}', end value: '{numberOfRows}'.");
             }
-            Query theMain = GetQuery();
-            Query2 theQuery = GetQuery2();
+
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)GetQuery();
+
             LimitCompile(theQuery, startLocation, numberOfRows);
-            theMain.orderList.Add("limit");
+            theQuery.OrderList.Add("limit");
         }
     }
 }

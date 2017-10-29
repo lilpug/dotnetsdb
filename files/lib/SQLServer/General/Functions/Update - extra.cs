@@ -17,10 +17,11 @@
             //Runs the original update
             add_update(tableName, field, value);
 
-            Query2 theQuery2 = GetQuery2();
+            //Converts the query object to QueryExtension
+            QueryExtension theQuery = (QueryExtension)GetQuery();
 
             //Adds the new return feature
-            theQuery2.updateReturned = true;
+            theQuery.UpdateReturned = true;
         }
 
         /// <summary>
@@ -34,10 +35,12 @@
             //Runs the original update
             add_update(tableName, fields, values);
 
-            Query2 theQuery2 = GetQuery2();
+            //Converts the query object to Query2
+            //Note: it will always be Query2 if this function is being hit as GetQuery is override to create Query2 objects.
+            QueryExtension theQuery2 = (QueryExtension)GetQuery();
 
             //Adds the new return feature
-            theQuery2.updateReturned = true;
+            theQuery2.UpdateReturned = true;
         }
     }
 }

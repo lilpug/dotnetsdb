@@ -10,7 +10,14 @@ namespace DotNetSDB
         /*            Update functions              */
         /*##########################################*/
 
-        //This function compiles the update fields
+        /// <summary>
+        /// This function deals with creating the update SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="definition"></param>
+        /// <param name="tableName"></param>
+        /// <param name="updateField"></param>
+        /// <param name="updateValues"></param>
         protected void UpdateCompile(Query theQuery, string definition, string tableName, string updateField, params object[] updateValues)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -21,14 +28,14 @@ namespace DotNetSDB
             if (!string.IsNullOrWhiteSpace(updateField))
             {
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.updateTable) && !string.IsNullOrWhiteSpace(tableName))
+                if (string.IsNullOrWhiteSpace(theQuery.UpdateTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    theQuery.updateTable = tableName;
+                    theQuery.UpdateTable = tableName;
                 }
                 
                 //Builds the final statement
-                theQuery.updateFields.Add($"{tableName}.{updateField} = {definition}0");
+                theQuery.UpdateFields.Add($"{tableName}.{updateField} = {definition}0");
             }
             else
             {
@@ -36,6 +43,14 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function deals with creating the update SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="definition"></param>
+        /// <param name="tableName"></param>
+        /// <param name="updateFields"></param>
+        /// <param name="updateValues"></param>
         protected void UpdateCompile(Query theQuery, string definition, string tableName, string[] updateFields, params object[] updateValues)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -47,10 +62,10 @@ namespace DotNetSDB
             if (updateFields != null && updateFields.Count() > 0)
             {
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.updateTable) && !string.IsNullOrWhiteSpace(tableName))
+                if (string.IsNullOrWhiteSpace(theQuery.UpdateTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    theQuery.updateTable = tableName;
+                    theQuery.UpdateTable = tableName;
                 }
 
                 StringBuilder sb = new StringBuilder();
@@ -67,7 +82,7 @@ namespace DotNetSDB
                 }
 
                 //Builds the final statement
-                theQuery.updateFields.Add(sb.ToString());
+                theQuery.UpdateFields.Add(sb.ToString());
             }
             else
             {
@@ -79,17 +94,25 @@ namespace DotNetSDB
         /*       Update Validation functions        */
         /*##########################################*/
 
+        /// <summary>
+        /// This function validates that the update base statement has been added before trying to add additional fields
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void UpdateNotExistValidation(Query theQuery)
         {
-            if (!theQuery.orderList.Contains("update"))
+            if (!theQuery.OrderList.Contains("update"))
             {
                 throw new Exception("Update Error: you cannot add update fields without defining a main update statement first.");
             }
         }
 
+        /// <summary>
+        /// This function validates that the update query has not already been run as a new one is about to be added
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void UpdateExistValidation(Query theQuery)
         {
-            if (theQuery.orderList.Contains("update"))
+            if (theQuery.OrderList.Contains("update"))
             {
                 throw new Exception("Update Error: a main update statement has already been defined, for additional fields use add_update_fields.");
             }
@@ -111,7 +134,7 @@ namespace DotNetSDB
 
             UpdateExistValidation(theQuery);
 
-            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.updateFields.Count}_";
+            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.UpdateFields.Count}_";
 
             object[] holding = AddData(value);
             if (holding.Count() != 1)
@@ -121,9 +144,9 @@ namespace DotNetSDB
 
             UpdateCompile(theQuery, definition, tableName, field, holding);
 
-            theQuery.updateRealValues.Add(holding);
+            theQuery.UpdateRealValues.Add(holding);
 
-            theQuery.orderList.Add("update");
+            theQuery.OrderList.Add("update");
         }
 
         /// <summary>
@@ -138,7 +161,7 @@ namespace DotNetSDB
 
             UpdateExistValidation(theQuery);
 
-            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.updateFields.Count}_";
+            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.UpdateFields.Count}_";
 
             object[] holding = AddData(values);
             if (holding.Count() != fields.Length)
@@ -148,9 +171,9 @@ namespace DotNetSDB
 
             UpdateCompile(theQuery, definition, tableName, fields, holding);
 
-            theQuery.updateRealValues.Add(holding);
+            theQuery.UpdateRealValues.Add(holding);
 
-            theQuery.orderList.Add("update");
+            theQuery.OrderList.Add("update");
         }
 
         /// <summary>
@@ -165,7 +188,7 @@ namespace DotNetSDB
 
             UpdateNotExistValidation(theQuery);
 
-            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.updateFields.Count}_";
+            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.UpdateFields.Count}_";
 
             object[] holding = AddData(value);
             if (holding.Count() != 1)
@@ -175,7 +198,7 @@ namespace DotNetSDB
 
             UpdateCompile(theQuery, definition, tableName, field, holding);
 
-            theQuery.updateRealValues.Add(holding);
+            theQuery.UpdateRealValues.Add(holding);
         }
 
         /// <summary>
@@ -190,7 +213,7 @@ namespace DotNetSDB
 
             UpdateNotExistValidation(theQuery);
 
-            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.updateFields.Count}_";
+            string definition = $"{updateDefinition}_{theQueries.Count}_{theQuery.UpdateFields.Count}_";
 
             object[] holding = AddData(values);
             if (holding.Count() != fields.Length)
@@ -200,7 +223,7 @@ namespace DotNetSDB
 
             UpdateCompile(theQuery, definition, tableName, fields, holding);
 
-            theQuery.updateRealValues.Add(holding);
+            theQuery.UpdateRealValues.Add(holding);
         }
     }
 }

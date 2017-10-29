@@ -10,7 +10,13 @@ namespace DotNetSDB
         /*               Helper Functions           */
         /*##########################################*/
 
-        //This function is used to obtain values between a specific segment within a string
+        /// <summary>
+        /// This function is used to obtain values between a specific segment within a string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="startValue"></param>
+        /// <param name="endValue"></param>
+        /// <returns></returns>
         protected string GetBetweenStringValue(string value, string startValue, string endValue)
         {
             if (!string.IsNullOrWhiteSpace(value) && value.IndexOf(startValue) > -1 && value.IndexOf(endValue) > -1)
@@ -31,7 +37,11 @@ namespace DotNetSDB
             return null;
         }
 
-        //This function deletes a file
+        /// <summary>
+        /// This function deletes a file
+        /// </summary>
+        /// <param name="theFilePath"></param>
+        /// <returns></returns>
         protected static bool DeleteFile(string theFilePath)
         {
             int maxWait = 10000;
@@ -56,7 +66,12 @@ namespace DotNetSDB
             return false;
         }
 
-        //This function creates a file
+        /// <summary>
+        /// This function creates a file
+        /// </summary>
+        /// <param name="theFilePath"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
         protected static bool CreateFile(string theFilePath, string data)
         {
             int maxWait = 10000;
@@ -88,7 +103,12 @@ namespace DotNetSDB
             return false;
         }
 
-        //This function appends a file
+        /// <summary>
+        /// This function appends a file
+        /// </summary>
+        /// <param name="theFilePath"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
         protected static bool AppendFile(string theFilePath, string data)
         {
             //Checks to ensure the file already exists
@@ -104,9 +124,16 @@ namespace DotNetSDB
         }
     }
 
+    /// <summary>
+    /// This class is an extension class for StringBuilder
+    /// </summary>
     public static class StringBuilderExtension
     {
-        //This is an extension method to StringBuilder to allow us to Trim the string being built efficiently
+        /// <summary>
+        /// This is an extension method to StringBuilder to allow us to Trim the string being built efficiently
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <returns></returns>
         public static StringBuilder Trim(this StringBuilder sb)
         {
             //Checks if the StringBuilder has any data first

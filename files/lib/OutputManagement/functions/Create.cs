@@ -11,7 +11,7 @@ namespace DotNetSDB.output
             try
             {
                 //Saves the file and closes the returned stream
-                using (FileStream fs = File.Create(Path.Combine(info.directory, filename))) { }
+                using (FileStream fs = File.Create(Path.Combine(info.Directory, filename))) { }
                 return true;
             }
             catch { }
@@ -29,7 +29,7 @@ namespace DotNetSDB.output
                 {
                     //Processes the filename
                     string fileName = $"{(now.ToString().Split(' '))[0].Replace('/', '-')}.log";
-                    fileName = $@"{info.logName}.{fileName}";
+                    fileName = $@"{info.LogName}.{fileName}";
 
                     //Checks if it exists, if not creates it before returning the name
                     if (!FileExists(fileName))

@@ -22,8 +22,8 @@ namespace DotNetSDB
             {
                 throw new Exception("add_pure_sql_bind Error: The data your trying to bind is an array not singular, please use the 'add_pure_sql_bind_array' function for this.");
             }
-            current.customRealValues.Add(holding);
-            return $"{customDefinition}_{theQueries.Count}_{current.customRealValues.Count - 1}_0";
+            current.CustomRealValues.Add(holding);
+            return $"{customDefinition}_{theQueries.Count}_{current.CustomRealValues.Count - 1}_0";
         }
 
         /// <summary>
@@ -35,20 +35,20 @@ namespace DotNetSDB
         {
             Query current = GetQuery();
             object[] holding = AddData(values);
-            current.customRealValues.Add(holding);
+            current.CustomRealValues.Add(holding);
 
             if (holding.Length > 1)
             {
                 List<string> defs = new List<string>();
                 for (int i = 0; i < holding.Length; i++)
                 {
-                    defs.Add($"{customDefinition}_{theQueries.Count}_{current.customRealValues.Count - 1}_{i}");
+                    defs.Add($"{customDefinition}_{theQueries.Count}_{current.CustomRealValues.Count - 1}_{i}");
                 }
                 return defs.ToArray();
             }
             else
             {
-                return new string[] { $"{customDefinition}_{theQueries.Count}_{current.customRealValues.Count - 1}_0" };
+                return new string[] { $"{customDefinition}_{theQueries.Count}_{current.CustomRealValues.Count - 1}_0" };
             }
         }
 
@@ -60,8 +60,8 @@ namespace DotNetSDB
         {
             Query theQuery = GetQuery();
 
-            theQuery.pureSql.Add(sqlQuery);
-            theQuery.orderList.Add("pure_sql");
+            theQuery.PureSql.Add(sqlQuery);
+            theQuery.OrderList.Add("pure_sql");
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace DotNetSDB
         public void add_start_sql_wrapper(string sqlQuery)
         {
             Query theQuery = GetQuery();
-            theQuery.sqlStartWrapper = sqlQuery;
+            theQuery.SqlStartWrapper = sqlQuery;
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace DotNetSDB
         public void add_end_sql_wrapper(string sqlQuery)
         {
             Query theQuery = GetQuery();
-            theQuery.sqlEndWrapper = sqlQuery;
+            theQuery.SqlEndWrapper = sqlQuery;
         }
     }
 }

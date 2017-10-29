@@ -12,8 +12,11 @@ namespace DotNetSDB
         /*        Data Conversion functions         */
         /*##########################################*/
 
-        //This functions takes the resulting data and converts it into a json format string
-        //Note: http://jsonformatter.curiousconcept.com/
+        /// <summary>
+        /// This functions takes the resulting data and converts it into a json format string
+        /// </summary>
+        /// <param name="myReader"></param>
+        /// <returns></returns>
         protected virtual string ResultToJson(ref SqlDataReader myReader)
         {
             StringBuilder sb = new StringBuilder();
@@ -69,6 +72,11 @@ namespace DotNetSDB
             return sb.ToString();
         }
 
+        /// <summary>
+        /// This function takes the first result value and returns it as a string
+        /// </summary>
+        /// <param name="myReader"></param>
+        /// <returns></returns>
         protected virtual string ResultToString(ref SqlDataReader myReader)
         {
             //Puts the first output into a string
@@ -80,7 +88,11 @@ namespace DotNetSDB
             return value;
         }
 
-        //This functions takes the resulting data and converts it into a dataTable format
+        /// <summary>
+        /// This functions takes the resulting data and converts it into a dataTable format
+        /// </summary>
+        /// <param name="myReader"></param>
+        /// <returns></returns>
         protected virtual DataTable ResultToDataTable(ref SqlDataReader myReader)
         {
             DataTable main_store = new DataTable();
@@ -89,7 +101,12 @@ namespace DotNetSDB
             return main_store;
         }
 
-        //This functions takes the resulting data and converts it into a dataset format
+        /// <summary>
+        /// This functions takes the resulting data and converts it into a dataset format
+        /// </summary>
+        /// <param name="myAdapter"></param>
+        /// <param name="enforceConstraints"></param>
+        /// <returns></returns>
         protected virtual DataSet ResultToDataSet(ref SqlDataAdapter myAdapter, bool enforceConstraints)
         {
             DataSet ds = new DataSet();
@@ -103,7 +120,11 @@ namespace DotNetSDB
             return ds;
         }
 
-        //This function takes the resulting data and puts every first row value into an array
+        /// <summary>
+        /// This function takes the resulting data and puts every first row value into an array
+        /// </summary>
+        /// <param name="myReader"></param>
+        /// <returns></returns>
         protected virtual string[] ResultToStringArray(ref SqlDataReader myReader)
         {
             List<string> ls = new List<string>();
@@ -116,7 +137,11 @@ namespace DotNetSDB
             return ls.ToArray();
         }
 
-        //This functions takes the resulting data and converts it into a list of dynamic class objects
+        /// <summary>
+        /// This functions takes the resulting data and converts it into a list of dynamic class objects
+        /// </summary>
+        /// <param name="myReader"></param>
+        /// <returns></returns>
         protected virtual List<dynamic> ResultToDynamic(ref SqlDataReader myReader)
         {
             //Builds the temporary storage object

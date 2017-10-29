@@ -9,7 +9,18 @@ namespace DotNetSDB
         /*            Where in function             */
         /*##########################################*/
 
-        //This function deals with processing through the where in clause
+        /// <summary>
+        /// This function deals with creating the where in SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="definition"></param>
+        /// <param name="tableName"></param>
+        /// <param name="field"></param>
+        /// <param name="values"></param>
+        /// <param name="theOperator"></param>
+        /// <param name="type"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         protected void WhereInCompile(Query theQuery, string definition, string tableName, string field, object values, string theOperator, string type = null, string start = null, string end = null)
         {
             //Array check preperation
@@ -37,9 +48,9 @@ namespace DotNetSDB
             }
             
             //Adds the operator *default and*
-            if (theQuery.whereStatements.Count != 0)
+            if (theQuery.WhereStatements.Count != 0)
             {
-                theQuery.whereStatementsTypes.Add((!string.IsNullOrWhiteSpace(type)) ? type : "AND");
+                theQuery.WhereStatementsTypes.Add((!string.IsNullOrWhiteSpace(type)) ? type : "AND");
             }
 
             //Extra optional variables
@@ -48,13 +59,21 @@ namespace DotNetSDB
             string endWrapper = (!string.IsNullOrWhiteSpace(end) ? end : "");
             
             //Builds the sql string
-            theQuery.whereStatements.Add($"{startWrapper} {tableName}.{field} {whereOperator} IN ({sb.ToString()}) {endWrapper}");
+            theQuery.WhereStatements.Add($"{startWrapper} {tableName}.{field} {whereOperator} IN ({sb.ToString()}) {endWrapper}");
         }
 
         /*##########################################*/
         /*       Where In Validation functions      */
         /*##########################################*/
-
+        
+        /// <summary>
+        /// This function validates the where in variables
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="field"></param>
+        /// <param name="type"></param>
+        /// <param name="values"></param>
         protected void WhereInValidation(Query theQuery, string tableName, string field, string type, object values)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -65,7 +84,7 @@ namespace DotNetSDB
             {
                 throw new Exception("Where In Error: The Field supplied is empty.");
             }
-            else if (!string.IsNullOrWhiteSpace(type) && theQuery.whereStatements.Count == 0)
+            else if (!string.IsNullOrWhiteSpace(type) && theQuery.WhereStatements.Count == 0)
             {
                 throw new Exception("Where In Error: The where type is supplied but this is the first where clause so there will be no type used.");
             }
@@ -92,16 +111,16 @@ namespace DotNetSDB
         public void add_where_in(string tableName, string field, object values, string theOperator = null, string type = null, string startWrapper = null, string endWrapper = null)
         {
             Query theQuery = GetQuery();
-            string definition = $"{whereDefinition}_{theQueries.Count}_{theQuery.whereStatements.Count}_";
+            string definition = $"{whereDefinition}_{theQueries.Count}_{theQuery.WhereStatements.Count}_";
 
             //Builds the query
             WhereInCompile(theQuery, definition, tableName, field, values, theOperator, type, startWrapper, endWrapper);
 
             //Adds the real value to a list for binding and sanitization later
-            theQuery.whereRealValues.Add(AddData(values));
+            theQuery.WhereRealValues.Add(AddData(values));
 
             //Adds the command
-            theQuery.orderList.Add("where");
+            theQuery.OrderList.Add("where");
         }
     }
 }

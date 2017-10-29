@@ -10,10 +10,10 @@ namespace DotNetSDB.SqlServer.FileTable
                 try
                 {
                     //Checks if the filegroup has been activated on the database
-                    connector.db.add_pure_sql($@"
+                    connector.DB.add_pure_sql($@"
                     --Checks if the filegroup stream is enabled
                     select (case when EXISTS(SELECT * FROM {dbName}.sys.database_files WHERE type_desc = 'FILESTREAM') then 1 else 0 end) as filegroup_activated");
-                    string resultOne = connector.db.run_return_string();
+                    string resultOne = connector.DB.run_return_string();
                     if (!string.IsNullOrWhiteSpace(resultOne) && resultOne == "1")
 
                     {
@@ -33,11 +33,11 @@ namespace DotNetSDB.SqlServer.FileTable
                 try
                 {
                     //Checks if the filegroup has been activated on the database
-                    connector.db.add_pure_sql($@"
+                    connector.DB.add_pure_sql($@"
                     SELECT non_transacted_access
                     FROM sys.database_filestream_options
                     where DB_NAME(database_id) = '{dbName}'");
-                    string resultOne = connector.db.run_return_string();
+                    string resultOne = connector.DB.run_return_string();
                     if (!string.IsNullOrWhiteSpace(resultOne) && resultOne == "2")
 
                     {
@@ -57,9 +57,9 @@ namespace DotNetSDB.SqlServer.FileTable
                 try
                 {
                     //Checks if filestream is enabled at the sql server instance base level "NOT THE DATABASE LEVEL"
-                    connector.db.add_select("sys.configurations", "value");
-                    connector.db.add_where_normal("sys.configurations", "name", "filestream access level");
-                    var filestreamBase = connector.db.run_return_string();
+                    connector.DB.add_select("sys.configurations", "value");
+                    connector.DB.add_where_normal("sys.configurations", "name", "filestream access level");
+                    var filestreamBase = connector.DB.run_return_string();
 
                     //Note: 0 = disabled, 2 = enabled
                     if (!string.IsNullOrWhiteSpace(filestreamBase) && filestreamBase == "2")

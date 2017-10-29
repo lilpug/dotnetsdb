@@ -7,11 +7,22 @@ namespace DotNetSDB.SqlServer.FileTable
     {
         //Holds the database connection in a dynamic object *thus we can use all versions of sql server in one class*
         private DatabaseConnector connector;
+        
+        /// <summary>
+        /// This variable stores the filetable permission object
+        /// </summary>
+		public FileTablePermissions Permissions { get; set; }
 
-        //Variables used to active the different filetable functions
-		public FileTablePermissions permissions;			
-		public FileTableTasks tasks;
+        /// <summary>
+        /// This variable stores the filetable tasks object
+        /// </summary>
+        public FileTableTasks Tasks { get; set; }
 			
+        /// <summary>
+        /// This function initialises the FileTableExtension object
+        /// </summary>
+        /// <param name="databaseObject"></param>
+        /// <param name="databaseName"></param>
         public SQLServerFileTableExtension(DatabaseConnector databaseObject, string databaseName)
         {
             //Sets the connection object
@@ -22,26 +33,26 @@ namespace DotNetSDB.SqlServer.FileTable
             {
                 throw new Exception("Database FileTable Initialisation: The database name you have passed is null.");
             }
-            else if (connector == null || connector.db == null)
+            else if (connector == null || connector.DB == null)
             {
                 throw new Exception("Database FileTable Initialisation: The database object you have passed is null.");
             }
-            else if (!connector.isDbSqlServer)
+            else if (!connector.IsDbSqlServer)
             {
                 throw new Exception("Database FileTable Initialisation: The database object you have passed is not a sql server object.");
             }
-            else if (connector.dbVersion == "sqlserver2008")
+            else if (connector.DBVersion == "sqlserver2008")
             {
-                throw new Exception($"Database FileTable Initialisation: The database object version you have passed does not support filetables '{connector.dbVersion}'.");
+                throw new Exception($"Database FileTable Initialisation: The database object version you have passed does not support filetables '{connector.DBVersion}'.");
             }
-            else if (!connector.db.is_alive())
+            else if (!connector.DB.is_alive())
             {
                 throw new Exception("Database FileTable Initialisation: The database object is not connected.");
             }
 
             //Inits the permissions and tasks libs
-            permissions = new FileTablePermissions(connector, databaseName);				
-			tasks = new FileTableTasks(connector);
+            Permissions = new FileTablePermissions(connector, databaseName);				
+			Tasks = new FileTableTasks(connector);
         }
     }
     

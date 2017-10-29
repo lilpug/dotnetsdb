@@ -10,11 +10,16 @@ namespace DotNetSDB
         /*      Insert Compiling functions          */
         /*##########################################*/
 
-        //This function builds the insert sql with multiple field parameters for inserting values
+        /// <summary>
+        /// This function deals with creating the insert SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="definition"></param>
+        /// <param name="values"></param>
         protected virtual void InsertCompile(Query theQuery, string definition, params object[] values)
         {
             //Checks if fields have been specified, if so there should be the same amount of parameters. otherwise does not matter
-            if (theQuery.insertFields.Count() == 0 || theQuery.insertFields.Count() == values.Count())
+            if (theQuery.InsertFields.Count() == 0 || theQuery.InsertFields.Count() == values.Count())
             {
                 StringBuilder sb = new StringBuilder();
                 
@@ -30,7 +35,7 @@ namespace DotNetSDB
                     sb.Append($"{definition + i.ToString()}");
                 }
 
-                theQuery.insertValues.Add(sb.ToString());
+                theQuery.InsertValues.Add(sb.ToString());
             }
             else
             {
@@ -38,7 +43,11 @@ namespace DotNetSDB
             }
         }
 
-        //This function builds the insert sql with multiple field parameters for inserting values
+        /// <summary>
+        /// This function deals with creating the insert SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="fields"></param>
         protected virtual void InsertFieldCompile(Query theQuery, params string[] fields)
         {
             //Checks  to ensure the data is accurate as there should be one field for every data insert
@@ -47,7 +56,7 @@ namespace DotNetSDB
                 if (fields.Count() > 0)
                 {
                     //Merges the results
-                    theQuery.insertFields = theQuery.insertFields.Concat(fields.ToList()).ToList();                    
+                    theQuery.InsertFields = theQuery.InsertFields.Concat(fields.ToList()).ToList();                    
                 }
             }
             else
@@ -60,6 +69,11 @@ namespace DotNetSDB
         /*        Insert Validation functions       */
         /*##########################################*/
 
+        /// <summary>
+        /// This function validates the insert variables
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="field"></param>
         protected void InsertsingleValidation(string tableName, string field)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -72,6 +86,11 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function validates the insert variables
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="fields"></param>
         protected void InsertMultipleValidation(string tableName, string[] fields)
         {
             if (string.IsNullOrWhiteSpace(tableName))
@@ -84,17 +103,25 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function validates that the insert query has not already been run as a new one is about to be added
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void InsertExistValidation(Query theQuery)
         {
-            if (theQuery.orderList.Contains("insert"))
+            if (theQuery.OrderList.Contains("insert"))
             {
-                throw new Exception("Insert Error: a main insert statement has already been defined, for additional fields use add_select_fields and for additional values use add_insert_values.");
+                throw new Exception("Insert Error: a main insert statement has already been defined, for additional fields use add_insert_fields and for additional values use add_insert_values.");
             }
         }
 
+        /// <summary>
+        /// This function validates that the insert base statement has been added before trying to add additional fields
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void InsertNotExistValidation(Query theQuery)
         {
-            if (!theQuery.orderList.Contains("insert"))
+            if (!theQuery.OrderList.Contains("insert"))
             {
                 throw new Exception("Insert Error: you cannot add insert fields or values without defining a main insert statement first.");
             }
@@ -120,10 +147,10 @@ namespace DotNetSDB
             }
 
             //Holds the insert table
-            theQuery.insertTableName = tableName;
+            theQuery.InsertTableName = tableName;
 
             //Adds the command
-            theQuery.orderList.Add("insert");
+            theQuery.OrderList.Add("insert");
         }
 
         /// <summary>
@@ -140,13 +167,13 @@ namespace DotNetSDB
             InsertsingleValidation(tableName, field);
 
             //Holds the insert table
-            theQuery.insertTableName = tableName;
+            theQuery.InsertTableName = tableName;
 
             //Builds the feidls query
             InsertFieldCompile(theQuery, field);
 
             //Adds the command
-            theQuery.orderList.Add("insert");
+            theQuery.OrderList.Add("insert");
         }
 
         /// <summary>
@@ -163,13 +190,13 @@ namespace DotNetSDB
             InsertMultipleValidation(tableName, fields);
 
             //Holds the insert table
-            theQuery.insertTableName = tableName;
+            theQuery.InsertTableName = tableName;
 
             //Builds the feidls query
             InsertFieldCompile(theQuery, fields);
 
             //Adds the command
-            theQuery.orderList.Add("insert");
+            theQuery.OrderList.Add("insert");
         }
 
         /// <summary>
@@ -181,7 +208,7 @@ namespace DotNetSDB
         {
             Query theQuery = GetQuery();
             
-            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.insertValues.Count}_";
+            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.InsertValues.Count}_";
 
             //Validation
             InsertExistValidation(theQuery);
@@ -194,16 +221,16 @@ namespace DotNetSDB
             object[] holding = AddData(values);
 
             //Holds the insert table
-            theQuery.insertTableName = tableName;
+            theQuery.InsertTableName = tableName;
 
             //Builds the query
             InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insertRealValues.Add(holding);
+            theQuery.InsertRealValues.Add(holding);
 
             //Adds the command
-            theQuery.orderList.Add("insert");
+            theQuery.OrderList.Add("insert");
         }
 
         /// <summary>
@@ -215,7 +242,7 @@ namespace DotNetSDB
         public virtual void add_insert(string tableName, string field, object value)
         {
             Query theQuery = GetQuery();
-            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.insertValues.Count}_";
+            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.InsertValues.Count}_";
 
             //Validation
             InsertExistValidation(theQuery);
@@ -225,17 +252,17 @@ namespace DotNetSDB
             object[] holding = AddData(value);
 
             //Holds the insert table
-            theQuery.insertTableName = tableName;
+            theQuery.InsertTableName = tableName;
 
             //Builds the query
             InsertFieldCompile(theQuery, field);
             InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insertRealValues.Add(holding);
+            theQuery.InsertRealValues.Add(holding);
 
             //Adds the command
-            theQuery.orderList.Add("insert");
+            theQuery.OrderList.Add("insert");
         }
 
         /// <summary>
@@ -247,7 +274,7 @@ namespace DotNetSDB
         public virtual void add_insert(string tableName, string[] fields, object values)
         {
             Query theQuery = GetQuery();
-            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.insertValues.Count}_";
+            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.InsertValues.Count}_";
 
             //Validation
             InsertExistValidation(theQuery);
@@ -257,17 +284,17 @@ namespace DotNetSDB
             object[] holding = AddData(values);
 
             //Holds the insert table
-            theQuery.insertTableName = tableName;
+            theQuery.InsertTableName = tableName;
 
             //Builds the query
             InsertFieldCompile(theQuery, fields);
             InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insertRealValues.Add(holding);
+            theQuery.InsertRealValues.Add(holding);
 
             //Adds the command
-            theQuery.orderList.Add("insert");
+            theQuery.OrderList.Add("insert");
         }
 
         /// <summary>
@@ -309,7 +336,7 @@ namespace DotNetSDB
         public virtual void add_insert_values(object values)
         {
             Query theQuery = GetQuery();
-            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.insertValues.Count}_";
+            string definition = $"{insertDefinition}_{theQueries.Count}_{theQuery.InsertValues.Count}_";
 
             //Validation
             InsertNotExistValidation(theQuery);
@@ -321,7 +348,7 @@ namespace DotNetSDB
             InsertCompile(theQuery, definition, holding);
 
             //Adds the real values to a list for binding and sanitization later
-            theQuery.insertRealValues.Add(holding);
+            theQuery.InsertRealValues.Add(holding);
         }
     }
 }

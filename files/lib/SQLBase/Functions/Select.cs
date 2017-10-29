@@ -9,10 +9,17 @@ namespace DotNetSDB
         /*        Select Creation functions         */
         /*##########################################*/
 
-        //This function builds the fields for the select statement
+        /// <summary>
+        /// This function deals with creating the select SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="selectField"></param>
+        /// <param name="startField"></param>
+        /// <param name="endField"></param>
         protected void SelectCompile(Query theQuery, string tableName, string selectField, string startField = null, string endField = null)
         {
-            SelectSingleValidation(tableName);
+            SelectValidation(tableName);
 
             //Checks if there is any select fields
             if (selectField != null)
@@ -28,10 +35,10 @@ namespace DotNetSDB
                 }
 
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.selectTable) && !string.IsNullOrWhiteSpace(tableName))
+                if (string.IsNullOrWhiteSpace(theQuery.SelectTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    theQuery.selectTable = tableName;
+                    theQuery.SelectTable = tableName;
                 }
 
                 StringBuilder sb = new StringBuilder();
@@ -46,7 +53,7 @@ namespace DotNetSDB
                     sb.Append($"{tableName}.{selectField}");
                 }
 
-                theQuery.selectFields.Add(sb.ToString());
+                theQuery.SelectFields.Add(sb.ToString());
             }
             else
             {
@@ -54,9 +61,17 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function deals with creating the select SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="selectFields"></param>
+        /// <param name="startFields"></param>
+        /// <param name="endFields"></param>
         protected void SelectCompile(Query theQuery, string tableName, string[] selectFields, string[] startFields = null, string[] endFields = null)
         {
-            SelectSingleValidation(tableName);
+            SelectValidation(tableName);
 
             //Checks if there is any select fields
             if (selectFields != null)
@@ -71,10 +86,10 @@ namespace DotNetSDB
                 }
 
                 //Do not change the main table name if its already set
-                if (string.IsNullOrWhiteSpace(theQuery.selectTable) && !string.IsNullOrWhiteSpace(tableName))
+                if (string.IsNullOrWhiteSpace(theQuery.SelectTable) && !string.IsNullOrWhiteSpace(tableName))
                 {
                     //Sets the table name
-                    theQuery.selectTable = tableName;
+                    theQuery.SelectTable = tableName;
                 }
                 StringBuilder sb = new StringBuilder();
                 
@@ -96,7 +111,7 @@ namespace DotNetSDB
                         sb.Append($"{tableName}.{selectFields[i]}");
                     }
                 }
-                theQuery.selectFields.Add(sb.ToString());
+                theQuery.SelectFields.Add(sb.ToString());
             }
             else
             {
@@ -108,7 +123,11 @@ namespace DotNetSDB
         /*       Select Validation functions        */
         /*##########################################*/
 
-        protected void SelectSingleValidation(string tableName)
+        /// <summary>
+        /// This function validates the select variables
+        /// </summary>
+        /// <param name="tableName"></param>
+        protected void SelectValidation(string tableName)
         {
             if (string.IsNullOrWhiteSpace(tableName))
             {
@@ -116,17 +135,25 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function validates that the select base statement has been added before trying to add additional fields
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void SelectNotExistValidation(Query theQuery)
         {
-            if (!theQuery.orderList.Contains("select"))
+            if (!theQuery.OrderList.Contains("select"))
             {
                 throw new Exception("Select Error: you cannot add select fields without defining a main select statement first.");
             }
         }
 
+        /// <summary>
+        /// This function validates that the select query has not already been run as a new one is about to be added
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void SelectExistValidation(Query theQuery)
         {
-            if (theQuery.orderList.Contains("select"))
+            if (theQuery.OrderList.Contains("select"))
             {
                 throw new Exception("Select Error: a main select statement has already been defined, for additional fields use add_select_fields.");
             }
@@ -143,7 +170,7 @@ namespace DotNetSDB
         public void is_distinct(bool distinct)
         {
             Query theQuery = GetQuery();
-            theQuery.isDistinct = distinct;
+            theQuery.IsDistinct = distinct;
         }
 
         /// <summary>
@@ -199,7 +226,7 @@ namespace DotNetSDB
             SelectCompile(theQuery, tableName, selectField, startField, endField);
 
             //Adds the command
-            theQuery.orderList.Add("select");
+            theQuery.OrderList.Add("select");
         }
 
         /// <summary>
@@ -219,7 +246,7 @@ namespace DotNetSDB
             SelectCompile(theQuery, tableName, selectFields, startFields, endFields);
 
             //Adds the command
-            theQuery.orderList.Add("select");
+            theQuery.OrderList.Add("select");
         }
     }
 }

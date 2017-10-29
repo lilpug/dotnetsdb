@@ -7,13 +7,17 @@ namespace DotNetSDB.output
 {
     public partial class OutputManagement
     {
-        //Need to look at how to make this thread safe as it will work only in procedural methods!!
+        /// <summary>
+        /// This function adds a supplied error message to a log
+        /// </summary>
+        /// <param name="errorMessage"></param>
+        /// <returns></returns>
         public bool AddToLog(string errorMessage)
         {
             try
             {
                 //Checks if cleanup is activated and does its job if so
-                if (cleanupLogs())
+                if (CleanupLogs())
                 {   
                     //Gets the stack trace object ready for obtaining method names
                     StackTrace stackTrace = new StackTrace();
@@ -23,7 +27,7 @@ namespace DotNetSDB.output
                     if (!string.IsNullOrWhiteSpace(fileName))
                     {
                         //Writes the single line log
-                        if (info.singleLineLog)
+                        if (info.SingleLineLog)
                         {
                             //Holds the created error output
                             StringBuilder sb = new StringBuilder();
@@ -39,7 +43,7 @@ namespace DotNetSDB.output
                             //Locks the section to be thread safe as we are now processing a file
                             lock (locker)
                             {
-                                using (TextWriter tw = new StreamWriter(Path.Combine(info.directory, fileName), true))
+                                using (TextWriter tw = new StreamWriter(Path.Combine(info.Directory, fileName), true))
                                 {
                                     tw.WriteLine(sb.ToString());
                                 }
@@ -50,7 +54,7 @@ namespace DotNetSDB.output
                             //Locks the section to be thread safe as we are now processing a file
                             lock (locker)
                             {
-                                using (TextWriter tw = new StreamWriter(Path.Combine(info.directory, fileName), true))
+                                using (TextWriter tw = new StreamWriter(Path.Combine(info.Directory, fileName), true))
                                 {
                                     tw.WriteLine($"Error Occured: {Now}");
                                     tw.WriteLine($"Function Trace: {stackTrace.GetFrame(2).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(2).GetMethod().GetParameters())}) -> {stackTrace.GetFrame(1).GetMethod().Name} ({GetAllParameters(stackTrace.GetFrame(1).GetMethod().GetParameters())})");

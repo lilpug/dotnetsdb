@@ -1,62 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace DotNetSDB
 {
     public partial class SQLServer2008
     {
-        //NOTE: even though we have another query object for the new features in this specific database version,
-        //      we STILL use the normal query objects order list for the new commands!!
-
-        //This holds the extra query variables for this specific database version
+        /// <summary>
+        /// This holds the extra query variables for this specific database version
+        /// </summary>
         [Serializable]
-        protected class Query3
+        protected class QueryExtension2 : QueryExtension
         {
-            //Variables for the limit
-            public int limitCountOne = -1;
-            public int limitCountTwo = -1;
-            public string orderby = "";
+            /// <summary>
+            /// Variable that holds the limit min value
+            /// </summary>
+            public int LimitCountOne { get; set; }
 
-            public void Dispose(bool disposing)
+            /// <summary>
+            /// Variable that holds the limit max value
+            /// </summary>
+            public int LimitCountTwo { get; set; }
+
+            /// <summary>
+            /// Variable that holds the generated orderby for the limit wrapper
+            /// </summary>
+            public string Orderby { get; set; }
+
+            /// <summary>
+            /// This is the main constructor that loads up the extended query variables
+            /// </summary>
+            public QueryExtension2() : base()
             {
-                if (disposing)
+            }
+
+            /// <summary>
+            /// This is the core disposal method for the Query Extension object
+            /// </summary>
+            public override void Dispose()
+            {
+                //Checks if the disposal method has already run
+                if (!IsDisposed)
                 {
-                    limitCountOne = -1;
-                    limitCountTwo = -1;
-                    orderby = "";
+                    LimitCountOne = -1;
+                    LimitCountTwo = -1;
+                    Orderby = null;
                 }
-            }
 
-            public void Dispose()
-            {
-                Dispose(true);
-                GC.SuppressFinalize(this);
+                //Calls the parents disposal method 
+                base.Dispose();
             }
         }
 
-        //This variable holds all the query objects for this specific database version
-        private List<Query3> theQueries3 = new List<Query3>();
-
-        //This function is run every time a Top layer function is run to get the query object
-        protected Query3 GetQuery3()
-        {
-            //This runs in case its the first initiation, if so it creates the new query object before getting it
-            if (theQueries3.Count == 0)
-            {
-                start_new_query();
-            }
-
-            //Returns the latest query element
-            return theQueries3[theQueries3.Count - 1];
-        }
-
-        //This function is used to create a new query object for running a new query
+        /// <summary>
+        /// This function is used to override the default object creation creation to ensure its what we require
+        /// </summary>
         public override void start_new_query()
         {
-            //Runs the base first then executes the extras
-            base.start_new_query();
-
-            theQueries3.Add(new Query3());
+            theQueries.Add(new QueryExtension2());
         }
     }
 }

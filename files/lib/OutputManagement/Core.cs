@@ -13,7 +13,7 @@ namespace DotNetSDB.output
         //This function checks if the file exists
         private bool FileExists(string filename)
         {
-            return File.Exists(Path.Combine(info.directory, filename));
+            return File.Exists(Path.Combine(info.Directory, filename));
         }
 
         //This function returns all the parameters in string format

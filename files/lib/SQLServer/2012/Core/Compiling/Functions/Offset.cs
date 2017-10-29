@@ -6,10 +6,16 @@
         /*          Compiling Offset functions      */
         /*##########################################*/
 
-        protected virtual void CompileOffset(Query3 current)
+        /// <summary>
+        /// This function compiles the offset query and adds it to the query being built
+        /// </summary>
+        /// <param name="current"></param>
+        protected virtual void CompileOffset(Query current)
         {
-            compiledSql.Append($" {current.offset}");
-            current.offset = "";
+            //Converts the query object to QueryExtension
+            QueryExtension2 theQuery = (QueryExtension2)current;
+
+            compiledSql.Append($" {theQuery.Offset}");
         }
     }
 }

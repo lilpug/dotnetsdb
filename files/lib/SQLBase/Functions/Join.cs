@@ -10,6 +10,15 @@ namespace DotNetSDB
         /*         Join Compiling functions         */
         /*##########################################*/
 
+        /// <summary>
+        /// This function deals with creating the join SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="joinType"></param>
+        /// <param name="joinTable"></param>
+        /// <param name="field"></param>
+        /// <param name="joinField"></param>
         protected void JoinCompile(Query theQuery, string tableName, string joinType, string joinTable, string field, string joinField)
         {
             //Does validation
@@ -22,9 +31,18 @@ namespace DotNetSDB
             string tempBuild = $"{joinType} {tableName} ON {alias}.{field} = {joinTable}.{joinField}";
 
             //adds it to the join statement lists
-            theQuery.joinFields.Add(new StringBuilder(tempBuild));
+            theQuery.JoinFields.Add(new StringBuilder(tempBuild));
         }
 
+        /// <summary>
+        /// This function deals with creating the join SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="joinType"></param>
+        /// <param name="joinTable"></param>
+        /// <param name="fields"></param>
+        /// <param name="joinFields"></param>
         protected void JoinCompile(Query theQuery, string tableName, string joinType, string joinTable, string[] fields, string[] joinFields)
         {
             //Does validation
@@ -50,9 +68,17 @@ namespace DotNetSDB
             }
 
             //adds it to the join statement lists
-            theQuery.joinFields.Add(new StringBuilder(sb.ToString()));
+            theQuery.JoinFields.Add(new StringBuilder(sb.ToString()));
         }
 
+        /// <summary>
+        /// This function deals with creating additional join SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="joinTable"></param>
+        /// <param name="field"></param>
+        /// <param name="joinField"></param>
         protected void JoinAdditionalCompile(Query theQuery, string tableName, string joinTable, string field, string joinField)
         {
             //Does validation
@@ -65,9 +91,17 @@ namespace DotNetSDB
             string tempBuild = $" AND {alias}.{field} = {joinTable}.{joinField}";
 
             //Adds it to the current join object
-            theQuery.joinFields[theQuery.joinFields.Count - 1].Append(tempBuild);
+            theQuery.JoinFields[theQuery.JoinFields.Count - 1].Append(tempBuild);
         }
 
+        /// <summary>
+        /// This function deals with creating additional join SQL
+        /// </summary>
+        /// <param name="theQuery"></param>
+        /// <param name="tableName"></param>
+        /// <param name="joinTable"></param>
+        /// <param name="fields"></param>
+        /// <param name="joinFields"></param>
         protected void JoinAdditionalCompile(Query theQuery, string tableName, string joinTable, string[] fields, string[] joinFields)
         {
             //Does validation
@@ -85,13 +119,21 @@ namespace DotNetSDB
             }
 
             //Adds it to the current join object
-            theQuery.joinFields[theQuery.joinFields.Count - 1].Append(sb.ToString());
+            theQuery.JoinFields[theQuery.JoinFields.Count - 1].Append(sb.ToString());
         }
 
         /*##########################################*/
         /*        Join Validation functions         */
         /*##########################################*/
 
+        /// <summary>
+        /// This function validates the join variables
+        /// </summary>
+        /// <param name="joinType"></param>
+        /// <param name="joinTableName"></param>
+        /// <param name="currentTableName"></param>
+        /// <param name="joinTableFields"></param>
+        /// <param name="currentTableFields"></param>
         protected void JoinSingleValidation(string joinType, string joinTableName, string currentTableName, string joinTableFields, string currentTableFields)
         {
             if (string.IsNullOrWhiteSpace(joinType))
@@ -116,6 +158,14 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function validates the join variables
+        /// </summary>
+        /// <param name="joinType"></param>
+        /// <param name="joinTableName"></param>
+        /// <param name="currentTableName"></param>
+        /// <param name="joinTableFields"></param>
+        /// <param name="currentTableFields"></param>
         protected void JoinMultipleValidation(string joinType, string joinTableName, string currentTableName, string[] joinTableFields, string[] currentTableFields)
         {
             if (string.IsNullOrWhiteSpace(joinType))
@@ -144,9 +194,13 @@ namespace DotNetSDB
             }
         }
 
+        /// <summary>
+        /// This function validates that the join base statement has been added before trying to add additional joins
+        /// </summary>
+        /// <param name="theQuery"></param>
         protected void JoinExistValidation(Query theQuery)
         {
-            if (theQuery.joinFields == null || theQuery.joinFields.Count <= 0)
+            if (theQuery.JoinFields == null || theQuery.JoinFields.Count <= 0)
             {
                 throw new Exception("Join Error: There is no join statement to add additional parameters.");
             }
@@ -174,7 +228,7 @@ namespace DotNetSDB
             JoinCompile(theQuery, joinTableName, joinType, currentTableName, joinTableField, currentTableField);
 
             //Adds the join command
-            theQuery.orderList.Add("join");
+            theQuery.OrderList.Add("join");
         }
 
         
@@ -196,7 +250,7 @@ namespace DotNetSDB
             JoinCompile(theQuery, joinTableName, joinType, currentTableName, joinTableFields, currentTableFields);
 
             //Adds the join command
-            theQuery.orderList.Add("join");
+            theQuery.OrderList.Add("join");
         }
 
         /// <summary>
