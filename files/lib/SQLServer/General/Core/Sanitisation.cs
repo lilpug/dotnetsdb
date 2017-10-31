@@ -40,7 +40,7 @@ namespace DotNetSDB
                     command.Parameters.AddWithValue(newDefinition, ((data == null) ? DBNull.Value : data));
                     if (data != null)
                     {
-                        using (SqlServerTypeConvertor convertor = new SqlServerTypeConvertor())
+                        using (DatabaseTypeConvertor convertor = new DatabaseTypeConvertor())
                         {
                             command.Parameters[newDefinition].SqlDbType = convertor.ToSqlDbType(data.GetType());
                         }

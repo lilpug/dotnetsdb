@@ -40,9 +40,9 @@ namespace DotNetSDB
                     command.Parameters.AddWithValue(newDefinition, ((data == null) ? DBNull.Value : data));
                     if (data != null)
                     {
-                        using (MySqlTypeConvertor convertor = new MySqlTypeConvertor())
+                        using (DatabaseTypeConvertor convertor = new DatabaseTypeConvertor("mysqlcore"))
                         {
-                            command.Parameters[newDefinition].MySqlDbType = convertor.ToSqlDbType(data.GetType());
+                            command.Parameters[newDefinition].MySqlDbType = convertor.ToMySqlDbType(data.GetType());
                         }
                     }                    
                 }

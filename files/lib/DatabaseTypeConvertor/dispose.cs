@@ -2,9 +2,9 @@
 namespace DotNetSDB
 {
     /// <summary>
-    /// Convert a base data type to another base data type
+    /// Converts a base data type to a database data type
     /// </summary>
-    public partial class MySqlTypeConvertor : IDisposable
+    public partial class DatabaseTypeConvertor : IDisposable
     {
         /*##########################################*/
         /*              Dispose functions           */
@@ -13,19 +13,19 @@ namespace DotNetSDB
         /// <summary>
         /// Core variable for determining if the object has already been disposed of
         /// </summary>
-        protected bool isDisposed = false;
+        protected bool IsDisposed { get; set; }
 
         /// <summary>
-        /// This is the core dispose method for the MySQL type convertor object
+        /// This is the core dispose method for the SQL Server type convertor object
         /// </summary>
         public virtual void Dispose()
         {
-            if (!isDisposed)
+            if (!IsDisposed)
             {   
                 TypeList.Clear();
                 TypeList = null;
-                
-                isDisposed = true;
+
+                IsDisposed = true;
             }
             GC.SuppressFinalize(this);
         }

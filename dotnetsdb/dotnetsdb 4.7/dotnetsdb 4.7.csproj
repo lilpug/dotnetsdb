@@ -61,6 +61,18 @@
     <Compile Include="..\..\files\lib\Database Connector\Variables.cs">
       <Link>Database Connector\Variables.cs</Link>
     </Compile>
+    <Compile Include="..\..\files\lib\DatabaseTypeConvertor\core.cs">
+      <Link>DatabaseTypeConvertor\core.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\DatabaseTypeConvertor\dispose.cs">
+      <Link>DatabaseTypeConvertor\dispose.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\DatabaseTypeConvertor\types.cs">
+      <Link>DatabaseTypeConvertor\types.cs</Link>
+    </Compile>
+    <Compile Include="..\..\files\lib\DatabaseTypeConvertor\variables.cs">
+      <Link>DatabaseTypeConvertor\variables.cs</Link>
+    </Compile>
     <Compile Include="..\..\files\lib\MySQL\Core\Compiling\Compile List.cs">
       <Link>MySQL\Core\Compiling\Compile List.cs</Link>
     </Compile>
@@ -108,18 +120,6 @@
     </Compile>
     <Compile Include="..\..\files\lib\MySQL\Functions\Truncate.cs">
       <Link>MySQL\Functions\Truncate.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\MySQL\TypeConvertor\core.cs">
-      <Link>MySQL\TypeConvertor\core.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\MySQL\TypeConvertor\dispose.cs">
-      <Link>MySQL\TypeConvertor\dispose.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\MySQL\TypeConvertor\types.cs">
-      <Link>MySQL\TypeConvertor\types.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\MySQL\TypeConvertor\variables.cs">
-      <Link>MySQL\TypeConvertor\variables.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\OutputManagement\Core.cs">
       <Link>OutputManagement\Core.cs</Link>
@@ -265,9 +265,6 @@
     <Compile Include="..\..\files\lib\SQLServer\2008\Functions\Limit.cs">
       <Link>SQLServer\2008\Functions\Limit.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2008\TypeConvertor\types.cs">
-      <Link>SQLServer\2008\TypeConvertor\types.cs</Link>
-    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2012\Core\Compiling\Compile List.cs">
       <Link>SQLServer\2012\Core\Compiling\Compile List.cs</Link>
     </Compile>
@@ -288,9 +285,6 @@
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2012\Functions\Offset.cs">
       <Link>SQLServer\2012\Functions\Offset.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2012\TypeConvertor\types.cs">
-      <Link>SQLServer\2012\TypeConvertor\types.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2014\Core\Compiling\Compile List.cs">
       <Link>SQLServer\2014\Core\Compiling\Compile List.cs</Link>
@@ -313,9 +307,6 @@
     <Compile Include="..\..\files\lib\SQLServer\2014\Functions\Offset.cs">
       <Link>SQLServer\2014\Functions\Offset.cs</Link>
     </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2014\TypeConvertor\types.cs">
-      <Link>SQLServer\2014\TypeConvertor\types.cs</Link>
-    </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2016\Core\Compiling\Compile List.cs">
       <Link>SQLServer\2016\Core\Compiling\Compile List.cs</Link>
     </Compile>
@@ -336,9 +327,6 @@
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\2016\Functions\Offset.cs">
       <Link>SQLServer\2016\Functions\Offset.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\2016\TypeConvertor\types.cs">
-      <Link>SQLServer\2016\TypeConvertor\types.cs</Link>
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\Core\Compiling\Functions\Delete - overriden.cs">
       <Link>SQLServer\General\Core\Compiling\Functions\Delete - overriden.cs</Link>
@@ -444,18 +432,6 @@
     </Compile>
     <Compile Include="..\..\files\lib\SQLServer\General\Functions\Update - extra.cs">
       <Link>SQLServer\General\Functions\Update - extra.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\core.cs">
-      <Link>SQLServer\General\TypeConvertor\core.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\dispose.cs">
-      <Link>SQLServer\General\TypeConvertor\dispose.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\types.cs">
-      <Link>SQLServer\General\TypeConvertor\types.cs</Link>
-    </Compile>
-    <Compile Include="..\..\files\lib\SQLServer\General\TypeConvertor\variables.cs">
-      <Link>SQLServer\General\TypeConvertor\variables.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
