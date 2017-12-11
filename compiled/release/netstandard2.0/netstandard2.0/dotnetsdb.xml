@@ -1,0 +1,3543 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>dotnetsdb</name>
+    </assembly>
+    <members>
+        <member name="T:DotNetSDB.Connector.DatabaseConnector">
+            <summary>
+            This is the DatabaseConnector class which is used as a bridge to store all connections via dynamic objects
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.DB">
+            <summary>
+            Returns a dynamic database object
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.DBVersion">
+            <summary>
+            Returns the database version being used
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.IsDbMysql">
+            <summary>
+            Returns if the database object is using MySQL or not
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.IsDbSqlServer">
+            <summary>
+            Returns if the database object is using SQL Server or not
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.DbType">
+            <summary>
+            Returns the current database class type
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.Sqlserver2016">
+            <summary>
+            Can stores the SQL Server 2016 database object
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.Sqlserver2014">
+            <summary>
+            Can stores the SQL Server 2014 database object
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.Sqlserver2012">
+            <summary>
+            Can stores the SQL Server 2012 database object
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.Sqlserver2008">
+            <summary>
+            Can stores the SQL Server 2008 database object
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.Connector.DatabaseConnector.MySQL">
+            <summary>
+            Can stores the MySQL database object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.Connector.DatabaseConnector.#ctor(System.Object)">
+            <summary>
+            Constructor for determining which database connection has been passed
+            </summary>
+            <param name="dbObject"></param>
+        </member>
+        <member name="F:DotNetSDB.Connector.DatabaseConnector.isDisposed">
+            <summary>
+            Core variable for determining if the object has already been disposed of
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.Connector.DatabaseConnector.Dispose">
+            <summary>
+            This is the core dispose method for the database connector object
+            </summary>
+        </member>
+        <member name="T:DotNetSDB.DatabaseTypeConvertor">
+            <summary>
+            Converts a base data type to a database data type
+            </summary>
+            <summary>
+            Converts a base data type to a database data type
+            </summary>
+            <summary>
+            Converts a base data type to a database data type
+            </summary>
+            <summary>
+            Converts a base data type to a database data type
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToNetType(System.Data.DbType)">
+            <summary>
+            Converts a db type to .Net data type
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToNetType(System.Data.SqlDbType)">
+            <summary>
+            Converts a SQL Server type to a .Net data type
+            </summary>
+            <param name="sqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToNetType(MySql.Data.MySqlClient.MySqlDbType)">
+            <summary>
+            Converts a MySQL type to a .Net data type
+            </summary>
+            <param name="mySqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToDbType(System.Type)">
+            <summary>
+            Converts a .Net type to a Db type
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToDbType(System.Data.SqlDbType)">
+            <summary>
+            Converts a SQL Server data type to a DbType
+            </summary>
+            <param name="sqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToDbType(MySql.Data.MySqlClient.MySqlDbType)">
+            <summary>
+            Converts a MySQL data type to a DbType
+            </summary>
+            <param name="mySqlDbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToSqlDbType(System.Type)">
+            <summary>
+            Converts a .Net type to a SQL Server data type
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToSqlDbType(System.Data.DbType)">
+            <summary>
+            Converts a DbType to a SQL Server data type
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToMySqlDbType(System.Type)">
+            <summary>
+            Converts a .Net type to a MySQL data type
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ToMySqlDbType(System.Data.DbType)">
+            <summary>
+            Converts DbType to a MySQL data type
+            </summary>
+            <param name="dbType"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DotNetSDB.DatabaseTypeConvertor.IsDisposed">
+            <summary>
+            Core variable for determining if the object has already been disposed of
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.Dispose">
+            <summary>
+            This is the core dispose method for the SQL Server type convertor object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeBool">
+            <summary>
+            Adds the boolean type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeByte">
+            <summary>
+            Adds the byte type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeByteArray">
+            <summary>
+            Adds the byte array type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeDateTime">
+            <summary>
+            Adds the datetime type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeDecimal">
+            <summary>
+            Adds the decimal type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeDouble">
+            <summary>
+            Adds the double type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeGUID">
+            <summary>
+            Adds the guid type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeInt16">
+            <summary>
+            Adds the int16 type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeInt32">
+            <summary>
+            Adds the int32 type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeInt64">
+            <summary>
+            Adds the int64 type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeLong">
+            <summary>
+            Adds the long type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeObject">
+            <summary>
+            Adds the object type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeString">
+            <summary>
+            Adds the string type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.TypeTable">
+            <summary>
+            Adds the datatable type conversions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.ExtraType">
+            <summary>
+            Adds any additional types which might be put in through inheritance
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.LoadTypes">
+            <summary>
+            This function is the loading function for the types
+            </summary>
+        </member>
+        <member name="T:DotNetSDB.DatabaseTypeConvertor.DbTypeMapEntry">
+            <summary>
+            A class that stores a map from a standard .NET reference type to database reference types
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.DatabaseTypeConvertor.DbTypeMapEntry.DBVersion">
+            <summary>
+            Stores the database versions which can use this type
+            Note: null means all!
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.DatabaseTypeConvertor.DbTypeMapEntry.Type">
+            <summary>
+            Stores the .NET reference type
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.DatabaseTypeConvertor.DbTypeMapEntry.DbType">
+            <summary>
+            Stores the standard database reference type
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.DatabaseTypeConvertor.DbTypeMapEntry.SQLserverDbType">
+            <summary>
+            Stores the SQL Server database reference type
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.DatabaseTypeConvertor.DbTypeMapEntry.MySQLDbType">
+            <summary>
+            /// <summary>
+            Stores the MySQL database reference type
+            </summary>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.DbTypeMapEntry.#ctor(System.Type,System.Data.DbType,System.Data.SqlDbType,MySql.Data.MySqlClient.MySqlDbType,System.String[])">
+            <summary>
+            Constructor that takes the reference values and stores
+            </summary>
+            <param name="type"></param>
+            <param name="dbType"></param>
+            <param name="sqlServerDbType"></param>
+            <param name="mySqlDbType"></param>
+            <param name="dbVersions"></param>
+        </member>
+        <member name="P:DotNetSDB.DatabaseTypeConvertor.TypeList">
+            <summary>
+            This variable stores a list of the type mapper class
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.DatabaseTypeConvertor.dbVersion">
+            <summary>
+            This variable stores the current supplied database version
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.DatabaseTypeConvertor.hasDBVersion">
+            <summary>
+            This variable stores if a dbversion variable has been passed
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.DatabaseTypeConvertor.#ctor(System.String)">
+            <summary>
+            This is the constructor for the SQL Server type mapper
+            </summary>
+        </member>
+        <member name="T:DotNetSDB.MySQLCore">
+            <summary>
+            This is the Core MySQL class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ExtraCompileList(DotNetSDB.SQLBase.Query,System.String)">
+            <summary>
+            This function hooks into the extra compiling function so we can run the extra compiling features for query extensions
+            </summary>
+            <param name="current"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.CompileLimit(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the limit SQL
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.WindowsAuthConnectionString">
+            <summary>
+            Builds the MySQL windows connection string
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.SqlAuthConnectionString">
+            <summary>
+            Builds the MySQL SQL user connection string
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.#ctor(DotNetSDB.MySQLConnection)">
+            <summary>
+            This initialises the MySQL connection
+            </summary>
+            <param name="connectionInformation"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.is_alive">
+            <summary>
+            This function checks to see if the supplied connection information allows connections or not
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ConnectionInit">
+            <summary>
+            Checks to see if we can connect to the database using the supplied details from the constructor
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ResultToJson(MySql.Data.MySqlClient.MySqlDataReader@)">
+            <summary>
+            This functions takes the resulting data and converts it into a json format string
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ResultToString(MySql.Data.MySqlClient.MySqlDataReader@)">
+            <summary>
+            This function takes the first result value and returns it as a string
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ResultToDataTable(MySql.Data.MySqlClient.MySqlDataReader@)">
+            <summary>
+            This functions takes the resulting data and converts it into a dataTable format
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ResultToDataSet(MySql.Data.MySqlClient.MySqlDataAdapter@,System.Boolean)">
+            <summary>
+            This functions takes the resulting data and converts it into a dataset format
+            </summary>
+            <param name="myAdapter"></param>
+            <param name="enforceConstraints"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ResultToStringArray(MySql.Data.MySqlClient.MySqlDataReader@)">
+            <summary>
+            This function takes the resulting data and puts every first row value into an array
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ResultToDynamic(MySql.Data.MySqlClient.MySqlDataReader@)">
+            <summary>
+            This functions takes the resulting data and converts it into a list of dynamic class objects
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.Dispose">
+            <summary>
+            This is the dispose method for disposing of the connection
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.CoreCommandSetup">
+            <summary>
+            This is the core function that sets up the SQL command object ready for execution
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.DeadLockRetry``1(MySql.Data.MySqlClient.MySqlConnection,MySql.Data.MySqlClient.MySqlCommand,System.Int32,MySql.Data.MySqlClient.MySqlException,System.Func{MySql.Data.MySqlClient.MySqlConnection,System.Int32,``0})">
+            <summary>
+            This is the core Deadlock retry functionality
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="myConnection"></param>
+            <param name="myCommand"></param>
+            <param name="counter"></param>
+            <param name="exception"></param>
+            <param name="runFunction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.CoreProcessing(MySql.Data.MySqlClient.MySqlConnection,System.Int32)">
+            <summary>
+            This function deals with the main compiling and running of any queries or stored procedure that do not require a return function
+            </summary>
+            <param name="myConnection"></param>
+            <param name="counter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.CoreProcessingReaderReturn(MySql.Data.MySqlClient.MySqlConnection,System.Int32)">
+            <summary>
+            This function deals with the main compiling and running of any queries or stored procedure that does require a return function
+            </summary>
+            <param name="myConnection"></param>
+            <param name="counter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.CoreProcessingAdapterReturn(MySql.Data.MySqlClient.MySqlConnection,System.Int32)">
+            <summary>
+            This function deals with the main compiling and running of any queries or stored procedure that require any kind of dataset format being returned
+            </summary>
+            <param name="myConnection"></param>
+            <param name="counter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run">
+            <summary>
+            <para>This executes the sql which has been added.</para>
+            <para>Note: This does not return any data, it only executes the sql.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run_return_string">
+            <summary>
+            <para>This executes the sql which has been added and returns the first value as string.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run_return_string_array">
+            <summary>
+            <para>This executes the sql which has been added and returns a string array from the first value of the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run_return_json">
+            <summary>
+            <para>This executes the sql which has been added and returns the a json formatted string with the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run_return_datatable">
+            <summary>
+            <para>This executes the sql which has been added and returns the results in a datatable.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run_return_dataset(System.Boolean)">
+            <summary>
+            <para>This executes the sql which has been added and returns the results in a dataset.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run_return_dynamic">
+            <summary>
+            <para>This executes the sql which has been added and returns a list of dynamic objects that are structured with the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run_to_csv(System.String,System.String)">
+            <summary>
+            <para>This executes the sql which has been added and creates a csv file using the file path and delimiter parameters specified.</para>
+            </summary>
+            <param name="fullFilePath">the full file location including the filename</param>
+            <param name="delimiter">the delimiter used for the csv</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run_append_to_csv(System.String,System.String)">
+            <summary>
+            <para>This executes the sql which has been added and appends the results to a csv file using the file path and delimiter parameters specified.</para>
+            </summary>
+            <param name="fullFilePath">the full file location including the filename</param>
+            <param name="delimiter">the delimiter used for the csv</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.run_raw_output(System.String)">
+            <summary>
+            <para>This executes the sql which has been added and returns the raw string format using the delimiter parameter specified.</para>
+            </summary>        
+            <param name="delimiter">the delimiter</param>
+            <returns></returns>
+        </member>
+        <member name="T:DotNetSDB.MySQLCore.QueryExtension">
+            <summary>
+            This holds the extra query variables for this specific database version
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLCore.QueryExtension.Limit">
+            <summary>
+            Variable that stores the built limit
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLCore.QueryExtension.ExistRealTableValue">
+            <summary>
+            Variable that holds the exist table values
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLCore.QueryExtension.GetFieldsRealTableValue">
+            <summary>
+            Variable that holds the get fields values
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.QueryExtension.#ctor">
+            <summary>
+            This is the main constructor that loads up the extended query variables
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.QueryExtension.Dispose">
+            <summary>
+            This is the core disposal method for the Query Extension object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.start_new_query">
+            <summary>
+            This function is used to override the default object creation creation to ensure its what we require
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.SanitiseItems(System.String,MySql.Data.MySqlClient.MySqlCommand@,System.Object[])">
+            <summary>
+            This function sanitise and parameter binds the query values using the MySQL Core type lookup class
+            </summary>
+            <param name="definition"></param>
+            <param name="command"></param>
+            <param name="items"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.SanitisationProcess(MySql.Data.MySqlClient.MySqlCommand@)">
+            <summary>
+            This function processes all the different sanitisations that have been declared
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ExtraSanitisationProcessing(DotNetSDB.SQLBase.Query,MySql.Data.MySqlClient.MySqlCommand@,System.Int32)">
+            <summary>
+            This can be used as a hook in function for new features which are inherited down the line and need to be sanatised
+            </summary>
+            <param name="current"></param>
+            <param name="command"></param>
+            <param name="queryCounter"></param>
+        </member>
+        <member name="T:DotNetSDB.MySQLCore.StoredProcedure">
+            <summary>
+            This object stores the internal stored procedure data
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLCore.StoredProcedure.Name">
+            <summary>
+            Holds the stored procedures name
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLCore.StoredProcedure.Parameters">
+            <summary>
+            Holds the stored procedures parameters that are going to be supplied
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLCore.Procedure">
+            <summary>
+            This variable stores the information for the stored procedure that is to be run on an execution method
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.loggerDetails">
+            <summary>
+            Stores the output logger details
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.existDefinition">
+            <summary>
+            Stores the default exist binding name to use
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.fieldsDefinition">
+            <summary>
+            Stores the default field binding name to use
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.user">
+            <summary>
+            Stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.pwd">
+            <summary>
+            Stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.server">
+            <summary>
+            Stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.db">
+            <summary>
+            Stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.connection">
+            <summary>
+            Stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.connectionStringExtra">
+            <summary>
+            Stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.integratedSecurity">
+            <summary>
+            Stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.isWindowsAuth">
+            <summary>
+            Stores the flag on if the connection is using windows auth
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.port">
+            <summary>
+            Stores the port to run the connection on
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.connectionTime">
+            <summary>
+            Stores the connection timeout value
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.myConnection">
+            <summary>
+            Stores the MySQL connection object
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.MySQLCore.maxDeadlockTry">
+            <summary>
+            Stores the max deadlock retry a query or stored procedure will do
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.return_compiled_sql_string">
+            <summary>
+            This function returns the sql query which will be built on a run function
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ReplaceOccurrences(System.String,System.String,System.String)">
+            <summary>
+            This function is used to replace a specific value within a string
+            </summary>
+            <param name="text"></param>
+            <param name="search"></param>
+            <param name="replace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.GetCompiledSqlFromCommand(MySql.Data.MySqlClient.MySqlCommand)">
+            <summary>
+            This function obtains the compiled SQL from a MySQL command object
+            </summary>
+            <param name="myCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ParameterValueForSQL(MySql.Data.MySqlClient.MySqlParameter)">
+            <summary>
+            This returns the parameters value in the specific format
+            </summary>
+            <param name="sp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ToBooleanOrDefault(System.Object)">
+            <summary>
+            This function deals with boolean and bit value conversions
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.table_exist(System.String)">
+            <summary>
+            This function checks if a table exists
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.LimitCompile(DotNetSDB.MySQLCore.QueryExtension,System.Int32)">
+            <summary>
+            This function is the MySQL limit SQL builder
+            </summary>
+            <param name="theQuery"></param>
+            <param name="start"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.LimitCompile(DotNetSDB.MySQLCore.QueryExtension,System.Int32,System.Int32)">
+            <summary>
+            This function is the MySQL limit SQL builder
+            </summary>
+            <param name="theQuery"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.add_limit(System.Int32)">
+            <summary>
+            This function adds the limit statement
+            </summary>
+            <param name="maxRows"></param>        
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.add_limit(System.Int32,System.Int32)">
+            <summary>
+            This function adds the limit statement
+            </summary>
+            <param name="startLocation"></param>
+            <param name="numberOfRows"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.ProcedureValidation(System.String)">
+            <summary>
+            This function runs validation checks against the stored procedure before setting it up
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.add_stored_procedure(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            This function adds a stored procedure and its parameters to be run
+            </summary>
+            <param name="name"></param>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.table_fields(System.String)">
+            <summary>
+            This function returns all the column names of a table
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.MySQLCore.truncate_table(System.String)">
+            <summary>
+            This function truncates the table
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DotNetSDB.MySQLConnection">
+            <summary>
+            The MySQL connection class
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.Server">
+            <summary>
+            Holds the server location
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.User">
+            <summary>
+            Holds the SQL username to use
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.Password">
+            <summary>
+            Holds the SQL user password to use
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.Database">
+            <summary>
+            Holds the database name to connect to
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.IntegratedSecurity">
+            <summary>
+            Holds whether or not to use windows authentication
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.Port">
+            <summary>
+            Holds the port to connect to *-1 means default*
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.ConnectionTimeout">
+            <summary>
+            Holds the connection timeout for the SQL connection
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.ConnectionStringExtra">
+            <summary>
+            Holds any extra connection string parameters
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.MySQLConnection.LoggerSettings">
+            <summary>
+            Holds the output management settings to use on failures
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.Validation">
+            <summary>
+            This function validates the connection information has the basic requirements
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,DotNetSDB.output.OutputManagementSettings)">
+            <summary>
+            This function sets up the MySQL connection based on a connection string
+            </summary>
+            <param name="connectionString">the MySQL connection string to use</param>
+            <param name="errorLogger">the error logger settings</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the MySQL connection based on an SQL user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="username">the SQL username to connect with</param>
+            <param name="password">the SQL user password to connect with</param>
+            <param name="database">database to connect to</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the MySQL connection based on an SQL user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="username">the SQL username to connect with</param>
+            <param name="password">the SQL user password to connect with</param>
+            <param name="database">database to connect to</param>   
+            <param name="port">the port to connect to the MySQL instance</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the MySQL connection based on a windows user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="database">database to connect to</param>        
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.#ctor(System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the MySQL connection based on a windows user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="database">database to connect to</param>        
+            <param name="port">the port to connect to the MySQL instance</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.MySQLConnection.Dispose">
+            <summary>
+            This is the core dispose function for the connection details
+            </summary>
+        </member>
+        <member name="T:DotNetSDB.output.OutputManagement">
+            <summary>
+            This class deals with the OutputManagement for errors
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.output.OutputManagement.AddToLog(System.String)">
+            <summary>
+            This function adds a supplied error message to a log
+            </summary>
+            <param name="errorMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.output.OutputManagement.CleanupLogs">
+            <summary>
+            This function cleans up the logs if the cleanUpDays variable is not 0 and the logs are older than the supplied days
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:DotNetSDB.output.OutputManagement.info">
+            <summary>
+            stores all the variables required for this library
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.output.OutputManagement.Now">
+            <summary>
+            On request creates a datetime object based the timezone information passed
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.output.OutputManagement.locker">
+            <summary>
+            Used to lock the thread while we add data to the log to ensure threadsafe compatibility
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.output.OutputManagement.#ctor(DotNetSDB.output.OutputManagementSettings)">
+            <summary>
+            This function initiates the OutputManagement object with the supplied settings
+            </summary>
+            <param name="variables"></param>
+        </member>
+        <member name="M:DotNetSDB.output.OutputManagement.Dispose">
+            <summary>
+            This is the dispose method for disposing of the object
+            </summary>
+        </member>
+        <member name="T:DotNetSDB.output.OutputManagementSettings">
+            <summary>
+            This class is used to store the settings for the OutputManagement object
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.output.OutputManagementSettings.Directory">
+            <summary>
+            Stores the directory the logs will be stored in
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.output.OutputManagementSettings.LogName">
+            <summary>
+            Stores the name of the log that will be created
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.output.OutputManagementSettings.CleanUpDays">
+            <summary>
+            Stores the amount of days old logs can be before the cleanup function will remove them
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.output.OutputManagementSettings.SingleLineLog">
+            <summary>
+            Stores whether each log entry should be put onto a single line or multiple
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.output.OutputManagementSettings.TimezoneInfo">
+            <summary>
+            Stores the timezones the OutputManagement should timestamp the logs with
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.output.OutputManagementSettings.#ctor(System.String,System.String,System.TimeZoneInfo,System.Boolean,System.Int32)">
+            <summary>
+            This function is the constructor for the OutputManagementSettings object
+            </summary>
+            <param name="directoryPath"></param>
+            <param name="theLogName"></param>
+            <param name="timezone"></param>
+            <param name="multiLineLogging"></param>
+            <param name="cleanUpDaysAmount"></param>
+        </member>
+        <member name="T:DotNetSDB.SQLBase">
+            <summary>
+            This is the SQLBase class which is used as a base throughout the MySQL and SQL Server classes
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileKeyList(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function runs through all the order list options and compiles the right query sections in the supplied order
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.ExtraCompileList(DotNetSDB.SQLBase.Query,System.String)">
+            <summary>
+            This is an empty method which allows inheritance to hook onto something within the list for extra functions
+            </summary>
+            <param name="current"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileBackup">
+            <summary>
+            This function loops through all the stored query objects and deep clones them into a backup list
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileRestore">
+            <summary>
+            This function loops through all the backed up query objects and restores them back into the query object list
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.DeepClone``1(``0)">
+            <summary>
+            This function takes an object and deep clones it as most copies in .NET just copy the reference
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.Compiling(System.Boolean)">
+            <summary>
+            This function is the main compiling function which deals with putting all the queries together into one massive statement to be executed.
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileCreate(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the create query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileDelete(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the delete query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileDrop(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the drop query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileGroup(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the group query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileInsert(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the insert query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileJoin(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the join query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileOrderBy(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the orderby query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompilePureSQL(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the pure SQL query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileSelect(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the select query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileUpdate(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the update query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileWhere(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the where query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileStartWrapper(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the query start wrapper and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CompileEndWrapper(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the query end wrapper and adds it to the query being built
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.DataTableToRawString(System.Data.DataTable,System.String)">
+            <summary>
+            This function returns a raw string from a datatable using the specified parameters
+            </summary>
+            <param name="dt"></param>
+            <param name="delimiter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.DataTableToCSV(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            This function creates a csv file from a datatable using the specified parameters
+            </summary>
+            <param name="dt"></param>
+            <param name="fullFilePath"></param>
+            <param name="delimiter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.DataTableAppendCSV(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            This function appends to an existing csv file from a datatable using the specified parameters
+            </summary>
+            <param name="dt"></param>
+            <param name="fullFilePath"></param>
+            <param name="delimiter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.AddData(System.Object)">
+            <summary>
+            This function looks at the data and if a cast exception is thrown it then uses a different approach to be able to type cast it correctly
+            Note: This is done as string[] will type cast normally but elements like byte[] will not the index's do not match
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.IsDisposed">
+            <summary>
+            Core variable for determining if the object has already been disposed of
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.Dispose">
+            <summary>
+            This is the dispose method for disposing of the connection
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.DisposeAll">
+            <summary>
+            This disposes all the query objects once finished
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.ExtraDispose">
+            <summary>
+            This function is used as an extra hook for inheritance
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.GetBetweenStringValue(System.String,System.String,System.String)">
+            <summary>
+            This function is used to obtain values between a specific segment within a string
+            </summary>
+            <param name="value"></param>
+            <param name="startValue"></param>
+            <param name="endValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.DeleteFile(System.String)">
+            <summary>
+            This function deletes a file
+            </summary>
+            <param name="theFilePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CreateFile(System.String,System.String)">
+            <summary>
+            This function creates a file
+            </summary>
+            <param name="theFilePath"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.AppendFile(System.String,System.String)">
+            <summary>
+            This function appends a file
+            </summary>
+            <param name="theFilePath"></param>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DotNetSDB.SQLBase.Query">
+            <summary>
+            This is the base query class that both MySQL and SQL Server stem from
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.IsDistinct">
+            <summary>
+            Variable that holds the flag for if the query should be distinct
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.SelectTable">
+            <summary>
+            Variable that stores that table name to select from
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.SelectFields">
+            <summary>
+            Variable that holds a list of select fields
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.OrderbyFields">
+            <summary>
+            Variable that holds a list of the orderby fields
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.GroupbyFields">
+            <summary>
+            Variable that holds a list of groupby fields
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.DropTableName">
+            <summary>
+            Variable used to store drop table name
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.InsertTableName">
+            <summary>
+            Variable used to store the insert table name
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.InsertFields">
+            <summary>
+            Variable used to store a list of insert fields
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.InsertValues">
+            <summary>
+            Variable used to store a list of insert values
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.CreateFields">
+            <summary>
+            Variable used to store a list of create fields
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.CreateTable">
+            <summary>
+            Variable used to store the create table name
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.UpdateFields">
+            <summary>
+            Variable used to store a list of update fields
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.UpdateTable">
+            <summary>
+            Variable used to store the update table name
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.DeleteTable">
+            <summary>
+            Variable used to store the delete table name
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.JoinFields">
+            <summary>
+            Variable used to store a list of join fields
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.WhereStatements">
+            <summary>
+            Variable used to store a list of where statements
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.WhereStatementsTypes">
+            <summary>
+            Variable used to store a list of where statement types
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.WhereRealValues">
+            <summary>
+            Variable used to store a list of the real where values
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.UpdateRealValues">
+            <summary>
+            Variable used to store a list of the real update values
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.InsertRealValues">
+            <summary>
+            Variable used to store a list of the real insert values
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.OrderList">
+            <summary>
+            Variable used to store the order the query should be compiled in
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.PureSql">
+            <summary>
+            Variable used to store a list of pure SQL statements
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.SqlStartWrapper">
+            <summary>
+            Variable used to store a SQL Server query start wrapper
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.SqlEndWrapper">
+            <summary>
+            Variable used to store a SQL Server query end wrapper
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.CustomRealValues">
+            <summary>
+            Variable used to store a list of custom real values
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.Query.#ctor">
+            <summary>
+            This is the main constructor that loads up the base query variables
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLBase.Query.IsDisposed">
+            <summary>
+            Core variable for determining if the object has already been disposed of
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.Query.Dispose">
+            <summary>
+            This is the core dispose method for the query object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.GetQuery">
+            <summary>
+            This function is run every time a Top layer function is run to get the query object
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.start_new_query">
+            <summary>
+            This function is used to create a new query object for running a new query
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SQLBase.theQueries">
+            <summary>
+            This variable holds all the query objects which will be processed
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SQLBase.compiledSql">
+            <summary>
+            This variable is used to compile the main sql query that will be executed
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SQLBase.updateDefinition">
+            <summary>
+            This variable stores the default update binding name to use
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SQLBase.insertDefinition">
+            <summary>
+            This variable stores the default insert binding name to use
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SQLBase.whereDefinition">
+            <summary>
+            This variable stores the default where binding name to use
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SQLBase.customDefinition">
+            <summary>
+            This variable stores the default custom binding name to use
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.get_parameter_binding_count">
+            <summary>
+            This function returns the current amount of parameter binding occurrences
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CreateCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating the create table SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CreateCompile(DotNetSDB.SQLBase.Query,System.String,System.String[],System.String[])">
+            <summary>
+            This function builds the create table SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="types"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CreateTableNameValidation(System.String)">
+            <summary>
+            This function validates the create table name
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CreateNotExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the create table base statement has been added before trying to add additional fields
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.CreateExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the create table query has not already been run as a new one is about to be added
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_create_table(System.String,System.String,System.String)">
+            <summary>
+            This function creates the main create table statement
+            </summary>
+            <param name="newTableName"></param>
+            <param name="newFieldsName"></param>
+            <param name="newFieldType"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_create_table(System.String,System.String[],System.String[])">
+            <summary>
+            This function creates the main create table statement
+            </summary>
+            <param name="newTableName"></param>
+            <param name="newFieldsNames"></param>
+            <param name="newFieldTypes"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_create_fields(System.String,System.String)">
+            <summary>
+            This function adds additional fields and types to the create table statement
+            </summary>
+            <param name="newFieldsName"></param>
+            <param name="newFieldType"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_create_fields(System.String[],System.String[])">
+            <summary>
+            This function adds additional fields and types to the create table statement
+            </summary>
+            <param name="newFieldsNames"></param>
+            <param name="newFieldTypes"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.DeleteSingleValidation(System.String)">
+            <summary>
+            This function validates the delete query table name
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.DeleteExistsValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the delete query has not already been run as a new one is about to be added
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_delete(System.String)">
+            <summary>
+            This function adds the delete statement
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_drop_table(System.String)">
+            <summary>
+            This function adds a drop table statement
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.GroupByCompile(DotNetSDB.SQLBase.Query,System.String,System.String)">
+            <summary>
+            This function deals with creating the group by SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.GroupByCompile(DotNetSDB.SQLBase.Query,System.String,System.String[])">
+            <summary>
+            This function deals with creating the group by SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.GroupBySingleValidation(System.String,System.String)">
+            <summary>
+            This function validates the group by variables
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.GroupByMultipleValidation(System.String,System.String[])">
+            <summary>
+            This function validates the group by variables
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.GroupByNotExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the group by base statement has been added before trying to add additional fields
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.GroupByExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the group by query has not already been run as a new one is about to be added
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_groupby(System.String,System.String)">
+            <summary>
+            This function adds the main group by statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_groupby(System.String,System.String[])">
+            <summary>
+            This function adds the main group by statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_groupby_fields(System.String,System.String)">
+            <summary>
+            This function adds additional fields to the group by statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_groupby_fields(System.String,System.String[])">
+            <summary>
+            This function adds additional fields to the group by statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.InsertCompile(DotNetSDB.SQLBase.Query,System.String,System.Object[])">
+            <summary>
+            This function deals with creating the insert SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="definition"></param>
+            <param name="values"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.InsertFieldCompile(DotNetSDB.SQLBase.Query,System.String[])">
+            <summary>
+            This function deals with creating the insert SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.InsertsingleValidation(System.String,System.String)">
+            <summary>
+            This function validates the insert variables
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.InsertMultipleValidation(System.String,System.String[])">
+            <summary>
+            This function validates the insert variables
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.InsertExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the insert query has not already been run as a new one is about to be added
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.InsertNotExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the insert base statement has been added before trying to add additional fields
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String)">
+            <summary>
+            This function adds the insert statement without fields or values
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.String)">
+            <summary>
+            This functions adds the insert statement with a field only
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.String[])">
+            <summary>
+            This functions adds the insert statement with fields only
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.Object)">
+            <summary>
+            This function adds the insert statement with only values
+            </summary>
+            <param name="tableName"></param>
+            <param name="values">single value or object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.String,System.Object)">
+            <summary>
+            This function adds the insert statement with a field and value
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="value">single value only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert(System.String,System.String[],System.Object)">
+            <summary>
+            This function adds the insert statement with the fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="values">object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert_fields(System.String)">
+            <summary>
+            This function adds additional fields to an insert statement
+            </summary>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert_fields(System.String[])">
+            <summary>
+            This function adds additional fields to an insert statement
+            </summary>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_insert_values(System.Object)">
+            <summary>
+            <para>This function adds additional values to an insert statement</para>
+            </summary>
+            <param name="values">single values or object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.JoinCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating the join SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="joinType"></param>
+            <param name="joinTable"></param>
+            <param name="field"></param>
+            <param name="joinField"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.JoinCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.String[],System.String[])">
+            <summary>
+            This function deals with creating the join SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="joinType"></param>
+            <param name="joinTable"></param>
+            <param name="fields"></param>
+            <param name="joinFields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.JoinAdditionalCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating additional join SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="joinTable"></param>
+            <param name="field"></param>
+            <param name="joinField"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.JoinAdditionalCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String[],System.String[])">
+            <summary>
+            This function deals with creating additional join SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="joinTable"></param>
+            <param name="fields"></param>
+            <param name="joinFields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.JoinSingleValidation(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function validates the join variables
+            </summary>
+            <param name="joinType"></param>
+            <param name="joinTableName"></param>
+            <param name="currentTableName"></param>
+            <param name="joinTableFields"></param>
+            <param name="currentTableFields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.JoinMultipleValidation(System.String,System.String,System.String,System.String[],System.String[])">
+            <summary>
+            This function validates the join variables
+            </summary>
+            <param name="joinType"></param>
+            <param name="joinTableName"></param>
+            <param name="currentTableName"></param>
+            <param name="joinTableFields"></param>
+            <param name="currentTableFields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.JoinExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the join base statement has been added before trying to add additional joins
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_join(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            <para>This function adds a join into the query.</para>
+            <para>Note: Please remember to use 'JOIN' within the joinType i.e. 'INNER JOIN'</para>
+            </summary>
+            <param name="joinType">Please enter the join type here i.e. 'INNER JOIN'</param>
+            <param name="joinTableName">Please enter the new table you wish to start your join on</param>
+            <param name="currentTableName">Please enter your current table you are linking with</param>
+            <param name="joinTableField">Please enter the field you are linking on the new table</param>
+            <param name="currentTableField">Please enter the field you are linking on in the current table</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_join(System.String,System.String,System.String,System.String[],System.String[])">
+            <summary>
+            <para>This function adds a join into the query.</para>
+            <para>Note: Please remember to use 'JOIN' within the joinType i.e. 'INNER JOIN'</para>
+            </summary>
+            <param name="joinType">Please enter the join type here i.e. 'INNER JOIN'</param>
+            <param name="joinTableName">Please enter the new table you wish to start your join on</param>
+            <param name="currentTableName">Please enter your current table you are linking with</param>
+            <param name="joinTableFields">Please enter the fields you are linking on the new table</param>
+            <param name="currentTableFields">Please enter the fields you are linking on in the current table</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_join_parameters(System.String,System.String,System.String[],System.String[])">
+            <summary>
+            <para>This function adds additional parameters to the previous join.</para>
+            </summary>
+            <param name="joinTableName">Please enter the new table you wish to start your join on</param>
+            <param name="currentTableName">Please enter your current table you are linking with</param>
+            <param name="joinTableFields">Please enter the fields you are linking on the new table</param>
+            <param name="currentTableFields">Please enter the fields you are linking on in the current table</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_join_parameters(System.String,System.String,System.String,System.String)">
+            <summary>
+            <para>This function adds additional parameters to the previous join.</para>
+            </summary>
+            <param name="joinTableName">Please enter the new table you wish to start your join on</param>
+            <param name="currentTableName">Please enter your current table you are linking with</param>
+            <param name="joinTableField">Please enter the field you are linking on the new table</param>
+            <param name="currentTableField">Please enter the field you are linking on in the current table</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.OrderByCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating the order by SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.OrderByCompile(DotNetSDB.SQLBase.Query,System.String,System.String[],System.String[])">
+            <summary>
+            This function deals with creating the order by SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="types"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_orderby(System.String,System.String,System.String)">
+            <summary>
+            This function creates the main orderby statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_orderby(System.String,System.String[],System.String[])">
+            <summary>
+            This function creates the main orderby statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="types"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_orderby_fields(System.String,System.String,System.String)">
+            <summary>
+            This function adds an additional field to the orderby statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_orderby_fields(System.String,System.String[],System.String[])">
+            <summary>
+            This function adds additional fields to the orderby statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="types"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.SelectCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating the select SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="selectField"></param>
+            <param name="startField"></param>
+            <param name="endField"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.SelectCompile(DotNetSDB.SQLBase.Query,System.String,System.String[],System.String[],System.String[])">
+            <summary>
+            This function deals with creating the select SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="selectFields"></param>
+            <param name="startFields"></param>
+            <param name="endFields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.SelectValidation(System.String)">
+            <summary>
+            This function validates the select variables
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.SelectNotExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the select base statement has been added before trying to add additional fields
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.SelectExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the select query has not already been run as a new one is about to be added
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.is_distinct(System.Boolean)">
+            <summary>
+            This function determines whether the select statement should be be distinct
+            </summary>
+            <param name="distinct"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_select_fields(System.String,System.String,System.String,System.String)">
+            <summary>
+            This functions adds an additional select field to a select statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="selectField"></param>
+            <param name="startField"></param>
+            <param name="endField"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_select_fields(System.String,System.String[],System.String[],System.String[])">
+            <summary>
+            This functions adds additional select fields to a select statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="selectFields"></param>
+            <param name="startFields"></param>
+            <param name="endFields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_select(System.String,System.String,System.String,System.String)">
+            <summary>
+            This functions adds a select statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="selectField"></param>
+            <param name="startField"></param>
+            <param name="endField"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_select(System.String,System.String[],System.String[],System.String[])">
+            <summary>
+            This functions adds a select statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="selectFields"></param>
+            <param name="startFields"></param>
+            <param name="endFields"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_pure_sql_bind(System.Object)">
+            <summary>
+            This function allows manual parameter binding and returns a string of the definition to input into the query
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_pure_sql_bind_array(System.Object)">
+            <summary>
+            This function allows an array of manual parameter binding and returns a string array of the definition to input into the query
+            </summary>
+            <param name="values"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_pure_sql(System.String)">
+            <summary>
+            This function adds an sql query to the current query object.
+            </summary>
+            <param name="sqlQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_start_sql_wrapper(System.String)">
+            <summary>
+            <para>This function adds a sql statement to the start of the current query object being processed.</para>
+            <para>Note: This function can only be used once per new query, using it multiple times will wipe the previous data until a new query object 'start_new_query()'.</para>
+            </summary>
+            <param name="sqlQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_end_sql_wrapper(System.String)">
+            <summary>
+            <para>This function adds a sql statement to the end of the current query object being processed.</para>
+            <para>Note: This function can only be used once per new query, using it multiple times will wipe the previous data until a new query object 'start_new_query()'.</para>
+            </summary>
+            <param name="sqlQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.UpdateCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.Object[])">
+            <summary>
+            This function deals with creating the update SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="definition"></param>
+            <param name="tableName"></param>
+            <param name="updateField"></param>
+            <param name="updateValues"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.UpdateCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String[],System.Object[])">
+            <summary>
+            This function deals with creating the update SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="definition"></param>
+            <param name="tableName"></param>
+            <param name="updateFields"></param>
+            <param name="updateValues"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.UpdateNotExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the update base statement has been added before trying to add additional fields
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.UpdateExistValidation(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function validates that the update query has not already been run as a new one is about to be added
+            </summary>
+            <param name="theQuery"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_update(System.String,System.String,System.Object)">
+            <summary>
+            This function adds the update statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="value">Single value</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_update(System.String,System.String[],System.Object)">
+            <summary>
+            This function adds the update statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="values">object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_update_additions(System.String,System.String,System.Object)">
+            <summary>
+            This function adds additional update fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="value">Single value</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_update_additions(System.String,System.String[],System.Object)">
+            <summary>
+            This function adds additional update fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="values">object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereBetweenCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating the where between SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="definition"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="values"></param>
+            <param name="theOperator"></param>
+            <param name="type"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereBetweenValidation(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.Object)">
+            <summary>
+            This function validates the where between variables
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+            <param name="values"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_between(System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a where between statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="values">object[] only, should only have 2 elements!</param>
+            <param name="theOperator">Optional, default is blank, could use NOT</param>
+            <param name="type">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereInCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating the where in SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="definition"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="values"></param>
+            <param name="theOperator"></param>
+            <param name="type"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereInValidation(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.Object)">
+            <summary>
+            This function validates the where in variables
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+            <param name="values"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_in(System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a where in statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="values">object[] only</param>
+            <param name="theOperator">Optional, default is blank, could use NOT</param>
+            <param name="type">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereIsCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating the where is SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="theOperator"></param>
+            <param name="type"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereIsValidation(DotNetSDB.SQLBase.Query,System.String,System.String,System.String)">
+            <summary>
+            This function validates the where is variables
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_is(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a where is statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="theOperator">Optional, default is blank, could use NOT</param>
+            <param name="type">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereLikeCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating the where like SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="definition"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="value"></param>
+            <param name="theOperator"></param>
+            <param name="type"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereLikeValidation(DotNetSDB.SQLBase.Query,System.String,System.String,System.String)">
+            <summary>
+            This function validates the where like variables
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_like(System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a where like statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="value">Single value</param>
+            <param name="theOperator">Optional, default is blank, could use NOT</param>
+            <param name="type">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereNormalCompile(DotNetSDB.SQLBase.Query,System.String,System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function deals with creating the normal where SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="definition"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="value"></param>
+            <param name="theOperator"></param>
+            <param name="type"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.WhereNormalValidation(DotNetSDB.SQLBase.Query,System.String,System.String,System.String)">
+            <summary>
+            This function validates the normal where variables
+            </summary>
+            <param name="theQuery"></param>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLBase.add_where_normal(System.String,System.String,System.Object,System.String,System.String,System.String,System.String)">
+            <summary>
+            This function defines a normal where statement
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="value">Single value</param>
+            <param name="theOperator">Optional, default is '='</param>
+            <param name="type">Optional, default is 'AND'</param>
+            <param name="startWrapper">Optional start wrapper</param>
+            <param name="endWrapper">Optional end wrapper</param>
+        </member>
+        <member name="T:DotNetSDB.StringBuilderExtension">
+            <summary>
+            This class is an extension class for StringBuilder
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.StringBuilderExtension.Trim(System.Text.StringBuilder)">
+            <summary>
+            This is an extension method to StringBuilder to allow us to Trim the string being built efficiently
+            </summary>
+            <param name="sb"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2008">
+            <summary>
+            The SQL Server 2008 class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.ExtraCompileList(DotNetSDB.SQLBase.Query,System.String)">
+            <summary>
+            This function hooks into the extra compiling function so we can run the extra compiling features for query extensions
+            </summary>
+            <param name="current"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.CompileLimit(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the limit query wrapper and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.CompileOrderBy(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the order by query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            Initialises the SQL Server connection with the supplied connection object
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2008.QueryExtension2">
+            <summary>
+            This holds the extra query variables for this specific database version
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServer2008.QueryExtension2.LimitCountOne">
+            <summary>
+            Variable that holds the limit min value
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServer2008.QueryExtension2.LimitCountTwo">
+            <summary>
+            Variable that holds the limit max value
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServer2008.QueryExtension2.Orderby">
+            <summary>
+            Variable that holds the generated orderby for the limit wrapper
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.QueryExtension2.#ctor">
+            <summary>
+            This is the main constructor that loads up the extended query variables
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.QueryExtension2.Dispose">
+            <summary>
+            This is the core disposal method for the Query Extension object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.start_new_query">
+            <summary>
+            This function is used to override the default object creation creation to ensure its what we require
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.SanitiseItems(System.String,System.Data.SqlClient.SqlCommand@,System.Object[])">
+            <summary>
+            This function sanitise and parameter binds the query values using the 2008 type lookup class
+            </summary>
+            <param name="definition"></param>
+            <param name="command"></param>
+            <param name="items"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.LimitCompile(DotNetSDB.SQLServer2008.QueryExtension2,System.String,System.String)">
+            <summary>
+            This function deals with creating the limit wrapper SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="orderby"></param>
+            <param name="compiling"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2008.add_limit(System.Int32,System.Int32)">
+            <summary>
+            This function adds a limit wrapper statement around the query
+            </summary>
+            <param name="minValue"></param>
+            <param name="maxValue"></param>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2012">
+            <summary>
+            The SQL Server 2012 class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.ExtraCompileList(DotNetSDB.SQLBase.Query,System.String)">
+            <summary>
+            This function hooks into the extra compiling function so we can run the extra compiling features for query extensions
+            </summary>
+            <param name="current"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.CompileOffset(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the offset query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            Initialises the SQL Server connection with the supplied connection object
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2012.QueryExtension2">
+            <summary>
+            This holds the extra query variables for this specific database version
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServer2012.QueryExtension2.Offset">
+            <summary>
+            Variable for the offset
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.QueryExtension2.#ctor">
+            <summary>
+            This is the main constructor that loads up the extended query variables
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.QueryExtension2.Dispose">
+            <summary>
+            This is the core disposal method for the Query Extension object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.start_new_query">
+            <summary>
+            This function is used to override the default object creation creation to ensure its what we require
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.SanitiseItems(System.String,System.Data.SqlClient.SqlCommand@,System.Object[])">
+            <summary>
+            This function sanitise and parameter binds the query values using the 2012 type lookup class
+            </summary>
+            <param name="definition"></param>
+            <param name="command"></param>
+            <param name="items"></param>
+        </member>
+        <member name="P:DotNetSDB.SQLServer2012.Filetable">
+            <summary>
+            This variable stores the SQL Server filetable extension object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.OffsetCompile(DotNetSDB.SQLServer2012.QueryExtension2,System.Int32,System.Int32)">
+            <summary>
+            This function deals with creating the Offset SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="offset"></param>
+            <param name="fetch"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2012.add_offset(System.Int32,System.Int32)">
+            <summary>
+            Note: This function requires an orderby before using it
+            </summary>
+            <param name="offsetRows"></param>
+            <param name="numberOfRows"></param>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2014">
+            <summary>
+            The SQL Server 2014 class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.ExtraCompileList(DotNetSDB.SQLBase.Query,System.String)">
+            <summary>
+            This function hooks into the extra compiling function so we can run the extra compiling features for query extensions
+            </summary>
+            <param name="current"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.CompileOffset(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the offset query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            Initialises the SQL Server connection with the supplied connection object
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2014.QueryExtension2">
+            <summary>
+            This holds the extra query variables for this specific database version
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServer2014.QueryExtension2.Offset">
+            <summary>
+            Variable for the offset
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.QueryExtension2.#ctor">
+            <summary>
+            This is the main constructor that loads up the extended query variables
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.QueryExtension2.Dispose">
+            <summary>
+            This is the core disposal method for the Query Extension object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.start_new_query">
+            <summary>
+            This function is used to override the default object creation creation to ensure its what we require
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.SanitiseItems(System.String,System.Data.SqlClient.SqlCommand@,System.Object[])">
+            <summary>
+            This function sanitise and parameter binds the query values using the 2014 type lookup class
+            </summary>
+            <param name="definition"></param>
+            <param name="command"></param>
+            <param name="items"></param>
+        </member>
+        <member name="P:DotNetSDB.SQLServer2014.Filetable">
+            <summary>
+            This variable stores the SQL Server filetable extension object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.OffsetCompile(DotNetSDB.SQLServer2014.QueryExtension2,System.Int32,System.Int32)">
+            <summary>
+            This function deals with creating the Offset SQL
+            </summary>
+            <param name="theQuery"></param>
+            <param name="offset"></param>
+            <param name="fetch"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2014.add_offset(System.Int32,System.Int32)">
+            <summary>
+            Note: This function requires an orderby before using it
+            </summary>
+            <param name="offsetRows"></param>
+            <param name="numberOfRows"></param>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2016">
+            <summary>
+            The SQL Server 2016 class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2016.ExtraCompileList(DotNetSDB.SQLBase.Query,System.String)">
+            <summary>
+            This function hooks into the extra compiling function so we can run the extra compiling features for query extensions
+            </summary>
+            <param name="current"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2016.CompileOffset(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the offset query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2016.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            Initialises the SQL Server connection with the supplied connection object
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
+        </member>
+        <member name="T:DotNetSDB.SQLServer2016.QueryExtension2">
+            <summary>
+            This holds the extra query variables for this specific database version
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServer2016.QueryExtension2.Offset">
+            <summary>
+            Variable for the offset
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2016.QueryExtension2.#ctor">
+            <summary>
+            This is the main constructor that loads up the extended query variables
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2016.QueryExtension2.Dispose">
+            <summary>
+            This is the core disposal method for the Query Extension object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2016.start_new_query">
+            <summary>
+            This function is used to override the default object creation creation to ensure its what we require
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServer2016.SanitiseItems(System.String,System.Data.SqlClient.SqlCommand@,System.Object[])">
+            <summary>
+            This function sanitise and parameter binds the query values using the 2016 type lookup class
+            </summary>
+            <param name="definition"></param>
+            <param name="command"></param>
+            <param name="items"></param>
+        </member>
+        <member name="P:DotNetSDB.SQLServer2016.Filetable">
+            <summary>
+            This variable stores the SQL Server filetable extension object
+            </summary>
+        </member>
+        <member name="T:DotNetSDB.SqlServerCore">
+            <summary>
+            The main core class for the SQL Server Base
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.CompileDelete(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the delete query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.CompileInsert(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the insert query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.CompileSelect(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the select query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.CompileUpdate(DotNetSDB.SQLBase.Query)">
+            <summary>
+            This function compiles the update query and adds it to the query being built
+            </summary>
+            <param name="current"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.WindowsAuthConnectionString">
+            <summary>
+            Builds the SQL Server windows connection string
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.SqlAuthConnectionString">
+            <summary>
+            Builds the SQL Server user connection string
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.#ctor(DotNetSDB.SQLServerConnection)">
+            <summary>
+            This initialises the SQL Server connection
+            </summary>
+            <param name="connectionInformation">the SQL Server Connection Object</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.is_alive">
+            <summary>
+            This function checks to see if the supplied connection information allows connections or not
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ConnectionInit">
+            <summary>
+            Checks to see if we can connect to the database using the supplied details from the constructor
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ResultToJson(System.Data.SqlClient.SqlDataReader@)">
+            <summary>
+            This functions takes the resulting data and converts it into a json format string
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ResultToString(System.Data.SqlClient.SqlDataReader@)">
+            <summary>
+            This function takes the first result value and returns it as a string
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ResultToDataTable(System.Data.SqlClient.SqlDataReader@)">
+            <summary>
+            This functions takes the resulting data and converts it into a dataTable format
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ResultToDataSet(System.Data.SqlClient.SqlDataAdapter@,System.Boolean)">
+            <summary>
+            This functions takes the resulting data and converts it into a dataset format
+            </summary>
+            <param name="myAdapter"></param>
+            <param name="enforceConstraints"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ResultToStringArray(System.Data.SqlClient.SqlDataReader@)">
+            <summary>
+            This function takes the resulting data and puts every first row value into an array
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ResultToDynamic(System.Data.SqlClient.SqlDataReader@)">
+            <summary>
+            This functions takes the resulting data and converts it into a list of dynamic class objects
+            </summary>
+            <param name="myReader"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.Dispose">
+            <summary>
+            This is the dispose method for disposing of the connection
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.CoreCommandSetup">
+            <summary>
+            This is the core function that sets up the SQL command object ready for execution
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.DeadLockRetry``1(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlCommand,System.Int32,System.Data.SqlClient.SqlException,System.Func{System.Data.SqlClient.SqlConnection,System.Int32,``0})">
+            <summary>
+            This is the core Deadlock retry functionality
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="myConnection"></param>
+            <param name="myCommand"></param>
+            <param name="counter"></param>
+            <param name="exception"></param>
+            <param name="runFunction"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.CoreProcessing(System.Data.SqlClient.SqlConnection,System.Int32)">
+            <summary>
+            This function deals with the main compiling and running of any queries or stored procedure that do not require a return function
+            </summary>
+            <param name="myConnection"></param>
+            <param name="counter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.CoreProcessingReaderReturn(System.Data.SqlClient.SqlConnection,System.Int32)">
+            <summary>
+            This function deals with the main compiling and running of any queries or stored procedure that does require a return function
+            </summary>
+            <param name="myConnection"></param>
+            <param name="counter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.CoreProcessingAdapterReturn(System.Data.SqlClient.SqlConnection,System.Int32)">
+            <summary>
+            This function deals with the main compiling and running of any queries or stored procedure that require any kind of dataset format being returned
+            </summary>
+            <param name="myConnection"></param>
+            <param name="counter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run">
+            <summary>
+            <para>This executes the sql which has been added.</para>
+            <para>Note: This does not return any data, it only executes the sql.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_string">
+            <summary>
+            <para>This executes the sql which has been added and returns the first value as string.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_string_array">
+            <summary>
+            <para>This executes the sql which has been added and returns a string array from the first value of the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_json">
+            <summary>
+            <para>This executes the sql which has been added and returns the a json formatted string with the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_datatable">
+            <summary>
+            <para>This executes the sql which has been added and returns the results in a datatable.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_dataset(System.Boolean)">
+            <summary>
+            <para>This executes the sql which has been added and returns the results in a dataset.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_return_dynamic">
+            <summary>
+            <para>This executes the sql which has been added and returns a list of dynamic objects that are structured with the results.</para>
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_bulk_copy(System.Data.DataTable,System.Int32,System.Int32)">
+            <summary>
+            This executes a bulk insert using the data in the datatable
+            </summary>
+            <param name="sourceData">Datatable that holds all the data to be inserted.
+            NOTE: The datatable table name and column names have to match the table that is being inserted to.
+            </param>
+            <param name="batchSize">The max records to insert at a time.</param>
+            <param name="timeoutSeconds">The maximum timeout per batch insert.</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_to_csv(System.String,System.String)">
+            <summary>
+            <para>This executes the sql which has been added and creates a csv file using the file path and delimiter parameters specified.</para>
+            </summary>
+            <param name="fullFilePath">the full file location including the filename</param>
+            <param name="delimiter">the delimiter used for the csv</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_append_to_csv(System.String,System.String)">
+            <summary>
+            <para>This executes the sql which has been added and appends the results to a csv file using the file path and delimiter parameters specified.</para>
+            </summary>
+            <param name="fullFilePath">the full file location including the filename</param>
+            <param name="delimiter">the delimiter used for the csv</param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.run_raw_output(System.String)">
+            <summary>
+            <para>This executes the sql which has been added and returns the raw string format using the delimiter parameter specified.</para>
+            </summary>        
+            <param name="delimiter">the delimiter</param>
+            <returns></returns>
+        </member>
+        <member name="T:DotNetSDB.SqlServerCore.QueryExtension">
+            <summary>
+            This holds the extra query variables for this specific database version
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.QueryExtension.SelectTop">
+            <summary>
+            Variable that holds the select top value
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.QueryExtension.ExistRealTableValue">
+            <summary>
+            Variable that holds the exist table values
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.QueryExtension.GetFieldsRealTableValue">
+            <summary>
+            Variable that holds the get fields values
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.QueryExtension.InsertReturn">
+            <summary>
+            Variable that holds whether an insert should return an output back
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.QueryExtension.UpdateReturned">
+            <summary>
+            Variable that holds whether an update should return an output back
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.QueryExtension.DeleteReturned">
+            <summary>
+            Variable that holds whether an delete should return an output back
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.QueryExtension.#ctor">
+            <summary>
+            This is the main constructor that loads up the extended query variables
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.QueryExtension.Dispose">
+            <summary>
+            This is the core disposal method for the Query Extension object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.start_new_query">
+            <summary>
+            This function is used to override the default object creation creation to ensure its what we require 
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.SanitiseItems(System.String,System.Data.SqlClient.SqlCommand@,System.Object[])">
+            <summary>
+            This function sanitise and parameter binds the query values using the core SQL Server type lookup class
+            </summary>
+            <param name="definition"></param>
+            <param name="command"></param>
+            <param name="items"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.SanitisationProcess(System.Data.SqlClient.SqlCommand@)">
+            <summary>
+            This function processes all the different sanitisations that have been declared
+            </summary>
+            <param name="command"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ExtraSanitisationProcessing(DotNetSDB.SQLBase.Query,System.Data.SqlClient.SqlCommand@,System.Int32)">
+            <summary>
+            This can be used as a hook in function for new features which are inherited down the line and need to be sanatised
+            </summary>
+            <param name="current"></param>
+            <param name="command"></param>
+            <param name="queryCounter"></param>
+        </member>
+        <member name="T:DotNetSDB.SqlServerCore.StoredProcedure">
+            <summary>
+            This object stores the internal stored procedure data
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.StoredProcedure.Name">
+            <summary>
+            Holds the stored procedures name
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.StoredProcedure.Parameters">
+            <summary>
+            Holds the stored procedures parameters that are going to be supplied
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServerCore.Procedure">
+            <summary>
+            This variable stores the information for the stored procedure that is to be run on an execution method
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.loggerDetails">
+            <summary>
+            This variable stores the output logger details
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.existDefinition">
+            <summary>
+            This variable stores the default exist binding name to use
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.fieldsDefinition">
+            <summary>
+            Stores the default field binding name to use
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.user">
+            <summary>
+            This variable stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.pwd">
+            <summary>
+            This variable stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.server">
+            <summary>
+            This variable stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.db">
+            <summary>
+            This variable stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.connection">
+            <summary>
+            This variable stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.connectionStringExtra">
+            <summary>
+            This variable stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.integratedSecurity">
+            <summary>
+            This variable stores the connection information variables
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.isWindowsAuth">
+            <summary>
+            This variable stores the flag on if the connection is using windows auth
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.port">
+            <summary>
+            This variable stores the port to run the connection on
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.connectionTime">
+            <summary>
+            This variable stores the connection timeout value
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.myConnection">
+            <summary>
+            This variable stores the MySQL connection object
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServerCore.maxDeadlockTry">
+            <summary>
+            This variable stores the max deadlock retry a query or stored procedure will do
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.return_compiled_sql_string">
+            <summary>
+            This function returns the sql query which will be built on a run function
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ReplaceOccurrences(System.String,System.String,System.String)">
+            <summary>
+            This function is used to replace a specific value within a string
+            </summary>
+            <param name="text"></param>
+            <param name="search"></param>
+            <param name="replace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.GetCompiledSqlFromCommand(System.Data.SqlClient.SqlCommand)">
+            <summary>
+            This function obtains the compiled SQL from a MySQL command object
+            </summary>
+            <param name="myCommand"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ParameterValueForSQL(System.Data.SqlClient.SqlParameter)">
+            <summary>
+            This returns the parameters value in the specific format
+            </summary>
+            <param name="sp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ToBooleanOrDefault(System.Object)">
+            <summary>
+            This function deals with boolean and bit value conversions
+            </summary>
+            <param name="o"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_delete_return(System.String)">
+            <summary>
+            This function starts the delete query
+            </summary>
+            <param name="tableName">The Table that you want to delete from</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.table_exist(System.String)">
+            <summary>
+            This function returns whether a table exists
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String)">
+            <summary>
+            This function adds the insert statement without fields or values
+            </summary>
+            <param name="tableName"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.String)">
+            <summary>
+            This functions adds the insert statement with a field only
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.String[])">
+            <summary>
+            This functions adds the insert statement with fields only
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.Object)">
+            <summary>
+            This function adds the insert statement with only values
+            </summary>
+            <param name="tableName"></param>
+            <param name="values">single value or object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.String,System.Object)">
+            <summary>
+            This function adds the insert statement with a field and value
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="value">single value only</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_insert_return(System.String,System.String[],System.Object)">
+            <summary>
+            This function adds the insert statement with the fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="values">object[] only</param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_select_top(System.Int32)">
+            <summary>
+            This function adds a top to the select statement
+            </summary>
+            <param name="topValue"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.ProcedureValidation(System.String)">
+            <summary>
+            This function runs validation checks against the stored procedure before setting it up
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_stored_procedure(System.String,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            This function adds a stored procedure and its parameters to be run
+            </summary>
+            <param name="name"></param>
+            <param name="parameters"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.table_fields(System.String)">
+            <summary>
+            This function returns all the column names of a table
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.truncate_table(System.String)">
+            <summary>
+            This function truncates the table
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_update_return(System.String,System.String,System.Object)">
+            <summary>
+            This function adds additional update fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="field"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServerCore.add_update_return(System.String,System.String[],System.Object)">
+            <summary>
+            This function adds additional update fields and values
+            </summary>
+            <param name="tableName"></param>
+            <param name="fields"></param>
+            <param name="values"></param>
+        </member>
+        <member name="T:DotNetSDB.SQLServerConnection">
+            <summary>
+            The SQL Server connection class
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.Server">
+            <summary>
+            Holds the server location
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.User">
+            <summary>
+            Holds the SQL username to use
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.Password">
+            <summary>
+            Holds the SQL user password to use
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.Database">
+            <summary>
+            Holds the database name to connect to
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.IntegratedSecurity">
+            <summary>
+            Holds whether or not to use windows authentication
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.Port">
+            <summary>
+            Holds the port to connect to *-1 means default*
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.ConnectionTimeout">
+            <summary>
+            Holds the connection timeout for the SQL connection
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.ConnectionStringExtra">
+            <summary>
+            Holds any extra connection string parameters
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SQLServerConnection.LoggerSettings">
+            <summary>
+            Holds the output management settings to use on failures
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.Validation">
+            <summary>
+            This function validates the connection information has the basic requirements
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,DotNetSDB.output.OutputManagementSettings)">
+            <summary>
+            This function sets up the SQL Server connection based on a connection string
+            </summary>
+            <param name="connectionString">the SQL Server connection string to use</param>
+            <param name="errorLogger">the error logger settings</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the SQL Server connection based on an SQL user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="username">the SQL username to connect with</param>
+            <param name="password">the SQL user password to connect with</param>
+            <param name="database">database to connect to</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,System.String,System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the SQL Server connection based on an SQL user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="username">the SQL username to connect with</param>
+            <param name="password">the SQL user password to connect with</param>
+            <param name="database">database to connect to</param>   
+            <param name="port">the port to connect to the SQL Server instance</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,System.String,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the SQL Server connection based on a windows user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="database">database to connect to</param>        
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.#ctor(System.String,System.String,System.Int32,System.Int32,DotNetSDB.output.OutputManagementSettings,System.String)">
+            <summary>
+            This function sets up the SQL Server connection based on a windows user connection
+            </summary>
+            <param name="server">database server instance name</param>
+            <param name="database">database to connect to</param>        
+            <param name="port">the port to connect to the SQL Server instance</param>
+            <param name="connectionTimeout">connection timeout value in seconds</param>
+            <param name="errorLogger">the error logger settings</param>
+            <param name="additionalConnectionString">any additional extra parameters in connection string format</param>
+        </member>
+        <member name="M:DotNetSDB.SQLServerConnection.Dispose">
+            <summary>
+            This is the core dispose function for the connection details
+            </summary>
+        </member>
+        <member name="T:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension">
+            <summary>
+            This is the SQL Server Filetable Extension class for DotNetSDB
+            </summary>
+        </member>
+        <member name="T:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions">
+            <summary>
+            This is the class for the FileTablePermissions
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.get_locked_files">
+            <summary>
+            This function obtains all the locked file entries in the filetable
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.get_base_instance_permissions">
+            <summary>
+            This functions obtains the base stream filetable permissions in the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.get_all_permissions">
+            <summary>
+            This function gets all the stream and filetable permissions in the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.has_all_required_permissions">
+            <summary>
+            This function returns if the database has enough permissions enabled to use filetabless
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.enable_all(System.String)">
+            <summary>
+            This function sets up all the correct permissions to enable filetables for the specified database
+            </summary>
+            <param name="directoryName"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.enable_base_instance">
+            <summary>
+            This function sets up the base stream permissions to enable filetables for the specified database
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.disable_base_instance">
+            <summary>
+            This function disables the base stream permissions for filetables for the specified database
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.disable_all">
+            <summary>
+            This function disables all the stream permissions for filetables for the specified database
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.connector">
+            <summary>
+            Variable that holds the connection in a dynamic object state *thus we can use all versions of sql server in one class*
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.errorHandler">
+            <summary>
+            Variable that holds the generic filetable error object
+            </summary>
+        </member>
+        <member name="F:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.dbName">
+            <summary>
+            Variable that holds the database name
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTablePermissions.#ctor(DotNetSDB.Connector.DatabaseConnector,System.String)">
+            <summary>
+            This function initialises the FileTableExtension object using the database connection and database name supplied
+            </summary>
+            <param name="databaseObject"></param>
+            <param name="databaseName"></param>
+        </member>
+        <member name="T:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks">
+            <summary>
+            This is the FileTableTasks class
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.GetNewName(System.String,System.String[])">
+            <summary>
+            This function returns a name which is not in use compared to the array passed
+            Note: this will work for both folders and files as file extension will be blank on the folder version
+            </summary>
+            <param name="name"></param>
+            <param name="allNames"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.CreateNewFolderPathLocator(System.String,System.String)">
+            <summary>
+            This function generates a new path locator ID based on the parents path locator
+            Note: when injecting files into a filetable via sql query this has to be done as its not auto generated
+            </summary>
+            <param name="tableName"></param>
+            <param name="streamID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.CreateNewRootPathLocator(System.String)">
+            <summary>
+            This function generates a new path locator ID based on the root folder path locator
+            Note: when injecting files into a filetable via sql query this has to be done as its not auto generated.
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.DeleteFolderContentRecursively(System.String,System.String,System.Boolean)">
+            <summary>
+            This function recursively deletes a folder structure and all its content within it
+            </summary>
+            <param name="tableName"></param>
+            <param name="locator"></param>
+            <param name="deleteBaseFolder"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.MoveFolderRecursively(System.String,System.String,System.String,System.String)">
+            <summary>
+            This function recursively moves a folder structure and all its content within it to a different location
+            </summary>
+            <param name="tableName"></param>
+            <param name="moveLocationID"></param>
+            <param name="folderName"></param>
+            <param name="locator"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.create_table(System.String,System.String)">
+            <summary>
+            This function creates a filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="directoryName"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.delete_folder(System.String,System.String)">
+            <summary>
+            This function deletes a folder from a filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="streamID"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.delete_folder_contents(System.String,System.String)">
+            <summary>
+            This function deletes all the content in a folder in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="streamID"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.delete_file(System.String,System.String)">
+            <summary>
+            This function deletes a file in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="streamID"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.id_exists(System.String,System.String)">
+            <summary>
+            This function checks if the following ID exists in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="streamID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.root_file_exists(System.String,System.String)">
+            <summary>
+            This function checks if a filename exist at the root level of a filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.file_exists(System.String,System.String,System.String)">
+            <summary>
+            This function checks if a file exists in a folder within the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="parentFolderID"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.root_folder_exists(System.String,System.String)">
+            <summary>
+            This function checks if a folder exists at the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.folder_exists(System.String,System.String,System.String)">
+            <summary>
+            This function checks if a folder exists within another folder within a filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="parentFolderID"></param>
+            <param name="folderName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_name(System.String,System.String)">
+            <summary>
+            This function gets the name for a supplied id in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="streamID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_root_folder_id(System.String,System.String)">
+            <summary>
+            This function gets the id for a folder in the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_root_file_id(System.String,System.String)">
+            <summary>
+            This function gets the id for a file in the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_folder_id(System.String,System.String,System.String)">
+            <summary>
+            This function gets a folder id from within another folder in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="parentFolderID"></param>
+            <param name="folderName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_file_id(System.String,System.String,System.String)">
+            <summary>
+            This function gets an id for a file within a folder in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="parentFolderID"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_files_from_root(System.String)">
+            <summary>
+            This function returns a dictionary of all files and their data from the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_files_from_folder(System.String,System.String)">
+            <summary>
+            This function returns a dictionary of all files and their data from a folder in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_file(System.String,System.String)">
+            <summary>
+            This function returns a dictionary of a file and its data from an id in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="fileID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_path_locator(System.String,System.String)">
+            <summary>
+            This function gets the main path locator for an id in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="streamID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_file_names_from_root(System.String)">
+            <summary>
+            This function returns an array of all the filenames in the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_file_names_from_folder(System.String,System.String)">
+            <summary>
+            This function returns an array of all the filenames from within a folder in the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_folder_names_from_root(System.String)">
+            <summary>
+            This function returns an array of all the folder names from the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_folder_names_from_folder(System.String,System.String)">
+            <summary>
+            This function returns an array of all the folder names from within a folder in the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_from_root(System.String)">
+            <summary>
+            This function obtains all the filetable entries at the root level
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_from_folder(System.String,System.String)">
+            <summary>
+            This function obtains all the filetable entries for a folder id
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_files_from_root_dt(System.String)">
+            <summary>
+            This function obtains all the file entries from the root level of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_files_from_folder_dt(System.String,System.String)">
+            <summary>
+            This function obtains all the file entries from a folder id in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_folders_from_root_dt(System.String)">
+            <summary>
+            This function obtains all the folder entries from the root in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.get_all_folders_from_folder(System.String,System.String)">
+            <summary>
+            This function obtains all the folder entries from a folder id in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.create_file_at_root(System.String,System.String,System.Byte[],System.Boolean)">
+            <summary>
+            This function creates a file in the filetable root
+            </summary>
+            <param name="tableName"></param>
+            <param name="fileName"></param>
+            <param name="fileData"></param>
+            <param name="incrementNameIfExists"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.create_file_in_folder(System.String,System.String,System.String,System.Byte[],System.Boolean)">
+            <summary>
+            This function creates a file within a folder in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderID"></param>
+            <param name="fileName"></param>
+            <param name="fileData"></param>
+            <param name="incrementNameIfExists"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.create_root_folder(System.String,System.String,System.Boolean)">
+            <summary>
+            This function creates a folder in the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderName"></param>
+            <param name="incrementNameIfExists"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.create_folder(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            This function creates a folder within another folder in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="folderID"></param>
+            <param name="folderName"></param>
+            <param name="incrementNameIfExists"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.search_all_file_context(System.String,System.String)">
+            <summary>
+            This function searchs all the file content in the filetable for a specific phrase
+            </summary>
+            <param name="tableName"></param>
+            <param name="searchContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.search_all_file_context_in_folder(System.String,System.String,System.String)">
+            <summary>
+            This function searchs all the file content from a folder in the filetable for a specific phrase
+            </summary>
+            <param name="tableName"></param>
+            <param name="parentDirectoryID"></param>
+            <param name="searchContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.search_all_file_context_in_root(System.String,System.String)">
+            <summary>
+            This function searchs all the file content in the root the filetable for a specific phrase
+            </summary>
+            <param name="tableName"></param>
+            <param name="searchContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.update_name(System.String,System.String,System.String)">
+            <summary>
+            This function updates the name of an entry in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="newName"></param>
+            <param name="streamID"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.update_file_location_to_root(System.String,System.String)">
+            <summary>
+            This function updates the location of a file to the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="streamID"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.update_folder_location_to_root(System.String,System.String)">
+            <summary>
+            This function updates the location of a folder to the root of the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="streamID"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.update_file_location(System.String,System.String,System.String)">
+            <summary>
+            This function updates the location of a file to another folder in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="newFolderID"></param>
+            <param name="streamID"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.update_folder_location(System.String,System.String,System.String)">
+            <summary>
+            This function updates the location of a folder to another folder in the filetable
+            </summary>
+            <param name="tableName"></param>
+            <param name="newFolderID"></param>
+            <param name="streamID"></param>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.FileTableTasks.#ctor(DotNetSDB.Connector.DatabaseConnector)">
+            <summary>
+            This function initialises the FiletableTasks object
+            </summary>
+            <param name="databaseObject"></param>
+        </member>
+        <member name="P:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.Permissions">
+            <summary>
+            This variable stores the filetable permission object
+            </summary>
+        </member>
+        <member name="P:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.Tasks">
+            <summary>
+            This variable stores the filetable tasks object
+            </summary>
+        </member>
+        <member name="M:DotNetSDB.SqlServer.FileTable.SQLServerFileTableExtension.#ctor(DotNetSDB.Connector.DatabaseConnector,System.String)">
+            <summary>
+            This function initialises the FileTableExtension object
+            </summary>
+            <param name="databaseObject"></param>
+            <param name="databaseName"></param>
+        </member>
+    </members>
+</doc>

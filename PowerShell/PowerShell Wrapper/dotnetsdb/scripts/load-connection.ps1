@@ -24,9 +24,6 @@ if($configLoaded)
 	# Loads the MySQL.Data library dependency using the full path of the script as its in the same folder structure
 	[System.Reflection.Assembly]::LoadFile("$ScriptDir\..\dll\MySql.Data.dll")
 	
-	# Loads the Microsoft.SqlServer.Types library using the full path of the script as its in the same folder structure
-	[System.Reflection.Assembly]::LoadFile("$ScriptDir\..\dll\Microsoft.SqlServer.Types.dll")
-	
 	# Loads the DotNetSDB library using the full path of the script as its in the same folder structure
 	[System.Reflection.Assembly]::LoadFile("$ScriptDir\..\dll\dotnetsdb.dll")
 
