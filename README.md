@@ -2,10 +2,12 @@
 
 <b>This library is now deprecated and i would recommend using the https://github.com/lilpug/SimpleDotNetDB version.</b>
 
+<b>Please note that the website has been turned off as of February 2020.</b>
+
 ## DotNetSDB
 For information, documentation or any inquiries please refer to the main website for this library.
 
-http://dotnetsdb.com/ <b>(has now been shut down)</b>
+http://dotnetsdb.com/ <b>(has now been shut down since February 2020)</b>
 
 [![NuGet](https://img.shields.io/nuget/v/DotNetSDB.svg?maxAge=3600)](https://www.nuget.org/packages/DotNetSDB/)
 
